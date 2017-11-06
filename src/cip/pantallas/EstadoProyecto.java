@@ -498,6 +498,11 @@ public class EstadoProyecto extends javax.swing.JPanel {
         jLabel1.setText("Proyectos");
 
         jComboBoxEstado.setEditable(true);
+        jComboBoxEstado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxEstadoActionPerformed(evt);
+            }
+        });
 
         jLabelEstado.setText("Estado");
 
@@ -561,6 +566,10 @@ public class EstadoProyecto extends javax.swing.JPanel {
     private void jButtonActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualizarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonActualizarActionPerformed
+
+    private void jComboBoxEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxEstadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxEstadoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

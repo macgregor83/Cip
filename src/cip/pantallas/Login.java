@@ -34,24 +34,6 @@ public class Login extends javax.swing.JFrame {
         //
         initComponents();
 
-        ImageIcon imagen = new ImageIcon("src\\Imagenes\\logo.PNG");
-        Icon icono = new ImageIcon(imagen.getImage().getScaledInstance(etLogo.getWidth(), etLogo.getHeight(), Image.SCALE_DEFAULT));
-        etLogo.setIcon(icono);
-        this.setLocation(500, 200);
-
-    }
-
-    private boolean login() {
-        return false;
-
-    }
-
-    @Override
-    public Image getIconImage() {
-        Image retValue = Toolkit.getDefaultToolkit().
-                getImage("Imagenes\\logo.PNG");
-
-        return retValue;
     }
 
     /**
@@ -83,7 +65,7 @@ public class Login extends javax.swing.JFrame {
         etLogo.setBackground(new java.awt.Color(255, 255, 255));
         etLogo.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
         etLogo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        etLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/controcentrolintegradorproyectos/imagenes/upt.png"))); // NOI18N
+        etLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/upt.png"))); // NOI18N
         etLogo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         etUsuario.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N

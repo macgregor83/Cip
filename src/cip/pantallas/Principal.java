@@ -19,21 +19,20 @@ import javax.swing.JTabbedPane;
 
 /**
  *
- * @author Vero
+ * @author iMac
  */
-public class MenuPrincipal extends javax.swing.JFrame {
+public class Principal extends javax.swing.JFrame {
 
     private RegistroPersona registroPersona;
+    private SeccionPublica SeccionPublica;
     private RegistroProyecto registroProyecto;
     private AvancesProyecto avancesProyecto;
     private EstadoProyecto estadoProyecto;
-    private SeccionPublica SeccionPublica;
-    private Login login;
 
     /**
-     * Creates new form JMenuPrincipal
+     * Creates new form Principal
      */
-    public MenuPrincipal() {
+    public Principal() {
         jTabbedPane1 = new JTabbedPane();
         initComponents();
         getContentPane().add(jTabbedPane1, BorderLayout.CENTER);
@@ -41,27 +40,26 @@ public class MenuPrincipal extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setExtendedState(MAXIMIZED_BOTH);
         this.setAlwaysOnTop(true);
-
+        
         jButtonCerrar.setContentAreaFilled(false);
         int size = 20;
         jButtonCerrar.setPreferredSize(new Dimension(size, size));
         jButtonCerrar.setToolTipText("Cerrar Pestaña");
-
+       
         //tabButton.setText("...");
         jButtonCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/boton_cerrar.gif")));
-        try {
-            login = new Login();
-            this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
-            SeccionPublica = new SeccionPublica();
-            pestana(SeccionPublica, Cte.Seccion_Publica);
-            this.pack();
-            this.setExtendedState(MAXIMIZED_BOTH);
-            this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
-        } catch (Exception ex) {
-            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-        }
+//        try {
+//            this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
+//            SeccionPublica = new SeccionPublica();
+//            pestana(SeccionPublica, Cte.Seccion_Publica);
+//            this.pack();
+//            this.setExtendedState(MAXIMIZED_BOTH);
+//            this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
+//        } catch (Exception ex) {
+//            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+//        } finally {
+//            this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+//        }
     }
 
     /**
@@ -96,6 +94,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        setFocusCycleRoot(false);
+        setFocusableWindowState(false);
 
         jTabbedPane1.setToolTipText("");
         jTabbedPane1.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -181,43 +182,33 @@ public class MenuPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1061, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1835, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 584, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 875, Short.MAX_VALUE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButtonCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCerrarActionPerformed
-        // TODO add your handling code here:
-        if (jTabbedPane1.getSelectedIndex() >= 0) {
-            String temp = jTabbedPane1.getTitleAt(jTabbedPane1.getSelectedIndex());
-
-            jTabbedPane1.removeTabAt(jTabbedPane1.getSelectedIndex());
-        }
-    }//GEN-LAST:event_jButtonCerrarActionPerformed
 
     private void jMenuIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuIniciarSesionActionPerformed
         try {
             // TODO add your handling code here:
-            
+            Login login = new Login();
             login.setVisible(true);
-            login.setAlwaysOnTop(true);
         } catch (Exception ex) {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }//GEN-LAST:event_jMenuIniciarSesionActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void jMenuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSalirActionPerformed
         // TODO add your handling code here:
-        jTabbedPane1.removeAll();
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jMenuSalirActionPerformed
 
     private void jMenuRegUsuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuRegUsuaActionPerformed
         // TODO add your handling code here:
@@ -236,10 +227,30 @@ public class MenuPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuRegUsuaActionPerformed
 
-    private void jMenuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSalirActionPerformed
+    private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1StateChanged
         // TODO add your handling code here:
-        System.exit(0);
-    }//GEN-LAST:event_jMenuSalirActionPerformed
+        System.out.println(jTabbedPane1.getSelectedIndex());
+        if (jTabbedPane1.getSelectedIndex() > -1) {
+            JPanel pnl = new JPanel();
+            pnl.setOpaque(false);
+            JLabel label = new JLabel(jTabbedPane1.getTitleAt(jTabbedPane1.getSelectedIndex()));
+            pnl.add(label);
+            pnl.add(jButtonCerrar);
+            if (jTabbedPane1.getSelectedIndex() >= 0) {
+                jTabbedPane1.setTabComponentAt(jTabbedPane1.getSelectedIndex(), pnl);
+            }
+        }
+
+    }//GEN-LAST:event_jTabbedPane1StateChanged
+
+    private void jButtonCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCerrarActionPerformed
+        // TODO add your handling code here:
+        if (jTabbedPane1.getSelectedIndex() >= 0) {
+            String temp = jTabbedPane1.getTitleAt(jTabbedPane1.getSelectedIndex());
+
+            jTabbedPane1.removeTabAt(jTabbedPane1.getSelectedIndex());
+        }
+    }//GEN-LAST:event_jButtonCerrarActionPerformed
 
     private void jMenuItemCrearProyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCrearProyActionPerformed
         // TODO add your handling code here:
@@ -259,7 +270,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void jMenuItemModProyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemModProyActionPerformed
         // TODO add your handling code here:
-        try {
+         try {
             this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
             avancesProyecto = new AvancesProyecto();
             pestana(avancesProyecto, Cte.Avances_Proyecto);
@@ -275,7 +286,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
-        try {
+                 try {
             this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
             estadoProyecto = new EstadoProyecto();
             pestana(estadoProyecto, Cte.Estado_Proyecto);
@@ -289,20 +300,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-    private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1StateChanged
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
-        System.out.println(jTabbedPane1.getSelectedIndex());
-        if (jTabbedPane1.getSelectedIndex() > -1) {
-            JPanel pnl = new JPanel();
-            pnl.setOpaque(false);
-            JLabel label = new JLabel(jTabbedPane1.getTitleAt(jTabbedPane1.getSelectedIndex()));
-            pnl.add(label);
-            pnl.add(jButtonCerrar);
-            if (jTabbedPane1.getSelectedIndex() >= 0) {
-                jTabbedPane1.setTabComponentAt(jTabbedPane1.getSelectedIndex(), pnl);
-            }
-        }
-    }//GEN-LAST:event_jTabbedPane1StateChanged
+        jTabbedPane1.removeAll();
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
     public void pestana(JPanel pantalla, String title) {
 
         jTabbedPane1.addTab(title, null, pantalla);
@@ -334,21 +335,20 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MenuPrincipal().setVisible(true);
+                new Principal().setVisible(true);
             }
         });
     }
