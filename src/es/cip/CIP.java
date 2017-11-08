@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cip;
+package es.cip;
 
-import cip.pantallas.MenuPrincipal;
+import es.cip.view.MenuPrincipal;
 
 /**
  *

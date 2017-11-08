@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cip.pantallas;
+package es.cip.view;
 
-import cip.cte.Cte;
+import es.cip.util.cte.Cte;
 import java.awt.BorderLayout;
 import java.awt.Cursor;
 import java.awt.Dimension;
