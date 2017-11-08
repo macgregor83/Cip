@@ -58,7 +58,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
             this.setExtendedState(MAXIMIZED_BOTH);
             this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
         } catch (Exception ex) {
-            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
         }
@@ -210,7 +210,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
             login.setVisible(true);
             login.setAlwaysOnTop(true);
         } catch (Exception ex) {
-            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jMenuIniciarSesionActionPerformed
 
@@ -230,7 +230,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
             this.setExtendedState(MAXIMIZED_BOTH);
             this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
         } catch (Exception ex) {
-            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
         }
@@ -251,7 +251,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
             this.setExtendedState(MAXIMIZED_BOTH);
             this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
         } catch (Exception ex) {
-            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
         }
@@ -267,7 +267,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
             this.setExtendedState(MAXIMIZED_BOTH);
             this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
         } catch (Exception ex) {
-            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
         }
@@ -283,7 +283,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
             this.setExtendedState(MAXIMIZED_BOTH);
             this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
         } catch (Exception ex) {
-            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
         }
