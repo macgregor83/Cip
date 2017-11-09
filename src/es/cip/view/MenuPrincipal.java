@@ -34,13 +34,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
      * Creates new form JMenuPrincipal
      */
     public MenuPrincipal() {
-        jTabbedPane1 = new JTabbedPane();
+        jTabbedPane = new JTabbedPane();
         initComponents();
-        getContentPane().add(jTabbedPane1, BorderLayout.CENTER);
+        getContentPane().add(jTabbedPane, BorderLayout.CENTER);
         this.setLayout(new FlowLayout());
         this.setLocationRelativeTo(null);
         this.setExtendedState(MAXIMIZED_BOTH);
-        this.setAlwaysOnTop(true);
+        //this.setAlwaysOnTop(true);
 
         jButtonCerrar.setContentAreaFilled(false);
         int size = 20;
@@ -74,19 +74,20 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         jButtonCerrar = new javax.swing.JButton();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        jTabbedPane = new javax.swing.JTabbedPane();
+        jMenuBar = new javax.swing.JMenuBar();
+        jMenuArchivo = new javax.swing.JMenu();
         jMenuIniciarSesion = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItemCerrarSesion = new javax.swing.JMenuItem();
         jMenuRegUsua = new javax.swing.JMenuItem();
         jMenuSalir = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        jMenuProyecto = new javax.swing.JMenu();
         jMenuItemCrearProy = new javax.swing.JMenuItem();
         jMenuItemModProy = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenu4 = new javax.swing.JMenu();
+        jMenuAdmin = new javax.swing.JMenu();
+        jMenuItemEstados = new javax.swing.JMenuItem();
+        jMenuItemConvocaroria = new javax.swing.JMenuItem();
+        jMenuAyuda = new javax.swing.JMenu();
 
         jButtonCerrar.setText("jButton1");
         jButtonCerrar.addActionListener(new java.awt.event.ActionListener() {
@@ -97,14 +98,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTabbedPane1.setToolTipText("");
-        jTabbedPane1.addChangeListener(new javax.swing.event.ChangeListener() {
+        jTabbedPane.setToolTipText("");
+        jTabbedPane.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                jTabbedPane1StateChanged(evt);
+                jTabbedPaneStateChanged(evt);
             }
         });
 
-        jMenu1.setText("Archivo");
+        jMenuArchivo.setText("Archivo");
 
         jMenuIniciarSesion.setText("Iniciar sesión ");
         jMenuIniciarSesion.addActionListener(new java.awt.event.ActionListener() {
@@ -112,15 +113,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 jMenuIniciarSesionActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuIniciarSesion);
+        jMenuArchivo.add(jMenuIniciarSesion);
 
-        jMenuItem2.setText("Cerrar sesión ");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemCerrarSesion.setText("Cerrar sesión ");
+        jMenuItemCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                jMenuItemCerrarSesionActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem2);
+        jMenuArchivo.add(jMenuItemCerrarSesion);
 
         jMenuRegUsua.setText("Registro de Usuario ");
         jMenuRegUsua.addActionListener(new java.awt.event.ActionListener() {
@@ -128,7 +129,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 jMenuRegUsuaActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuRegUsua);
+        jMenuArchivo.add(jMenuRegUsua);
 
         jMenuSalir.setText("Salir");
         jMenuSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -136,11 +137,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 jMenuSalirActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuSalir);
+        jMenuArchivo.add(jMenuSalir);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar.add(jMenuArchivo);
 
-        jMenu2.setText("Proyecto ");
+        jMenuProyecto.setText("Proyecto ");
 
         jMenuItemCrearProy.setText("Crear Proyecto");
         jMenuItemCrearProy.addActionListener(new java.awt.event.ActionListener() {
@@ -148,7 +149,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 jMenuItemCrearProyActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItemCrearProy);
+        jMenuProyecto.add(jMenuItemCrearProy);
 
         jMenuItemModProy.setText("Actualizar proyectos ");
         jMenuItemModProy.addActionListener(new java.awt.event.ActionListener() {
@@ -156,37 +157,45 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 jMenuItemModProyActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItemModProy);
+        jMenuProyecto.add(jMenuItemModProy);
 
-        jMenuBar1.add(jMenu2);
+        jMenuBar.add(jMenuProyecto);
 
-        jMenu3.setText("Administrador ");
+        jMenuAdmin.setText("Administrador ");
 
-        jMenuItem1.setText("Aprobar Proyectos");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemEstados.setText("Aprobar Proyectos");
+        jMenuItemEstados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                jMenuItemEstadosActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem1);
+        jMenuAdmin.add(jMenuItemEstados);
 
-        jMenuBar1.add(jMenu3);
+        jMenuItemConvocaroria.setText("Crear Convocatorias");
+        jMenuItemConvocaroria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemConvocaroriaActionPerformed(evt);
+            }
+        });
+        jMenuAdmin.add(jMenuItemConvocaroria);
 
-        jMenu4.setText("Ayuda");
-        jMenuBar1.add(jMenu4);
+        jMenuBar.add(jMenuAdmin);
 
-        setJMenuBar(jMenuBar1);
+        jMenuAyuda.setText("Ayuda");
+        jMenuBar.add(jMenuAyuda);
+
+        setJMenuBar(jMenuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1061, Short.MAX_VALUE)
+            .addComponent(jTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 1061, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 584, Short.MAX_VALUE)
+                .addComponent(jTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 584, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -196,10 +205,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void jButtonCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCerrarActionPerformed
         // TODO add your handling code here:
-        if (jTabbedPane1.getSelectedIndex() >= 0) {
-            String temp = jTabbedPane1.getTitleAt(jTabbedPane1.getSelectedIndex());
+        if (jTabbedPane.getSelectedIndex() >= 0) {
+            String temp = jTabbedPane.getTitleAt(jTabbedPane.getSelectedIndex());
 
-            jTabbedPane1.removeTabAt(jTabbedPane1.getSelectedIndex());
+            jTabbedPane.removeTabAt(jTabbedPane.getSelectedIndex());
         }
     }//GEN-LAST:event_jButtonCerrarActionPerformed
 
@@ -214,10 +223,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuIniciarSesionActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void jMenuItemCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCerrarSesionActionPerformed
         // TODO add your handling code here:
-        jTabbedPane1.removeAll();
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+        jTabbedPane.removeAll();
+    }//GEN-LAST:event_jMenuItemCerrarSesionActionPerformed
 
     private void jMenuRegUsuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuRegUsuaActionPerformed
         // TODO add your handling code here:
@@ -273,7 +282,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuItemModProyActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void jMenuItemEstadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemEstadosActionPerformed
         // TODO add your handling code here:
         try {
             this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
@@ -287,33 +296,37 @@ public class MenuPrincipal extends javax.swing.JFrame {
         } finally {
             this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
         }
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_jMenuItemEstadosActionPerformed
 
-    private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1StateChanged
+    private void jTabbedPaneStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPaneStateChanged
         // TODO add your handling code here:
-        System.out.println(jTabbedPane1.getSelectedIndex());
-        if (jTabbedPane1.getSelectedIndex() > -1) {
+        System.out.println(jTabbedPane.getSelectedIndex());
+        if (jTabbedPane.getSelectedIndex() > -1) {
             JPanel pnl = new JPanel();
             pnl.setOpaque(false);
-            JLabel label = new JLabel(jTabbedPane1.getTitleAt(jTabbedPane1.getSelectedIndex()));
+            JLabel label = new JLabel(jTabbedPane.getTitleAt(jTabbedPane.getSelectedIndex()));
             pnl.add(label);
             pnl.add(jButtonCerrar);
-            if (jTabbedPane1.getSelectedIndex() >= 0) {
-                jTabbedPane1.setTabComponentAt(jTabbedPane1.getSelectedIndex(), pnl);
+            if (jTabbedPane.getSelectedIndex() >= 0) {
+                jTabbedPane.setTabComponentAt(jTabbedPane.getSelectedIndex(), pnl);
             }
         }
-    }//GEN-LAST:event_jTabbedPane1StateChanged
+    }//GEN-LAST:event_jTabbedPaneStateChanged
+
+    private void jMenuItemConvocaroriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemConvocaroriaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItemConvocaroriaActionPerformed
     public void pestana(JPanel pantalla, String title) {
 
-        jTabbedPane1.addTab(title, null, pantalla);
+        jTabbedPane.addTab(title, null, pantalla);
 //jTabbedPane1.;
         JPanel pnl = new JPanel();
         pnl.setOpaque(true);
         JLabel label = new JLabel(title);
         pnl.add(label);
         pnl.add(jButtonCerrar);
-        jTabbedPane1.setTabComponentAt(jTabbedPane1.getTabCount() - 1, pnl);
-        jTabbedPane1.setSelectedIndex(jTabbedPane1.getTabCount() - 1);
+        jTabbedPane.setTabComponentAt(jTabbedPane.getTabCount() - 1, pnl);
+        jTabbedPane.setSelectedIndex(jTabbedPane.getTabCount() - 1);
 
     }
 
@@ -355,18 +368,19 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCerrar;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenu jMenuAdmin;
+    private javax.swing.JMenu jMenuArchivo;
+    private javax.swing.JMenu jMenuAyuda;
+    private javax.swing.JMenuBar jMenuBar;
     private javax.swing.JMenuItem jMenuIniciarSesion;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItemCerrarSesion;
+    private javax.swing.JMenuItem jMenuItemConvocaroria;
     private javax.swing.JMenuItem jMenuItemCrearProy;
+    private javax.swing.JMenuItem jMenuItemEstados;
     private javax.swing.JMenuItem jMenuItemModProy;
+    private javax.swing.JMenu jMenuProyecto;
     private javax.swing.JMenuItem jMenuRegUsua;
     private javax.swing.JMenuItem jMenuSalir;
-    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTabbedPane jTabbedPane;
     // End of variables declaration//GEN-END:variables
 }

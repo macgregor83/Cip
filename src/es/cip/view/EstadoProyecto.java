@@ -5,6 +5,8 @@
  */
 package es.cip.view;
 
+import static java.awt.Frame.MAXIMIZED_BOTH;
+
 /**
  *
  * @author iMac
@@ -517,6 +519,11 @@ public class EstadoProyecto extends javax.swing.JPanel {
                 "Nombre del Proyecto", "Contacto (Nombre/Correo) ", "Tipo de Proyecto", "Criterio de Clasificación", "Porcentaje de Avance ", "Estado"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jLabel3.setForeground(new java.awt.Color(255, 51, 0));
@@ -570,6 +577,12 @@ public class EstadoProyecto extends javax.swing.JPanel {
     private void jComboBoxEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxEstadoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBoxEstadoActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+        this.jFrame1.setVisible(true);
+        this.jFrame1.setExtendedState(MAXIMIZED_BOTH);
+    }//GEN-LAST:event_jTable1MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
