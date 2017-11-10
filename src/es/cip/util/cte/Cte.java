@@ -10,9 +10,16 @@ package es.cip.util.cte;
  * @author iMac
  */
 public class Cte {
-    public static final String Seccion_Publica  = "Sección Pública";
-    public static final String Alta_Usuario  = "Alta de Usuario";
-    public static String Avances_Proyecto="Avances Proyecto";
-    public static String Registro_Proyecto="Registro Proyecto";
-    public static String Estado_Proyecto=" Aprobar Proyecto";
+
+    public static final String Persistence_Unit_Name = "CIPPU";
+
+    /**
+     * * encabezados de jTabbedPane de Menu Principal  **
+     */
+    public static final String Seccion_Publica = "Sección Pública";
+    public static final String Alta_Usuario = "Alta de Usuario";
+    public static final String Avances_Proyecto = "Avances Proyecto";
+    public static final String Registro_Proyecto = "Registro Proyecto";
+    public static final String Estado_Proyecto = " Aprobar Proyecto";
+
 }
