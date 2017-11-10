@@ -117,7 +117,19 @@ public class LoginJpaController implements Serializable {
             em.close();
         }
     }
-
+    public List<Login> findLoginEntities(String nickname) {
+        EntityManager em = getEntityManager();
+        try {
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery(Login.class);
+            Root<Login> c = cq.from(Login.class);
+            cq.select(c);
+            cq.where(em.getCriteriaBuilder().like(c.get("Nickname"), "%" + nickname + "%"));
+            Query q = em.createQuery(cq);
+            return q.getResultList();
+        } finally {
+            em.close();
+        }
+    }
     public Login findLogin(Long id) {
         EntityManager em = getEntityManager();
         try {

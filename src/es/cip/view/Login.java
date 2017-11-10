@@ -5,6 +5,7 @@
  */
 package es.cip.view;
 
+import es.cip.bussines.bl.LoginBL;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Image;
@@ -25,15 +26,15 @@ public class Login extends javax.swing.JFrame {
     public String rpe;
     public String contrasenia;
     String valorRPE;
+    LoginBL loginBL;
+    private boolean validarUsu = false;
 
     /**
      * Creates new form Inicio
      */
     public Login() throws Exception {
-
-        //
+        loginBL = new LoginBL();
         initComponents();
-
     }
 
     /**
@@ -164,11 +165,17 @@ public class Login extends javax.swing.JFrame {
 
     private void jButtonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAceptarActionPerformed
 
+        validarUsu = loginBL.validarUsuario(jTextFieldUsuario.getText(), jTextFieldContrasenia.getText());
+        jTextFieldUsuario.setText("");
+        jTextFieldContrasenia.setText("");
+        this.setVisible(!validarUsu);
+
     }//GEN-LAST:event_jButtonAceptarActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
         // TODO add your handling code here:
-
+        validarUsu=false;
+        this.setVisible(false);
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     private void jTextFieldUsuarioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldUsuarioKeyReleased
@@ -221,6 +228,9 @@ public class Login extends javax.swing.JFrame {
 //            }
 //        });
 //    }
+    public boolean isValidarUsu() {
+        return validarUsu;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel etContrasenia;

@@ -42,6 +42,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
         this.setExtendedState(MAXIMIZED_BOTH);
         //this.setAlwaysOnTop(true);
 
+        jMenuProyecto.setEnabled(false);
+        jMenuAdmin.setEnabled(false);
+
         jButtonCerrar.setContentAreaFilled(false);
         int size = 20;
         jButtonCerrar.setPreferredSize(new Dimension(size, size));
@@ -97,6 +100,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowFocusListener(new java.awt.event.WindowFocusListener() {
+            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
+                formWindowGainedFocus(evt);
+            }
+            public void windowLostFocus(java.awt.event.WindowEvent evt) {
+                formWindowLostFocus(evt);
+            }
+        });
 
         jTabbedPane.setToolTipText("");
         jTabbedPane.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -215,7 +226,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void jMenuIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuIniciarSesionActionPerformed
         try {
             // TODO add your handling code here:
-            
+
             login.setVisible(true);
             login.setAlwaysOnTop(true);
         } catch (Exception ex) {
@@ -316,6 +327,17 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void jMenuItemConvocaroriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemConvocaroriaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItemConvocaroriaActionPerformed
+
+    private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
+        // TODO add your handling code here:
+        jMenuProyecto.setEnabled(login.isValidarUsu());
+        jMenuAdmin.setEnabled(login.isValidarUsu());
+
+    }//GEN-LAST:event_formWindowGainedFocus
+
+    private void formWindowLostFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowLostFocus
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowLostFocus
     public void pestana(JPanel pantalla, String title) {
 
         jTabbedPane.addTab(title, null, pantalla);
