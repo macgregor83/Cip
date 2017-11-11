@@ -26,7 +26,7 @@ public class Login implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Integer id;
 
     private Integer idUsuario;
     private String Nickname;
@@ -39,11 +39,11 @@ public class Login implements Serializable {
     @ManyToOne(optional = false)
     private Usuario Usuario;
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
