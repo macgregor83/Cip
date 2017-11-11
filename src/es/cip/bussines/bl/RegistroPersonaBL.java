@@ -57,19 +57,19 @@ public class RegistroPersonaBL {
         CampusJpaController camjc=new CampusJpaController();
         CarreraJpaController carrjc=new CarreraJpaController();
         
-        long id = es.cip.util.cte.Id.Id();       
-        Integer id2 = (int) (long)id;
+        Integer id = es.cip.util.cte.Id.Id();       
+        Integer id2 = (int) (Integer)id;
         
         usuario.setId(id);
         login.setId(id);
-        login.setIdUsuario((int) (long)usuario.getId());
+        login.setIdUsuario(usuario.getId());
         universidad.setId(id);
         tipoUsuario.setId(id);
         campus.setId(id);
         carrera.setId(id);
         
         recursoHumanoDatos.setId(id);
-        recursoHumanoDatos.setIdUsuario((int) (long)usuario.getId());
+        recursoHumanoDatos.setIdUsuario(usuario.getId());
         recursoHumanoDatos.setIdUniversidad(id2);
         recursoHumanoDatos.setIdCampus(id2);
         recursoHumanoDatos.setIdCarrera(id2);
@@ -159,10 +159,10 @@ public class RegistroPersonaBL {
 //        UniversidadJpaController unijc1=new UniversidadJpaController();
 //        
 //        
-//        long id = es.cip.util.cte.Id.Id();
-//        // long id = 20;
+//        Integer id = es.cip.util.cte.Id.Id();
+//        // Integer id = 20;
 //        System.out.println("id\t"+id);
-//        Integer id2 = (int) (long)id;
+//        Integer id2 = (int) (Integer)id;
 //        System.out.println("id2\t"+id2);
 //        usuario.setId(id);
 //        usuario.setNombre(nombreUsu);
