@@ -67,6 +67,7 @@ public class RegistroPersonaBL {
         tipoUsuario.setId(id);
         campus.setId(id);
         carrera.setId(id);
+        
         recursoHumanoDatos.setId(id);
         recursoHumanoDatos.setIdUsuario((int) (long)usuario.getId());
         recursoHumanoDatos.setIdUniversidad(id2);
