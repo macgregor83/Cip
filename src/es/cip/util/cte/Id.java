@@ -12,7 +12,7 @@ import java.util.Date;
  * @author iMac
  */
 public class Id {
-    public static final long Id() {
+    public static final Integer Id() {
               
         Date date=new Date();
         if (date==null) {
@@ -29,6 +29,6 @@ public class Id {
 //        id+=date.getSeconds()<10?"0"+(date.getSeconds()):(date.getSeconds())+"";
         //id+=(date.getTime()<10?"0"+(date.getTime()):(date.getTime())+"").substring(0,2);
         
-        return Long.parseLong(id);
+        return Integer.parseInt(id);
     }
 }
