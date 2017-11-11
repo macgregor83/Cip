@@ -60,9 +60,9 @@ public class TipoUsuarioJpaController implements Serializable {
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                Long id = tipoUsuario.getId();
+                Integer id = tipoUsuario.getId();
                 if (findTipoUsuario(id) == null) {
-                    throw new NonexistentEntityException("The tipoUsuario with id " + id + " no longer exists.");
+                    throw new NonexistentEntityException("The tipoUsuario with id " + id + " no Integerer exists.");
                 }
             }
             throw ex;
@@ -73,7 +73,7 @@ public class TipoUsuarioJpaController implements Serializable {
         }
     }
 
-    public void destroy(Long id) throws NonexistentEntityException {
+    public void destroy(Integer id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -83,7 +83,7 @@ public class TipoUsuarioJpaController implements Serializable {
                 tipoUsuario = em.getReference(TipoUsuario.class, id);
                 tipoUsuario.getId();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The tipoUsuario with id " + id + " no longer exists.", enfe);
+                throw new NonexistentEntityException("The tipoUsuario with id " + id + " no Integerer exists.", enfe);
             }
             em.remove(tipoUsuario);
             em.getTransaction().commit();
@@ -118,7 +118,7 @@ public class TipoUsuarioJpaController implements Serializable {
         }
     }
 
-    public TipoUsuario findTipoUsuario(Long id) {
+    public TipoUsuario findTipoUsuario(Integer id) {
         EntityManager em = getEntityManager();
         try {
             return em.find(TipoUsuario.class, id);
@@ -134,7 +134,7 @@ public class TipoUsuarioJpaController implements Serializable {
             Root<TipoUsuario> rt = cq.from(TipoUsuario.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
-            return ((Long) q.getSingleResult()).intValue();
+            return ((Integer) q.getSingleResult()).intValue();
         } finally {
             em.close();
         }

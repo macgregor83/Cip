@@ -60,9 +60,9 @@ public class RecursoHumanoDatosJpaController implements Serializable {
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                Long id = recursoHumanoDatos.getId();
+                Integer id = recursoHumanoDatos.getId();
                 if (findRecursoHumanoDatos(id) == null) {
-                    throw new NonexistentEntityException("The recursoHumanoDatos with id " + id + " no longer exists.");
+                    throw new NonexistentEntityException("The recursoHumanoDatos with id " + id + " no Integerer exists.");
                 }
             }
             throw ex;
@@ -73,7 +73,7 @@ public class RecursoHumanoDatosJpaController implements Serializable {
         }
     }
 
-    public void destroy(Long id) throws NonexistentEntityException {
+    public void destroy(Integer id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -83,7 +83,7 @@ public class RecursoHumanoDatosJpaController implements Serializable {
                 recursoHumanoDatos = em.getReference(RecursoHumanoDatos.class, id);
                 recursoHumanoDatos.getId();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The recursoHumanoDatos with id " + id + " no longer exists.", enfe);
+                throw new NonexistentEntityException("The recursoHumanoDatos with id " + id + " no Integerer exists.", enfe);
             }
             em.remove(recursoHumanoDatos);
             em.getTransaction().commit();
@@ -118,7 +118,7 @@ public class RecursoHumanoDatosJpaController implements Serializable {
         }
     }
 
-    public RecursoHumanoDatos findRecursoHumanoDatos(Long id) {
+    public RecursoHumanoDatos findRecursoHumanoDatos(Integer id) {
         EntityManager em = getEntityManager();
         try {
             return em.find(RecursoHumanoDatos.class, id);
@@ -134,7 +134,7 @@ public class RecursoHumanoDatosJpaController implements Serializable {
             Root<RecursoHumanoDatos> rt = cq.from(RecursoHumanoDatos.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
-            return ((Long) q.getSingleResult()).intValue();
+            return ((Integer) q.getSingleResult()).intValue();
         } finally {
             em.close();
         }

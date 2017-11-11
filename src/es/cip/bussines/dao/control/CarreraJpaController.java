@@ -60,9 +60,9 @@ public class CarreraJpaController implements Serializable {
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                Long id = carrera.getId();
+                Integer id = carrera.getId();
                 if (findCarrera(id) == null) {
-                    throw new NonexistentEntityException("The carrera with id " + id + " no longer exists.");
+                    throw new NonexistentEntityException("The carrera with id " + id + " no Integerer exists.");
                 }
             }
             throw ex;
@@ -73,7 +73,7 @@ public class CarreraJpaController implements Serializable {
         }
     }
 
-    public void destroy(Long id) throws NonexistentEntityException {
+    public void destroy(Integer id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -83,7 +83,7 @@ public class CarreraJpaController implements Serializable {
                 carrera = em.getReference(Carrera.class, id);
                 carrera.getId();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The carrera with id " + id + " no longer exists.", enfe);
+                throw new NonexistentEntityException("The carrera with id " + id + " no Integerer exists.", enfe);
             }
             em.remove(carrera);
             em.getTransaction().commit();
@@ -118,7 +118,7 @@ public class CarreraJpaController implements Serializable {
         }
     }
 
-    public Carrera findCarrera(Long id) {
+    public Carrera findCarrera(Integer id) {
         EntityManager em = getEntityManager();
         try {
             return em.find(Carrera.class, id);
@@ -134,7 +134,7 @@ public class CarreraJpaController implements Serializable {
             Root<Carrera> rt = cq.from(Carrera.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
-            return ((Long) q.getSingleResult()).intValue();
+            return ((Integer) q.getSingleResult()).intValue();
         } finally {
             em.close();
         }

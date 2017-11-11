@@ -59,9 +59,9 @@ public class UniversidadJpaController implements Serializable {
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                Long id = universidad.getId();
+                Integer id = universidad.getId();
                 if (findUniversidad(id) == null) {
-                    throw new NonexistentEntityException("The universidad with id " + id + " no longer exists.");
+                    throw new NonexistentEntityException("The universidad with id " + id + " no Integerer exists.");
                 }
             }
             throw ex;
@@ -72,7 +72,7 @@ public class UniversidadJpaController implements Serializable {
         }
     }
 
-    public void destroy(Long id) throws NonexistentEntityException {
+    public void destroy(Integer id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -82,7 +82,7 @@ public class UniversidadJpaController implements Serializable {
                 universidad = em.getReference(Universidad.class, id);
                 universidad.getId();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The universidad with id " + id + " no longer exists.", enfe);
+                throw new NonexistentEntityException("The universidad with id " + id + " no Integerer exists.", enfe);
             }
             em.remove(universidad);
             em.getTransaction().commit();
@@ -117,7 +117,7 @@ public class UniversidadJpaController implements Serializable {
         }
     }
 
-    public Universidad findUniversidad(Long id) {
+    public Universidad findUniversidad(Integer id) {
         EntityManager em = getEntityManager();
         try {
             return em.find(Universidad.class, id);
@@ -133,7 +133,7 @@ public class UniversidadJpaController implements Serializable {
             Root<Universidad> rt = cq.from(Universidad.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
-            return ((Long) q.getSingleResult()).intValue();
+            return ((Integer) q.getSingleResult()).intValue();
         } finally {
             em.close();
         }

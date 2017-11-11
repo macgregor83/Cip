@@ -60,9 +60,9 @@ public class LoginJpaController implements Serializable {
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                Long id = login.getId();
+                Integer id = login.getId();
                 if (findLogin(id) == null) {
-                    throw new NonexistentEntityException("The login with id " + id + " no longer exists.");
+                    throw new NonexistentEntityException("The login with id " + id + " no Integerer exists.");
                 }
             }
             throw ex;
@@ -73,7 +73,7 @@ public class LoginJpaController implements Serializable {
         }
     }
 
-    public void destroy(Long id) throws NonexistentEntityException {
+    public void destroy(Integer id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -83,7 +83,7 @@ public class LoginJpaController implements Serializable {
                 login = em.getReference(Login.class, id);
                 login.getId();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The login with id " + id + " no longer exists.", enfe);
+                throw new NonexistentEntityException("The login with id " + id + " no Integerer exists.", enfe);
             }
             em.remove(login);
             em.getTransaction().commit();
@@ -130,7 +130,7 @@ public class LoginJpaController implements Serializable {
             em.close();
         }
     }
-    public Login findLogin(Long id) {
+    public Login findLogin(Integer id) {
         EntityManager em = getEntityManager();
         try {
             return em.find(Login.class, id);
@@ -146,7 +146,7 @@ public class LoginJpaController implements Serializable {
             Root<Login> rt = cq.from(Login.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
-            return ((Long) q.getSingleResult()).intValue();
+            return ((Integer) q.getSingleResult()).intValue();
         } finally {
             em.close();
         }
