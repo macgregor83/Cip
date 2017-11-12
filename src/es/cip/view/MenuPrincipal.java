@@ -34,6 +34,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
      * Creates new form JMenuPrincipal
      */
     public MenuPrincipal() {
+        
         jTabbedPane = new JTabbedPane();
         initComponents();
         getContentPane().add(jTabbedPane, BorderLayout.CENTER);

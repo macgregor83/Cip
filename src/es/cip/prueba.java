@@ -8,6 +8,7 @@ package es.cip;
 import es.cip.bussines.dao.control.UsuarioJpaController;
 import es.cip.bussines.dao.model.Usuario;
 import es.cip.util.cte.Id;
+import es.cip.util.cte.ValidCampos;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
 
@@ -26,10 +27,11 @@ public class prueba {
 //        for (Usuario li : lis) {
 //            System.out.println("" + li.getNombre());
 //        }
-    
-        
-        for (int i = 0; i < 10000; i++) {
-            System.out.println(Id.Id());
-        }
+//        for (int i = 0; i < 10000; i++) {
+//            System.out.println(Id.Id());
+//        }
+        String url = "D:\\Users\\iMac\\Documents\\maestria\\1re cuatrimestre\\Libros\\eBook\\Ingenier+¡a de Software\\Analisis y dise+¦o de Sistemas - Kendal 8ed.pdf";    
+        String[] ext={".pdf","doc","docx"};
+        System.out.println(ValidCampos.validarArchivo(url,ext));
     }
 }
