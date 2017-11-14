@@ -7,9 +7,9 @@ package es.cip;
 
 import es.cip.bussines.dao.control.UsuarioJpaController;
 import es.cip.bussines.dao.model.Usuario;
-import es.cip.util.cte.Convertir;
-import es.cip.util.cte.Id;
-import es.cip.util.cte.ValidCampos;
+import es.cip.util.Convertir;
+import es.cip.util.Id;
+import es.cip.util.ValidCampos;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
 

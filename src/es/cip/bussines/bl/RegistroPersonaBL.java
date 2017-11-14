@@ -57,7 +57,7 @@ public class RegistroPersonaBL {
         CampusJpaController camjc=new CampusJpaController();
         CarreraJpaController carrjc=new CarreraJpaController();
         
-        Integer id = es.cip.util.cte.Id.Id();       
+        Integer id = es.cip.util.Id.Id();       
         Integer id2 = (int) (Integer)id;
         
         usuario.setId(id);

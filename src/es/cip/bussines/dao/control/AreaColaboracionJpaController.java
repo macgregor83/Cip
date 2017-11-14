@@ -6,7 +6,7 @@
 package es.cip.bussines.dao.control;
 
 import es.cip.bussines.dao.control.exceptions.NonexistentEntityException;
-import es.cip.bussines.dao.model.Campus;
+import es.cip.bussines.dao.model.AreaColaboracion;
 import es.cip.util.Cte;
 import java.io.Serializable;
 import java.util.List;
@@ -21,27 +21,27 @@ import javax.persistence.criteria.Root;
  *
  * @author iMac
  */
-public class CampusJpaController implements Serializable {
+public class AreaColaboracionJpaController implements Serializable {
 
-    public CampusJpaController(EntityManagerFactory emf) {
+    public AreaColaboracionJpaController() {
+        this.emf = javax.persistence.Persistence.createEntityManagerFactory(Cte.Persistence_Unit_Name);
+    }
+
+    public AreaColaboracionJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;
-
-    public CampusJpaController() {
-        this.emf = javax.persistence.Persistence.createEntityManagerFactory(Cte.Persistence_Unit_Name);
-    }
 
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
 
-    public void create(Campus campus) {
+    public void create(AreaColaboracion areaColaboracion) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            em.persist(campus);
+            em.persist(areaColaboracion);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -50,19 +50,19 @@ public class CampusJpaController implements Serializable {
         }
     }
 
-    public void edit(Campus campus) throws NonexistentEntityException, Exception {
+    public void edit(AreaColaboracion areaColaboracion) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            campus = em.merge(campus);
+            areaColaboracion = em.merge(areaColaboracion);
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                Integer id = campus.getId();
-                if (findCampus(id) == null) {
-                    throw new NonexistentEntityException("The campus with id " + id + " no Integerer exists.");
+                Integer id = areaColaboracion.getId();
+                if (findAreaColaboracion(id) == null) {
+                    throw new NonexistentEntityException("The areaColaboracion with id " + id + " no longer exists.");
                 }
             }
             throw ex;
@@ -78,14 +78,14 @@ public class CampusJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Campus campus;
+            AreaColaboracion areaColaboracion;
             try {
-                campus = em.getReference(Campus.class, id);
-                campus.getId();
+                areaColaboracion = em.getReference(AreaColaboracion.class, id);
+                areaColaboracion.getId();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The campus with id " + id + " no Integerer exists.", enfe);
+                throw new NonexistentEntityException("The areaColaboracion with id " + id + " no longer exists.", enfe);
             }
-            em.remove(campus);
+            em.remove(areaColaboracion);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -94,19 +94,19 @@ public class CampusJpaController implements Serializable {
         }
     }
 
-    public List<Campus> findCampusEntities() {
-        return findCampusEntities(true, -1, -1);
+    public List<AreaColaboracion> findAreaColaboracionEntities() {
+        return findAreaColaboracionEntities(true, -1, -1);
     }
 
-    public List<Campus> findCampusEntities(int maxResults, int firstResult) {
-        return findCampusEntities(false, maxResults, firstResult);
+    public List<AreaColaboracion> findAreaColaboracionEntities(int maxResults, int firstResult) {
+        return findAreaColaboracionEntities(false, maxResults, firstResult);
     }
 
-    private List<Campus> findCampusEntities(boolean all, int maxResults, int firstResult) {
+    private List<AreaColaboracion> findAreaColaboracionEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Campus.class));
+            cq.select(cq.from(AreaColaboracion.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -118,26 +118,26 @@ public class CampusJpaController implements Serializable {
         }
     }
 
-    public Campus findCampus(Integer id) {
+    public AreaColaboracion findAreaColaboracion(Integer id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Campus.class, id);
+            return em.find(AreaColaboracion.class, id);
         } finally {
             em.close();
         }
     }
 
-    public int getCampusCount() {
+    public int getAreaColaboracionCount() {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Campus> rt = cq.from(Campus.class);
+            Root<AreaColaboracion> rt = cq.from(AreaColaboracion.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
-            return ((Integer) q.getSingleResult()).intValue();
+            return ((Long) q.getSingleResult()).intValue();
         } finally {
             em.close();
         }
     }
-    
+
 }

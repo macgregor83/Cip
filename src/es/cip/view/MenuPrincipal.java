@@ -5,7 +5,7 @@
  */
 package es.cip.view;
 
-import es.cip.util.cte.Cte;
+import es.cip.util.Cte;
 import java.awt.BorderLayout;
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -105,6 +105,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Cip");
+        setAutoRequestFocus(false);
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jTabbedPane.setToolTipText("");
         jTabbedPane.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -320,8 +323,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void jMenuItemEstadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemEstadosActionPerformed
         // TODO add your handling code here:
         try {
-            this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
-            estadoProyecto = new EstadoProyecto();
+            this.setCursor(new Cursor(Cursor.WAIT_CURSOR));// cambia imagen del mouse a cargando
+            estadoProyecto = new EstadoProyecto(); //aqui es 
             pestana(estadoProyecto, Cte.Estado_Proyecto);
             this.pack();
             this.setExtendedState(MAXIMIZED_BOTH);
