@@ -10,6 +10,19 @@
     <class>es.cip.bussines.dao.model.Universidad</class>
     <class>es.cip.bussines.dao.model.RecursoHumanoDatos</class>
     <class>es.cip.bussines.dao.model.EstatusProyecto</class>
+    <class>es.cip.bussines.dao.model.AreaColaboracion</class>
+    <class>es.cip.bussines.dao.model.Convocatoria</class>
+    <class>es.cip.bussines.dao.model.DetalleAreaColaboracion</class>
+    <class>es.cip.bussines.dao.model.CriterioClasificacion</class>
+    <class>es.cip.bussines.dao.model.Face</class>
+    <class>es.cip.bussines.dao.model.Metodologia</class>
+    <class>es.cip.bussines.dao.model.ObjetivoEspecifico</class>
+    <class>es.cip.bussines.dao.model.Patente</class>
+    <class>es.cip.bussines.dao.model.ProductoEsperado</class>
+    <class>es.cip.bussines.dao.model.Proyecto</class>
+    <class>es.cip.bussines.dao.model.RecursoHumanoProyecto</class>
+    <class>es.cip.bussines.dao.model.idProyecto</class>
+    <class>es.cip.bussines.dao.model.TipoProyecto</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://LAPTOP-MJK7SBQ5\SQLEXPRESS:1433;databaseName=cipdesarrollo"/>
       <property name="javax.persistence.jdbc.user" value="ivan"/>

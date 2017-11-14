@@ -7,6 +7,7 @@ package es.cip;
 
 import es.cip.bussines.dao.control.UsuarioJpaController;
 import es.cip.bussines.dao.model.Usuario;
+import es.cip.util.cte.Convertir;
 import es.cip.util.cte.Id;
 import es.cip.util.cte.ValidCampos;
 import java.util.List;
@@ -21,6 +22,7 @@ public class prueba {
     Usuario u = new Usuario();
 
     public static void main(String[] args) {
+        
 //        EntityManagerFactory emf = javax.persistence.Persistence.createEntityManagerFactory("CIPPU");
 //        UsuarioJpaController oControl = new UsuarioJpaController(emf);
 //        List<Usuario> lis = oControl.findUsuarioEntities();
@@ -30,8 +32,11 @@ public class prueba {
 //        for (int i = 0; i < 10000; i++) {
 //            System.out.println(Id.Id());
 //        }
-        String url = "D:\\Users\\iMac\\Documents\\maestria\\1re cuatrimestre\\Libros\\eBook\\Ingenier+¡a de Software\\Analisis y dise+¦o de Sistemas - Kendal 8ed.pdf";    
-        String[] ext={".pdf","doc","docx"};
-        System.out.println(ValidCampos.validarArchivo(url,ext));
+//        String url = "D:\\Users\\iMac\\Documents\\maestria\\1re cuatrimestre\\Libros\\eBook\\Ingenier+¡a de Software\\Analisis y dise+¦o de Sistemas - Kendal 8ed.pdf";    
+//        String[] ext={".pdf","doc","docx"};
+//        System.out.println(ValidCampos.validarArchivo(url,ext));
+    
+        byte[] by = Convertir.convertDocToByteArray("‪D:\\Users\\iMac\\Downloads\\ExpRegulares.pdf");
+         Convertir.convertByteArrayToDoc(by);
     }
 }
