@@ -34,7 +34,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
      * Creates new form JMenuPrincipal
      */
     public MenuPrincipal() {
-        
         jTabbedPane = new JTabbedPane();
         initComponents();
         getContentPane().add(jTabbedPane, BorderLayout.CENTER);
@@ -43,16 +42,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
         this.setExtendedState(MAXIMIZED_BOTH);
         //this.setAlwaysOnTop(true);
 
-        jMenuProyecto.setEnabled(false);
-        jMenuAdmin.setEnabled(false);
-
         jButtonCerrar.setContentAreaFilled(false);
         int size = 20;
         jButtonCerrar.setPreferredSize(new Dimension(size, size));
         jButtonCerrar.setToolTipText("Cerrar Pestaña");
 
         //tabButton.setText("...");
-        jButtonCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/boton_cerrar.gif")));
+        //jButtonCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("../Imagenes/boton_cerrar.gif")));
         try {
             login = new Login();
             this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
@@ -88,10 +84,18 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenuProyecto = new javax.swing.JMenu();
         jMenuItemCrearProy = new javax.swing.JMenuItem();
         jMenuItemModProy = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jMenuAdmin = new javax.swing.JMenu();
         jMenuItemEstados = new javax.swing.JMenuItem();
-        jMenuItemConvocaroria = new javax.swing.JMenuItem();
-        jMenuAyuda = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        jMenuItem5 = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
 
         jButtonCerrar.setText("jButton1");
         jButtonCerrar.addActionListener(new java.awt.event.ActionListener() {
@@ -101,14 +105,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        addWindowFocusListener(new java.awt.event.WindowFocusListener() {
-            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
-                formWindowGainedFocus(evt);
-            }
-            public void windowLostFocus(java.awt.event.WindowEvent evt) {
-                formWindowLostFocus(evt);
-            }
-        });
 
         jTabbedPane.setToolTipText("");
         jTabbedPane.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -155,7 +151,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jMenuProyecto.setText("Proyecto ");
 
-        jMenuItemCrearProy.setText("Crear Proyecto");
+        jMenuItemCrearProy.setText("Registrar Proyecto");
         jMenuItemCrearProy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemCrearProyActionPerformed(evt);
@@ -163,13 +159,24 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         jMenuProyecto.add(jMenuItemCrearProy);
 
-        jMenuItemModProy.setText("Actualizar proyectos ");
+        jMenuItemModProy.setText("Registrar Fases ");
         jMenuItemModProy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemModProyActionPerformed(evt);
             }
         });
         jMenuProyecto.add(jMenuItemModProy);
+
+        jMenuItem6.setText("Actividades Proyecto");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
+        jMenuProyecto.add(jMenuItem6);
+
+        jMenuItem2.setText("Consultar Proyecto");
+        jMenuProyecto.add(jMenuItem2);
 
         jMenuBar.add(jMenuProyecto);
 
@@ -183,18 +190,34 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         jMenuAdmin.add(jMenuItemEstados);
 
-        jMenuItemConvocaroria.setText("Crear Convocatorias");
-        jMenuItemConvocaroria.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemConvocaroriaActionPerformed(evt);
-            }
-        });
-        jMenuAdmin.add(jMenuItemConvocaroria);
+        jMenuItem1.setText("Asociar Proyecto aTutor");
+        jMenuAdmin.add(jMenuItem1);
 
         jMenuBar.add(jMenuAdmin);
 
-        jMenuAyuda.setText("Ayuda");
-        jMenuBar.add(jMenuAyuda);
+        jMenu1.setText("Convocatoria");
+
+        jMenuItem3.setText("Registrar Convocatoria");
+        jMenu1.add(jMenuItem3);
+
+        jMenuBar.add(jMenu1);
+
+        jMenu3.setText("Patente");
+
+        jMenuItem4.setText("Registrar Pantente");
+        jMenu3.add(jMenuItem4);
+
+        jMenuBar.add(jMenu3);
+
+        jMenu4.setText("Visitante");
+
+        jMenuItem5.setText("Registrar Vistante");
+        jMenu4.add(jMenuItem5);
+
+        jMenuBar.add(jMenu4);
+
+        jMenu2.setText("Ayuda");
+        jMenuBar.add(jMenu2);
 
         setJMenuBar(jMenuBar);
 
@@ -227,7 +250,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void jMenuIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuIniciarSesionActionPerformed
         try {
             // TODO add your handling code here:
-
+            
             login.setVisible(true);
             login.setAlwaysOnTop(true);
         } catch (Exception ex) {
@@ -325,20 +348,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jTabbedPaneStateChanged
 
-    private void jMenuItemConvocaroriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemConvocaroriaActionPerformed
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItemConvocaroriaActionPerformed
-
-    private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
-        // TODO add your handling code here:
-        jMenuProyecto.setEnabled(login.isValidarUsu());
-        jMenuAdmin.setEnabled(login.isValidarUsu());
-
-    }//GEN-LAST:event_formWindowGainedFocus
-
-    private void formWindowLostFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowLostFocus
-        // TODO add your handling code here:
-    }//GEN-LAST:event_formWindowLostFocus
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
     public void pestana(JPanel pantalla, String title) {
 
         jTabbedPane.addTab(title, null, pantalla);
@@ -391,13 +403,21 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCerrar;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenuAdmin;
     private javax.swing.JMenu jMenuArchivo;
-    private javax.swing.JMenu jMenuAyuda;
     private javax.swing.JMenuBar jMenuBar;
     private javax.swing.JMenuItem jMenuIniciarSesion;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItemCerrarSesion;
-    private javax.swing.JMenuItem jMenuItemConvocaroria;
     private javax.swing.JMenuItem jMenuItemCrearProy;
     private javax.swing.JMenuItem jMenuItemEstados;
     private javax.swing.JMenuItem jMenuItemModProy;
