@@ -25,7 +25,7 @@ public class Login extends javax.swing.JFrame {
     public String rpe;
     public String contrasenia;
     String valorRPE;
-
+ public RegistroPersona registro;
     /**
      * Creates new form Inicio
      */
@@ -54,7 +54,7 @@ public class Login extends javax.swing.JFrame {
         jTextFieldContrasenia = new javax.swing.JPasswordField();
         jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
         setIconImage(getIconImage());
         setMinimumSize(new java.awt.Dimension(391, 332));
@@ -110,6 +110,11 @@ public class Login extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 3, 12)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 255));
         jLabel1.setText("*Crear nuevo usuario");
+        jLabel1.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                jLabel1ComponentShown(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -160,6 +165,7 @@ public class Login extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAceptarActionPerformed
@@ -180,6 +186,12 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
 
     }//GEN-LAST:event_jTextFieldContraseniaKeyReleased
+
+    private void jLabel1ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jLabel1ComponentShown
+       registro =new RegistroPersona();
+      registro.setVisible(true);
+       // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel1ComponentShown
 
     /**
      * @param args the command line arguments

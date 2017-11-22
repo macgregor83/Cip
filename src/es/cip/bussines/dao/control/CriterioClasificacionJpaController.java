@@ -6,7 +6,8 @@
 package es.cip.bussines.dao.control;
 
 import es.cip.bussines.dao.control.exceptions.NonexistentEntityException;
-import es.cip.bussines.dao.model.Usuario;
+import es.cip.bussines.dao.model.CriterioClasificacion;
+import es.cip.util.Cte;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -20,9 +21,13 @@ import javax.persistence.criteria.Root;
  *
  * @author iMac
  */
-public class UsuarioJpaController1 implements Serializable {
+public class CriterioClasificacionJpaController implements Serializable {
 
-    public UsuarioJpaController1(EntityManagerFactory emf) {
+    public CriterioClasificacionJpaController() {
+        this.emf = javax.persistence.Persistence.createEntityManagerFactory(Cte.Persistence_Unit_Name);
+    }
+
+    public CriterioClasificacionJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;
@@ -31,12 +36,12 @@ public class UsuarioJpaController1 implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Usuario usuario) {
+    public void create(CriterioClasificacion criterioClasificacion) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            em.persist(usuario);
+            em.persist(criterioClasificacion);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -45,19 +50,19 @@ public class UsuarioJpaController1 implements Serializable {
         }
     }
 
-    public void edit(Usuario usuario) throws NonexistentEntityException, Exception {
+    public void edit(CriterioClasificacion criterioClasificacion) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            usuario = em.merge(usuario);
+            criterioClasificacion = em.merge(criterioClasificacion);
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                Integer id = usuario.getId();
-                if (findUsuario(id) == null) {
-                    throw new NonexistentEntityException("The usuario with id " + id + " no Integerer exists.");
+                Integer id = criterioClasificacion.getId();
+                if (findCriterioClasificacion(id) == null) {
+                    throw new NonexistentEntityException("The criterioClasificacion with id " + id + " no longer exists.");
                 }
             }
             throw ex;
@@ -73,14 +78,14 @@ public class UsuarioJpaController1 implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Usuario usuario;
+            CriterioClasificacion criterioClasificacion;
             try {
-                usuario = em.getReference(Usuario.class, id);
-                usuario.getId();
+                criterioClasificacion = em.getReference(CriterioClasificacion.class, id);
+                criterioClasificacion.getId();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The usuario with id " + id + " no Integerer exists.", enfe);
+                throw new NonexistentEntityException("The criterioClasificacion with id " + id + " no longer exists.", enfe);
             }
-            em.remove(usuario);
+            em.remove(criterioClasificacion);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -89,19 +94,19 @@ public class UsuarioJpaController1 implements Serializable {
         }
     }
 
-    public List<Usuario> findUsuarioEntities() {
-        return findUsuarioEntities(true, -1, -1);
+    public List<CriterioClasificacion> findCriterioClasificacionEntities() {
+        return findCriterioClasificacionEntities(true, -1, -1);
     }
 
-    public List<Usuario> findUsuarioEntities(int maxResults, int firstResult) {
-        return findUsuarioEntities(false, maxResults, firstResult);
+    public List<CriterioClasificacion> findCriterioClasificacionEntities(int maxResults, int firstResult) {
+        return findCriterioClasificacionEntities(false, maxResults, firstResult);
     }
 
-    private List<Usuario> findUsuarioEntities(boolean all, int maxResults, int firstResult) {
+    private List<CriterioClasificacion> findCriterioClasificacionEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Usuario.class));
+            cq.select(cq.from(CriterioClasificacion.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -113,26 +118,26 @@ public class UsuarioJpaController1 implements Serializable {
         }
     }
 
-    public Usuario findUsuario(Integer id) {
+    public CriterioClasificacion findCriterioClasificacion(Integer id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Usuario.class, id);
+            return em.find(CriterioClasificacion.class, id);
         } finally {
             em.close();
         }
     }
 
-    public int getUsuarioCount() {
+    public int getCriterioClasificacionCount() {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Usuario> rt = cq.from(Usuario.class);
+            Root<CriterioClasificacion> rt = cq.from(CriterioClasificacion.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
-            return ((Integer) q.getSingleResult()).intValue();
+            return ((Long) q.getSingleResult()).intValue();
         } finally {
             em.close();
         }
     }
-    
+
 }

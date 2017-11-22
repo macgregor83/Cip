@@ -6,7 +6,7 @@
 package es.cip.bussines.dao.control;
 
 import es.cip.bussines.dao.control.exceptions.NonexistentEntityException;
-import es.cip.bussines.dao.model.Campus;
+import es.cip.bussines.dao.model.Face;
 import es.cip.util.Cte;
 import java.io.Serializable;
 import java.util.List;
@@ -21,27 +21,27 @@ import javax.persistence.criteria.Root;
  *
  * @author iMac
  */
-public class CampusJpaController implements Serializable {
+public class FaceJpaController implements Serializable {
 
-    public CampusJpaController(EntityManagerFactory emf) {
+    public FaceJpaController() {
+        this.emf = javax.persistence.Persistence.createEntityManagerFactory(Cte.Persistence_Unit_Name);
+    }
+
+    public FaceJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;
-
-    public CampusJpaController() {
-        this.emf = javax.persistence.Persistence.createEntityManagerFactory(Cte.Persistence_Unit_Name);
-    }
 
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
 
-    public void create(Campus campus) {
+    public void create(Face face) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            em.persist(campus);
+            em.persist(face);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -50,19 +50,19 @@ public class CampusJpaController implements Serializable {
         }
     }
 
-    public void edit(Campus campus) throws NonexistentEntityException, Exception {
+    public void edit(Face face) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            campus = em.merge(campus);
+            face = em.merge(face);
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                Integer id = campus.getId();
-                if (findCampus(id) == null) {
-                    throw new NonexistentEntityException("The campus with id " + id + " no Integerer exists.");
+                Integer id = face.getId();
+                if (findFace(id) == null) {
+                    throw new NonexistentEntityException("The face with id " + id + " no longer exists.");
                 }
             }
             throw ex;
@@ -78,14 +78,14 @@ public class CampusJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Campus campus;
+            Face face;
             try {
-                campus = em.getReference(Campus.class, id);
-                campus.getId();
+                face = em.getReference(Face.class, id);
+                face.getId();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The campus with id " + id + " no Integerer exists.", enfe);
+                throw new NonexistentEntityException("The face with id " + id + " no longer exists.", enfe);
             }
-            em.remove(campus);
+            em.remove(face);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -94,19 +94,19 @@ public class CampusJpaController implements Serializable {
         }
     }
 
-    public List<Campus> findCampusEntities() {
-        return findCampusEntities(true, -1, -1);
+    public List<Face> findFaceEntities() {
+        return findFaceEntities(true, -1, -1);
     }
 
-    public List<Campus> findCampusEntities(int maxResults, int firstResult) {
-        return findCampusEntities(false, maxResults, firstResult);
+    public List<Face> findFaceEntities(int maxResults, int firstResult) {
+        return findFaceEntities(false, maxResults, firstResult);
     }
 
-    private List<Campus> findCampusEntities(boolean all, int maxResults, int firstResult) {
+    private List<Face> findFaceEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Campus.class));
+            cq.select(cq.from(Face.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -118,26 +118,26 @@ public class CampusJpaController implements Serializable {
         }
     }
 
-    public Campus findCampus(Integer id) {
+    public Face findFace(Integer id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Campus.class, id);
+            return em.find(Face.class, id);
         } finally {
             em.close();
         }
     }
 
-    public int getCampusCount() {
+    public int getFaceCount() {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Campus> rt = cq.from(Campus.class);
+            Root<Face> rt = cq.from(Face.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
-            return ((Integer) q.getSingleResult()).intValue();
+            return ((Long) q.getSingleResult()).intValue();
         } finally {
             em.close();
         }
     }
-    
+
 }

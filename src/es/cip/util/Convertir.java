@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package es.cip.util.cte;
+package es.cip.util;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -57,5 +57,9 @@ public class Convertir {
         } catch (Exception e) {
             System.err.println("Error: " + e.getMessage());
         }
+    }
+    public static void main(String[] args) {
+        byte[] by = Convertir.convertDocToByteArray("D:\\Users\\iMac\\Documents\\maestria\\1re cuatrimestre\\Nueva carpeta\\tarea\\IMGOD_Atc1_S2.pdf");
+        Convertir.convertByteArrayToDoc(by);
     }
 }

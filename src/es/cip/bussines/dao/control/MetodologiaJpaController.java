@@ -6,7 +6,7 @@
 package es.cip.bussines.dao.control;
 
 import es.cip.bussines.dao.control.exceptions.NonexistentEntityException;
-import es.cip.bussines.dao.model.Campus;
+import es.cip.bussines.dao.model.Metodologia;
 import es.cip.util.Cte;
 import java.io.Serializable;
 import java.util.List;
@@ -21,27 +21,27 @@ import javax.persistence.criteria.Root;
  *
  * @author iMac
  */
-public class CampusJpaController implements Serializable {
+public class MetodologiaJpaController implements Serializable {
 
-    public CampusJpaController(EntityManagerFactory emf) {
+    public MetodologiaJpaController() {
+        this.emf = javax.persistence.Persistence.createEntityManagerFactory(Cte.Persistence_Unit_Name);
+    }
+
+    public MetodologiaJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;
-
-    public CampusJpaController() {
-        this.emf = javax.persistence.Persistence.createEntityManagerFactory(Cte.Persistence_Unit_Name);
-    }
 
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
 
-    public void create(Campus campus) {
+    public void create(Metodologia metodologia) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            em.persist(campus);
+            em.persist(metodologia);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -50,19 +50,19 @@ public class CampusJpaController implements Serializable {
         }
     }
 
-    public void edit(Campus campus) throws NonexistentEntityException, Exception {
+    public void edit(Metodologia metodologia) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            campus = em.merge(campus);
+            metodologia = em.merge(metodologia);
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                Integer id = campus.getId();
-                if (findCampus(id) == null) {
-                    throw new NonexistentEntityException("The campus with id " + id + " no Integerer exists.");
+                Integer id = metodologia.getId();
+                if (findMetodologia(id) == null) {
+                    throw new NonexistentEntityException("The metodologia with id " + id + " no longer exists.");
                 }
             }
             throw ex;
@@ -78,14 +78,14 @@ public class CampusJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Campus campus;
+            Metodologia metodologia;
             try {
-                campus = em.getReference(Campus.class, id);
-                campus.getId();
+                metodologia = em.getReference(Metodologia.class, id);
+                metodologia.getId();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The campus with id " + id + " no Integerer exists.", enfe);
+                throw new NonexistentEntityException("The metodologia with id " + id + " no longer exists.", enfe);
             }
-            em.remove(campus);
+            em.remove(metodologia);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -94,19 +94,19 @@ public class CampusJpaController implements Serializable {
         }
     }
 
-    public List<Campus> findCampusEntities() {
-        return findCampusEntities(true, -1, -1);
+    public List<Metodologia> findMetodologiaEntities() {
+        return findMetodologiaEntities(true, -1, -1);
     }
 
-    public List<Campus> findCampusEntities(int maxResults, int firstResult) {
-        return findCampusEntities(false, maxResults, firstResult);
+    public List<Metodologia> findMetodologiaEntities(int maxResults, int firstResult) {
+        return findMetodologiaEntities(false, maxResults, firstResult);
     }
 
-    private List<Campus> findCampusEntities(boolean all, int maxResults, int firstResult) {
+    private List<Metodologia> findMetodologiaEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Campus.class));
+            cq.select(cq.from(Metodologia.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -118,26 +118,26 @@ public class CampusJpaController implements Serializable {
         }
     }
 
-    public Campus findCampus(Integer id) {
+    public Metodologia findMetodologia(Integer id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Campus.class, id);
+            return em.find(Metodologia.class, id);
         } finally {
             em.close();
         }
     }
 
-    public int getCampusCount() {
+    public int getMetodologiaCount() {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Campus> rt = cq.from(Campus.class);
+            Root<Metodologia> rt = cq.from(Metodologia.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
-            return ((Integer) q.getSingleResult()).intValue();
+            return ((Long) q.getSingleResult()).intValue();
         } finally {
             em.close();
         }
     }
-    
+
 }

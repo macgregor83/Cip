@@ -40,12 +40,12 @@ public class JAsociaciònUsuario extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel2.setMaximumSize(new java.awt.Dimension(1059, 356));
 
-        jLabel9.setText("Asesor");
+        jLabel9.setText("Tutor");
 
         jTableAsesor.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -155,6 +155,7 @@ public class JAsociaciònUsuario extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     /**

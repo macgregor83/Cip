@@ -5,7 +5,7 @@
  */
 package es.cip.view;
 
-import es.cip.util.cte.Cte;
+import es.cip.util.Cte;
 import java.awt.BorderLayout;
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -115,6 +115,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Cip");
+        setAutoRequestFocus(false);
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jTabbedPane.setToolTipText("");
         jTabbedPane.addChangeListener(new javax.swing.event.ChangeListener() {
