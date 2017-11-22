@@ -14,6 +14,7 @@ import static java.awt.Frame.MAXIMIZED_BOTH;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
@@ -24,10 +25,19 @@ import javax.swing.JTabbedPane;
 public class MenuPrincipal extends javax.swing.JFrame {
 
     private RegistroPersona registroPersona;
-    private RegistroProyecto registroProyecto;
+    private JFInvitados invitado;
+    private JFRegistroPersona JFRegistroPersona;
+    private JFDatosAcademicos datosAcademicos;
+     private JAsociaciònUsuario asociacionUsuario;
+    private JRegistroProyecto registroProyecto;
+       private JFPatentes patente;
+       private JFActividades actividades;
     private AvancesProyecto avancesProyecto;
-    private EstadoProyecto estadoProyecto;
+    private JFEstadoProyecto estadoProyecto;
     private SeccionPublica SeccionPublica;
+    private JFConvocatorias convocatoria;
+   
+    private JFases JFases;
     private Login login;
 
     /**
@@ -77,15 +87,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jTabbedPane = new javax.swing.JTabbedPane();
         jMenuBar = new javax.swing.JMenuBar();
         jMenuArchivo = new javax.swing.JMenu();
-        jMenuIniciarSesion = new javax.swing.JMenuItem();
-        jMenuItemCerrarSesion = new javax.swing.JMenuItem();
         jMenuRegUsua = new javax.swing.JMenuItem();
-        jMenuSalir = new javax.swing.JMenuItem();
+        jDatosAcademicos = new javax.swing.JMenuItem();
+        jMenuAsociarTutorUser = new javax.swing.JMenuItem();
+        jMenuInvitado = new javax.swing.JMenuItem();
         jMenuProyecto = new javax.swing.JMenu();
         jMenuItemCrearProy = new javax.swing.JMenuItem();
         jMenuItemModProy = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
         jMenuAdmin = new javax.swing.JMenu();
         jMenuItemEstados = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -96,6 +105,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenu4 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        jMenu5 = new javax.swing.JMenu();
 
         jButtonCerrar.setText("jButton1");
         jButtonCerrar.addActionListener(new java.awt.event.ActionListener() {
@@ -113,23 +123,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jMenuArchivo.setText("Archivo");
-
-        jMenuIniciarSesion.setText("Iniciar sesión ");
-        jMenuIniciarSesion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuIniciarSesionActionPerformed(evt);
-            }
-        });
-        jMenuArchivo.add(jMenuIniciarSesion);
-
-        jMenuItemCerrarSesion.setText("Cerrar sesión ");
-        jMenuItemCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemCerrarSesionActionPerformed(evt);
-            }
-        });
-        jMenuArchivo.add(jMenuItemCerrarSesion);
+        jMenuArchivo.setText("Usuario");
 
         jMenuRegUsua.setText("Registro de Usuario ");
         jMenuRegUsua.addActionListener(new java.awt.event.ActionListener() {
@@ -139,13 +133,29 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         jMenuArchivo.add(jMenuRegUsua);
 
-        jMenuSalir.setText("Salir");
-        jMenuSalir.addActionListener(new java.awt.event.ActionListener() {
+        jDatosAcademicos.setText("Datos Academicos");
+        jDatosAcademicos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuSalirActionPerformed(evt);
+                jDatosAcademicosActionPerformed(evt);
             }
         });
-        jMenuArchivo.add(jMenuSalir);
+        jMenuArchivo.add(jDatosAcademicos);
+
+        jMenuAsociarTutorUser.setText("Asociacion Tutor / Usuario");
+        jMenuAsociarTutorUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuAsociarTutorUserActionPerformed(evt);
+            }
+        });
+        jMenuArchivo.add(jMenuAsociarTutorUser);
+
+        jMenuInvitado.setText("Invitado");
+        jMenuInvitado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuInvitadoActionPerformed(evt);
+            }
+        });
+        jMenuArchivo.add(jMenuInvitado);
 
         jMenuBar.add(jMenuArchivo);
 
@@ -175,9 +185,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         jMenuProyecto.add(jMenuItem6);
 
-        jMenuItem2.setText("Consultar Proyecto");
-        jMenuProyecto.add(jMenuItem2);
-
         jMenuBar.add(jMenuProyecto);
 
         jMenuAdmin.setText("Administrador ");
@@ -191,6 +198,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenuAdmin.add(jMenuItemEstados);
 
         jMenuItem1.setText("Asociar Proyecto aTutor");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         jMenuAdmin.add(jMenuItem1);
 
         jMenuBar.add(jMenuAdmin);
@@ -198,6 +210,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenu1.setText("Convocatoria");
 
         jMenuItem3.setText("Registrar Convocatoria");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem3);
 
         jMenuBar.add(jMenu1);
@@ -205,6 +222,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenu3.setText("Patente");
 
         jMenuItem4.setText("Registrar Pantente");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem4);
 
         jMenuBar.add(jMenu3);
@@ -212,11 +234,20 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenu4.setText("Visitante");
 
         jMenuItem5.setText("Registrar Vistante");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMenuItem5);
 
         jMenuBar.add(jMenu4);
 
         jMenu2.setText("Ayuda");
+
+        jMenu5.setText("Manual");
+        jMenu2.add(jMenu5);
+
         jMenuBar.add(jMenu2);
 
         setJMenuBar(jMenuBar);
@@ -247,50 +278,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonCerrarActionPerformed
 
-    private void jMenuIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuIniciarSesionActionPerformed
-        try {
-            // TODO add your handling code here:
-            
-            login.setVisible(true);
-            login.setAlwaysOnTop(true);
-        } catch (Exception ex) {
-            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jMenuIniciarSesionActionPerformed
-
-    private void jMenuItemCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCerrarSesionActionPerformed
-        // TODO add your handling code here:
-        jTabbedPane.removeAll();
-    }//GEN-LAST:event_jMenuItemCerrarSesionActionPerformed
-
-    private void jMenuRegUsuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuRegUsuaActionPerformed
-        // TODO add your handling code here:
-        try {
-            this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
-            registroPersona = new RegistroPersona();
-            //this.add(pantallaHerramentero, BorderLayout.CENTER);
-            pestana(registroPersona, Cte.Alta_Usuario);
-            this.pack();
-            this.setExtendedState(MAXIMIZED_BOTH);
-            this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
-        } catch (Exception ex) {
-            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-        }
-    }//GEN-LAST:event_jMenuRegUsuaActionPerformed
-
-    private void jMenuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSalirActionPerformed
-        // TODO add your handling code here:
-        System.exit(0);
-    }//GEN-LAST:event_jMenuSalirActionPerformed
-
     private void jMenuItemCrearProyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCrearProyActionPerformed
         // TODO add your handling code here:
         try {
             this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
-            registroProyecto = new RegistroProyecto();
-            pestana(registroProyecto, Cte.Registro_Proyecto);
+            registroProyecto = new JRegistroProyecto();
+            registroProyecto.setVisible(true);
+          //  pestana(registroProyecto, Cte.Registro_Proyecto);
             this.pack();
             this.setExtendedState(MAXIMIZED_BOTH);
             this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
@@ -305,8 +299,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
-            avancesProyecto = new AvancesProyecto();
-            pestana(avancesProyecto, Cte.Avances_Proyecto);
+            JFases = new JFases();
+            JFases.setVisible(true);         //  pestana(avancesProyecto, Cte.JFases);
             this.pack();
             this.setExtendedState(MAXIMIZED_BOTH);
             this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
@@ -321,8 +315,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
-            estadoProyecto = new EstadoProyecto();
-            pestana(estadoProyecto, Cte.Estado_Proyecto);
+            estadoProyecto = new JFEstadoProyecto();
+            estadoProyecto.setVisible(true);
+           // pestana(estadoProyecto, Cte.Estado_Proyecto);
             this.pack();
             this.setExtendedState(MAXIMIZED_BOTH);
             this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
@@ -349,8 +344,76 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jTabbedPaneStateChanged
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-        // TODO add your handling code here:
+   actividades=new JFActividades();  
+   actividades.setVisible(true);        // TODO add your handling code here:
+         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jMenuInvitadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuInvitadoActionPerformed
+            invitado = new JFInvitados();
+            invitado.setVisible(true);        // TODO add your handling code here:
+           
+    }//GEN-LAST:event_jMenuInvitadoActionPerformed
+
+    private void jMenuRegUsuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuRegUsuaActionPerformed
+        // TODO add your handling code here:
+        try {
+//            this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
+            JFRegistroPersona = new JFRegistroPersona();
+            JFRegistroPersona.setVisible(true);
+          
+ 
+            
+            //this.add(pantallaHerramentero, BorderLayout.CENTER);
+          //  pestana(JFRegistroPersona, Cte.Alta_Usuario);
+//            this.pack();
+//            this.setExtendedState(MAXIMIZED_BOTH);
+//            this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
+        } catch (Exception ex) {
+            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+        }
+    }//GEN-LAST:event_jMenuRegUsuaActionPerformed
+
+    private void jMenuAsociarTutorUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuAsociarTutorUserActionPerformed
+            asociacionUsuario = new JAsociaciònUsuario();
+            asociacionUsuario.setVisible(true);        // TODO add your handling code here:
+        jTabbedPane.removeAll();
+    }//GEN-LAST:event_jMenuAsociarTutorUserActionPerformed
+
+    private void jDatosAcademicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDatosAcademicosActionPerformed
+        try {
+            // TODO add your handling code here:
+           datosAcademicos = new JFDatosAcademicos();
+            datosAcademicos.setVisible(true);
+           // login.setVisible(true);
+            //login.setAlwaysOnTop(true);
+        } catch (Exception ex) {
+            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+        }
+    }//GEN-LAST:event_jDatosAcademicosActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+            convocatoria = new JFConvocatorias();
+            convocatoria.setVisible(true);        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+            patente = new JFPatentes();
+            patente.setVisible(true);         // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+            SeccionPublica = new SeccionPublica();
+            SeccionPublica.setVisible(true);   // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
     public void pestana(JPanel pantalla, String title) {
 
         jTabbedPane.addTab(title, null, pantalla);
@@ -396,34 +459,61 @@ public class MenuPrincipal extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                
                 new MenuPrincipal().setVisible(true);
+                Login lo;
+                try {
+                    lo = new Login();
+                    lo.setVisible(true);
+                    lo.show();
+                } catch (Exception ex) {
+                    Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+               
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCerrar;
+    private javax.swing.JMenuItem jDatosAcademicos;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenuAdmin;
     private javax.swing.JMenu jMenuArchivo;
+    private javax.swing.JMenuItem jMenuAsociarTutorUser;
     private javax.swing.JMenuBar jMenuBar;
-    private javax.swing.JMenuItem jMenuIniciarSesion;
+    private javax.swing.JMenuItem jMenuInvitado;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItemCerrarSesion;
     private javax.swing.JMenuItem jMenuItemCrearProy;
     private javax.swing.JMenuItem jMenuItemEstados;
     private javax.swing.JMenuItem jMenuItemModProy;
     private javax.swing.JMenu jMenuProyecto;
     private javax.swing.JMenuItem jMenuRegUsua;
-    private javax.swing.JMenuItem jMenuSalir;
     private javax.swing.JTabbedPane jTabbedPane;
     // End of variables declaration//GEN-END:variables
+
+    private void cerrar() {
+       
+Object [] opciones ={"Aceptar","Cancelar"};
+int eleccion = JOptionPane.showOptionDialog(rootPane,"En realidad desea realizar cerrar la aplicacion","Mensaje de Confirmacion",
+JOptionPane.YES_NO_OPTION,
+JOptionPane.QUESTION_MESSAGE,null,opciones,"Aceptar");
+if (eleccion == JOptionPane.YES_OPTION)
+{
+    System.exit(0);
+}else{
+}
+ }
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {
+cerrar();
+}
 }
