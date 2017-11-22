@@ -285,7 +285,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
-            registroProyecto = new JRegistroProyecto();
+           registroProyecto = new JRegistroProyecto();
             registroProyecto.setVisible(true);
           //  pestana(registroProyecto, Cte.Registro_Proyecto);
             this.pack();
