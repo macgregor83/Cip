@@ -122,9 +122,9 @@ public class JFRegistroPersona extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jLabel3.setText("Apellido Materno");
+        jLabel3.setText("Repetir Contraseña");
 
-        jLabel2.setText("Apellido Paterno");
+        jLabel2.setText("Contraseña");
 
         jLabel1.setText("Nombre");
 
@@ -175,11 +175,11 @@ public class JFRegistroPersona extends javax.swing.JFrame {
 
         jLabel12.setText("NumExt");
 
-        jLabel7.setText("Usuario:");
+        jLabel7.setText("Apellido Paterno");
 
-        jLabel13.setText("Contraseña");
+        jLabel13.setText("Apellido Materno");
 
-        jLabel14.setText("Repetir Contraseña");
+        jLabel14.setText("Usuario");
 
         jTextFieldNombre1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
