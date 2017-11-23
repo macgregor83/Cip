@@ -103,6 +103,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenuItemEstados = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
@@ -233,6 +234,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
         jMenu1.add(jMenuItem3);
+
+        jMenuItem1.setText("Consulta Convocatoria");
+        jMenu1.add(jMenuItem1);
 
         jMenuBar.add(jMenu1);
 
@@ -514,6 +518,7 @@ estadoProyecto.setVisible(true);
     private javax.swing.JMenuItem jMenuAsociarTutorUser;
     private javax.swing.JMenuBar jMenuBar;
     private javax.swing.JMenuItem jMenuInvitado;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
