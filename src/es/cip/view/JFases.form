@@ -152,7 +152,7 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
+                      <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
@@ -181,11 +181,6 @@
                                   </Group>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="jLabel47" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jTextField20" max="32767" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="jLabel45" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="jLabel48" alignment="1" min="-2" max="-2" attributes="0"/>
@@ -199,6 +194,17 @@
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                       <Component id="jButtonMasFilas3" alignment="0" min="-2" pref="29" max="-2" attributes="0"/>
                                       <Component id="jButtonMenosFilas3" alignment="0" min="-2" pref="29" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jLabel47" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel49" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jTextField22" alignment="1" max="32767" attributes="0"/>
+                                      <Component id="jTextField20" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -224,7 +230,12 @@
                               <Component id="jLabel47" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jTextField20" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jTextField22" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel49" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel42" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jTextField18" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -375,7 +386,7 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel47">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Nombre de la Metodologia"/>
+                    <Property name="text" type="java.lang.String" value="Nombre del Proyecto"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jTextField20">
@@ -412,6 +423,16 @@
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonMasFilas3ActionPerformed"/>
                   </Events>
+                </Component>
+                <Component class="javax.swing.JTextField" name="jTextField22">
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField22ActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabel49">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Nombre de la Metodologia"/>
+                  </Properties>
                 </Component>
               </SubComponents>
             </Container>

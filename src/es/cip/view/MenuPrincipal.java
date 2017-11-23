@@ -36,6 +36,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private JFEstadoProyecto estadoProyecto;
     private SeccionPublica SeccionPublica;
     private JFConvocatorias convocatoria;
+    private JFAprobarProyecto aprovarProyecto;
    
     private JFases JFases;
     private Login login;
@@ -86,6 +87,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jButtonCerrar = new javax.swing.JButton();
         jTabbedPane = new javax.swing.JTabbedPane();
         jMenuBar = new javax.swing.JMenuBar();
+        jMenu6 = new javax.swing.JMenu();
         jMenuArchivo = new javax.swing.JMenu();
         jMenuRegUsua = new javax.swing.JMenuItem();
         jDatosAcademicos = new javax.swing.JMenuItem();
@@ -94,10 +96,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenuProyecto = new javax.swing.JMenu();
         jMenuItemCrearProy = new javax.swing.JMenuItem();
         jMenuItemModProy = new javax.swing.JMenuItem();
+        jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jMenuAdmin = new javax.swing.JMenu();
         jMenuItemEstados = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
@@ -125,6 +128,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 jTabbedPaneStateChanged(evt);
             }
         });
+
+        jMenu6.setText("Iniciar Sesion");
+        jMenuBar.add(jMenu6);
 
         jMenuArchivo.setText("Usuario");
 
@@ -180,6 +186,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         jMenuProyecto.add(jMenuItemModProy);
 
+        jMenuItem7.setText("Asociar ");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
+        jMenuProyecto.add(jMenuItem7);
+
         jMenuItem6.setText("Actividades Proyecto");
         jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -187,6 +201,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
         jMenuProyecto.add(jMenuItem6);
+
+        jMenuItem2.setText("Estado del Proyecto");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenuProyecto.add(jMenuItem2);
 
         jMenuBar.add(jMenuProyecto);
 
@@ -199,14 +221,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
         jMenuAdmin.add(jMenuItemEstados);
-
-        jMenuItem1.setText("Asociar Proyecto aTutor");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
-        jMenuAdmin.add(jMenuItem1);
 
         jMenuBar.add(jMenuAdmin);
 
@@ -318,7 +332,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
-            estadoProyecto = new JFEstadoProyecto();
+           estadoProyecto = new JFEstadoProyecto();
             estadoProyecto.setVisible(true);
            // pestana(estadoProyecto, Cte.Estado_Proyecto);
             this.pack();
@@ -399,10 +413,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jDatosAcademicosActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
-
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
             convocatoria = new JFConvocatorias();
             convocatoria.setVisible(true);        // TODO add your handling code here:
@@ -417,6 +427,18 @@ public class MenuPrincipal extends javax.swing.JFrame {
             SeccionPublica = new SeccionPublica();
             SeccionPublica.setVisible(true);   // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+estadoProyecto = new JFEstadoProyecto();
+estadoProyecto.setVisible(true);
+// TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+   asociacionUsuario =new JAsociaciònUsuario();
+   asociacionUsuario.setVisible(true);
+   // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
     public void pestana(JPanel pantalla, String title) {
 
         jTabbedPane.addTab(title, null, pantalla);
@@ -486,16 +508,18 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenuAdmin;
     private javax.swing.JMenu jMenuArchivo;
     private javax.swing.JMenuItem jMenuAsociarTutorUser;
     private javax.swing.JMenuBar jMenuBar;
     private javax.swing.JMenuItem jMenuInvitado;
-    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItemCrearProy;
     private javax.swing.JMenuItem jMenuItemEstados;
     private javax.swing.JMenuItem jMenuItemModProy;
