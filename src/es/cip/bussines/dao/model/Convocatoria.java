@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -28,7 +29,10 @@ public class Convocatoria implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String Convocatoria;
-    private String AchivoPDF;
+    
+    @Lob
+    private byte[] AchivoPDF;
+    
     private String url;
     
     @Temporal(TemporalType.DATE)
@@ -56,13 +60,15 @@ public class Convocatoria implements Serializable {
         this.Convocatoria = Convocatoria;
     }
 
-    public String getAchivoPDF() {
+    public byte[] getAchivoPDF() {
         return AchivoPDF;
     }
 
-    public void setAchivoPDF(String AchivoPDF) {
+    public void setAchivoPDF(byte[] AchivoPDF) {
         this.AchivoPDF = AchivoPDF;
     }
+
+ 
 
     public String getUrl() {
         return url;

@@ -174,16 +174,22 @@ public class ValidCampos {
      * @param archivo
      * @return
      */
-    public static final boolean validarArchivo(String archivo, String[] extensionesPermitidas) {
-        //String[] extensionesPermitidas={".pdf","doc","docx"};
-        //recupero la extensión de este nombre de archivo
-        String extension = (archivo.substring(archivo.lastIndexOf("."))).toLowerCase();
+    public static final boolean validarArchivo(String archivo) {
+        try {
+            String[] extensionesPermitidas = {".pdf", "doc", "docx"};
+            //recupero la extensión de este nombre de archivo
+            String extension = (archivo.substring(archivo.lastIndexOf("."))).toLowerCase();
 
-        for (int i = 0; i < extensionesPermitidas.length; i++) {
-            if (extensionesPermitidas[i].equals(extension)) {
-                return true;
+            for (int i = 0; i < extensionesPermitidas.length; i++) {
+                if (extensionesPermitidas[i].equals(extension)) {
+                    return true;
+                }
             }
+        } catch (Exception e) {
+
+            return false;
         }
+
         return false;
     }
 

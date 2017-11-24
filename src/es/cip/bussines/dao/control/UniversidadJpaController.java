@@ -7,6 +7,7 @@ package es.cip.bussines.dao.control;
 
 import es.cip.bussines.dao.control.exceptions.NonexistentEntityException;
 import es.cip.bussines.dao.model.Universidad;
+import es.cip.util.Cte;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -22,6 +23,9 @@ import javax.persistence.criteria.Root;
  */
 public class UniversidadJpaController implements Serializable {
 
+    public UniversidadJpaController() {
+        this.emf = javax.persistence.Persistence.createEntityManagerFactory(Cte.Persistence_Unit_Name);
+    }
     public UniversidadJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }

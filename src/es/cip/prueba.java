@@ -10,7 +10,11 @@ import es.cip.bussines.dao.model.Usuario;
 import es.cip.util.Convertir;
 import es.cip.util.Id;
 import es.cip.util.ValidCampos;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.EntityManagerFactory;
 
 /**
@@ -22,8 +26,9 @@ public class prueba {
     Usuario u = new Usuario();
 
     public static void main(String[] args) {
-        
-//        EntityManagerFactory emf = javax.persistence.Persistence.createEntityManagerFactory("CIPPU");
+
+        try {
+            //        EntityManagerFactory emf = javax.persistence.Persistence.createEntityManagerFactory("CIPPU");
 //        UsuarioJpaController oControl = new UsuarioJpaController(emf);
 //        List<Usuario> lis = oControl.findUsuarioEntities();
 //        for (Usuario li : lis) {
@@ -35,8 +40,13 @@ public class prueba {
 //        String url = "D:\\Users\\iMac\\Documents\\maestria\\1re cuatrimestre\\Libros\\eBook\\Ingenier+¡a de Software\\Analisis y dise+¦o de Sistemas - Kendal 8ed.pdf";    
 //        String[] ext={".pdf","doc","docx"};
 //        System.out.println(ValidCampos.validarArchivo(url,ext));
-    
-        byte[] by = Convertir.convertDocToByteArray("‪D:\\Users\\iMac\\Downloads\\ExpRegulares.pdf");
-         Convertir.convertByteArrayToDoc(by);
+
+            byte[] by = Convertir.convertDocToByteArray("‪D:\\Users\\iMac\\Downloads\\ExpRegulares.pdf");
+            Convertir.convertByteArrayToDoc(by);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(prueba.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(prueba.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

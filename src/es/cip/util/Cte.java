@@ -22,5 +22,6 @@ public class Cte {
     public static final String Registro_Proyecto = "Registro Proyecto";
     public static final String Estado_Proyecto = " Aprobar Proyecto";
     public static final String Solo_Letras="Este campo solo admite Letras";
+    public static final String Archivo_Erroneo= "Archivo Invalido";
 
 }

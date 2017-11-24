@@ -7,6 +7,7 @@ package es.cip.bussines.dao.control;
 
 import es.cip.bussines.dao.control.exceptions.NonexistentEntityException;
 import es.cip.bussines.dao.model.Login;
+import es.cip.util.Cte;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -21,6 +22,10 @@ import javax.persistence.criteria.Root;
  * @author iMac
  */
 public class LoginJpaController implements Serializable {
+
+    public LoginJpaController() {
+        this.emf = javax.persistence.Persistence.createEntityManagerFactory(Cte.Persistence_Unit_Name);
+    }
 
     public LoginJpaController(EntityManagerFactory emf) {
         this.emf = emf;
@@ -112,7 +117,19 @@ public class LoginJpaController implements Serializable {
             em.close();
         }
     }
-
+    public List<Login> findLoginEntities(String nickname) {
+        EntityManager em = getEntityManager();
+        try {
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery(Login.class);
+            Root<Login> c = cq.from(Login.class);
+            cq.select(c);
+            cq.where(em.getCriteriaBuilder().like(c.get("Nickname"), "%" + nickname + "%"));
+            Query q = em.createQuery(cq);
+            return q.getResultList();
+        } finally {
+            em.close();
+        }
+    }
     public Login findLogin(Integer id) {
         EntityManager em = getEntityManager();
         try {

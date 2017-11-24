@@ -7,6 +7,7 @@ package es.cip.bussines.dao.control;
 
 import es.cip.bussines.dao.control.exceptions.NonexistentEntityException;
 import es.cip.bussines.dao.model.Convocatoria;
+import es.cip.util.Cte;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -25,6 +26,11 @@ public class ConvocatoriaJpaController implements Serializable {
     public ConvocatoriaJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
+
+    public ConvocatoriaJpaController() {
+        this.emf = javax.persistence.Persistence.createEntityManagerFactory(Cte.Persistence_Unit_Name);
+    }
+    
     private EntityManagerFactory emf = null;
 
     public EntityManager getEntityManager() {
