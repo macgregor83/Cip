@@ -5,15 +5,12 @@
  */
 package es.cip.util;
 
-import java.io.BufferedWriter;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -23,43 +20,43 @@ import java.util.logging.Logger;
  */
 public class Convertir {
 
-    public static byte[] convertDocToByteArray(String sourcePath) {
+    public static byte[] convertDocToByteArray(String sourcePath) throws FileNotFoundException {
 
-        byte[] byteArray = null;
+        File file = new File(sourcePath);
+        FileInputStream fis = new FileInputStream(file);
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        byte[] buf = new byte[1024];
         try {
-            InputStream inputstream = new FileInputStream("capitulo7.pdf");
-
-            String inputStreamToString = inputstream.toString();
-            byteArray = inputStreamToString.getBytes();
-
-            inputstream.close();
-//        } catch (FileNotFoundException e) {
-//            System.out.println("File Not found" + e);
-//        } catch (IOException e) {
-//            System.out.println("IO Ex" + e);
-//        }
+            for (int readNum; (readNum = fis.read(buf)) != -1;) {
+                bos.write(buf, 0, readNum);
+             //   System.out.println("read " + readNum + " bytes,");
+            }
         } catch (IOException ex) {
             Logger.getLogger(Convertir.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return byteArray;
+        return bos.toByteArray();
 
     }
 
-    public static void convertByteArrayToDoc(byte[] bArray) {
-        try {
-            // Create file  
-            FileWriter fstream = new FileWriter("out.pdf");
-            BufferedWriter out = new BufferedWriter(fstream);
-            for (Byte b : bArray) {
-                out.write(b);
-            }
-            out.close();
-        } catch (Exception e) {
-            System.err.println("Error: " + e.getMessage());
-        }
+    public static void convertByteArrayToDoc(byte[] bytes) throws IOException {
+        File someFile = new File("java2.pdf");
+        FileOutputStream fos = new FileOutputStream(someFile);
+        fos.write(bytes);
+        fos.flush();
+        fos.close();
+
     }
+
     public static void main(String[] args) {
-        byte[] by = Convertir.convertDocToByteArray("D:\\Users\\iMac\\Documents\\maestria\\1re cuatrimestre\\Nueva carpeta\\tarea\\IMGOD_Atc1_S2.pdf");
-        Convertir.convertByteArrayToDoc(by);
+        try {
+            byte[] by = Convertir.convertDocToByteArray("D:\\Users\\iMac\\Documents\\maestria\\1re cuatrimestre\\Nueva carpeta\\tarea\\IMGOD_Atc1_S2.pdf");
+
+            Convertir.convertByteArrayToDoc(by);
+
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Convertir.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Convertir.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

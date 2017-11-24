@@ -37,11 +37,8 @@ public class Convocatoria implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date FechaCierre;
     
-    private Integer idProyecto;
-    
-    @JoinColumn(name = "idProyecto", referencedColumnName = "id", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
-    private Proyecto proyecto;    
+    private String ExtAchivoPDF;
+      
 
     public Integer getId() {
         return id;
@@ -91,20 +88,12 @@ public class Convocatoria implements Serializable {
         this.FechaCierre = FechaCierre;
     }
 
-    public Integer getIdProyecto() {
-        return idProyecto;
+    public String getExtAchivoPDF() {
+        return ExtAchivoPDF;
     }
 
-    public void setIdProyecto(Integer idProyecto) {
-        this.idProyecto = idProyecto;
-    }
-
-    public Proyecto getProyecto() {
-        return proyecto;
-    }
-
-    public void setProyecto(Proyecto proyecto) {
-        this.proyecto = proyecto;
+    public void setExtAchivoPDF(String ExtAchivoPDF) {
+        this.ExtAchivoPDF = ExtAchivoPDF;
     }
 
     @Override

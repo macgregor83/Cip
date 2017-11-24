@@ -7,7 +7,6 @@ package es.cip.bussines.dao.control;
 
 import es.cip.bussines.dao.control.exceptions.NonexistentEntityException;
 import es.cip.bussines.dao.model.RecursoHumanoDatos;
-import es.cip.util.Cte;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -27,10 +26,6 @@ public class RecursoHumanoDatosJpaController implements Serializable {
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;
-
-    public RecursoHumanoDatosJpaController() {
-        this.emf = javax.persistence.Persistence.createEntityManagerFactory(Cte.Persistence_Unit_Name);
-    }
 
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
@@ -62,7 +57,7 @@ public class RecursoHumanoDatosJpaController implements Serializable {
             if (msg == null || msg.length() == 0) {
                 Integer id = recursoHumanoDatos.getId();
                 if (findRecursoHumanoDatos(id) == null) {
-                    throw new NonexistentEntityException("The recursoHumanoDatos with id " + id + " no Integerer exists.");
+                    throw new NonexistentEntityException("The recursoHumanoDatos with id " + id + " no longer exists.");
                 }
             }
             throw ex;
@@ -83,7 +78,7 @@ public class RecursoHumanoDatosJpaController implements Serializable {
                 recursoHumanoDatos = em.getReference(RecursoHumanoDatos.class, id);
                 recursoHumanoDatos.getId();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The recursoHumanoDatos with id " + id + " no Integerer exists.", enfe);
+                throw new NonexistentEntityException("The recursoHumanoDatos with id " + id + " no longer exists.", enfe);
             }
             em.remove(recursoHumanoDatos);
             em.getTransaction().commit();
@@ -134,7 +129,7 @@ public class RecursoHumanoDatosJpaController implements Serializable {
             Root<RecursoHumanoDatos> rt = cq.from(RecursoHumanoDatos.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
-            return ((Integer) q.getSingleResult()).intValue();
+            return ((Long) q.getSingleResult()).intValue();
         } finally {
             em.close();
         }

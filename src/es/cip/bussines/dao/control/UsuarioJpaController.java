@@ -7,7 +7,6 @@ package es.cip.bussines.dao.control;
 
 import es.cip.bussines.dao.control.exceptions.NonexistentEntityException;
 import es.cip.bussines.dao.model.Usuario;
-import es.cip.util.Cte;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -22,10 +21,6 @@ import javax.persistence.criteria.Root;
  * @author iMac
  */
 public class UsuarioJpaController implements Serializable {
-    
-    public UsuarioJpaController() {
-        this.emf = javax.persistence.Persistence.createEntityManagerFactory(Cte.Persistence_Unit_Name);
-    }
 
     public UsuarioJpaController(EntityManagerFactory emf) {
         this.emf = emf;
@@ -62,7 +57,7 @@ public class UsuarioJpaController implements Serializable {
             if (msg == null || msg.length() == 0) {
                 Integer id = usuario.getId();
                 if (findUsuario(id) == null) {
-                    throw new NonexistentEntityException("The usuario with id " + id + " no Integerer exists.");
+                    throw new NonexistentEntityException("The usuario with id " + id + " no longer exists.");
                 }
             }
             throw ex;
@@ -83,7 +78,7 @@ public class UsuarioJpaController implements Serializable {
                 usuario = em.getReference(Usuario.class, id);
                 usuario.getId();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The usuario with id " + id + " no Integerer exists.", enfe);
+                throw new NonexistentEntityException("The usuario with id " + id + " no longer exists.", enfe);
             }
             em.remove(usuario);
             em.getTransaction().commit();
@@ -134,7 +129,7 @@ public class UsuarioJpaController implements Serializable {
             Root<Usuario> rt = cq.from(Usuario.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
-            return ((Integer) q.getSingleResult()).intValue();
+            return ((Long) q.getSingleResult()).intValue();
         } finally {
             em.close();
         }

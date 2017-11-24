@@ -6,11 +6,13 @@
 package es.cip.bussines.dao.model;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 
 /**
@@ -30,10 +32,12 @@ public class Face implements Serializable {
     private String Objetivo;
     private String Actividad;
     private Integer idMetodologia;
-    private String Entregable;
+    @Lob
+//    @Column(name = "Entregable")
+    private byte[] Entregable;
+    
     @JoinColumn(name = "idMetodologia", referencedColumnName = "id", insertable = false, updatable = false)
     @ManyToOne(optional = false)
-    private Proyecto proyecto;    
     private Metodologia metodologia;
     
     public Integer getId() {
@@ -92,11 +96,11 @@ public class Face implements Serializable {
         this.idMetodologia = idMetodologia;
     }
 
-    public String getEntregable() {
+    public byte[] getEntregable() {
         return Entregable;
     }
 
-    public void setEntregable(String Entregable) {
+    public void setEntregable(byte[] Entregable) {
         this.Entregable = Entregable;
     }
 

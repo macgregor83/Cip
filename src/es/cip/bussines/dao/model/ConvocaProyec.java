@@ -21,53 +21,34 @@ import javax.persistence.TemporalType;
  * @author iMac
  */
 @Entity
-public class Patente implements Serializable {
+public class ConvocaProyec implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
-    private String Folio;
-    @Temporal(TemporalType.DATE)
-    private Date FechaRegistro;
-    private Integer Porcentage;
-    
+    private int id;
+
     private Integer idProyecto;
-            
+    private Integer idConvocatoria;
+    @Temporal(TemporalType.DATE)
+    private Date Fecha;
+
+    private String ExtAchivoPDF;
+
     @JoinColumn(name = "idProyecto", referencedColumnName = "id", insertable = false, updatable = false)
     @ManyToOne(optional = false)
-    private Proyecto proyecto;    
-    
-    public Integer getId() {
+    private Proyecto proyecto;
+
+    @JoinColumn(name = "idConvocatoria", referencedColumnName = "id", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    private Convocatoria convocatoria;
+
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
-    }
-
-    public String getFolio() {
-        return Folio;
-    }
-
-    public void setFolio(String Folio) {
-        this.Folio = Folio;
-    }
-
-    public Date getFechaRegistro() {
-        return FechaRegistro;
-    }
-
-    public void setFechaRegistro(Date FechaRegistro) {
-        this.FechaRegistro = FechaRegistro;
-    }
-
-    public Integer getPorcentage() {
-        return Porcentage;
-    }
-
-    public void setPorcentage(Integer Porcentage) {
-        this.Porcentage = Porcentage;
     }
 
     public Integer getIdProyecto() {
@@ -78,6 +59,30 @@ public class Patente implements Serializable {
         this.idProyecto = idProyecto;
     }
 
+    public Integer getIdConvocatoria() {
+        return idConvocatoria;
+    }
+
+    public void setIdConvocatoria(Integer idConvocatoria) {
+        this.idConvocatoria = idConvocatoria;
+    }
+
+    public Date getFecha() {
+        return Fecha;
+    }
+
+    public void setFecha(Date Fecha) {
+        this.Fecha = Fecha;
+    }
+
+    public String getExtAchivoPDF() {
+        return ExtAchivoPDF;
+    }
+
+    public void setExtAchivoPDF(String ExtAchivoPDF) {
+        this.ExtAchivoPDF = ExtAchivoPDF;
+    }
+
     public Proyecto getProyecto() {
         return proyecto;
     }
@@ -86,21 +91,29 @@ public class Patente implements Serializable {
         this.proyecto = proyecto;
     }
 
+    public Convocatoria getConvocatoria() {
+        return convocatoria;
+    }
+
+    public void setConvocatoria(Convocatoria convocatoria) {
+        this.convocatoria = convocatoria;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (int) id;
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Patente)) {
+        if (!(object instanceof ConvocaProyec)) {
             return false;
         }
-        Patente other = (Patente) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        ConvocaProyec other = (ConvocaProyec) object;
+        if (this.id != other.id) {
             return false;
         }
         return true;
@@ -108,7 +121,7 @@ public class Patente implements Serializable {
 
     @Override
     public String toString() {
-        return "es.cip.bussines.dao.model.Patente[ id=" + id + " ]";
+        return "es.cip.bussines.dao.model.ConvocaProyec[ id=" + id + " ]";
     }
-    
+
 }

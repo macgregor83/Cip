@@ -6,7 +6,7 @@
 package es.cip.bussines.dao.control;
 
 import es.cip.bussines.dao.control.exceptions.NonexistentEntityException;
-import es.cip.bussines.dao.model.Carrera;
+import es.cip.bussines.dao.model.ConvocaProyec;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -20,9 +20,9 @@ import javax.persistence.criteria.Root;
  *
  * @author iMac
  */
-public class CarreraJpaController implements Serializable {
+public class ConvocaProyecJpaController implements Serializable {
 
-    public CarreraJpaController(EntityManagerFactory emf) {
+    public ConvocaProyecJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;
@@ -31,12 +31,12 @@ public class CarreraJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Carrera carrera) {
+    public void create(ConvocaProyec convocaProyec) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            em.persist(carrera);
+            em.persist(convocaProyec);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -45,19 +45,19 @@ public class CarreraJpaController implements Serializable {
         }
     }
 
-    public void edit(Carrera carrera) throws NonexistentEntityException, Exception {
+    public void edit(ConvocaProyec convocaProyec) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            carrera = em.merge(carrera);
+            convocaProyec = em.merge(convocaProyec);
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                Integer id = carrera.getId();
-                if (findCarrera(id) == null) {
-                    throw new NonexistentEntityException("The carrera with id " + id + " no longer exists.");
+                int id = convocaProyec.getId();
+                if (findConvocaProyec(id) == null) {
+                    throw new NonexistentEntityException("The convocaProyec with id " + id + " no longer exists.");
                 }
             }
             throw ex;
@@ -68,19 +68,19 @@ public class CarreraJpaController implements Serializable {
         }
     }
 
-    public void destroy(Integer id) throws NonexistentEntityException {
+    public void destroy(int id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Carrera carrera;
+            ConvocaProyec convocaProyec;
             try {
-                carrera = em.getReference(Carrera.class, id);
-                carrera.getId();
+                convocaProyec = em.getReference(ConvocaProyec.class, id);
+                convocaProyec.getId();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The carrera with id " + id + " no longer exists.", enfe);
+                throw new NonexistentEntityException("The convocaProyec with id " + id + " no longer exists.", enfe);
             }
-            em.remove(carrera);
+            em.remove(convocaProyec);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -89,19 +89,19 @@ public class CarreraJpaController implements Serializable {
         }
     }
 
-    public List<Carrera> findCarreraEntities() {
-        return findCarreraEntities(true, -1, -1);
+    public List<ConvocaProyec> findConvocaProyecEntities() {
+        return findConvocaProyecEntities(true, -1, -1);
     }
 
-    public List<Carrera> findCarreraEntities(int maxResults, int firstResult) {
-        return findCarreraEntities(false, maxResults, firstResult);
+    public List<ConvocaProyec> findConvocaProyecEntities(int maxResults, int firstResult) {
+        return findConvocaProyecEntities(false, maxResults, firstResult);
     }
 
-    private List<Carrera> findCarreraEntities(boolean all, int maxResults, int firstResult) {
+    private List<ConvocaProyec> findConvocaProyecEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Carrera.class));
+            cq.select(cq.from(ConvocaProyec.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -113,20 +113,20 @@ public class CarreraJpaController implements Serializable {
         }
     }
 
-    public Carrera findCarrera(Integer id) {
+    public ConvocaProyec findConvocaProyec(int id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Carrera.class, id);
+            return em.find(ConvocaProyec.class, id);
         } finally {
             em.close();
         }
     }
 
-    public int getCarreraCount() {
+    public int getConvocaProyecCount() {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Carrera> rt = cq.from(Carrera.class);
+            Root<ConvocaProyec> rt = cq.from(ConvocaProyec.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();

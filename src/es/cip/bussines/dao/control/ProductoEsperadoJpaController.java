@@ -7,7 +7,6 @@ package es.cip.bussines.dao.control;
 
 import es.cip.bussines.dao.control.exceptions.NonexistentEntityException;
 import es.cip.bussines.dao.model.ProductoEsperado;
-import es.cip.util.Cte;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -22,10 +21,6 @@ import javax.persistence.criteria.Root;
  * @author iMac
  */
 public class ProductoEsperadoJpaController implements Serializable {
-
-    public ProductoEsperadoJpaController() {
-        this.emf = javax.persistence.Persistence.createEntityManagerFactory(Cte.Persistence_Unit_Name);
-    }
 
     public ProductoEsperadoJpaController(EntityManagerFactory emf) {
         this.emf = emf;
@@ -139,5 +134,5 @@ public class ProductoEsperadoJpaController implements Serializable {
             em.close();
         }
     }
-
+    
 }

@@ -7,7 +7,6 @@ package es.cip.bussines.dao.control;
 
 import es.cip.bussines.dao.control.exceptions.NonexistentEntityException;
 import es.cip.bussines.dao.model.RecursosMateriales;
-import es.cip.util.Cte;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -22,10 +21,6 @@ import javax.persistence.criteria.Root;
  * @author iMac
  */
 public class RecursosMaterialesJpaController implements Serializable {
-
-    public RecursosMaterialesJpaController() {
-        this.emf = javax.persistence.Persistence.createEntityManagerFactory(Cte.Persistence_Unit_Name);
-    }
 
     public RecursosMaterialesJpaController(EntityManagerFactory emf) {
         this.emf = emf;
@@ -139,5 +134,5 @@ public class RecursosMaterialesJpaController implements Serializable {
             em.close();
         }
     }
-
+    
 }

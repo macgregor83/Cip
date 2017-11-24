@@ -7,7 +7,6 @@ package es.cip.bussines.dao.control;
 
 import es.cip.bussines.dao.control.exceptions.NonexistentEntityException;
 import es.cip.bussines.dao.model.Universidad;
-import es.cip.util.Cte;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -23,9 +22,6 @@ import javax.persistence.criteria.Root;
  */
 public class UniversidadJpaController implements Serializable {
 
-    public UniversidadJpaController() {
-        this.emf = javax.persistence.Persistence.createEntityManagerFactory(Cte.Persistence_Unit_Name);
-    }
     public UniversidadJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
@@ -61,7 +57,7 @@ public class UniversidadJpaController implements Serializable {
             if (msg == null || msg.length() == 0) {
                 Integer id = universidad.getId();
                 if (findUniversidad(id) == null) {
-                    throw new NonexistentEntityException("The universidad with id " + id + " no Integerer exists.");
+                    throw new NonexistentEntityException("The universidad with id " + id + " no longer exists.");
                 }
             }
             throw ex;
@@ -82,7 +78,7 @@ public class UniversidadJpaController implements Serializable {
                 universidad = em.getReference(Universidad.class, id);
                 universidad.getId();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The universidad with id " + id + " no Integerer exists.", enfe);
+                throw new NonexistentEntityException("The universidad with id " + id + " no longer exists.", enfe);
             }
             em.remove(universidad);
             em.getTransaction().commit();
@@ -133,7 +129,7 @@ public class UniversidadJpaController implements Serializable {
             Root<Universidad> rt = cq.from(Universidad.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
-            return ((Integer) q.getSingleResult()).intValue();
+            return ((Long) q.getSingleResult()).intValue();
         } finally {
             em.close();
         }

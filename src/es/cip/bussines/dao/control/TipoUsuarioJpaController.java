@@ -7,7 +7,6 @@ package es.cip.bussines.dao.control;
 
 import es.cip.bussines.dao.control.exceptions.NonexistentEntityException;
 import es.cip.bussines.dao.model.TipoUsuario;
-import es.cip.util.Cte;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -27,10 +26,6 @@ public class TipoUsuarioJpaController implements Serializable {
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;
-
-    public TipoUsuarioJpaController() {
-        this.emf = javax.persistence.Persistence.createEntityManagerFactory(Cte.Persistence_Unit_Name);
-    }
 
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
@@ -62,7 +57,7 @@ public class TipoUsuarioJpaController implements Serializable {
             if (msg == null || msg.length() == 0) {
                 Integer id = tipoUsuario.getId();
                 if (findTipoUsuario(id) == null) {
-                    throw new NonexistentEntityException("The tipoUsuario with id " + id + " no Integerer exists.");
+                    throw new NonexistentEntityException("The tipoUsuario with id " + id + " no longer exists.");
                 }
             }
             throw ex;
@@ -83,7 +78,7 @@ public class TipoUsuarioJpaController implements Serializable {
                 tipoUsuario = em.getReference(TipoUsuario.class, id);
                 tipoUsuario.getId();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The tipoUsuario with id " + id + " no Integerer exists.", enfe);
+                throw new NonexistentEntityException("The tipoUsuario with id " + id + " no longer exists.", enfe);
             }
             em.remove(tipoUsuario);
             em.getTransaction().commit();
@@ -134,7 +129,7 @@ public class TipoUsuarioJpaController implements Serializable {
             Root<TipoUsuario> rt = cq.from(TipoUsuario.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
-            return ((Integer) q.getSingleResult()).intValue();
+            return ((Long) q.getSingleResult()).intValue();
         } finally {
             em.close();
         }

@@ -25,13 +25,13 @@ public class LoginBL {
     }
     public boolean validarUsuario(String nickname, String pass ){
         
-        LoginJpaController logjc = new LoginJpaController();
-        List<Login> lis = logjc.findLoginEntities(nickname);
-        if(lis.size()>0){
-            if(lis.get(0).getPassword().equalsIgnoreCase(pass)){
-              return true;  
-            }
-        }            
+//        LoginJpaController logjc = new LoginJpaController();
+//        List<Login> lis = logjc.findLoginEntities(nickname);
+//        if(lis.size()>0){
+//            if(lis.get(0).getPassword().equalsIgnoreCase(pass)){
+//              return true;  
+//            }
+//        }            
         return false;        
     }
     

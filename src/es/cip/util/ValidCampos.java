@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.text.ParseException;
+import jdk.nashorn.internal.codegen.CompilerConstants;
 
 /**
  *
@@ -28,12 +29,36 @@ public class ValidCampos {
     }
 
     public static final boolean esEntero(String cadena) {
-        try {
-            Integer.parseInt(cadena.trim());
-            return true;
-        } catch (NumberFormatException nfe) {
-            return false;
-        }
+        Pattern patron = Pattern.compile("[0-9]*");
+        Matcher encaja = patron.matcher(cadena);
+        return encaja.matches();
+
+    }
+
+    public static final boolean esURL(String cadena) {
+        Pattern patron = Pattern.compile("^(http|https|ftp)\\:\\/\\/[a-z0-9\\.-]+\\.(([a-z]{2,4})+)$");
+        Matcher encaja = patron.matcher(cadena);
+        return encaja.matches();
+
+    }
+
+    public static final boolean esNombrePropio(String cadena) {
+        Pattern patron = Pattern.compile("^([A-Z]{1}[a-zñáéíóú]+[\\s]*)+$");
+        Matcher encaja = patron.matcher(cadena);
+        return encaja.matches();
+    }
+
+//    Minimo 8 caracteres
+//    Maximo 15
+//    Al menos una letra mayúscula
+//    Al menos una letra minucula
+//    Al menos un dígito
+//    No espacios en blanco
+//    Al menos 1 caracter especial
+    public static final boolean esPassVal(String cadena) {
+        Pattern patron = Pattern.compile("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[$@$!%*?&])([A-Za-z\\d$@$!%*?&]|[^ ]){8,15}$");
+        Matcher encaja = patron.matcher(cadena);
+        return encaja.matches();
     }
 
     public static final boolean esMayorIgual(Date fecha1, Date fecha2) {
@@ -58,7 +83,7 @@ public class ValidCampos {
     }
 
     public static final boolean esSoloLetras(String entrada) {
-        //String entrada = " No para mi?? que triste :( por que??";
+        //String entrada = " No para mi?? que triste :( por que??"; ^[a-zA-Z]+(\\s*[a-zA-Z]*)*[a-zA-Z]+$
         Pattern patron = Pattern.compile("[^A-Za-z ]");
         Matcher encaja = patron.matcher(entrada);
 
@@ -133,11 +158,6 @@ public class ValidCampos {
         return false;
     }
 
-    /*Método que tiene la función de validar el curp*/
-    public static final boolean validarRPE(String rpe) {
-        rpe = rpe.toUpperCase().trim();
-        return rpe.matches("[9]{1}[A-Za-z0-9]{4}|[A-Za-z]{1}[A-Za-z0-9]{4}");
-    }//Cierra método validarCurp
 
     /*Método que tiene la función de validar el email*/
     public static final boolean validarEmail(String email) {
@@ -158,12 +178,34 @@ public class ValidCampos {
         //String[] extensionesPermitidas={".pdf","doc","docx"};
         //recupero la extensión de este nombre de archivo
         String extension = (archivo.substring(archivo.lastIndexOf("."))).toLowerCase();
-               
+
         for (int i = 0; i < extensionesPermitidas.length; i++) {
             if (extensionesPermitidas[i].equals(extension)) {
                 return true;
             }
         }
         return false;
+    }
+
+    public static final boolean esTelefono(String entrada) {
+        //String entrada = " No para mi?? que triste :( por que??"; ^([0-9]{10}) ^[5]{2}[0-9]{7} ^[3]{2}[0-9]{7}
+        if (entrada.trim().length() < 11 && entrada.trim().length() > 6) {
+            if (ValidCampos.esEntero(entrada)) {
+                char[] ar = entrada.toCharArray();
+                int lada = Integer.parseInt(ar[0] + "" + ar[1]);
+                if (lada != 33 && lada != 55 && lada != 81 && entrada.length() == 10) {
+                    return true;
+                } else if (lada == 33 && entrada.length() == 9) {
+                    return true;
+                } else if (lada == 55 && entrada.length() == 9) {
+                    return true;
+                } else if (lada == 81 && entrada.length() == 9) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+
     }
 }

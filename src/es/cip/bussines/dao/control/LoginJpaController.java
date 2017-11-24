@@ -7,7 +7,6 @@ package es.cip.bussines.dao.control;
 
 import es.cip.bussines.dao.control.exceptions.NonexistentEntityException;
 import es.cip.bussines.dao.model.Login;
-import es.cip.util.Cte;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -22,10 +21,6 @@ import javax.persistence.criteria.Root;
  * @author iMac
  */
 public class LoginJpaController implements Serializable {
-
-    public LoginJpaController() {
-        this.emf = javax.persistence.Persistence.createEntityManagerFactory(Cte.Persistence_Unit_Name);
-    }
 
     public LoginJpaController(EntityManagerFactory emf) {
         this.emf = emf;
@@ -62,7 +57,7 @@ public class LoginJpaController implements Serializable {
             if (msg == null || msg.length() == 0) {
                 Integer id = login.getId();
                 if (findLogin(id) == null) {
-                    throw new NonexistentEntityException("The login with id " + id + " no Integerer exists.");
+                    throw new NonexistentEntityException("The login with id " + id + " no longer exists.");
                 }
             }
             throw ex;
@@ -83,7 +78,7 @@ public class LoginJpaController implements Serializable {
                 login = em.getReference(Login.class, id);
                 login.getId();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The login with id " + id + " no Integerer exists.", enfe);
+                throw new NonexistentEntityException("The login with id " + id + " no longer exists.", enfe);
             }
             em.remove(login);
             em.getTransaction().commit();
@@ -117,19 +112,7 @@ public class LoginJpaController implements Serializable {
             em.close();
         }
     }
-    public List<Login> findLoginEntities(String nickname) {
-        EntityManager em = getEntityManager();
-        try {
-            CriteriaQuery cq = em.getCriteriaBuilder().createQuery(Login.class);
-            Root<Login> c = cq.from(Login.class);
-            cq.select(c);
-            cq.where(em.getCriteriaBuilder().like(c.get("Nickname"), "%" + nickname + "%"));
-            Query q = em.createQuery(cq);
-            return q.getResultList();
-        } finally {
-            em.close();
-        }
-    }
+
     public Login findLogin(Integer id) {
         EntityManager em = getEntityManager();
         try {
@@ -146,10 +129,10 @@ public class LoginJpaController implements Serializable {
             Root<Login> rt = cq.from(Login.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
-            return ((Integer) q.getSingleResult()).intValue();
+            return ((Long) q.getSingleResult()).intValue();
         } finally {
             em.close();
         }
     }
-
+    
 }

@@ -49,40 +49,40 @@ public class RegistroPersonaBL {
 
 
     public void guardarUsuario() {
-        RecursoHumanoDatosJpaController rhdjc = new RecursoHumanoDatosJpaController();
-        UsuarioJpaController usujc = new UsuarioJpaController();
-        LoginJpaController logjc = new LoginJpaController();
-        UniversidadJpaController unijc1 = new UniversidadJpaController();
-        TipoUsuarioJpaController tuujc =new TipoUsuarioJpaController();
-        CampusJpaController camjc=new CampusJpaController();
-        CarreraJpaController carrjc=new CarreraJpaController();
+//        RecursoHumanoDatosJpaController rhdjc = new RecursoHumanoDatosJpaController();
+//        UsuarioJpaController usujc = new UsuarioJpaController();
+//        LoginJpaController logjc = new LoginJpaController();
+//        UniversidadJpaController unijc1 = new UniversidadJpaController();
+//        TipoUsuarioJpaController tuujc =new TipoUsuarioJpaController();
+//        CampusJpaController camjc=new CampusJpaController();
+//        CarreraJpaController carrjc=new CarreraJpaController();
         
-        Integer id = es.cip.util.Id.Id();       
-        Integer id2 = (int) (Integer)id;
-        
-        usuario.setId(id);
-        login.setId(id);
-        login.setIdUsuario(usuario.getId());
-        universidad.setId(id);
-        tipoUsuario.setId(id);
-        campus.setId(id);
-        carrera.setId(id);
-        
-        recursoHumanoDatos.setId(id);
-        recursoHumanoDatos.setIdUsuario(usuario.getId());
-        recursoHumanoDatos.setIdUniversidad(id2);
-        recursoHumanoDatos.setIdCampus(id2);
-        recursoHumanoDatos.setIdCarrera(id2);
-        recursoHumanoDatos.setIdTipoUsuario(id2);
-       
-        
-        usujc.create(usuario);        
-        logjc.create(login);
-        unijc1.create(universidad);
-        tuujc.create(tipoUsuario);
-        camjc.create(campus);
-        carrjc.create(carrera);
-        rhdjc.create(recursoHumanoDatos);  
+//        Integer id = es.cip.util.Id.Id();       
+//        Integer id2 = (int) (Integer)id;
+//        
+//        usuario.setId(id);
+//        login.setId(id);
+//        login.setIdUsuario(usuario.getId());
+//        universidad.setId(id);
+//        tipoUsuario.setId(id);
+//        campus.setId(id);
+//        carrera.setId(id);
+//        
+//        recursoHumanoDatos.setId(id);
+//        recursoHumanoDatos.setIdUsuario(usuario.getId());
+//        recursoHumanoDatos.setIdUniversidad(id2);
+//        recursoHumanoDatos.setIdCampus(id2);
+//        recursoHumanoDatos.setIdCarrera(id2);
+//        recursoHumanoDatos.setIdTipoUsuario(id2);
+//       
+//        
+//        usujc.create(usuario);        
+//        logjc.create(login);
+//        unijc1.create(universidad);
+//        tuujc.create(tipoUsuario);
+//        camjc.create(campus);
+//        carrjc.create(carrera);
+//        rhdjc.create(recursoHumanoDatos);  
         
     }
 
