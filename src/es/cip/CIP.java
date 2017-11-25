@@ -7,6 +7,9 @@ package es.cip;
 
 //import es.cip.view.MenuPrincipal;
 
+import es.cip.view.MenuPrincipal;
+
+
 /**
  *
  * @author iMac
@@ -18,9 +21,9 @@ public class CIP {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-//        MenuPrincipal p=new MenuPrincipal();
-//        p.setVisible(true);
-//        p.isFocusableWindow();
+        MenuPrincipal p=new MenuPrincipal();
+        p.setVisible(true);
+        p.isFocusableWindow();
     }
     
 }
