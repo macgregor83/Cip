@@ -60,19 +60,19 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         //tabButton.setText("...");
         //jButtonCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("../Imagenes/boton_cerrar.gif")));
-        try {
-            login = new Login();
-            this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
-            SeccionPublica = new SeccionPublica();
-            pestana(SeccionPublica, Cte.Seccion_Publica);
-            this.pack();
-            this.setExtendedState(MAXIMIZED_BOTH);
-            this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
-        } catch (Exception ex) {
-            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-        }
+//        try {
+//            login = new Login();
+//            this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
+//            SeccionPublica = new SeccionPublica();
+//            pestana(SeccionPublica, Cte.Seccion_Publica);
+//            this.pack();
+//            this.setExtendedState(MAXIMIZED_BOTH);
+//            this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
+//        } catch (Exception ex) {
+//            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+//        } finally {
+//            this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+//        }
     }
 
     /**
