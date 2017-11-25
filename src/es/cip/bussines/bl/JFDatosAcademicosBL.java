@@ -25,7 +25,7 @@ import java.util.List;
  */
 public class JFDatosAcademicosBL {
 
-    private String nickname;
+    private String nickname = "";
 
     private Usuario usuario = new Usuario();
     private TipoUsuario tipoUsuario = new TipoUsuario();
@@ -46,34 +46,35 @@ public class JFDatosAcademicosBL {
     private List<Carrera> listCarrera;
     private List<Usuario> lisUsuario;
 
-    public void guardarUni(String uni){
-       
-    }
     public void setNickname(String nickname) {
         this.nickname = nickname;
         List<Usuario> lis = usuarioJpaController.findNickname(nickname);
-        if (lis.size() == 0) {
+        if (lis.size() == 1) {
             this.usuario = lis.get(0);
         }
     }
 
+    public String getNickname() {
+        return nickname;
+    }
+
     public List<TipoUsuario> getListTipoUsuario(String tipo) {
-        listTipoUsuario=tipoUsuarioJpaController.findTipoUsuario(tipo);
+        listTipoUsuario = tipoUsuarioJpaController.findTipoUsuario(tipo);
         return listTipoUsuario;
     }
 
     public List<Universidad> getListUniversidad(String uni) {
-        listUniversidad=universidadJpaController.findUniversidad(uni);
+        listUniversidad = universidadJpaController.findUniversidad(uni);
         return listUniversidad;
     }
 
     public List<Campus> getListCampus(String campus) {
-        listCampus=campusJpaController.findCampus(campus);
+        listCampus = campusJpaController.findCampus(campus);
         return listCampus;
     }
 
     public List<Carrera> getListCarrera(String carr) {
-        listCarrera=carreraJpaController.findNombreCarrera(carr);
+        listCarrera = carreraJpaController.findNombreCarrera(carr);
         return listCarrera;
     }
 
@@ -84,8 +85,9 @@ public class JFDatosAcademicosBL {
             return true;
         }
     }
-        public List<Usuario> findNombreCompleto(String nombre) {
-        lisUsuario=usuarioJpaController.findNombreCompleto(nombre);
+
+    public List<Usuario> findNombreCompleto(String nombre) {
+        lisUsuario = usuarioJpaController.findNombreCompleto(nombre);
         return lisUsuario;
 //            System.out.println(lis.size());
 //        if (lis.size() == 0) {
@@ -110,10 +112,41 @@ public class JFDatosAcademicosBL {
         return recursoHumanoDatos;
     }
 
-    public void guardar(int jComboBoxNombre, int jComboBoxTipoDA, int jComboBoxUniversidad, int jComboBoxCampus, int jComboBoxCarrera) {
-        usuario=lisUsuario.get(jComboBoxNombre-1);
-        tipoUsuario=listTipoUsuario.get(jComboBoxTipoDA);
-        
+    public List<Campus> getListCampus() {
+        return listCampus;
     }
-        
+
+    public void guardar(int jComboBoxNombre, int jComboBoxTipoDA, int jComboBoxUniversidad, int jComboBoxCampus, int jComboBoxCarrera) throws Exception {
+        if (nickname == "") {
+            usuario = lisUsuario.get(jComboBoxNombre - 1);
+        }
+        tipoUsuario = listTipoUsuario.get(jComboBoxTipoDA);
+        if (jComboBoxUniversidad > 0) {
+            universidad = listUniversidad.get(jComboBoxUniversidad - 1);
+        } else {
+            universidadJpaController.create(universidad);
+            universidad = universidadJpaController.findUniversidad(universidad.getNombre()).get(0);
+        }
+
+        if (jComboBoxCampus > 0) {
+            campus = listCampus.get(jComboBoxCampus - 1);
+        } else {
+            campusJpaController.create(campus);
+            campus = campusJpaController.findCampus(campus.getNombre()).get(0);
+        }
+
+        if (jComboBoxCarrera > 0) {
+            carrera = listCarrera.get(jComboBoxCarrera - 1);
+        } else {
+            carreraJpaController.create(carrera);
+            carrera = carreraJpaController.findNombreCarrera(carrera.getNombreCarrera()).get(0);
+        }
+        recursoHumanoDatos.setIdUsuario(usuario.getId());
+        recursoHumanoDatos.setIdTipoUsuario(tipoUsuario.getId());
+        recursoHumanoDatos.setIdUniversidad(universidad.getId());
+        recursoHumanoDatos.setIdCampus(campus.getId());
+        recursoHumanoDatos.setIdCarrera(carrera.getId());
+        recursoHumanoDatosJpaController.create(recursoHumanoDatos);
+    }
+
 }

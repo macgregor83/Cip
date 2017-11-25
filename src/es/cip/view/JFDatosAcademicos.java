@@ -14,8 +14,12 @@ import es.cip.bussines.dao.model.Usuario;
 import es.cip.util.Cte;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.text.JTextComponent;
 
 /**
@@ -144,6 +148,9 @@ public class JFDatosAcademicos extends javax.swing.JFrame {
                 }
             }
         });
+//        jComboBoxCampus.getEditor().getEditorComponent().addMouseListener(new MouseAdapter() {
+//            
+//        });
     }
 
     /**
@@ -236,6 +243,11 @@ public class JFDatosAcademicos extends javax.swing.JFrame {
                 jTextFieldLocalidadDAActionPerformed(evt);
             }
         });
+        jTextFieldLocalidadDA.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextFieldLocalidadDAKeyReleased(evt);
+            }
+        });
 
         jLabel18.setText("Tipo");
 
@@ -273,6 +285,11 @@ public class JFDatosAcademicos extends javax.swing.JFrame {
         });
 
         jComboBoxCampus.setEditable(true);
+        jComboBoxCampus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxCampusActionPerformed(evt);
+            }
+        });
 
         jComboBoxCarrera.setEditable(true);
 
@@ -354,36 +371,36 @@ public class JFDatosAcademicos extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(jComboBoxNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelAlertaNombre))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel18)
                     .addComponent(jComboBoxTipoDA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
                     .addComponent(jComboBoxUniversidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
                     .addComponent(jComboBoxCampus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
                     .addComponent(jComboBoxCarrera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(8, 8, 8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldNoControl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel23)
                     .addComponent(jLabelAlertaNoControl))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel16)
                     .addComponent(jTextFieldDireccionDA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel17)
                     .addComponent(jTextFieldLocalidadDA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnAgregar)
                 .addContainerGap())
         );
@@ -423,19 +440,25 @@ public class JFDatosAcademicos extends javax.swing.JFrame {
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // TODO add your handling code here:
-        if (jComboBoxNombre.getItemCount() > 1 && jComboBoxNombre.getSelectedIndex() > 0) {
-            jLabelAlertaNombre.setVisible(false);
-            bL.getUniversidad().setNombre(jComboBoxNombre.getEditor().getItem().toString().toUpperCase().trim());
-            bL.getCampus().setNombre(jComboBoxCampus.getEditor().getItem().toString().toUpperCase().trim());
-            bL.getCarrera().setNombreCarrera(jComboBoxCarrera.getEditor().getItem().toString().toUpperCase().trim());
-            bL.getRecursoHumanoDatos().setNoControl(jTextFieldNoControl.getText());
-            bL.getCampus().setDireccion(jTextFieldDireccionDA.getText());
-            bL.getCampus().setLocalidad(jTextFieldLocalidadDA.getText());
-            bL.guardar(jComboBoxNombre.getSelectedIndex(),
-                    jComboBoxTipoDA.getSelectedIndex(),
-                    jComboBoxUniversidad.getSelectedIndex(),
-                    jComboBoxCampus.getSelectedIndex(),
-                    jComboBoxCarrera.getSelectedIndex());
+        if ((jComboBoxNombre.getItemCount() > 1 && jComboBoxNombre.getSelectedIndex() > 0) || bL.getNickname() != "") {
+            try {
+                jLabelAlertaNombre.setVisible(false);
+                bL.getUniversidad().setNombre(jComboBoxUniversidad.getEditor().getItem().toString().toUpperCase().trim());
+                bL.getCampus().setNombre(jComboBoxCampus.getEditor().getItem().toString().toUpperCase().trim());
+                bL.getCarrera().setNombreCarrera(jComboBoxCarrera.getEditor().getItem().toString().toUpperCase().trim());
+                bL.getRecursoHumanoDatos().setNoControl(jTextFieldNoControl.getText());
+                bL.getCampus().setDireccion(jTextFieldDireccionDA.getText());
+                bL.getCampus().setLocalidad(jTextFieldLocalidadDA.getText());
+                bL.guardar(jComboBoxNombre.getSelectedIndex(),
+                        jComboBoxTipoDA.getSelectedIndex(),
+                        jComboBoxUniversidad.getSelectedIndex(),
+                        jComboBoxCampus.getSelectedIndex(),
+                        jComboBoxCarrera.getSelectedIndex());
+                this.setVisible(false);
+            } catch (Exception ex) {
+                Logger.getLogger(JFDatosAcademicos.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(rootPane, ex);
+            }
         } else {
             jLabelAlertaNombre.setVisible(true);
         }
@@ -458,7 +481,7 @@ public class JFDatosAcademicos extends javax.swing.JFrame {
 
     private void jTextFieldDireccionDAKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldDireccionDAKeyReleased
         // TODO add your handling code here:
-        // bL.findNombreCompleto(jTextFieldDireccionDA.getText());
+        jTextFieldDireccionDA.setText(jTextFieldDireccionDA.getText().trim());
     }//GEN-LAST:event_jTextFieldDireccionDAKeyReleased
 
     private void jComboBoxNombreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBoxNombreMouseClicked
@@ -474,6 +497,18 @@ public class JFDatosAcademicos extends javax.swing.JFrame {
     private void jComboBoxNombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jComboBoxNombreFocusLost
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBoxNombreFocusLost
+
+    private void jTextFieldLocalidadDAKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldLocalidadDAKeyReleased
+        // TODO add your handling code here:
+        jTextFieldLocalidadDA.setText(jTextFieldLocalidadDA.getText().trim());
+    }//GEN-LAST:event_jTextFieldLocalidadDAKeyReleased
+
+    private void jComboBoxCampusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxCampusActionPerformed
+        // TODO add your handling code here:
+        
+        jTextFieldDireccionDA.setText(bL.getListCampus().get(jComboBoxCampus.getSelectedIndex()).getDireccion());
+        jTextFieldLocalidadDA.setText(bL.getListCampus().get(jComboBoxCampus.getSelectedIndex()).getLocalidad());
+    }//GEN-LAST:event_jComboBoxCampusActionPerformed
 
     public void setNickname(String nickname) {
         bL.setNickname(nickname);

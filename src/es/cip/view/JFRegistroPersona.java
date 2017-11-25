@@ -151,6 +151,11 @@ public class JFRegistroPersona extends javax.swing.JFrame {
                 jTextFieldNombreActionPerformed(evt);
             }
         });
+        jTextFieldNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextFieldNombreKeyReleased(evt);
+            }
+        });
 
         jTextFieldTelefono.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -230,6 +235,11 @@ public class JFRegistroPersona extends javax.swing.JFrame {
                 jTextFieldApePaternoActionPerformed(evt);
             }
         });
+        jTextFieldApePaterno.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextFieldApePaternoKeyReleased(evt);
+            }
+        });
 
         jTextFieldUsuar.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -250,6 +260,11 @@ public class JFRegistroPersona extends javax.swing.JFrame {
         jTextFieldApeMaterno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldApeMaternoActionPerformed(evt);
+            }
+        });
+        jTextFieldApeMaterno.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextFieldApeMaternoKeyReleased(evt);
             }
         });
 
@@ -331,7 +346,7 @@ public class JFRegistroPersona extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(35, Short.MAX_VALUE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(17, 17, 17))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -350,7 +365,7 @@ public class JFRegistroPersona extends javax.swing.JFrame {
                             .addComponent(jLabel7)
                             .addComponent(jLabel13)
                             .addComponent(jLabel14))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jTextFieldNumInt, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE)
                             .addComponent(jTextFieldMunicipio, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -396,7 +411,6 @@ public class JFRegistroPersona extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel6)
-                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -516,7 +530,7 @@ public class JFRegistroPersona extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldApeMaternoActionPerformed
 
     private void jButtonAgregar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregar1ActionPerformed
-        
+
         valCampos = true;
         valCampos = !ValidCampos.esSoloLetras(jTextFieldNombre.getText().trim()) ? false : valCampos;
         valCampos = !ValidCampos.esSoloLetras(jTextFieldApePaterno.getText().trim()) ? false : valCampos;
@@ -554,7 +568,7 @@ public class JFRegistroPersona extends javax.swing.JFrame {
                 this.setVisible(!datosAcademicos.isVisible());
             } catch (Exception ex) {
                 Logger.getLogger(JFRegistroPersona.class.getName()).log(Level.SEVERE, null, ex);
-                JOptionPane.showMessageDialog(rootPane, ex);                        
+                JOptionPane.showMessageDialog(rootPane, ex);
             }
         } else {
             JOptionPane.showMessageDialog(rootPane, Cte.Falta_llenar_Campos);
@@ -633,6 +647,21 @@ public class JFRegistroPersona extends javax.swing.JFrame {
         // TODO add your handling code here:
         jLabelPass1.setVisible(!jTextFieldPass.getText().trim().equalsIgnoreCase(jTextFieldPass1.getText().trim()));
     }//GEN-LAST:event_jTextFieldPass1FocusLost
+
+    private void jTextFieldNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldNombreKeyReleased
+        // TODO add your handling code here:
+        jTextFieldNombre.setText(jTextFieldNombre.getText().trim().toUpperCase());
+    }//GEN-LAST:event_jTextFieldNombreKeyReleased
+
+    private void jTextFieldApePaternoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldApePaternoKeyReleased
+        // TODO add your handling code here:
+        jTextFieldApePaterno.setText(jTextFieldApePaterno.getText().trim().toUpperCase());
+    }//GEN-LAST:event_jTextFieldApePaternoKeyReleased
+
+    private void jTextFieldApeMaternoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldApeMaternoKeyReleased
+        // TODO add your handling code here:        
+        jTextFieldApeMaterno.setText(jTextFieldApeMaterno.getText().trim().toUpperCase());
+    }//GEN-LAST:event_jTextFieldApeMaternoKeyReleased
     private boolean CampNull() {
         if (jTextFieldNombre.getText() == ""
                 || jTextFieldApePaterno.getText() == ""
@@ -648,7 +677,7 @@ public class JFRegistroPersona extends javax.swing.JFrame {
                 || jTextFieldNumInt.getText() == ""
                 || jTextFieldNumExt.getText() == "") {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
