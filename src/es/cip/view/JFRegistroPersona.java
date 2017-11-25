@@ -5,6 +5,9 @@
  */
 package es.cip.view;
 
+import es.cip.bussines.bl.JFRegistroPersonaBL;
+import es.cip.util.Cte;
+import es.cip.util.ValidCampos;
 import java.awt.Cursor;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,12 +18,58 @@ import javax.swing.JOptionPane;
  * @author Vero
  */
 public class JFRegistroPersona extends javax.swing.JFrame {
-   private JFDatosAcademicos datosAcademicos;
+
+    private JFDatosAcademicos datosAcademicos;
+    private boolean valCampos = true;
+    private JFRegistroPersonaBL bL = new JFRegistroPersonaBL();
+
     /**
      * Creates new form JFRegistroPersona
      */
     public JFRegistroPersona() {
         initComponents();
+
+        jLabelNombre.setVisible(false);
+        jLabelApePaterno.setVisible(false);
+        jLabelApeMaterno.setVisible(false);
+        jLabelUsuar.setVisible(false);
+        jLabelPass.setVisible(false);
+        jLabelPass1.setVisible(false);
+        jLabelTel.setVisible(false);
+        jLabelCorreo.setVisible(false);
+        jLabelDirec.setVisible(false);
+        jLabelColonia.setVisible(false);
+        jLabelMunicipio.setVisible(false);
+        jLabelNumInt.setVisible(false);
+        jLabelNumExt.setVisible(false);
+
+        jLabelNombre.setToolTipText(Cte.Solo_Letras);
+        jLabelApePaterno.setToolTipText(Cte.Solo_Letras);
+        jLabelApeMaterno.setToolTipText(Cte.Solo_Letras);
+        jLabelUsuar.setToolTipText(Cte.Usua_Rep);
+        jLabelPass.setToolTipText(Cte.Pass);
+        jLabelPass1.setToolTipText(Cte.Pass_Diferente);
+        jLabelTel.setToolTipText(Cte.Tel_Erroneo);
+        jLabelCorreo.setToolTipText(Cte.Correo_Erroneo);
+        jLabelDirec.setToolTipText(Cte.Campo_Vacio);
+        jLabelColonia.setToolTipText(Cte.Campo_Vacio);
+        jLabelMunicipio.setToolTipText(Cte.Campo_Vacio);
+        jLabelNumInt.setToolTipText(Cte.Solo_Numero);
+        jLabelNumExt.setToolTipText(Cte.Solo_Numero);
+
+        jTextFieldNombre.setToolTipText(Cte.Solo_Letras);
+        jTextFieldApePaterno.setToolTipText(Cte.Solo_Letras);
+        jTextFieldApeMaterno.setToolTipText(Cte.Solo_Letras);
+        jTextFieldUsuar.setToolTipText(Cte.Solo_Letras);
+        jTextFieldPass.setToolTipText(Cte.Pass);
+        jTextFieldPass1.setToolTipText(Cte.Pass_Diferente);
+        jTextFieldTelefono.setToolTipText(Cte.Tel_Erroneo);
+        jTextFieldCorreo.setToolTipText(Cte.Correo_Erroneo);
+        jTextFieldDireccion.setToolTipText(Cte.Campo_Vacio);
+        jTextFieldColonia.setToolTipText(Cte.Campo_Vacio);
+        jTextFieldMunicipio.setToolTipText(Cte.Campo_Vacio);
+        jTextFieldNumInt.setToolTipText(Cte.Solo_Numero);
+        jTextFieldNumExt.setToolTipText(Cte.Solo_Numero);
     }
 
     /**
@@ -32,15 +81,6 @@ public class JFRegistroPersona extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel19 = new javax.swing.JLabel();
-        jTextFieldUsuario = new javax.swing.JTextField();
-        jLabel20 = new javax.swing.JLabel();
-        jPasswordFieldContrasenia = new javax.swing.JPasswordField();
-        jLabel24 = new javax.swing.JLabel();
-        jPasswordFieldConfContrasenia = new javax.swing.JPasswordField();
-        jFrame1 = new javax.swing.JFrame();
-        jFrame2 = new javax.swing.JFrame();
-        jFrame3 = new javax.swing.JFrame();
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -49,9 +89,7 @@ public class JFRegistroPersona extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jTextFieldNombre = new javax.swing.JTextField();
-        jTextFieldApaterno = new javax.swing.JTextField();
         jTextFieldTelefono = new javax.swing.JTextField();
-        jTextFieldAMaterno = new javax.swing.JTextField();
         jTextFieldCorreo = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jTextFieldDireccion = new javax.swing.JTextField();
@@ -66,57 +104,25 @@ public class JFRegistroPersona extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        jTextFieldNombre1 = new javax.swing.JTextField();
-        jTextFieldNombre2 = new javax.swing.JTextField();
-        jTextFieldNombre3 = new javax.swing.JTextField();
-        jButtonAgregar = new javax.swing.JButton();
+        jTextFieldApePaterno = new javax.swing.JTextField();
+        jTextFieldUsuar = new javax.swing.JTextField();
+        jTextFieldApeMaterno = new javax.swing.JTextField();
         jButtonAgregar1 = new javax.swing.JButton();
-        jButtonAgregar2 = new javax.swing.JButton();
-
-        jLabel19.setText("Usuario");
-
-        jTextFieldUsuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldUsuarioActionPerformed(evt);
-            }
-        });
-
-        jLabel20.setText("Contraseña");
-
-        jLabel24.setText("Nuevamente la Contraseña");
-
-        javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
-        jFrame1.getContentPane().setLayout(jFrame1Layout);
-        jFrame1Layout.setHorizontalGroup(
-            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        jFrame1Layout.setVerticalGroup(
-            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout jFrame2Layout = new javax.swing.GroupLayout(jFrame2.getContentPane());
-        jFrame2.getContentPane().setLayout(jFrame2Layout);
-        jFrame2Layout.setHorizontalGroup(
-            jFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        jFrame2Layout.setVerticalGroup(
-            jFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout jFrame3Layout = new javax.swing.GroupLayout(jFrame3.getContentPane());
-        jFrame3.getContentPane().setLayout(jFrame3Layout);
-        jFrame3Layout.setHorizontalGroup(
-            jFrame3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        jFrame3Layout.setVerticalGroup(
-            jFrame3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        jLabelNombre = new javax.swing.JLabel();
+        jLabelApePaterno = new javax.swing.JLabel();
+        jLabelApeMaterno = new javax.swing.JLabel();
+        jLabelUsuar = new javax.swing.JLabel();
+        jLabelPass = new javax.swing.JLabel();
+        jLabelPass1 = new javax.swing.JLabel();
+        jLabelTel = new javax.swing.JLabel();
+        jLabelCorreo = new javax.swing.JLabel();
+        jLabelDirec = new javax.swing.JLabel();
+        jLabelColonia = new javax.swing.JLabel();
+        jLabelMunicipio = new javax.swing.JLabel();
+        jLabelNumInt = new javax.swing.JLabel();
+        jLabelNumExt = new javax.swing.JLabel();
+        jTextFieldPass = new javax.swing.JPasswordField();
+        jTextFieldPass1 = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -135,30 +141,33 @@ public class JFRegistroPersona extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel6.setText("Datos Personales");
 
+        jTextFieldNombre.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextFieldNombreFocusLost(evt);
+            }
+        });
         jTextFieldNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldNombreActionPerformed(evt);
             }
         });
 
-        jTextFieldApaterno.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldApaternoActionPerformed(evt);
+        jTextFieldTelefono.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextFieldTelefonoFocusLost(evt);
             }
         });
-
         jTextFieldTelefono.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldTelefonoActionPerformed(evt);
             }
         });
 
-        jTextFieldAMaterno.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldAMaternoActionPerformed(evt);
+        jTextFieldCorreo.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextFieldCorreoFocusLost(evt);
             }
         });
-
         jTextFieldCorreo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldCorreoActionPerformed(evt);
@@ -167,7 +176,25 @@ public class JFRegistroPersona extends javax.swing.JFrame {
 
         jLabel8.setText("Dirección ");
 
+        jTextFieldDireccion.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextFieldDireccionFocusLost(evt);
+            }
+        });
+
         jLabel9.setText("Colonia");
+
+        jTextFieldColonia.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextFieldColoniaFocusLost(evt);
+            }
+        });
+
+        jTextFieldMunicipio.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextFieldMunicipioFocusLost(evt);
+            }
+        });
 
         jLabel10.setText("Municipio");
 
@@ -175,34 +202,54 @@ public class JFRegistroPersona extends javax.swing.JFrame {
 
         jLabel12.setText("NumExt");
 
+        jTextFieldNumExt.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextFieldNumExtFocusLost(evt);
+            }
+        });
+
+        jTextFieldNumInt.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextFieldNumIntFocusLost(evt);
+            }
+        });
+
         jLabel7.setText("Apellido Paterno");
 
         jLabel13.setText("Apellido Materno");
 
         jLabel14.setText("Usuario");
 
-        jTextFieldNombre1.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldApePaterno.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextFieldApePaternoFocusLost(evt);
+            }
+        });
+        jTextFieldApePaterno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldNombre1ActionPerformed(evt);
+                jTextFieldApePaternoActionPerformed(evt);
             }
         });
 
-        jTextFieldNombre2.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldUsuar.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextFieldUsuarFocusLost(evt);
+            }
+        });
+        jTextFieldUsuar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldNombre2ActionPerformed(evt);
+                jTextFieldUsuarActionPerformed(evt);
             }
         });
 
-        jTextFieldNombre3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldNombre3ActionPerformed(evt);
+        jTextFieldApeMaterno.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextFieldApeMaternoFocusLost(evt);
             }
         });
-
-        jButtonAgregar.setText("Modificar");
-        jButtonAgregar.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldApeMaterno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonAgregarActionPerformed(evt);
+                jTextFieldApeMaternoActionPerformed(evt);
             }
         });
 
@@ -213,10 +260,67 @@ public class JFRegistroPersona extends javax.swing.JFrame {
             }
         });
 
-        jButtonAgregar2.setText("Eliminar");
-        jButtonAgregar2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonAgregar2ActionPerformed(evt);
+        jLabelNombre.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabelNombre.setForeground(new java.awt.Color(204, 0, 0));
+        jLabelNombre.setText("*");
+
+        jLabelApePaterno.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabelApePaterno.setForeground(new java.awt.Color(204, 0, 0));
+        jLabelApePaterno.setText("*");
+
+        jLabelApeMaterno.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabelApeMaterno.setForeground(new java.awt.Color(204, 0, 0));
+        jLabelApeMaterno.setText("*");
+
+        jLabelUsuar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabelUsuar.setForeground(new java.awt.Color(204, 0, 0));
+        jLabelUsuar.setText("*");
+
+        jLabelPass.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabelPass.setForeground(new java.awt.Color(204, 0, 0));
+        jLabelPass.setText("*");
+
+        jLabelPass1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabelPass1.setForeground(new java.awt.Color(204, 0, 0));
+        jLabelPass1.setText("*");
+
+        jLabelTel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabelTel.setForeground(new java.awt.Color(204, 0, 0));
+        jLabelTel.setText("*");
+
+        jLabelCorreo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabelCorreo.setForeground(new java.awt.Color(204, 0, 0));
+        jLabelCorreo.setText("*");
+
+        jLabelDirec.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabelDirec.setForeground(new java.awt.Color(204, 0, 0));
+        jLabelDirec.setText("*");
+
+        jLabelColonia.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabelColonia.setForeground(new java.awt.Color(204, 0, 0));
+        jLabelColonia.setText("*");
+
+        jLabelMunicipio.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabelMunicipio.setForeground(new java.awt.Color(204, 0, 0));
+        jLabelMunicipio.setText("*");
+
+        jLabelNumInt.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabelNumInt.setForeground(new java.awt.Color(204, 0, 0));
+        jLabelNumInt.setText("*");
+
+        jLabelNumExt.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabelNumExt.setForeground(new java.awt.Color(204, 0, 0));
+        jLabelNumExt.setText("*");
+
+        jTextFieldPass.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextFieldPassFocusLost(evt);
+            }
+        });
+
+        jTextFieldPass1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextFieldPass1FocusLost(evt);
             }
         });
 
@@ -227,8 +331,9 @@ public class JFRegistroPersona extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(35, Short.MAX_VALUE)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(17, 17, 17))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(41, 41, 41)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -253,19 +358,37 @@ public class JFRegistroPersona extends javax.swing.JFrame {
                             .addComponent(jTextFieldDireccion, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jTextFieldCorreo, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jTextFieldTelefono, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextFieldAMaterno, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextFieldApaterno, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jTextFieldNombre, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jTextFieldNumExt)
-                            .addComponent(jTextFieldNombre1)
-                            .addComponent(jTextFieldNombre2)
-                            .addComponent(jTextFieldNombre3)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jButtonAgregar1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButtonAgregar)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButtonAgregar2)))))
+                            .addComponent(jTextFieldApePaterno)
+                            .addComponent(jTextFieldUsuar)
+                            .addComponent(jTextFieldApeMaterno)
+                            .addComponent(jButtonAgregar1, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jTextFieldPass)
+                            .addComponent(jTextFieldPass1))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(jLabelNombre)
+                                                    .addComponent(jLabelApePaterno, javax.swing.GroupLayout.Alignment.TRAILING))
+                                                .addComponent(jLabelApeMaterno, javax.swing.GroupLayout.Alignment.TRAILING))
+                                            .addComponent(jLabelUsuar)
+                                            .addComponent(jLabelPass, javax.swing.GroupLayout.Alignment.TRAILING))
+                                        .addComponent(jLabelPass1, javax.swing.GroupLayout.Alignment.TRAILING))
+                                    .addComponent(jLabelTel)
+                                    .addComponent(jLabelCorreo)
+                                    .addComponent(jLabelDirec, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addComponent(jLabelColonia, javax.swing.GroupLayout.Alignment.TRAILING))
+                            .addComponent(jLabelMunicipio, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addComponent(jLabelNumInt, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(jLabelNumExt))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -274,63 +397,77 @@ public class JFRegistroPersona extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel6)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jTextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(jTextFieldNombre1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel13)
-                    .addComponent(jTextFieldNombre3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel14)
-                    .addComponent(jTextFieldNombre2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jTextFieldApaterno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jTextFieldAMaterno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(7, 7, 7)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jTextFieldTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jTextFieldCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(jTextFieldDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(jTextFieldColonia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(jTextFieldMunicipio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11)
-                    .addComponent(jTextFieldNumInt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(jTextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelNombre))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel7)
+                            .addComponent(jTextFieldApePaterno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelApePaterno))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel13)
+                            .addComponent(jTextFieldApeMaterno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelApeMaterno))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel14)
+                            .addComponent(jTextFieldUsuar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelUsuar))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabelPass)
+                            .addComponent(jTextFieldPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabelPass1)
+                            .addComponent(jTextFieldPass1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(5, 5, 5)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(jTextFieldTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelTel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(jTextFieldCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelCorreo))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel8)
+                            .addComponent(jTextFieldDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelDirec))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel9)
+                            .addComponent(jTextFieldColonia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelColonia))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel10)
+                            .addComponent(jTextFieldMunicipio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelMunicipio))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel11)
+                            .addComponent(jTextFieldNumInt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabelNumInt)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
-                    .addComponent(jTextFieldNumExt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonAgregar)
-                    .addComponent(jButtonAgregar1)
-                    .addComponent(jButtonAgregar2))
-                .addGap(17, 17, 17))
+                    .addComponent(jTextFieldNumExt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelNumExt))
+                .addGap(22, 22, 22)
+                .addComponent(jButtonAgregar1)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -354,56 +491,167 @@ public class JFRegistroPersona extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextFieldUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldUsuarioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldUsuarioActionPerformed
-
     private void jTextFieldCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCorreoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldCorreoActionPerformed
-
-    private void jTextFieldAMaternoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldAMaternoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldAMaternoActionPerformed
 
     private void jTextFieldTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldTelefonoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldTelefonoActionPerformed
 
-    private void jTextFieldApaternoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldApaternoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldApaternoActionPerformed
-
     private void jTextFieldNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNombreActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldNombreActionPerformed
 
-    private void jTextFieldNombre1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNombre1ActionPerformed
+    private void jTextFieldApePaternoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldApePaternoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldNombre1ActionPerformed
+    }//GEN-LAST:event_jTextFieldApePaternoActionPerformed
 
-    private void jTextFieldNombre2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNombre2ActionPerformed
+    private void jTextFieldUsuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldUsuarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldNombre2ActionPerformed
+    }//GEN-LAST:event_jTextFieldUsuarActionPerformed
 
-    private void jTextFieldNombre3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNombre3ActionPerformed
+    private void jTextFieldApeMaternoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldApeMaternoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldNombre3ActionPerformed
-
-    private void jButtonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonAgregarActionPerformed
+    }//GEN-LAST:event_jTextFieldApeMaternoActionPerformed
 
     private void jButtonAgregar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregar1ActionPerformed
-    
-         datosAcademicos=new JFDatosAcademicos();  
-         datosAcademicos.setVisible(true);
-                     // TODO add your handling code here:
+        
+        valCampos = true;
+        valCampos = !ValidCampos.esSoloLetras(jTextFieldNombre.getText().trim()) ? false : valCampos;
+        valCampos = !ValidCampos.esSoloLetras(jTextFieldApePaterno.getText().trim()) ? false : valCampos;
+        valCampos = !ValidCampos.esSoloLetras(jTextFieldApeMaterno.getText().trim()) ? false : valCampos;
+        //valCampos = !ValidCampos.esSoloLetras(jTextFieldUsuar.getText().trim()) ? false : valCampos;
+        valCampos = !bL.extNickname(jTextFieldUsuar.getText().trim()) ? false : valCampos;
+        valCampos = !ValidCampos.esPassVal(jTextFieldPass.getText().trim()) ? false : valCampos;
+        valCampos = !jTextFieldPass.getText().trim().equalsIgnoreCase(jTextFieldPass1.getText().trim()) ? false : valCampos;
+        valCampos = !ValidCampos.esTelefono(jTextFieldTelefono.getText().trim()) ? false : valCampos;
+        valCampos = !ValidCampos.validarEmail(jTextFieldCorreo.getText().trim()) ? false : valCampos;
+        valCampos = jTextFieldDireccion.getText().trim() == "" ? false : valCampos;
+        valCampos = jTextFieldColonia.getText().trim() == "" ? false : valCampos;
+        valCampos = jTextFieldMunicipio.getText().trim() == "" ? false : valCampos;
+        valCampos = !ValidCampos.esEntero(jTextFieldNumInt.getText().trim()) ? false : valCampos;
+        valCampos = !ValidCampos.esEntero(jTextFieldNumExt.getText().trim()) ? false : valCampos;
+
+        if (valCampos || CampNull()) {
+
+            try {
+                bL.getUsuario().setNombre(jTextFieldNombre.getText().trim());
+                bL.getUsuario().setApellidoPaterno(jTextFieldApePaterno.getText().trim());
+                bL.getUsuario().setApellidoMaterno(jTextFieldApeMaterno.getText().trim());
+                bL.getUsuario().setTelefono(jTextFieldTelefono.getText().trim());
+                bL.getUsuario().setCorreoElectronico(jTextFieldCorreo.getText().trim());
+                bL.getUsuario().setCalle(jTextFieldDireccion.getText().trim());
+                bL.getUsuario().setColonia(jTextFieldColonia.getText().trim());
+                bL.getUsuario().setMunicipio(jTextFieldMunicipio.getText().trim());
+                bL.getUsuario().setNumInt(jTextFieldNumInt.getText().trim());
+                bL.getUsuario().setNumExt(jTextFieldNumExt.getText().trim());
+                bL.getUsuario().setNickname(jTextFieldUsuar.getText().trim());
+                bL.guardar();
+                datosAcademicos = new JFDatosAcademicos();
+                datosAcademicos.setNickname(jTextFieldUsuar.getText().trim());
+                datosAcademicos.setVisible(true);
+                this.setVisible(!datosAcademicos.isVisible());
+            } catch (Exception ex) {
+                Logger.getLogger(JFRegistroPersona.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(rootPane, ex);                        
+            }
+        } else {
+            JOptionPane.showMessageDialog(rootPane, Cte.Falta_llenar_Campos);
+        }
+
+        // TODO add your handling code here:
     }//GEN-LAST:event_jButtonAgregar1ActionPerformed
 
-    private void jButtonAgregar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregar2ActionPerformed
+    private void jTextFieldNombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldNombreFocusLost
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonAgregar2ActionPerformed
+        jLabelNombre.setVisible(!ValidCampos.esSoloLetras(jTextFieldNombre.getText().trim()));
+    }//GEN-LAST:event_jTextFieldNombreFocusLost
+
+    private void jTextFieldApePaternoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldApePaternoFocusLost
+        // TODO add your handling code here:
+        jLabelApePaterno.setVisible(!ValidCampos.esSoloLetras(jTextFieldApePaterno.getText().trim()));
+    }//GEN-LAST:event_jTextFieldApePaternoFocusLost
+
+    private void jTextFieldApeMaternoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldApeMaternoFocusLost
+        // TODO add your handling code here:
+        jLabelApeMaterno.setVisible(!ValidCampos.esSoloLetras(jTextFieldApeMaterno.getText().trim()));
+    }//GEN-LAST:event_jTextFieldApeMaternoFocusLost
+
+    private void jTextFieldUsuarFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldUsuarFocusLost
+        // TODO add your handling code here:
+//        jLabelUsuar.setVisible(!ValidCampos.esSoloLetras(jTextFieldUsuar.getText().trim()));
+        jLabelUsuar.setVisible(!bL.extNickname(jTextFieldUsuar.getText().trim()));
+//        if (!ValidCampos.esSoloLetras(jTextFieldUsuar.getText().trim()) || !bL.extNickname(jTextFieldUsuar.getText().trim())) {
+//            jLabelUsuar.setVisible(true);
+//        } else {
+//            jLabelUsuar.setVisible(false);
+//        }
+    }//GEN-LAST:event_jTextFieldUsuarFocusLost
+
+    private void jTextFieldTelefonoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldTelefonoFocusLost
+        // TODO add your handling code here:
+        jLabelTel.setVisible(!ValidCampos.esTelefono(jTextFieldTelefono.getText().trim()));
+    }//GEN-LAST:event_jTextFieldTelefonoFocusLost
+
+    private void jTextFieldCorreoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldCorreoFocusLost
+        // TODO add your handling code here:
+        jLabelCorreo.setVisible(!ValidCampos.validarEmail(jTextFieldCorreo.getText().trim()));
+    }//GEN-LAST:event_jTextFieldCorreoFocusLost
+
+    private void jTextFieldDireccionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldDireccionFocusLost
+        // TODO add your handling code here:
+        jLabelCorreo.setVisible(jTextFieldDireccion.getText().trim() == "");
+    }//GEN-LAST:event_jTextFieldDireccionFocusLost
+
+    private void jTextFieldColoniaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldColoniaFocusLost
+        // TODO add your handling code here:
+        jLabelColonia.setVisible(jTextFieldColonia.getText().trim() == "");
+    }//GEN-LAST:event_jTextFieldColoniaFocusLost
+
+    private void jTextFieldMunicipioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldMunicipioFocusLost
+        // TODO add your handling code here:
+        jLabelMunicipio.setVisible(jTextFieldMunicipio.getText().trim() == "");
+    }//GEN-LAST:event_jTextFieldMunicipioFocusLost
+
+    private void jTextFieldNumIntFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldNumIntFocusLost
+        // TODO add your handling code here:
+        jLabelNumInt.setVisible(!ValidCampos.esEntero(jTextFieldNumInt.getText().trim()));
+    }//GEN-LAST:event_jTextFieldNumIntFocusLost
+
+    private void jTextFieldNumExtFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldNumExtFocusLost
+        // TODO add your handling code here:
+        jLabelNumExt.setVisible(!ValidCampos.esEntero(jTextFieldNumExt.getText().trim()));
+    }//GEN-LAST:event_jTextFieldNumExtFocusLost
+
+    private void jTextFieldPassFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldPassFocusLost
+        // TODO add your handling code here:
+        jLabelPass.setVisible(!ValidCampos.esPassVal(jTextFieldPass.getText().trim()));
+    }//GEN-LAST:event_jTextFieldPassFocusLost
+
+    private void jTextFieldPass1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldPass1FocusLost
+        // TODO add your handling code here:
+        jLabelPass1.setVisible(!jTextFieldPass.getText().trim().equalsIgnoreCase(jTextFieldPass1.getText().trim()));
+    }//GEN-LAST:event_jTextFieldPass1FocusLost
+    private boolean CampNull() {
+        if (jTextFieldNombre.getText() == ""
+                || jTextFieldApePaterno.getText() == ""
+                || jTextFieldApeMaterno.getText() == ""
+                || jTextFieldUsuar.getText() == ""
+                || jTextFieldPass.getText() == ""
+                || jTextFieldPass1.getText() == ""
+                || jTextFieldTelefono.getText() == ""
+                || jTextFieldCorreo.getText() == ""
+                || jTextFieldDireccion.getText() == ""
+                || jTextFieldColonia.getText() == ""
+                || jTextFieldMunicipio.getText() == ""
+                || jTextFieldNumInt.getText() == ""
+                || jTextFieldNumExt.getText() == "") {
+            return true;
+        }else{
+            return false;
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -441,22 +689,14 @@ public class JFRegistroPersona extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonAgregar;
     private javax.swing.JButton jButtonAgregar1;
-    private javax.swing.JButton jButtonAgregar2;
-    private javax.swing.JFrame jFrame1;
-    private javax.swing.JFrame jFrame2;
-    private javax.swing.JFrame jFrame3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -464,23 +704,33 @@ public class JFRegistroPersona extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabelApeMaterno;
+    private javax.swing.JLabel jLabelApePaterno;
+    private javax.swing.JLabel jLabelColonia;
+    private javax.swing.JLabel jLabelCorreo;
+    private javax.swing.JLabel jLabelDirec;
+    private javax.swing.JLabel jLabelMunicipio;
+    private javax.swing.JLabel jLabelNombre;
+    private javax.swing.JLabel jLabelNumExt;
+    private javax.swing.JLabel jLabelNumInt;
+    private javax.swing.JLabel jLabelPass;
+    private javax.swing.JLabel jLabelPass1;
+    private javax.swing.JLabel jLabelTel;
+    private javax.swing.JLabel jLabelUsuar;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPasswordField jPasswordFieldConfContrasenia;
-    private javax.swing.JPasswordField jPasswordFieldContrasenia;
-    private javax.swing.JTextField jTextFieldAMaterno;
-    private javax.swing.JTextField jTextFieldApaterno;
+    private javax.swing.JTextField jTextFieldApeMaterno;
+    private javax.swing.JTextField jTextFieldApePaterno;
     private javax.swing.JTextField jTextFieldColonia;
     private javax.swing.JTextField jTextFieldCorreo;
     private javax.swing.JTextField jTextFieldDireccion;
     private javax.swing.JTextField jTextFieldMunicipio;
     private javax.swing.JTextField jTextFieldNombre;
-    private javax.swing.JTextField jTextFieldNombre1;
-    private javax.swing.JTextField jTextFieldNombre2;
-    private javax.swing.JTextField jTextFieldNombre3;
     private javax.swing.JTextField jTextFieldNumExt;
     private javax.swing.JTextField jTextFieldNumInt;
+    private javax.swing.JPasswordField jTextFieldPass;
+    private javax.swing.JPasswordField jTextFieldPass1;
     private javax.swing.JTextField jTextFieldTelefono;
-    private javax.swing.JTextField jTextFieldUsuario;
+    private javax.swing.JTextField jTextFieldUsuar;
     // End of variables declaration//GEN-END:variables
 
 //    private void cerrar() {

@@ -117,7 +117,19 @@ public class TipoUsuarioJpaController implements Serializable {
             em.close();
         }
     }
-
+    public List<TipoUsuario> findTipoUsuario(String tipo) {
+        EntityManager em = getEntityManager();
+        try {
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery(TipoUsuario.class);
+            Root<TipoUsuario> c = cq.from(TipoUsuario.class);
+            cq.select(c);
+            cq.where(em.getCriteriaBuilder().like(c.get("Tipo"), "%" + tipo + "%"));
+            Query q = em.createQuery(cq);
+            return q.getResultList();
+        } finally {
+            em.close();
+        }
+    }
     public TipoUsuario findTipoUsuario(Integer id) {
         EntityManager em = getEntityManager();
         try {

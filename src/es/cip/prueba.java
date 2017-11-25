@@ -39,7 +39,7 @@ public class prueba {
 //        }
 //        String url = "D:\\Users\\iMac\\Documents\\maestria\\1re cuatrimestre\\Libros\\eBook\\Ingenier+¡a de Software\\Analisis y dise+¦o de Sistemas - Kendal 8ed.pdf";    
 //        String[] ext={".pdf","doc","docx"};
-//        System.out.println(ValidCampos.validarArchivo(url,ext));
+        System.out.println(ValidCampos.esTelefono("7712007695"));
 
             byte[] by = Convertir.convertDocToByteArray("‪D:\\Users\\iMac\\Downloads\\ExpRegulares.pdf");
             Convertir.convertByteArrayToDoc(by);

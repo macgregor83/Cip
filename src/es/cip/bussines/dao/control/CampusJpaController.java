@@ -126,7 +126,19 @@ public class CampusJpaController implements Serializable {
             em.close();
         }
     }
-
+    public List<Campus> findCampus(String nombreCampus) {
+        EntityManager em = getEntityManager();
+        try {
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery(Campus.class);
+            Root<Campus> c = cq.from(Campus.class);
+            cq.select(c);
+            cq.where(em.getCriteriaBuilder().like(c.get("Nombre"), "%" + nombreCampus.trim() + "%"));
+            Query q = em.createQuery(cq);
+            return q.getResultList();
+        } finally {
+            em.close();
+        }
+    }
     public int getCampusCount() {
         EntityManager em = getEntityManager();
         try {

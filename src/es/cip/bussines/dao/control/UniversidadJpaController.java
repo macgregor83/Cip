@@ -26,6 +26,7 @@ public class UniversidadJpaController implements Serializable {
     public UniversidadJpaController() {
         this.emf = javax.persistence.Persistence.createEntityManagerFactory(Cte.Persistence_Unit_Name);
     }
+
     public UniversidadJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
@@ -126,6 +127,20 @@ public class UniversidadJpaController implements Serializable {
         }
     }
 
+    public List<Universidad> findUniversidad(String Universidad) {
+        EntityManager em = getEntityManager();
+        try {
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery(Universidad.class);
+            Root<Universidad> c = cq.from(Universidad.class);
+            cq.select(c);
+            cq.where(em.getCriteriaBuilder().like(c.get("Nombre"), "%" + Universidad.trim() + "%"));
+            Query q = em.createQuery(cq);
+            return q.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
     public int getUniversidadCount() {
         EntityManager em = getEntityManager();
         try {
@@ -138,5 +153,5 @@ public class UniversidadJpaController implements Serializable {
             em.close();
         }
     }
-    
+
 }

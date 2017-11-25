@@ -5,17 +5,145 @@
  */
 package es.cip.view;
 
+import es.cip.bussines.bl.JFDatosAcademicosBL;
+import es.cip.bussines.dao.model.Campus;
+import es.cip.bussines.dao.model.Carrera;
+import es.cip.bussines.dao.model.TipoUsuario;
+import es.cip.bussines.dao.model.Universidad;
+import es.cip.bussines.dao.model.Usuario;
+import es.cip.util.Cte;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.text.JTextComponent;
+
 /**
  *
  * @author Vero
  */
 public class JFDatosAcademicos extends javax.swing.JFrame {
 
+    private JFDatosAcademicosBL bL = new JFDatosAcademicosBL();
+
     /**
      * Creates new form JFDatosAcademicos
      */
     public JFDatosAcademicos() {
         initComponents();
+        jLabelAlertaNoControl.setVisible(false);
+        jLabelAlertaNombre.setVisible(false);
+
+        jLabelAlertaNoControl.setToolTipText(Cte.No_Control_Rep);
+        jLabelAlertaNombre.setToolTipText(Cte.No_Existe_Usuario);
+
+        for (TipoUsuario li : bL.getListTipoUsuario("")) {
+            if (li.getId() < 10) {
+                jComboBoxTipoDA.addItem(li.getTipo());
+            }
+        }
+        ///// jComboBoxNombre ////
+        jComboBoxNombre.getEditor().getEditorComponent().addKeyListener(new KeyAdapter() {
+            public void keyReleased(KeyEvent evt) {
+                String cadenaEscrita = jComboBoxNombre.getEditor().getItem().toString().toUpperCase();
+                DefaultComboBoxModel modelo = new DefaultComboBoxModel();
+                modelo.addElement(cadenaEscrita);
+                List<Usuario> list = bL.findNombreCompleto(cadenaEscrita);
+                if (list.size() > 0) {
+                    for (Usuario Usuario : list) {
+                        modelo.addElement(Usuario.getNombre() + " " + Usuario.getApellidoPaterno() + " " + Usuario.getApellidoMaterno() + "-" + Usuario.getCorreoElectronico());
+                    }
+                    jComboBoxNombre.setModel(modelo);
+                    if (jComboBoxNombre.getItemCount() > 0) {
+                        jComboBoxNombre.showPopup();
+                        if (evt.getKeyCode() != 8) {
+                            ((JTextComponent) jComboBoxNombre.getEditor().getEditorComponent()).select(cadenaEscrita.length(), jComboBoxNombre.getEditor().getItem().toString().length());
+                        } else {
+                            jComboBoxNombre.getEditor().setItem(cadenaEscrita);
+                        }
+                    } else {
+                        jComboBoxNombre.addItem(cadenaEscrita);
+                    }
+                } else {
+                    jComboBoxNombre.setModel(modelo);
+                }
+            }
+        });
+        ///// jComboBoxUniversidad ////
+        jComboBoxUniversidad.getEditor().getEditorComponent().addKeyListener(new KeyAdapter() {
+            public void keyReleased(KeyEvent evt) {
+                String cadenaEscrita = jComboBoxUniversidad.getEditor().getItem().toString().toUpperCase();
+                DefaultComboBoxModel modelo = new DefaultComboBoxModel();
+                modelo.addElement(cadenaEscrita);
+                List<Universidad> list = bL.getListUniversidad(cadenaEscrita);
+                if (list.size() > 0) {
+                    for (Universidad universidad : list) {
+                        modelo.addElement(universidad.getNombre());
+                    }
+                    jComboBoxUniversidad.setModel(modelo);
+                    if (jComboBoxUniversidad.getItemCount() > 0) {
+                        jComboBoxUniversidad.showPopup();
+                        if (evt.getKeyCode() != 8) {
+                            ((JTextComponent) jComboBoxUniversidad.getEditor().getEditorComponent()).select(cadenaEscrita.length(), jComboBoxUniversidad.getEditor().getItem().toString().length());
+                        } else {
+                            jComboBoxUniversidad.getEditor().setItem(cadenaEscrita);
+                        }
+                    } else {
+                        jComboBoxUniversidad.addItem(cadenaEscrita);
+                    }
+                }
+            }
+        });
+        ///// jComboBoxCampus ////
+        jComboBoxCampus.getEditor().getEditorComponent().addKeyListener(new KeyAdapter() {
+            public void keyReleased(KeyEvent evt) {
+                String cadenaEscrita = jComboBoxCampus.getEditor().getItem().toString().toUpperCase();
+                DefaultComboBoxModel modelo = new DefaultComboBoxModel();
+                modelo.addElement(cadenaEscrita);
+                List<Campus> list = bL.getListCampus(cadenaEscrita);
+                if (list.size() > 0) {
+                    for (Campus campus : list) {
+                        modelo.addElement(campus.getNombre());
+                    }
+                    jComboBoxCampus.setModel(modelo);
+                    if (jComboBoxCampus.getItemCount() > 0) {
+                        jComboBoxCampus.showPopup();
+                        if (evt.getKeyCode() != 8) {
+                            ((JTextComponent) jComboBoxCampus.getEditor().getEditorComponent()).select(cadenaEscrita.length(), jComboBoxCampus.getEditor().getItem().toString().length());
+                        } else {
+                            jComboBoxCampus.getEditor().setItem(cadenaEscrita);
+                        }
+                    } else {
+                        jComboBoxCampus.addItem(cadenaEscrita);
+                    }
+                }
+            }
+        });
+        ///// jComboBoxCarrera ////
+        jComboBoxCarrera.getEditor().getEditorComponent().addKeyListener(new KeyAdapter() {
+            public void keyReleased(KeyEvent evt) {
+                String cadenaEscrita = jComboBoxCarrera.getEditor().getItem().toString().toUpperCase();
+                DefaultComboBoxModel modelo = new DefaultComboBoxModel();
+                modelo.addElement(cadenaEscrita);
+                List<Carrera> list = bL.getListCarrera(cadenaEscrita);
+                if (list.size() > 0) {
+                    for (Carrera carrera : list) {
+                        modelo.addElement(carrera.getNombreCarrera());
+                    }
+                    jComboBoxCarrera.setModel(modelo);
+                    if (jComboBoxCarrera.getItemCount() > 0) {
+                        jComboBoxCarrera.showPopup();
+                        if (evt.getKeyCode() != 8) {
+                            ((JTextComponent) jComboBoxCarrera.getEditor().getEditorComponent()).select(cadenaEscrita.length(), jComboBoxCarrera.getEditor().getItem().toString().length());
+                        } else {
+                            jComboBoxCarrera.getEditor().setItem(cadenaEscrita);
+                        }
+                    } else {
+                        jComboBoxCarrera.addItem(cadenaEscrita);
+                    }
+                }
+            }
+        });
     }
 
     /**
@@ -36,9 +164,6 @@ public class JFDatosAcademicos extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
-        jTextFieldCampus = new javax.swing.JTextField();
-        jTextFieldCarrera = new javax.swing.JTextField();
-        jTextFieldUniversidad = new javax.swing.JTextField();
         jTextFieldDireccionDA = new javax.swing.JTextField();
         jTextFieldLocalidadDA = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
@@ -46,8 +171,13 @@ public class JFDatosAcademicos extends javax.swing.JFrame {
         jLabel23 = new javax.swing.JLabel();
         jTextFieldNoControl = new javax.swing.JTextField();
         btnAgregar = new javax.swing.JButton();
-        btnModificar = new javax.swing.JButton();
-        btnEliminar = new javax.swing.JButton();
+        jComboBoxUniversidad = new javax.swing.JComboBox<>();
+        jComboBoxCampus = new javax.swing.JComboBox<>();
+        jComboBoxCarrera = new javax.swing.JComboBox<>();
+        jLabelAlertaNoControl = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jComboBoxNombre = new javax.swing.JComboBox<>();
+        jLabelAlertaNombre = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
         jFrame1.getContentPane().setLayout(jFrame1Layout);
@@ -90,27 +220,14 @@ public class JFDatosAcademicos extends javax.swing.JFrame {
 
         jLabel17.setText("Localidad");
 
-        jTextFieldCampus.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldCampusActionPerformed(evt);
-            }
-        });
-
-        jTextFieldCarrera.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldCarreraActionPerformed(evt);
-            }
-        });
-
-        jTextFieldUniversidad.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldUniversidadActionPerformed(evt);
-            }
-        });
-
         jTextFieldDireccionDA.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldDireccionDAActionPerformed(evt);
+            }
+        });
+        jTextFieldDireccionDA.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextFieldDireccionDAKeyReleased(evt);
             }
         });
 
@@ -122,10 +239,19 @@ public class JFDatosAcademicos extends javax.swing.JFrame {
 
         jLabel18.setText("Tipo");
 
-        jComboBoxTipoDA.setEditable(true);
+        jComboBoxTipoDA.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jComboBoxTipoDAKeyReleased(evt);
+            }
+        });
 
         jLabel23.setText("No de Control");
 
+        jTextFieldNoControl.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextFieldNoControlFocusLost(evt);
+            }
+        });
         jTextFieldNoControl.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldNoControlActionPerformed(evt);
@@ -139,58 +265,83 @@ public class JFDatosAcademicos extends javax.swing.JFrame {
             }
         });
 
-        btnModificar.setText("Modificar");
-        btnModificar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnModificarActionPerformed(evt);
+        jComboBoxUniversidad.setEditable(true);
+        jComboBoxUniversidad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jComboBoxUniversidadKeyReleased(evt);
             }
         });
 
-        btnEliminar.setText("Eliminar");
-        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarActionPerformed(evt);
+        jComboBoxCampus.setEditable(true);
+
+        jComboBoxCarrera.setEditable(true);
+
+        jLabelAlertaNoControl.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabelAlertaNoControl.setForeground(new java.awt.Color(255, 0, 0));
+        jLabelAlertaNoControl.setText("*");
+
+        jLabel1.setText("Nombre");
+
+        jComboBoxNombre.setEditable(true);
+        jComboBoxNombre.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                jComboBoxNombreMouseDragged(evt);
             }
         });
+        jComboBoxNombre.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jComboBoxNombreFocusLost(evt);
+            }
+        });
+        jComboBoxNombre.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jComboBoxNombreMouseClicked(evt);
+            }
+        });
+
+        jLabelAlertaNombre.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabelAlertaNombre.setForeground(new java.awt.Color(255, 0, 0));
+        jLabelAlertaNombre.setText("*");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel7)
-                .addGap(91, 91, 91))
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(0, 175, Short.MAX_VALUE)
+                .addComponent(jLabel7)
+                .addGap(73, 73, 73))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
+                        .addGap(8, 8, 8)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel17, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel18, javax.swing.GroupLayout.Alignment.TRAILING)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel23)))
+                            .addComponent(jLabel18, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)))
+                    .addComponent(jLabel23))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(btnAgregar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnModificar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnEliminar)
-                        .addGap(0, 77, Short.MAX_VALUE))
-                    .addComponent(jTextFieldCampus)
-                    .addComponent(jTextFieldUniversidad)
                     .addComponent(jTextFieldNoControl)
                     .addComponent(jTextFieldDireccionDA)
                     .addComponent(jTextFieldLocalidadDA)
                     .addComponent(jComboBoxTipoDA, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextFieldCarrera, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(jComboBoxUniversidad, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jComboBoxCampus, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jComboBoxCarrera, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jComboBoxNombre, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnAgregar)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelAlertaNoControl)
+                    .addComponent(jLabelAlertaNombre))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -198,26 +349,32 @@ public class JFDatosAcademicos extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(4, 4, 4)
                 .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jComboBoxNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelAlertaNombre))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel18)
                     .addComponent(jComboBoxTipoDA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
-                    .addComponent(jTextFieldUniversidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBoxUniversidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
-                    .addComponent(jTextFieldCampus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBoxCampus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
-                    .addComponent(jTextFieldCarrera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBoxCarrera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(8, 8, 8)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldNoControl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel23))
+                    .addComponent(jLabel23)
+                    .addComponent(jLabelAlertaNoControl))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel16)
@@ -227,11 +384,8 @@ public class JFDatosAcademicos extends javax.swing.JFrame {
                     .addComponent(jLabel17)
                     .addComponent(jTextFieldLocalidadDA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAgregar)
-                    .addComponent(btnModificar)
-                    .addComponent(btnEliminar))
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addComponent(btnAgregar)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -255,18 +409,6 @@ public class JFDatosAcademicos extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextFieldCampusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCampusActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldCampusActionPerformed
-
-    private void jTextFieldCarreraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCarreraActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldCarreraActionPerformed
-
-    private void jTextFieldUniversidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldUniversidadActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldUniversidadActionPerformed
-
     private void jTextFieldDireccionDAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldDireccionDAActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldDireccionDAActionPerformed
@@ -281,39 +423,64 @@ public class JFDatosAcademicos extends javax.swing.JFrame {
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // TODO add your handling code here:
-//        rpbl.getUsuario().setNombre(jTextFieldNombre.getText());
-//        rpbl.getUsuario().setApellidoPaterno(jTextFieldApaterno.getText());
-//        rpbl.getUsuario().setApellidoMaterno(jTextFieldAMaterno.getText());
-//        rpbl.getUsuario().setCalle(jTextFieldDireccion.getText());
-//        rpbl.getUsuario().setColonia(jTextFieldColonia.getText());
-//        rpbl.getUsuario().setMunicipio(jTextFieldMunicipio.getText());
-//        rpbl.getUsuario().setNumInt(jTextFieldNumInt.getText());
-//        rpbl.getUsuario().setNumInt(jTextFieldTelefono.getText());
-//        rpbl.getUsuario().setCorreoElectronico(jTextFieldCorreo.getText());
-//
-//        rpbl.getTipoUsuario().setTipo(jComboBoxTipoDA.getEditor().getItem().toString());
-//
-//        rpbl.getUniversidad().setNombre(jTextFieldUniversidad.getText());
-//
-//        rpbl.getCampus().setNombre(jTextFieldCampus.getText());
-//        rpbl.getCampus().setDireccion(jTextFieldDireccionDA.getText());
-//        rpbl.getCampus().setLocalidad(jTextFieldLocalidadDA.getText());
-//
-//        rpbl.getCarrera().setNombreCarrera(jTextFieldCarrera.getText());
-//
-//        rpbl.getLogin().setNickname(jTextFieldUsuario.getText());
-//        rpbl.getLogin().setPassword(jPasswordFieldContrasenia.getText());
-//
-//        rpbl.guardarUsuario();
+        if (jComboBoxNombre.getItemCount() > 1 && jComboBoxNombre.getSelectedIndex() > 0) {
+            jLabelAlertaNombre.setVisible(false);
+            bL.getUniversidad().setNombre(jComboBoxNombre.getEditor().getItem().toString().toUpperCase().trim());
+            bL.getCampus().setNombre(jComboBoxCampus.getEditor().getItem().toString().toUpperCase().trim());
+            bL.getCarrera().setNombreCarrera(jComboBoxCarrera.getEditor().getItem().toString().toUpperCase().trim());
+            bL.getRecursoHumanoDatos().setNoControl(jTextFieldNoControl.getText());
+            bL.getCampus().setDireccion(jTextFieldDireccionDA.getText());
+            bL.getCampus().setLocalidad(jTextFieldLocalidadDA.getText());
+            bL.guardar(jComboBoxNombre.getSelectedIndex(),
+                    jComboBoxTipoDA.getSelectedIndex(),
+                    jComboBoxUniversidad.getSelectedIndex(),
+                    jComboBoxCampus.getSelectedIndex(),
+                    jComboBoxCarrera.getSelectedIndex());
+        } else {
+            jLabelAlertaNombre.setVisible(true);
+        }
+
     }//GEN-LAST:event_btnAgregarActionPerformed
 
-    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+    private void jComboBoxTipoDAKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jComboBoxTipoDAKeyReleased
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnModificarActionPerformed
 
-    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+    }//GEN-LAST:event_jComboBoxTipoDAKeyReleased
+
+    private void jComboBoxUniversidadKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jComboBoxUniversidadKeyReleased
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnEliminarActionPerformed
+    }//GEN-LAST:event_jComboBoxUniversidadKeyReleased
+
+    private void jTextFieldNoControlFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldNoControlFocusLost
+        // TODO add your handling code here:
+        jLabelAlertaNoControl.setVisible(bL.extisteNoControl(jTextFieldNoControl.getText().trim()));
+    }//GEN-LAST:event_jTextFieldNoControlFocusLost
+
+    private void jTextFieldDireccionDAKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldDireccionDAKeyReleased
+        // TODO add your handling code here:
+        // bL.findNombreCompleto(jTextFieldDireccionDA.getText());
+    }//GEN-LAST:event_jTextFieldDireccionDAKeyReleased
+
+    private void jComboBoxNombreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBoxNombreMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxNombreMouseClicked
+
+    private void jComboBoxNombreMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBoxNombreMouseDragged
+        // TODO add your handling code here:
+
+
+    }//GEN-LAST:event_jComboBoxNombreMouseDragged
+
+    private void jComboBoxNombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jComboBoxNombreFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxNombreFocusLost
+
+    public void setNickname(String nickname) {
+        bL.setNickname(nickname);
+
+        jLabel1.setVisible(false);
+        jComboBoxNombre.setVisible(false);
+    }
 
     /**
      * @param args the command line arguments
@@ -352,11 +519,14 @@ public class JFDatosAcademicos extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
-    private javax.swing.JButton btnEliminar;
-    private javax.swing.JButton btnModificar;
+    private javax.swing.JComboBox<String> jComboBoxCampus;
+    private javax.swing.JComboBox<String> jComboBoxCarrera;
+    private javax.swing.JComboBox<String> jComboBoxNombre;
     private javax.swing.JComboBox<String> jComboBoxTipoDA;
+    private javax.swing.JComboBox<String> jComboBoxUniversidad;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JFrame jFrame2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
@@ -365,12 +535,11 @@ public class JFDatosAcademicos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabelAlertaNoControl;
+    private javax.swing.JLabel jLabelAlertaNombre;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField jTextFieldCampus;
-    private javax.swing.JTextField jTextFieldCarrera;
     private javax.swing.JTextField jTextFieldDireccionDA;
     private javax.swing.JTextField jTextFieldLocalidadDA;
     private javax.swing.JTextField jTextFieldNoControl;
-    private javax.swing.JTextField jTextFieldUniversidad;
     // End of variables declaration//GEN-END:variables
 }

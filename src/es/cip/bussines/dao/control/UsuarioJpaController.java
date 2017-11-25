@@ -118,6 +118,35 @@ public class UsuarioJpaController implements Serializable {
         }
     }
 
+    public List<Usuario> findNickname(String nickname) {
+        EntityManager em = getEntityManager();
+        try {
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery(Usuario.class);
+            Root<Usuario> c = cq.from(Usuario.class);
+            cq.select(c);
+            cq.where(em.getCriteriaBuilder().like(c.get("Nickname"), "%" + nickname + "%"));
+            Query q = em.createQuery(cq);
+            return q.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
+    public List<Usuario> findNombreCompleto(String nombre) {
+        EntityManager em = getEntityManager();
+        try {
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery(Usuario.class);
+            Root<Usuario> c = cq.from(Usuario.class);
+            cq.select(c);
+            cq.where(em.getCriteriaBuilder().or(em.getCriteriaBuilder().like(c.get("Nombre"), "%" + nombre + "%"),
+                    em.getCriteriaBuilder().like(c.get("ApellidoPaterno"), "%" + nombre + "%")));
+            Query q = em.createQuery(cq);
+            return q.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
     public Usuario findUsuario(Integer id) {
         EntityManager em = getEntityManager();
         try {
@@ -139,5 +168,5 @@ public class UsuarioJpaController implements Serializable {
             em.close();
         }
     }
-    
+
 }

@@ -14,14 +14,32 @@ public class Cte {
     public static final String Persistence_Unit_Name = "CIPPU";
 
     /**
-     * * encabezados de jTabbedPane de Menu Principal  **
+     * * encabezados de jTabbedPane de Menu Principal **
      */
     public static final String Seccion_Publica = "Sección Pública";
     public static final String Alta_Usuario = "Alta de Usuario";
     public static final String Avances_Proyecto = "Avances Proyecto";
     public static final String Registro_Proyecto = "Registro Proyecto";
     public static final String Estado_Proyecto = " Aprobar Proyecto";
-    public static final String Solo_Letras="Este campo solo admite Letras";
-    public static final String Archivo_Erroneo= "Archivo Invalido";
+    public static final String Archivo_Erroneo = "Archivo Invalido";
+
+    /*  */
+    public static final String Solo_Letras = "Este campo solo admite Letras";
+    public static final String Pass = "Minimo 8 caracteres\n"
+            + " Maximo 15\n"
+            + " Al menos una letra mayúscula\n"
+            + " Al menos una letra minucula\n"
+            + " Al menos un dígito\n"
+            + " No espacios en blanco\n"
+            + " Al menos 1 caracter especial";
+    public static final String Pass_Diferente = "Las Contraseñas son diferentes.";
+    public static final String Tel_Erroneo = "El telefono el incorrecto";
+    public static final String Correo_Erroneo = "Correo Erroneo";
+    public static final String Campo_Vacio= "No se admite vacio";
+    public static final String Solo_Numero= "Este campo solo admite Numeros";
+    public static final String Falta_llenar_Campos="Falta llenar campos";
+    public static final String Usua_Rep="Este usuario ya existe";
+    public static final String No_Control_Rep="Este Numero de control ya existe";
+    public static final String No_Existe_Usuario="Selecciona una persona";
 
 }

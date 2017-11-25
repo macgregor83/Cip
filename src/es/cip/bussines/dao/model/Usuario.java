@@ -31,7 +31,9 @@ public class Usuario implements Serializable {
     private String NumInt;
     private String NumExt;
     private String Telefono;
-    private String CorreoElectronico;
+    private String CorreoElectronico;    
+    private String Nickname;
+    
     public Integer getId() {
         return id;
     }
@@ -118,6 +120,14 @@ public class Usuario implements Serializable {
 
     public void setCorreoElectronico(String CorreoElectronico) {
         this.CorreoElectronico = CorreoElectronico;
+    }
+
+    public String getNickname() {
+        return Nickname;
+    }
+
+    public void setNickname(String Nickname) {
+        this.Nickname = Nickname;
     }
 
     

@@ -29,7 +29,6 @@ public class Login implements Serializable {
     private Integer id;
 
     private Integer idUsuario;
-    private String Nickname;
     private String Password;
     private Integer Intentos;
     @Temporal(TemporalType.DATE)
@@ -53,14 +52,6 @@ public class Login implements Serializable {
 
     public void setIdUsuario(Integer idUsuario) {
         this.idUsuario = idUsuario;
-    }
-
-    public String getNickname() {
-        return Nickname;
-    }
-
-    public void setNickname(String Nickname) {
-        this.Nickname = Nickname;
     }
 
     public String getPassword() {
@@ -95,8 +86,6 @@ public class Login implements Serializable {
         this.Usuario = Usuario;
     }
 
-    
-    
     @Override
     public int hashCode() {
         int hash = 0;

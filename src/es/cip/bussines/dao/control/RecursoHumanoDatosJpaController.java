@@ -127,6 +127,20 @@ public class RecursoHumanoDatosJpaController implements Serializable {
         }
     }
 
+    public List<RecursoHumanoDatos> findNoControl(String noControl) {
+        EntityManager em = getEntityManager();
+        try {
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery(RecursoHumanoDatos.class);
+            Root<RecursoHumanoDatos> c = cq.from(RecursoHumanoDatos.class);
+            cq.select(c);
+            cq.where(em.getCriteriaBuilder().like(c.get("NoControl"), "%" + noControl.trim() + "%"));
+            Query q = em.createQuery(cq);
+            return q.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
     public int getRecursoHumanoDatosCount() {
         EntityManager em = getEntityManager();
         try {
@@ -139,5 +153,5 @@ public class RecursoHumanoDatosJpaController implements Serializable {
             em.close();
         }
     }
-    
+
 }

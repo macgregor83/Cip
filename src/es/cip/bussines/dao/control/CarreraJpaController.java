@@ -127,6 +127,20 @@ public class CarreraJpaController implements Serializable {
         }
     }
 
+    public List<Carrera> findNombreCarrera(String nombreCarrera) {
+        EntityManager em = getEntityManager();
+        try {
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery(Carrera.class);
+            Root<Carrera> c = cq.from(Carrera.class);
+            cq.select(c);
+            cq.where(em.getCriteriaBuilder().like(c.get("NombreCarrera"), "%" + nombreCarrera.trim() + "%"));
+            Query q = em.createQuery(cq);
+            return q.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
     public int getCarreraCount() {
         EntityManager em = getEntityManager();
         try {
@@ -139,5 +153,5 @@ public class CarreraJpaController implements Serializable {
             em.close();
         }
     }
-    
+
 }

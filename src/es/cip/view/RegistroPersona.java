@@ -489,30 +489,30 @@ public class RegistroPersona extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        rpbl.getUsuario().setNombre(jTextFieldNombre.getText());
-        rpbl.getUsuario().setApellidoPaterno(jTextFieldApaterno.getText());
-        rpbl.getUsuario().setApellidoMaterno(jTextFieldAMaterno.getText());
-        rpbl.getUsuario().setCalle(jTextFieldDireccion.getText());
-        rpbl.getUsuario().setColonia(jTextFieldColonia.getText());
-        rpbl.getUsuario().setMunicipio(jTextFieldMunicipio.getText());
-        rpbl.getUsuario().setNumInt(jTextFieldNumInt.getText());
-        rpbl.getUsuario().setNumInt(jTextFieldTelefono.getText());
-        rpbl.getUsuario().setCorreoElectronico(jTextFieldCorreo.getText());
-
-        rpbl.getTipoUsuario().setTipo(jComboBoxTipoDA.getEditor().getItem().toString());
-        
-        rpbl.getUniversidad().setNombre(jTextFieldUniversidad.getText());
-        
-        rpbl.getCampus().setNombre(jTextFieldCampus.getText());
-        rpbl.getCampus().setDireccion(jTextFieldDireccionDA.getText());
-        rpbl.getCampus().setLocalidad(jTextFieldLocalidadDA.getText());
-        
-        rpbl.getCarrera().setNombreCarrera(jTextFieldCarrera.getText());
-
-        rpbl.getLogin().setNickname(jTextFieldUsuario.getText());
-        rpbl.getLogin().setPassword(jPasswordFieldContrasenia.getText());
-
-        rpbl.guardarUsuario();
+//        rpbl.getUsuario().setNombre(jTextFieldNombre.getText());
+//        rpbl.getUsuario().setApellidoPaterno(jTextFieldApaterno.getText());
+//        rpbl.getUsuario().setApellidoMaterno(jTextFieldAMaterno.getText());
+//        rpbl.getUsuario().setCalle(jTextFieldDireccion.getText());
+//        rpbl.getUsuario().setColonia(jTextFieldColonia.getText());
+//        rpbl.getUsuario().setMunicipio(jTextFieldMunicipio.getText());
+//        rpbl.getUsuario().setNumInt(jTextFieldNumInt.getText());
+//        rpbl.getUsuario().setNumInt(jTextFieldTelefono.getText());
+//        rpbl.getUsuario().setCorreoElectronico(jTextFieldCorreo.getText());
+//
+//        rpbl.getTipoUsuario().setTipo(jComboBoxTipoDA.getEditor().getItem().toString());
+//        
+//        rpbl.getUniversidad().setNombre(jTextFieldUniversidad.getText());
+//        
+//        rpbl.getCampus().setNombre(jTextFieldCampus.getText());
+//        rpbl.getCampus().setDireccion(jTextFieldDireccionDA.getText());
+//        rpbl.getCampus().setLocalidad(jTextFieldLocalidadDA.getText());
+//        
+//        rpbl.getCarrera().setNombreCarrera(jTextFieldCarrera.getText());
+//
+//        rpbl.getLogin().setNickname(jTextFieldUsuario.getText());
+//        rpbl.getLogin().setPassword(jPasswordFieldContrasenia.getText());
+//
+//        rpbl.guardarUsuario();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextFieldUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldUsuarioActionPerformed
