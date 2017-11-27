@@ -7,6 +7,7 @@ package es.cip.bussines.dao.control;
 
 import es.cip.bussines.dao.control.exceptions.NonexistentEntityException;
 import es.cip.bussines.dao.model.Proyecto;
+import es.cip.util.Cte;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -26,6 +27,10 @@ public class ProyectoJpaController implements Serializable {
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;
+
+    public ProyectoJpaController() {
+        this.emf = javax.persistence.Persistence.createEntityManagerFactory(Cte.Persistence_Unit_Name);
+    }
 
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
@@ -55,7 +60,7 @@ public class ProyectoJpaController implements Serializable {
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                Integer id = proyecto.getId();
+                String id = proyecto.getId();
                 if (findProyecto(id) == null) {
                     throw new NonexistentEntityException("The proyecto with id " + id + " no longer exists.");
                 }
@@ -68,7 +73,7 @@ public class ProyectoJpaController implements Serializable {
         }
     }
 
-    public void destroy(Integer id) throws NonexistentEntityException {
+    public void destroy(String id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -113,7 +118,7 @@ public class ProyectoJpaController implements Serializable {
         }
     }
 
-    public Proyecto findProyecto(Integer id) {
+    public Proyecto findProyecto(String id) {
         EntityManager em = getEntityManager();
         try {
             return em.find(Proyecto.class, id);

@@ -7,6 +7,7 @@ package es.cip.bussines.dao.control;
 
 import es.cip.bussines.dao.control.exceptions.NonexistentEntityException;
 import es.cip.bussines.dao.model.ObjetivoEspecifico;
+import es.cip.util.Cte;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -26,6 +27,10 @@ public class ObjetivoEspecificoJpaController implements Serializable {
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;
+
+    public ObjetivoEspecificoJpaController() {
+        this.emf = javax.persistence.Persistence.createEntityManagerFactory(Cte.Persistence_Unit_Name);
+    }
 
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
@@ -134,5 +139,5 @@ public class ObjetivoEspecificoJpaController implements Serializable {
             em.close();
         }
     }
-    
+
 }
