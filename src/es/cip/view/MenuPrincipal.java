@@ -320,8 +320,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
-//            JFases = new JFases();
-//            JFases.setVisible(true);         //  pestana(avancesProyecto, Cte.JFases);
+            JFases = new JFases("",1);
+            JFases.setVisible(true);         //  pestana(avancesProyecto, Cte.JFases);
             this.pack();
 //            this.setExtendedState(MAXIMIZED_BOTH);
             this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
@@ -336,7 +336,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
-            estadoProyecto = new JFEstadoProyecto();
+            estadoProyecto = new JFEstadoProyecto(1);
             estadoProyecto.setVisible(true);
             // pestana(estadoProyecto, Cte.Estado_Proyecto);
             this.pack();
@@ -431,7 +431,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        estadoProyecto = new JFEstadoProyecto();
+        estadoProyecto = new JFEstadoProyecto(1);
         estadoProyecto.setVisible(true);
 // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem2ActionPerformed

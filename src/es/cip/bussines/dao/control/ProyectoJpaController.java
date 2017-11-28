@@ -154,6 +154,30 @@ public class ProyectoJpaController implements Serializable {
             em.close();
         }
     }
+    public List<Proyecto> findProyecto(String nombreProyecto,Integer idUsuario) {
+        EntityManager em = getEntityManager();
+        try {
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery(Proyecto.class);
+            Root<Proyecto> c = cq.from(Proyecto.class);
+            Root<RecursoHumanoProyecto> r = cq.from(RecursoHumanoProyecto.class);            
+            Root<RecursoHumanoDatos> u = cq.from(RecursoHumanoDatos.class);
+            cq.select(c);
+            cq.where(
+                    em.getCriteriaBuilder().and(
+                    em.getCriteriaBuilder().or(
+                            em.getCriteriaBuilder().like(c.get("id"), "%" + nombreProyecto.trim() + "%"),
+                            em.getCriteriaBuilder().like(c.get("NombreProyecto"), "%" + nombreProyecto.trim() + "%")),
+                    em.getCriteriaBuilder().like(c.get("id"), r.get("idProyecto")),
+                    em.getCriteriaBuilder().like(u.get("id"), r.get("idRecursoHumanoDatos")),
+                    em.getCriteriaBuilder().like(u.get("idUsuario"), idUsuario+"") 
+                    )
+                    );
+            Query q = em.createQuery(cq);
+            return q.getResultList();
+        } finally {
+            em.close();
+        }
+    }
     public int getProyectoCount() {
         EntityManager em = getEntityManager();
         try {

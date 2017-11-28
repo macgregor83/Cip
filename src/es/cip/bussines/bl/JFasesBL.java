@@ -46,6 +46,9 @@ public class JFasesBL {
     public void setIdUsuario(Integer idUsuario) {
         this.idUsuario = idUsuario;
         lisProyecto = proyectoJpaController.findProyecto(idProyecto, idUsuario, Cte.Estatus_Registro_Proyecto_F1);
+        if (lisProyecto.size()>0) {
+            idProyecto=lisProyecto.get(0).getId();
+        }
     }
 
     public void setIdProyecto(String id) {
