@@ -5,17 +5,61 @@
  */
 package es.cip.view;
 
+import es.cip.bussines.bl.JRegistroProyectoBL;
+import es.cip.bussines.dao.model.CriterioClasificacion;
+import es.cip.bussines.dao.model.ProductoEsperado;
+import es.cip.bussines.dao.model.TipoProyecto;
+import es.cip.util.Cte;
+import es.cip.util.ValidCampos;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Vero
  */
 public class JRegistroProyecto extends javax.swing.JFrame {
 
+    private JRegistroProyectoBL bl;
+    private DefaultTableModel modelObjGeneral;
+    private DefaultTableModel modelAreaColaboracion;
+    private DefaultTableModel modelRecursosMateriale;
+    private JFases JFases;
+
     /**
      * Creates new form JRegistroProyecto
      */
     public JRegistroProyecto() {
+        bl = new JRegistroProyectoBL();
+        bl.setIdUsuario(1);
+
         initComponents();
+
+        jLabelAlertNom.setToolTipText(Cte.Solo_Letras);
+        jLabelAlertTiem.setToolTipText(Cte.Solo_Numero);
+
+        jLabelAlertNom.setVisible(false);
+        jLabelAlertTiem.setVisible(false);
+
+        modelObjGeneral = (DefaultTableModel) jTableObjEspecifico.getModel();
+        modelObjGeneral.setNumRows(0);
+
+        modelAreaColaboracion = (DefaultTableModel) jTableAreaColaboracion.getModel();
+        modelAreaColaboracion.setNumRows(0);
+
+        modelRecursosMateriale = (DefaultTableModel) jTableRecursosMateriales.getModel();
+        modelRecursosMateriale.setNumRows(0);
+
+        for (TipoProyecto obj : bl.getLisTipoProyecto()) {
+            jComboBoxTipoProyecto.addItem(obj.getTipo());
+        }
+        for (CriterioClasificacion obj : bl.getLisCriterioClasificacion()) {
+            jComboBoxCriterioClasificacion.addItem(obj.getCriterioClasificacion());
+        }
+        for (ProductoEsperado obj : bl.getLisProductoEsperado()) {
+            jComboBoxPrototipo.addItem(obj.getProductoEsperado());
+        }
     }
 
     /**
@@ -30,10 +74,9 @@ public class JRegistroProyecto extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTableObjGeneral = new javax.swing.JTable();
+        jTableObjEspecifico = new javax.swing.JTable();
         jLabel5 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextObjetivoGeneral = new javax.swing.JTextArea();
@@ -62,6 +105,13 @@ public class JRegistroProyecto extends javax.swing.JFrame {
         jTableRecursosMateriales = new javax.swing.JTable();
         jComboBoxPrototipo = new javax.swing.JComboBox<>();
         jButtonAgregar = new javax.swing.JButton();
+        jTextFieldNombProyecto = new javax.swing.JTextField();
+        jButtonAgregar1 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
+        jLabelAlertNom = new javax.swing.JLabel();
+        jLabelAlertTiem = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -73,16 +123,9 @@ public class JRegistroProyecto extends javax.swing.JFrame {
 
         jLabel1.setText("Nombre del Proyecto");
 
-        jComboBox1.setEditable(true);
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
-            }
-        });
-
         jLabel3.setText("Objetivos Específicos");
 
-        jTableObjGeneral.setModel(new javax.swing.table.DefaultTableModel(
+        jTableObjEspecifico.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null},
                 {null},
@@ -94,7 +137,7 @@ public class JRegistroProyecto extends javax.swing.JFrame {
                 "Objetivos Específicos"
             }
         ));
-        jScrollPane1.setViewportView(jTableObjGeneral);
+        jScrollPane1.setViewportView(jTableObjEspecifico);
 
         jLabel5.setText("Tiempo Estimado");
 
@@ -102,6 +145,11 @@ public class JRegistroProyecto extends javax.swing.JFrame {
         jTextObjetivoGeneral.setRows(5);
         jScrollPane2.setViewportView(jTextObjetivoGeneral);
 
+        jTextFieldTiempoEstimado.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextFieldTiempoEstimadoFocusLost(evt);
+            }
+        });
         jTextFieldTiempoEstimado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldTiempoEstimadoActionPerformed(evt);
@@ -111,8 +159,6 @@ public class JRegistroProyecto extends javax.swing.JFrame {
         jLabel6.setText("meses");
 
         jLabel7.setText("Tipo de Proyecto");
-
-        jComboBoxTipoProyecto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Científico", "Tecnológico", "Administrativo" }));
 
         jLabel8.setText("Resumen/Abstract");
 
@@ -126,16 +172,24 @@ public class JRegistroProyecto extends javax.swing.JFrame {
 
         jTextObjetivoEsoecificos.setColumns(20);
         jTextObjetivoEsoecificos.setRows(5);
+        jTextObjetivoEsoecificos.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextObjetivoEsoecificosFocusLost(evt);
+            }
+        });
         jScrollPane5.setViewportView(jTextObjetivoEsoecificos);
 
         jLabel13.setText("Criterio de Clasificación");
-
-        jComboBoxCriterioClasificacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Social" }));
 
         jLabel14.setText("Producto Esperado");
 
         jLabel15.setText("Areas de  Colaboración");
 
+        jTextFieldAreaConsideracion.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextFieldAreaConsideracionFocusLost(evt);
+            }
+        });
         jTextFieldAreaConsideracion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldAreaConsideracionActionPerformed(evt);
@@ -154,14 +208,14 @@ public class JRegistroProyecto extends javax.swing.JFrame {
         ));
         jScrollPane7.setViewportView(jTableAreaColaboracion);
 
-        jButton3.setText("Agregar");
+        jButton3.setText("-");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
 
-        jButton4.setText("Agregar");
+        jButton4.setText("-");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -170,6 +224,11 @@ public class JRegistroProyecto extends javax.swing.JFrame {
 
         jLabel16.setText("Recursos Materiales");
 
+        jTextFieldRecurosMateriales.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextFieldRecurosMaterialesFocusLost(evt);
+            }
+        });
         jTextFieldRecurosMateriales.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldRecurosMaterialesActionPerformed(evt);
@@ -188,22 +247,56 @@ public class JRegistroProyecto extends javax.swing.JFrame {
         ));
         jScrollPane8.setViewportView(jTableRecursosMateriales);
 
-        jComboBoxPrototipo.setEditable(true);
-        jComboBoxPrototipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Prototipo" }));
+        jComboBoxPrototipo.setActionCommand("");
 
-        jButtonAgregar.setText("Agregar");
+        jButtonAgregar.setText("+");
         jButtonAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonAgregarActionPerformed(evt);
             }
         });
 
+        jTextFieldNombProyecto.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextFieldNombProyectoFocusLost(evt);
+            }
+        });
+
+        jButtonAgregar1.setText("-");
+        jButtonAgregar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAgregar1ActionPerformed(evt);
+            }
+        });
+
+        jButton5.setText("+");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
+        jButton6.setText("+");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
+        jLabelAlertNom.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabelAlertNom.setForeground(new java.awt.Color(255, 0, 0));
+        jLabelAlertNom.setText("*");
+
+        jLabelAlertTiem.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabelAlertTiem.setForeground(new java.awt.Color(255, 0, 0));
+        jLabelAlertTiem.setText("*");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 503, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -217,47 +310,64 @@ public class JRegistroProyecto extends javax.swing.JFrame {
                                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
                                 .addGap(5, 5, 5))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jButtonAgregar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jButtonAgregar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButtonAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(18, 18, 18)))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jTextFieldTiempoEstimado, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel6))
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabelAlertTiem))
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 379, Short.MAX_VALUE)
                             .addComponent(jScrollPane5)
-                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jComboBoxTipoProyecto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jComboBoxTipoProyecto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jTextFieldNombProyecto))))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel13)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(5, 5, 5)
+                                .addComponent(jLabelAlertNom)
+                                .addGap(14, 14, 14)
+                                .addComponent(jLabel8))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(21, 21, 21)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.TRAILING))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBoxCriterioClasificacion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel14)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBoxPrototipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jScrollPane7, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel15)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldAreaConsideracion, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jTextFieldAreaConsideracion)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton3))
+                            .addComponent(jComboBoxPrototipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jComboBoxCriterioClasificacion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jScrollPane3)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+            .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel16)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextFieldRecurosMateriales, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton4))
-                    .addComponent(jScrollPane8, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel8)
+                        .addComponent(jButton6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane3)))
-                .addContainerGap())
-            .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton4))
+                    .addComponent(jScrollPane8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -267,8 +377,10 @@ public class JRegistroProyecto extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1))
+                            .addComponent(jLabel1)
+                            .addComponent(jTextFieldNombProyecto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabelAlertNom))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7)
@@ -277,8 +389,8 @@ public class JRegistroProyecto extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
                             .addComponent(jTextFieldTiempoEstimado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6)))
-                    .addComponent(jLabel8)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabelAlertTiem)))
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -290,8 +402,10 @@ public class JRegistroProyecto extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButtonAgregar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButtonAgregar))
+                                .addComponent(jButtonAgregar1))
                             .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
@@ -307,25 +421,37 @@ public class JRegistroProyecto extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel15)
                             .addComponent(jTextFieldAreaConsideracion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton3))
+                            .addComponent(jButton3)
+                            .addComponent(jButton5))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel16)
                             .addComponent(jTextFieldRecurosMateriales, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton4))
+                            .addComponent(jButton4)
+                            .addComponent(jButton6))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
+        jButton1.setText("Siguente");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1079, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
@@ -334,21 +460,20 @@ public class JRegistroProyecto extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 469, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(509, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addContainerGap(49, Short.MAX_VALUE)))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jTextFieldTiempoEstimadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldTiempoEstimadoActionPerformed
         // TODO add your handling code here:
@@ -360,10 +485,28 @@ public class JRegistroProyecto extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        if (jTableAreaColaboracion.getSelectedRows().length == 0) {
+            bl.getLisAreaColaboracion().remove(modelAreaColaboracion.getRowCount() - 1);
+            modelAreaColaboracion.removeRow(modelAreaColaboracion.getRowCount() - 1);
+        } else {
+            for (int i = jTableAreaColaboracion.getSelectedRows().length; 0 < i; i--) {
+                bl.getLisAreaColaboracion().remove(jTableAreaColaboracion.getSelectedRows()[i - 1]);
+                modelAreaColaboracion.removeRow(jTableAreaColaboracion.getSelectedRows()[i - 1]);
+            }
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
+        if (jTableRecursosMateriales.getSelectedRows().length == 0) {
+            bl.getLisRecursosMateriales().remove(modelRecursosMateriale.getRowCount() - 1);
+            modelRecursosMateriale.removeRow(modelRecursosMateriale.getRowCount() - 1);
+        } else {
+            for (int i = jTableRecursosMateriales.getSelectedRows().length; 0 < i; i--) {
+                bl.getLisRecursosMateriales().remove(jTableRecursosMateriales.getSelectedRows()[i - 1]);
+                modelRecursosMateriale.removeRow(jTableRecursosMateriales.getSelectedRows()[i - 1]);
+            }
+        }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jTextFieldRecurosMaterialesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldRecurosMaterialesActionPerformed
@@ -372,7 +515,95 @@ public class JRegistroProyecto extends javax.swing.JFrame {
 
     private void jButtonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarActionPerformed
         // TODO add your handling code here:
+        modelObjGeneral.addRow(new Object[]{jTextObjetivoEsoecificos.getText().trim()});
+        bl.setObjetivoEspecifico(jTextObjetivoEsoecificos.getText().trim());
+        jTextObjetivoEsoecificos.setText("");
     }//GEN-LAST:event_jButtonAgregarActionPerformed
+
+    private void jTextFieldNombProyectoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldNombProyectoFocusLost
+        // TODO add your handling code here:
+        System.out.println(ValidCampos.sonLetrasNumero(jTextFieldNombProyecto.getText()));
+        System.out.println(ValidCampos.esSoloLetras(jTextFieldNombProyecto.getText()));
+        jLabelAlertNom.setVisible(!ValidCampos.sonLetrasNumero(jTextFieldNombProyecto.getText()));
+    }//GEN-LAST:event_jTextFieldNombProyectoFocusLost
+
+    private void jButtonAgregar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregar1ActionPerformed
+        // TODO add your handling code here:
+        //System.out.println(jTableObjGeneral.getSelectedRows().length);
+        if (jTableObjEspecifico.getSelectedRows().length == 0) {
+            bl.getLisObjetivoEspecifico().remove(jTableObjEspecifico.getRowCount() - 1);
+            modelObjGeneral.removeRow(jTableObjEspecifico.getRowCount() - 1);
+        } else {
+            for (int i = jTableObjEspecifico.getSelectedRows().length; 0 < i; i--) {
+                bl.getLisObjetivoEspecifico().remove(jTableObjEspecifico.getSelectedRows()[i - 1]);
+                modelObjGeneral.removeRow(jTableObjEspecifico.getSelectedRows()[i - 1]);
+            }
+        }
+    }//GEN-LAST:event_jButtonAgregar1ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        bl.setAreaColaboracion(jTextFieldAreaConsideracion.getText().trim());
+        modelAreaColaboracion.addRow(new Object[]{jTextFieldAreaConsideracion.getText().trim()});
+        jTextFieldAreaConsideracion.setText("");
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        bl.setRecursosMateriales(jTextFieldRecurosMateriales.getText().trim());
+        modelRecursosMateriale.addRow(new Object[]{jTextFieldRecurosMateriales.getText().trim()});
+        jTextFieldRecurosMateriales.setText("");
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        System.out.println(jTextFieldNombProyecto.getText().trim());
+        if (jTextFieldNombProyecto.getText().trim() != ""
+                && ValidCampos.sonLetrasNumero(jTextFieldNombProyecto.getText().trim()) 
+                && jTextFieldTiempoEstimado.getText().trim() !=""
+                && ValidCampos.esEntero(jTextFieldTiempoEstimado.getText().trim())
+                && jTextObjetivoGeneral.getText()!=""
+                && jTableObjEspecifico.getColumnCount()>0
+                && jTextResumAbstracto.getText()!=""
+                && jTableAreaColaboracion.getColumnCount()>0
+                && jTableRecursosMateriales.getColumnCount()>0
+                ) {
+            bl.getProyecto().setNombreProyecto(jTextFieldNombProyecto.getText());
+            bl.getProyecto().setTiempoEstimado(Integer.parseInt(jTextFieldTiempoEstimado.getText()));
+            bl.getProyecto().setObjGeneral(jTextObjetivoGeneral.getText());
+            bl.getProyecto().setResumen(jTextResumAbstracto.getText());
+            boolean val = bl.guardar(jComboBoxTipoProyecto.getSelectedIndex(), jComboBoxCriterioClasificacion.getSelectedIndex(), jComboBoxPrototipo.getSelectedIndex());
+            if(val){
+            JFases = new JFases(bl.getId(),bl.getIdUsuario());
+            JFases.setVisible(true);
+//            JFases.setIdProyecto(bl.getId());
+            this.setVisible(false);}else{
+                JOptionPane.showMessageDialog(rootPane, Cte.Error_BD);
+            }
+        } else {
+            JOptionPane.showMessageDialog(rootPane, Cte.Falta_llenar_Campos);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTextFieldTiempoEstimadoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldTiempoEstimadoFocusLost
+        // TODO add your handling code here:
+        jLabelAlertTiem.setVisible(!ValidCampos.esEntero(jTextFieldTiempoEstimado.getText()));
+    }//GEN-LAST:event_jTextFieldTiempoEstimadoFocusLost
+
+    private void jTextObjetivoEsoecificosFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextObjetivoEsoecificosFocusLost
+        // TODO add your handling code here:
+        jButtonAgregar.doClick();
+    }//GEN-LAST:event_jTextObjetivoEsoecificosFocusLost
+
+    private void jTextFieldAreaConsideracionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldAreaConsideracionFocusLost
+        // TODO add your handling code here:
+        jButton5.doClick();
+    }//GEN-LAST:event_jTextFieldAreaConsideracionFocusLost
+
+    private void jTextFieldRecurosMaterialesFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldRecurosMaterialesFocusLost
+        // TODO add your handling code here:
+        jButton6.doClick();
+    }//GEN-LAST:event_jTextFieldRecurosMaterialesFocusLost
 
     /**
      * @param args the command line arguments
@@ -410,10 +641,13 @@ public class JRegistroProyecto extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JButton jButtonAgregar;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton jButtonAgregar1;
     private javax.swing.JComboBox<String> jComboBoxCriterioClasificacion;
     private javax.swing.JComboBox<String> jComboBoxPrototipo;
     private javax.swing.JComboBox<String> jComboBoxTipoProyecto;
@@ -429,6 +663,8 @@ public class JRegistroProyecto extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabelAlertNom;
+    private javax.swing.JLabel jLabelAlertTiem;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -437,13 +673,15 @@ public class JRegistroProyecto extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JTable jTableAreaColaboracion;
-    private javax.swing.JTable jTableObjGeneral;
+    private javax.swing.JTable jTableObjEspecifico;
     private javax.swing.JTable jTableRecursosMateriales;
     private javax.swing.JTextField jTextFieldAreaConsideracion;
+    private javax.swing.JTextField jTextFieldNombProyecto;
     private javax.swing.JTextField jTextFieldRecurosMateriales;
     private javax.swing.JTextField jTextFieldTiempoEstimado;
     private javax.swing.JTextArea jTextObjetivoEsoecificos;
     private javax.swing.JTextArea jTextObjetivoGeneral;
     private javax.swing.JTextArea jTextResumAbstracto;
     // End of variables declaration//GEN-END:variables
+
 }

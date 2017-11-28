@@ -33,6 +33,22 @@ public class TipoProyecto implements Serializable {
         this.id = id;
     }
 
+    public String getTipo() {
+        return Tipo;
+    }
+
+    public void setTipo(String Tipo) {
+        this.Tipo = Tipo;
+    }
+
+    public String getDescripcion() {
+        return Descripcion;
+    }
+
+    public void setDescripcion(String Descripcion) {
+        this.Descripcion = Descripcion;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;

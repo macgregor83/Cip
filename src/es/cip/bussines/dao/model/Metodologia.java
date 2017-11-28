@@ -22,10 +22,10 @@ public class Metodologia implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private Integer idProyecto;
+    private String idProyecto;
     private String Metodologia;
 
     @JoinColumn(name = "idProyecto", referencedColumnName = "id", insertable = false, updatable = false)
@@ -40,11 +40,11 @@ public class Metodologia implements Serializable {
         this.id = id;
     }
 
-    public Integer getIdProyecto() {
+    public String getIdProyecto() {
         return idProyecto;
     }
 
-    public void setIdProyecto(Integer idProyecto) {
+    public void setIdProyecto(String idProyecto) {
         this.idProyecto = idProyecto;
     }
 

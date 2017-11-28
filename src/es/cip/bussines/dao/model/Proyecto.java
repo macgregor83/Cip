@@ -23,7 +23,7 @@ public class Proyecto implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private String id;
     private String NombreProyecto;
     private Integer idTipoProyecto;
     private Integer TiempoEstimado;
@@ -49,11 +49,11 @@ public class Proyecto implements Serializable {
     @ManyToOne(optional = false)
     private EstatusProyecto EstatusProyecto;
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 

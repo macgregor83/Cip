@@ -22,9 +22,9 @@ public class RecursoHumanoProyecto implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private Integer idproyecto;
+    private String idProyecto;
     private Integer idRecursoHumanoDatos;
 
     @JoinColumn(name = "idProyecto", referencedColumnName = "id", insertable = false, updatable = false)
@@ -43,12 +43,12 @@ public class RecursoHumanoProyecto implements Serializable {
         this.id = id;
     }
 
-    public Integer getIdproyecto() {
-        return idproyecto;
+    public String getIdProyecto() {
+        return this.idProyecto;
     }
 
-    public void setIdproyecto(Integer idproyecto) {
-        this.idproyecto = idproyecto;
+    public void setIdproyecto(String idProyecto) {
+        this.idProyecto = idProyecto;
     }
 
     public Integer getIdRecursoHumanoDatos() {

@@ -32,7 +32,7 @@ public class Patente implements Serializable {
     private Date FechaRegistro;
     private Integer Porcentage;
     
-    private Integer idProyecto;
+    private String idProyecto;
             
     @JoinColumn(name = "idProyecto", referencedColumnName = "id", insertable = false, updatable = false)
     @ManyToOne(optional = false)
@@ -70,11 +70,11 @@ public class Patente implements Serializable {
         this.Porcentage = Porcentage;
     }
 
-    public Integer getIdProyecto() {
+    public String getIdProyecto() {
         return idProyecto;
     }
 
-    public void setIdProyecto(Integer idProyecto) {
+    public void setIdProyecto(String idProyecto) {
         this.idProyecto = idProyecto;
     }
 

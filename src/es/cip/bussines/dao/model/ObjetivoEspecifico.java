@@ -22,10 +22,10 @@ public class ObjetivoEspecifico implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private Integer idPreyecto;
+    private String idProyecto;
     private String ObjEspecifico;
 
     @JoinColumn(name = "idProyecto", referencedColumnName = "id", insertable = false, updatable = false)
@@ -40,12 +40,12 @@ public class ObjetivoEspecifico implements Serializable {
         this.id = id;
     }
 
-    public Integer getIdPreyecto() {
-        return idPreyecto;
+    public String getIdProyecto() {
+        return idProyecto;
     }
 
-    public void setIdPreyecto(Integer idPreyecto) {
-        this.idPreyecto = idPreyecto;
+    public void setIdProyecto(String idProyecto) {
+        this.idProyecto = idProyecto;
     }
 
     public String getObjEspecifico() {

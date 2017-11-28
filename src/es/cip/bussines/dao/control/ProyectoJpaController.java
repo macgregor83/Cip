@@ -7,6 +7,9 @@ package es.cip.bussines.dao.control;
 
 import es.cip.bussines.dao.control.exceptions.NonexistentEntityException;
 import es.cip.bussines.dao.model.Proyecto;
+import es.cip.bussines.dao.model.RecursoHumanoDatos;
+import es.cip.bussines.dao.model.RecursoHumanoProyecto;
+import es.cip.bussines.dao.model.Usuario;
 import es.cip.util.Cte;
 import java.io.Serializable;
 import java.util.List;
@@ -126,7 +129,31 @@ public class ProyectoJpaController implements Serializable {
             em.close();
         }
     }
-
+    public List<Proyecto> findProyecto(String nombreProyecto,Integer idUsuario, Integer idEstatusProyecto) {
+        EntityManager em = getEntityManager();
+        try {
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery(Proyecto.class);
+            Root<Proyecto> c = cq.from(Proyecto.class);
+            Root<RecursoHumanoProyecto> r = cq.from(RecursoHumanoProyecto.class);            
+            Root<RecursoHumanoDatos> u = cq.from(RecursoHumanoDatos.class);
+            cq.select(c);
+            cq.where(
+                    em.getCriteriaBuilder().and(
+                    em.getCriteriaBuilder().or(
+                            em.getCriteriaBuilder().like(c.get("id"), "%" + nombreProyecto.trim() + "%"),
+                            em.getCriteriaBuilder().like(c.get("NombreProyecto"), "%" + nombreProyecto.trim() + "%")),
+                    em.getCriteriaBuilder().like(c.get("id"), r.get("idProyecto")),
+                    em.getCriteriaBuilder().like(u.get("id"), r.get("idRecursoHumanoDatos")),
+                    em.getCriteriaBuilder().like(u.get("idUsuario"), idUsuario+"") ,  
+                    em.getCriteriaBuilder().like(c.get("idEstatusProyecto"), idEstatusProyecto+"") 
+                    )
+                    );
+            Query q = em.createQuery(cq);
+            return q.getResultList();
+        } finally {
+            em.close();
+        }
+    }
     public int getProyectoCount() {
         EntityManager em = getEntityManager();
         try {

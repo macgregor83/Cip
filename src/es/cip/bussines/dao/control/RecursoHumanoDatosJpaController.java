@@ -7,6 +7,7 @@ package es.cip.bussines.dao.control;
 
 import es.cip.bussines.dao.control.exceptions.NonexistentEntityException;
 import es.cip.bussines.dao.model.RecursoHumanoDatos;
+import es.cip.bussines.dao.model.Usuario;
 import es.cip.util.Cte;
 import java.io.Serializable;
 import java.util.List;
@@ -141,6 +142,41 @@ public class RecursoHumanoDatosJpaController implements Serializable {
         }
     }
 
+    public List<RecursoHumanoDatos> findIdUsuario(Integer idUsuario) {
+        EntityManager em = getEntityManager();
+        try {
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery(RecursoHumanoDatos.class);
+            Root<RecursoHumanoDatos> c = cq.from(RecursoHumanoDatos.class);
+            cq.select(c);
+            cq.where(em.getCriteriaBuilder().like(c.get("idUsuario"), "%" + idUsuario + "%"));
+            Query q = em.createQuery(cq);
+            return q.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+      public List<RecursoHumanoDatos> findNombreUsuario(String usuario) {
+        EntityManager em = getEntityManager();
+        try {
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery(RecursoHumanoDatos.class);
+            Root<RecursoHumanoDatos> c = cq.from(RecursoHumanoDatos.class);            
+            Root<Usuario> u = cq.from(Usuario.class);
+            cq.select(c);
+            cq.where(
+                    em.getCriteriaBuilder().and(
+                    em.getCriteriaBuilder().or(
+                            em.getCriteriaBuilder().like(u.get("Nombre"), "%" + usuario.trim() + "%"),
+                            em.getCriteriaBuilder().like(u.get("ApellidoPaterno"), "%" + usuario.trim() + "%")),
+                    em.getCriteriaBuilder().like(u.get("id"), c.get("idUsuario"))
+                    )
+                    );
+            Query q = em.createQuery(cq);
+            return q.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+    
     public int getRecursoHumanoDatosCount() {
         EntityManager em = getEntityManager();
         try {

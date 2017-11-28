@@ -28,16 +28,16 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private JFInvitados invitado;
     private JFRegistroPersona JFRegistroPersona;
     private JFDatosAcademicos datosAcademicos;
-     private JAsociaciònUsuario asociacionUsuario;
+    private JAsociaciònUsuario asociacionUsuario;
     private JRegistroProyecto registroProyecto;
-       private JFPatentes patente;
-       private JFActividades actividades;
+    private JFPatentes patente;
+    private JFActividades actividades;
     private AvancesProyecto avancesProyecto;
     private JFEstadoProyecto estadoProyecto;
     private SeccionPublica SeccionPublica;
     private JFConvocatorias convocatoria;
     private JFAprobarProyecto aprovarProyecto;
-   
+
     private JFases JFases;
     private Login login;
 
@@ -303,11 +303,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
-           registroProyecto = new JRegistroProyecto();
+            registroProyecto = new JRegistroProyecto();
             registroProyecto.setVisible(true);
-          //  pestana(registroProyecto, Cte.Registro_Proyecto);
+            //  pestana(registroProyecto, Cte.Registro_Proyecto);
             this.pack();
-            this.setExtendedState(MAXIMIZED_BOTH);
+//            this.setExtendedState(MAXIMIZED_BOTH);
             this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
         } catch (Exception ex) {
             Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
@@ -320,10 +320,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
-            JFases = new JFases();
-            JFases.setVisible(true);         //  pestana(avancesProyecto, Cte.JFases);
+//            JFases = new JFases();
+//            JFases.setVisible(true);         //  pestana(avancesProyecto, Cte.JFases);
             this.pack();
-            this.setExtendedState(MAXIMIZED_BOTH);
+//            this.setExtendedState(MAXIMIZED_BOTH);
             this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
         } catch (Exception ex) {
             Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
@@ -336,9 +336,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
-           estadoProyecto = new JFEstadoProyecto();
+            estadoProyecto = new JFEstadoProyecto();
             estadoProyecto.setVisible(true);
-           // pestana(estadoProyecto, Cte.Estado_Proyecto);
+            // pestana(estadoProyecto, Cte.Estado_Proyecto);
             this.pack();
             this.setExtendedState(MAXIMIZED_BOTH);
             this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
@@ -365,15 +365,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jTabbedPaneStateChanged
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-   actividades=new JFActividades();  
-   actividades.setVisible(true);        // TODO add your handling code here:
-         // TODO add your handling code here:
+        actividades = new JFActividades();
+        actividades.setVisible(true);        // TODO add your handling code here:
+        // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuInvitadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuInvitadoActionPerformed
-            invitado = new JFInvitados();
-            invitado.setVisible(true);        // TODO add your handling code here:
-           
+        invitado = new JFInvitados();
+        invitado.setVisible(true);        // TODO add your handling code here:
+
     }//GEN-LAST:event_jMenuInvitadoActionPerformed
 
     private void jMenuRegUsuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuRegUsuaActionPerformed
@@ -382,11 +382,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
 //            this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
             JFRegistroPersona = new JFRegistroPersona();
             JFRegistroPersona.setVisible(true);
-          
- 
-            
+
             //this.add(pantallaHerramentero, BorderLayout.CENTER);
-          //  pestana(JFRegistroPersona, Cte.Alta_Usuario);
+            //  pestana(JFRegistroPersona, Cte.Alta_Usuario);
 //            this.pack();
 //            this.setExtendedState(MAXIMIZED_BOTH);
 //            this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
@@ -398,17 +396,17 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuRegUsuaActionPerformed
 
     private void jMenuAsociarTutorUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuAsociarTutorUserActionPerformed
-            asociacionUsuario = new JAsociaciònUsuario();
-            asociacionUsuario.setVisible(true);        // TODO add your handling code here:
+        asociacionUsuario = new JAsociaciònUsuario("",1);
+        asociacionUsuario.setVisible(true);        // TODO add your handling code here:
         jTabbedPane.removeAll();
     }//GEN-LAST:event_jMenuAsociarTutorUserActionPerformed
 
     private void jDatosAcademicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDatosAcademicosActionPerformed
         try {
             // TODO add your handling code here:
-           datosAcademicos = new JFDatosAcademicos();
+            datosAcademicos = new JFDatosAcademicos();
             datosAcademicos.setVisible(true);
-           // login.setVisible(true);
+            // login.setVisible(true);
             //login.setAlwaysOnTop(true);
         } catch (Exception ex) {
             Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
@@ -418,30 +416,30 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jDatosAcademicosActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-            convocatoria = new JFConvocatorias();
-            convocatoria.setVisible(true);        // TODO add your handling code here:
+        convocatoria = new JFConvocatorias();
+        convocatoria.setVisible(true);        // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-            patente = new JFPatentes();
-            patente.setVisible(true);         // TODO add your handling code here:
+        patente = new JFPatentes();
+        patente.setVisible(true);         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-            SeccionPublica = new SeccionPublica();
-            SeccionPublica.setVisible(true);   // TODO add your handling code here:
+        SeccionPublica = new SeccionPublica();
+        SeccionPublica.setVisible(true);   // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-estadoProyecto = new JFEstadoProyecto();
-estadoProyecto.setVisible(true);
+        estadoProyecto = new JFEstadoProyecto();
+        estadoProyecto.setVisible(true);
 // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
-   asociacionUsuario =new JAsociaciònUsuario();
-   asociacionUsuario.setVisible(true);
-   // TODO add your handling code here:
+        asociacionUsuario = new JAsociaciònUsuario("",1);
+        asociacionUsuario.setVisible(true);
+        // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem7ActionPerformed
     public void pestana(JPanel pantalla, String title) {
 
@@ -488,7 +486,7 @@ estadoProyecto.setVisible(true);
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                
+
                 new MenuPrincipal().setVisible(true);
                 Login lo;
                 try {
@@ -498,8 +496,7 @@ estadoProyecto.setVisible(true);
                 } catch (Exception ex) {
                     Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                
-               
+
             }
         });
     }
@@ -534,18 +531,18 @@ estadoProyecto.setVisible(true);
     // End of variables declaration//GEN-END:variables
 
     private void cerrar() {
-       
-Object [] opciones ={"Aceptar","Cancelar"};
-int eleccion = JOptionPane.showOptionDialog(rootPane,"En realidad desea realizar cerrar la aplicacion","Mensaje de Confirmacion",
-JOptionPane.YES_NO_OPTION,
-JOptionPane.QUESTION_MESSAGE,null,opciones,"Aceptar");
-if (eleccion == JOptionPane.YES_OPTION)
-{
-    System.exit(0);
-}else{
-}
- }
+
+        Object[] opciones = {"Aceptar", "Cancelar"};
+        int eleccion = JOptionPane.showOptionDialog(rootPane, "En realidad desea realizar cerrar la aplicacion", "Mensaje de Confirmacion",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE, null, opciones, "Aceptar");
+        if (eleccion == JOptionPane.YES_OPTION) {
+            System.exit(0);
+        } else {
+        }
+    }
+
     private void formWindowClosing(java.awt.event.WindowEvent evt) {
-cerrar();
-}
+        cerrar();
+    }
 }

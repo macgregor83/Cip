@@ -22,14 +22,14 @@ public class RecursosMateriales implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private Integer idProyecto;
+    private String idProyecto;
     private String RecursosMateriales;
 
-    @JoinColumn(name = "idProyecto", referencedColumnName = "id", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
-    private Proyecto proyecto;
+//    @JoinColumn(name = "idProyecto", referencedColumnName = "id", insertable = false, updatable = false)
+//    @ManyToOne(optional = false)
+//    private Proyecto proyecto;
 
     public Integer getId() {
         return id;
@@ -39,11 +39,11 @@ public class RecursosMateriales implements Serializable {
         this.id = id;
     }
 
-    public Integer getIdProyecto() {
+    public String getIdProyecto() {
         return idProyecto;
     }
 
-    public void setIdProyecto(Integer idProyecto) {
+    public void setIdProyecto(String idProyecto) {
         this.idProyecto = idProyecto;
     }
 
@@ -55,13 +55,13 @@ public class RecursosMateriales implements Serializable {
         this.RecursosMateriales = RecursosMateriales;
     }
 
-    public Proyecto getProyecto() {
-        return proyecto;
-    }
-
-    public void setProyecto(Proyecto proyecto) {
-        this.proyecto = proyecto;
-    }
+//    public Proyecto getProyecto() {
+//        return proyecto;
+//    }
+//
+//    public void setProyecto(Proyecto proyecto) {
+//        this.proyecto = proyecto;
+//    }
 
     @Override
     public int hashCode() {
@@ -85,7 +85,7 @@ public class RecursosMateriales implements Serializable {
 
     @Override
     public String toString() {
-        return "es.cip.bussines.dao.model.idProyecto[ id=" + id + " ]";
+        return "es.cip.bussines.dao.model.RecursosMateriales[ id=" + id + " ]";
     }
-
+    
 }

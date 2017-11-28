@@ -24,7 +24,7 @@ public class Face implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String NombreFase;
     private Integer Duracion;
@@ -35,6 +35,8 @@ public class Face implements Serializable {
     @Lob
 //    @Column(name = "Entregable")
     private byte[] Entregable;
+    
+    private String ExtEntregable; 
     
     @JoinColumn(name = "idMetodologia", referencedColumnName = "id", insertable = false, updatable = false)
     @ManyToOne(optional = false)
@@ -102,6 +104,22 @@ public class Face implements Serializable {
 
     public void setEntregable(byte[] Entregable) {
         this.Entregable = Entregable;
+    }
+
+    public Metodologia getMetodologia() {
+        return metodologia;
+    }
+
+    public void setMetodologia(Metodologia metodologia) {
+        this.metodologia = metodologia;
+    }
+
+    public String getExtEntregable() {
+        return ExtEntregable;
+    }
+
+    public void setExtEntregable(String ExtEntregable) {
+        this.ExtEntregable = ExtEntregable;
     }
 
     @Override

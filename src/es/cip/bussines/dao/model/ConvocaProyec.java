@@ -28,7 +28,7 @@ public class ConvocaProyec implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    private Integer idProyecto;
+    private String idProyecto;
     private Integer idConvocatoria;
     @Temporal(TemporalType.DATE)
     private Date Fecha;
@@ -51,11 +51,11 @@ public class ConvocaProyec implements Serializable {
         this.id = id;
     }
 
-    public Integer getIdProyecto() {
+    public String getIdProyecto() {
         return idProyecto;
     }
 
-    public void setIdProyecto(Integer idProyecto) {
+    public void setIdProyecto(String idProyecto) {
         this.idProyecto = idProyecto;
     }
 

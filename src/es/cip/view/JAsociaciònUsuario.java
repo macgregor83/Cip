@@ -5,17 +5,99 @@
  */
 package es.cip.view;
 
+import es.cip.bussines.bl.JAsociaciònUsuarioBL;
+import es.cip.bussines.dao.model.Proyecto;
+import es.cip.bussines.dao.model.RecursoHumanoDatos;
+import es.cip.bussines.dao.model.Usuario;
+import es.cip.util.Cte;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.text.JTextComponent;
+
 /**
  *
  * @author Vero
  */
 public class JAsociaciònUsuario extends javax.swing.JFrame {
 
+    public JAsociaciònUsuarioBL bL = new JAsociaciònUsuarioBL();
+    private final DefaultTableModel modelTabla;
+
     /**
      * Creates new form JAsociaciònUsuario
      */
-    public JAsociaciònUsuario() {
+    public JAsociaciònUsuario(String idProyecto, Integer idUsuario) {
         initComponents();
+        bL.setIdProyecto(idProyecto);
+        bL.setIdUsuario(idUsuario);
+        jLabelAlertNomPro.setVisible(false);
+        jLabelAlertNomPro.setToolTipText(Cte.Proyecto_No_existe);
+
+        modelTabla = (DefaultTableModel) jTableAsesor.getModel();
+        modelTabla.setNumRows(0);
+        for (Proyecto object : bL.getLisProyecto()) {
+            jComboBoxProyecto.addItem(object.getNombreProyecto());
+            jComboBoxProyecto.addItem(object.getNombreProyecto());
+        }
+
+        jComboBoxProyecto.getEditor().getEditorComponent().addKeyListener(new KeyAdapter() {
+            public void keyReleased(KeyEvent evt) {
+                String cadenaEscrita = jComboBoxProyecto.getEditor().getItem().toString().toUpperCase();
+                DefaultComboBoxModel modelo = new DefaultComboBoxModel();
+                modelo.addElement(cadenaEscrita);
+                List<Proyecto> list = bL.setNombreProyecto(cadenaEscrita);
+                if (list.size() > 0) {
+                    for (Proyecto proyecto : list) {
+                        modelo.addElement(proyecto.getNombreProyecto());
+                    }
+                    jComboBoxProyecto.setModel(modelo);
+                    if (jComboBoxProyecto.getItemCount() > 0) {
+                        jComboBoxProyecto.showPopup();
+                        if (evt.getKeyCode() != 8) {
+                            ((JTextComponent) jComboBoxProyecto.getEditor().getEditorComponent()).select(cadenaEscrita.length(), jComboBoxProyecto.getEditor().getItem().toString().length());
+                        } else {
+                            jComboBoxProyecto.getEditor().setItem(cadenaEscrita);
+                        }
+                    } else {
+                        jComboBoxProyecto.addItem(cadenaEscrita);
+                    }
+                } else {
+                    jComboBoxProyecto.setModel(modelo);
+                }
+            }
+        });
+
+        jComboBoxNombre.getEditor().getEditorComponent().addKeyListener(new KeyAdapter() {
+            public void keyReleased(KeyEvent evt) {
+                String cadenaEscrita = jComboBoxNombre.getEditor().getItem().toString().toUpperCase();
+                DefaultComboBoxModel modelo = new DefaultComboBoxModel();
+                modelo.addElement(cadenaEscrita);
+                List<RecursoHumanoDatos> list = bL.findNombreCompleto(cadenaEscrita);
+                if (list.size() > 0) {
+                    for (RecursoHumanoDatos rh : list) {
+                        modelo.addElement(rh.getUsuario().getNombre() + " " + rh.getUsuario().getApellidoPaterno() + " " + rh.getUsuario().getApellidoMaterno() + "-" + rh.getUsuario().getCorreoElectronico() + "-" + rh.getTipoUsuario().getTipo());
+                    }
+                    jComboBoxNombre.setModel(modelo);
+                    if (jComboBoxNombre.getItemCount() > 0) {
+                        jComboBoxNombre.showPopup();
+                        if (evt.getKeyCode() != 8) {
+                            ((JTextComponent) jComboBoxNombre.getEditor().getEditorComponent()).select(cadenaEscrita.length(), jComboBoxNombre.getEditor().getItem().toString().length());
+                        } else {
+                            jComboBoxNombre.getEditor().setItem(cadenaEscrita);
+                        }
+                    } else {
+                        jComboBoxNombre.addItem(cadenaEscrita);
+                    }
+                } else {
+                    jComboBoxNombre.setModel(modelo);
+                }
+            }
+        });
+
     }
 
     /**
@@ -29,13 +111,17 @@ public class JAsociaciònUsuario extends javax.swing.JFrame {
 
         jPanel2 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
-        jComboBoxRecursosHumanos = new javax.swing.JComboBox<>();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        jTableAsesor = new javax.swing.JTable();
+        jComboBoxNombre = new javax.swing.JComboBox<>();
         jLabel12 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
-        jComboBoxRecursosHumanos1 = new javax.swing.JComboBox<>();
+        jComboBoxProyecto = new javax.swing.JComboBox<>();
         txtTutor = new javax.swing.JLabel();
+        jButtonMas = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jLabelAlertNomPro = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTableAsesor = new javax.swing.JTable();
+        jLabelAlertNomPro1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -43,6 +129,55 @@ public class JAsociaciònUsuario extends javax.swing.JFrame {
         jPanel2.setMaximumSize(new java.awt.Dimension(1059, 356));
 
         jLabel9.setText("Proyecto");
+
+        jComboBoxNombre.setEditable(true);
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel12.setText("Recursos Humanos");
+
+        jButton2.setText("Enviar a Aprobación");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jComboBoxProyecto.setEditable(true);
+        jComboBoxProyecto.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBoxProyectoItemStateChanged(evt);
+            }
+        });
+        jComboBoxProyecto.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jComboBoxProyectoFocusLost(evt);
+            }
+        });
+        jComboBoxProyecto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jComboBoxProyectoKeyReleased(evt);
+            }
+        });
+
+        txtTutor.setText("Tutor");
+
+        jButtonMas.setText("+");
+        jButtonMas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonMasActionPerformed(evt);
+            }
+        });
+
+        jButton3.setText("-");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jLabelAlertNomPro.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabelAlertNomPro.setForeground(new java.awt.Color(255, 0, 0));
+        jLabelAlertNomPro.setText("*");
 
         jTableAsesor.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -57,82 +192,166 @@ public class JAsociaciònUsuario extends javax.swing.JFrame {
         ));
         jScrollPane4.setViewportView(jTableAsesor);
 
-        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel12.setText("Recursos Humanos");
-
-        jButton2.setText("Agregar");
-
-        txtTutor.setText("Tutor");
+        jLabelAlertNomPro1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabelAlertNomPro1.setForeground(new java.awt.Color(255, 0, 0));
+        jLabelAlertNomPro1.setText("*");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(342, Short.MAX_VALUE)
                 .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(396, 396, 396))
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel9)
                             .addComponent(txtTutor))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jComboBoxProyecto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jComboBoxNombre, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabelAlertNomPro)
+                            .addComponent(jLabelAlertNomPro1))
+                        .addGap(5, 5, 5)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jComboBoxRecursosHumanos1, 0, 468, Short.MAX_VALUE)
-                            .addComponent(jComboBoxRecursosHumanos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(57, 57, 57)
-                        .addComponent(jButton2))
+                            .addComponent(jButtonMas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(35, 35, 35))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 821, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(35, Short.MAX_VALUE))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButton2)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 884, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel12)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBoxRecursosHumanos1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9))
-                .addGap(23, 23, 23)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBoxRecursosHumanos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtTutor)
-                    .addComponent(jButton2))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(86, 86, 86))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBoxProyecto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9)
+                    .addComponent(jButtonMas)
+                    .addComponent(jLabelAlertNomPro, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBoxNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTutor)
+                    .addComponent(jButton3)
+                    .addComponent(jLabelAlertNomPro1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton2)
+                .addGap(18, 18, 18))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 890, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 324, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(1, 1, 1)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(26, 26, 26))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        if (jTableAsesor.getSelectedRows().length == 0) {
+            bL.getLisRHProyecto().remove(jTableAsesor.getRowCount() - 1);
+            modelTabla.removeRow(jTableAsesor.getRowCount() - 1);
+            
+        } else {
+            for (int i = jTableAsesor.getSelectedRows().length; 0 < i; i--) {
+                bL.getLisRHProyecto().remove(jTableAsesor.getSelectedRows()[i - 1]);
+                modelTabla.removeRow(jTableAsesor.getSelectedRows()[i - 1]);
+            }
+        }
+        if (jTableAsesor.getRowCount()==0) {
+            jComboBoxProyecto.setEnabled(true);
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jComboBoxProyectoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jComboBoxProyectoKeyReleased
+        // TODO add your handling code here:
+        System.out.println("hola");
+    }//GEN-LAST:event_jComboBoxProyectoKeyReleased
+
+    private void jComboBoxProyectoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jComboBoxProyectoFocusLost
+        // TODO add your handling code here:
+        System.out.println("hola");
+    }//GEN-LAST:event_jComboBoxProyectoFocusLost
+
+    private void jComboBoxProyectoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxProyectoItemStateChanged
+        // TODO add your handling code here:
+        if (jComboBoxProyecto.getItemCount() > 1) {
+            System.out.println(jComboBoxProyecto.getSelectedItem().toString());
+            bL.setNombreProyecto(jComboBoxProyecto.getSelectedItem().toString());
+            if (bL.getLisProyecto().size() > 0) {
+                jComboBoxProyecto.removeAllItems();
+                jComboBoxProyecto.addItem(bL.getLisProyecto().get(0).getNombreProyecto());
+                bL.setIdProyecto(bL.getLisProyecto().get(0).getId());
+                jLabelAlertNomPro.setVisible(false);
+            }
+        } else {
+            jLabelAlertNomPro.setVisible(true);
+        }
+    }//GEN-LAST:event_jComboBoxProyectoItemStateChanged
+
+    private void jButtonMasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMasActionPerformed
+        // TODO add your handling code here:
+//        System.out.println((jComboBoxProyecto.getItemCount() > 0) +"-"+ (jComboBoxNombre.getItemCount() > 0) +"-"+
+//                (jComboBoxProyecto.getSelectedIndex()> 0) +"-"+ (jComboBoxNombre.getSelectedIndex() > 0));
+        jComboBoxProyecto.setEditable(false);
+        System.out.println(jComboBoxProyecto.getSelectedIndex() + "-" + jComboBoxNombre.getSelectedIndex());
+        if (jComboBoxProyecto.getItemCount() > 0 && jComboBoxNombre.getItemCount() > 0
+                && jComboBoxNombre.getSelectedIndex() > 0) {
+            modelTabla.addRow(new Object[]{bL.getLisRHDatos().get(jComboBoxNombre.getSelectedIndex() - 1).getUsuario().getNombre(),
+                bL.getLisRHDatos().get(jComboBoxNombre.getSelectedIndex() - 1).getUniversidad().getNombre(),
+                bL.getLisRHDatos().get(jComboBoxNombre.getSelectedIndex() - 1).getCampus().getNombre(),
+                bL.getLisRHDatos().get(jComboBoxNombre.getSelectedIndex() - 1).getCarrera().getNombreCarrera(),
+                bL.getLisRHDatos().get(jComboBoxNombre.getSelectedIndex() - 1).getUsuario().getCorreoElectronico(),
+                bL.getLisRHDatos().get(jComboBoxNombre.getSelectedIndex() - 1).getTipoUsuario().getTipo()});
+            bL.setlisRHProyecto(bL.getLisProyecto().get(jComboBoxProyecto.getSelectedIndex()).getId(), bL.getLisRHDatos().get(jComboBoxNombre.getSelectedIndex() - 1).getId());
+            jComboBoxNombre.removeAllItems();
+
+        } else {
+            JOptionPane.showMessageDialog(rootPane, Cte.Selecciona_Campos);
+        }
+    }//GEN-LAST:event_jButtonMasActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+//        jButtonMas.doClick();
+        if (jTableAsesor.getRowCount() > 0) {
+            bL.guardar();
+            this.setVisible(false);
+            
+        }else{
+            JOptionPane.showMessageDialog(rootPane, Cte.Falta_llenar_Campos);
+        }
+        System.out.println("hola");
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -164,17 +383,21 @@ public class JAsociaciònUsuario extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JAsociaciònUsuario().setVisible(true);
+                new JAsociaciònUsuario("11710262216430000001", 1).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBoxRecursosHumanos;
-    private javax.swing.JComboBox<String> jComboBoxRecursosHumanos1;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButtonMas;
+    private javax.swing.JComboBox<String> jComboBoxNombre;
+    private javax.swing.JComboBox<String> jComboBoxProyecto;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabelAlertNomPro;
+    private javax.swing.JLabel jLabelAlertNomPro1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable jTableAsesor;

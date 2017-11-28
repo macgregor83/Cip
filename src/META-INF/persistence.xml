@@ -21,7 +21,7 @@
     <class>es.cip.bussines.dao.model.ProductoEsperado</class>
     <class>es.cip.bussines.dao.model.Proyecto</class>
     <class>es.cip.bussines.dao.model.RecursoHumanoProyecto</class>
-    <class>es.cip.bussines.dao.model.idProyecto</class>
+    <class>es.cip.bussines.dao.model.RecursosMateriales</class>
     <class>es.cip.bussines.dao.model.TipoProyecto</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://LAPTOP-MJK7SBQ5\SQLEXPRESS:1433;databaseName=cipdesarrollo"/>

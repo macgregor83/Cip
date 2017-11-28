@@ -285,9 +285,19 @@ public class JFDatosAcademicos extends javax.swing.JFrame {
         });
 
         jComboBoxCampus.setEditable(true);
+        jComboBoxCampus.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jComboBoxCampusFocusLost(evt);
+            }
+        });
         jComboBoxCampus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxCampusActionPerformed(evt);
+            }
+        });
+        jComboBoxCampus.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jComboBoxCampusKeyReleased(evt);
             }
         });
 
@@ -505,10 +515,23 @@ public class JFDatosAcademicos extends javax.swing.JFrame {
 
     private void jComboBoxCampusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxCampusActionPerformed
         // TODO add your handling code here:
-        
-        jTextFieldDireccionDA.setText(bL.getListCampus().get(jComboBoxCampus.getSelectedIndex()).getDireccion());
-        jTextFieldLocalidadDA.setText(bL.getListCampus().get(jComboBoxCampus.getSelectedIndex()).getLocalidad());
+        if (bL.getListCampus().size() > 0) {
+            jTextFieldDireccionDA.setText(bL.getListCampus().get(jComboBoxCampus.getSelectedIndex()-1).getDireccion());
+            jTextFieldLocalidadDA.setText(bL.getListCampus().get(jComboBoxCampus.getSelectedIndex()-1).getLocalidad());
+        }
     }//GEN-LAST:event_jComboBoxCampusActionPerformed
+
+    private void jComboBoxCampusKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jComboBoxCampusKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxCampusKeyReleased
+
+    private void jComboBoxCampusFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jComboBoxCampusFocusLost
+        // TODO add your handling code here:
+        if (bL.getListCampus().size() > 0) {
+            jTextFieldDireccionDA.setText(bL.getListCampus().get(jComboBoxCampus.getSelectedIndex()-1).getDireccion());
+            jTextFieldLocalidadDA.setText(bL.getListCampus().get(jComboBoxCampus.getSelectedIndex()-1).getLocalidad());
+        }
+    }//GEN-LAST:event_jComboBoxCampusFocusLost
 
     public void setNickname(String nickname) {
         bL.setNickname(nickname);

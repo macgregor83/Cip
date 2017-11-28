@@ -22,18 +22,15 @@ public class AreaColaboracion implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private Integer idProyecto;
-    private Integer idDetAreaCola;
-
+    private String idProyecto;
+    private String AreaColaboracion;
+    
     @JoinColumn(name = "idProyecto", referencedColumnName = "id", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Proyecto proyecto;
 
-    @JoinColumn(name = "idDetAreaCola", referencedColumnName = "id", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
-    private DetalleAreaColaboracion detalleAreaColaboracion;
 
     public Integer getId() {
         return id;
@@ -43,21 +40,23 @@ public class AreaColaboracion implements Serializable {
         this.id = id;
     }
 
-    public Integer getIdProyecto() {
+    public String getIdProyecto() {
         return idProyecto;
     }
 
-    public void setIdProyecto(Integer idProyecto) {
+    public void setIdProyecto(String idProyecto) {
         this.idProyecto = idProyecto;
     }
 
-    public Integer getIdDetAreaCola() {
-        return idDetAreaCola;
+    public String getAreaColaboracion() {
+        return AreaColaboracion;
     }
 
-    public void setIdDetAreaCola(Integer idDetAreaCola) {
-        this.idDetAreaCola = idDetAreaCola;
+    public void setAreaColaboracion(String AreaColaboracion) {
+        this.AreaColaboracion = AreaColaboracion;
     }
+
+
 
     public Proyecto getProyecto() {
         return proyecto;
@@ -65,14 +64,6 @@ public class AreaColaboracion implements Serializable {
 
     public void setProyecto(Proyecto proyecto) {
         this.proyecto = proyecto;
-    }
-
-    public DetalleAreaColaboracion getDetalleAreaColaboracion() {
-        return detalleAreaColaboracion;
-    }
-
-    public void setDetalleAreaColaboracion(DetalleAreaColaboracion detalleAreaColaboracion) {
-        this.detalleAreaColaboracion = detalleAreaColaboracion;
     }
 
     @Override

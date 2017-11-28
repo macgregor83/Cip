@@ -84,7 +84,8 @@ public class ValidCampos {
 
     public static final boolean esSoloLetras(String entrada) {
         //String entrada = " No para mi?? que triste :( por que??"; ^[a-zA-Z]+(\\s*[a-zA-Z]*)*[a-zA-Z]+$
-        Pattern patron = Pattern.compile("[^A-Za-z ]");
+        Pattern patron = Pattern.compile("[^A-Za-zñáéíóúüÜÑÁÉÍÓÚ]");
+        //Pattern patron = Pattern.compile("^[a-zA-Z0-9ñáéíóúüÜÑÁÉÍÓÚ]+( [a-zA-Z0-9ñáéíóúüÜÑÁÉÍÓÚ]+)*$");
         Matcher encaja = patron.matcher(entrada);
 
         if (!encaja.find()) //System.out.println("solo tiene letras y espacio!");
@@ -95,6 +96,18 @@ public class ValidCampos {
             return false;
         }
 
+    }
+
+    public static final boolean sonLetrasNumero(String cadena) {
+        Pattern patron = Pattern.compile("[^A-Za-zñáéíóúüÜÑÁÉÍÓÚ0-9]");
+        Matcher encaja = patron.matcher(cadena);
+        if (!encaja.find()) //System.out.println("solo tiene letras y espacio!");
+        {
+            return true;
+        } else //System.out.println("tiene otra cosa");
+        {
+            return false;
+        }
     }
 
     public static final boolean esMoneda(String entrada) {

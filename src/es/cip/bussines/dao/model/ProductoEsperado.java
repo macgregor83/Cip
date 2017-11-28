@@ -33,6 +33,22 @@ public class ProductoEsperado implements Serializable {
         this.id = id;
     }
 
+    public String getProductoEsperado() {
+        return ProductoEsperado;
+    }
+
+    public void setProductoEsperado(String ProductoEsperado) {
+        this.ProductoEsperado = ProductoEsperado;
+    }
+
+    public String getDescripcion() {
+        return Descripcion;
+    }
+
+    public void setDescripcion(String Descripcion) {
+        this.Descripcion = Descripcion;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
