@@ -5,8 +5,12 @@
  */
 package es.cip.bussines.bl;
 
+//import es.cip.bussines.dao.control.ConvocatoriaJpaController;
+
 import es.cip.bussines.dao.control.ConvocatoriaJpaController;
 import es.cip.bussines.dao.model.Convocatoria;
+
+//import es.cip.bussines.dao.model.Convocatoria;
 
 /**
  *

@@ -13,6 +13,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -39,9 +41,11 @@ public class Convertir {
     }
 
     public static void convertByteArrayToDoc(byte[] bytes) throws IOException {
+       
+        
         File someFile = new File("java2.pdf");
         FileOutputStream fos = new FileOutputStream(someFile);
-        fos.write(bytes);
+       fos.write(bytes);
         fos.flush();
         fos.close();
 
