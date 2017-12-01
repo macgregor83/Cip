@@ -8,10 +8,12 @@ package es.cip.bussines.bl;
 import es.cip.bussines.dao.control.ProyectoJpaController;
 import es.cip.bussines.dao.control.RecursoHumanoDatosJpaController;
 import es.cip.bussines.dao.control.RecursoHumanoProyectoJpaController;
+import es.cip.bussines.dao.control.TipoUsuarioJpaController;
 import es.cip.bussines.dao.control.UsuarioJpaController;
 import es.cip.bussines.dao.model.Proyecto;
 import es.cip.bussines.dao.model.RecursoHumanoDatos;
 import es.cip.bussines.dao.model.RecursoHumanoProyecto;
+import es.cip.bussines.dao.model.TipoUsuario;
 import es.cip.bussines.dao.model.Usuario;
 import es.cip.util.Cte;
 import java.util.ArrayList;
@@ -35,6 +37,7 @@ public class JAsociaciònUsuarioBL {
     private UsuarioJpaController usuarioJpaController = new UsuarioJpaController();
     private RecursoHumanoDatosJpaController recursoHumanoDatosJpaController = new RecursoHumanoDatosJpaController();
     private RecursoHumanoProyectoJpaController recursoHumanoProyectoJpaController = new RecursoHumanoProyectoJpaController();
+    private TipoUsuarioJpaController  tipoUsuarioJpaController = new TipoUsuarioJpaController();
 
     private List<Proyecto> lisProyecto;
     private List<Usuario> lisUsuario;
@@ -66,7 +69,7 @@ public class JAsociaciònUsuarioBL {
     }
 
     public void setlisRHProyecto(String idProyecto, Integer idRHDatos) {
-        this.idProyecto=idProyecto;
+        this.idProyecto = idProyecto;
         recursoHumanoProyecto.setIdproyecto(idProyecto);
         recursoHumanoProyecto.setIdRecursoHumanoDatos(idRHDatos);
         lisRHProyecto.add(recursoHumanoProyecto);
@@ -79,12 +82,20 @@ public class JAsociaciònUsuarioBL {
 
     public List<RecursoHumanoDatos> findNombreCompleto(String nombre) {
         lisRHDatos = recursoHumanoDatosJpaController.findNombreUsuario(nombre);
+        if (lisRHDatos.size() > 0) {
+            for (RecursoHumanoDatos lisRHDato : lisRHDatos) {
+                if (lisRHDato.getUsuario() == null) {
+                    lisRHDato.setUsuario(usuarioJpaController.findUsuario(lisRHDato.getIdUsuario()));
+                    lisRHDato.setTipoUsuario(tipoUsuarioJpaController.findTipoUsuario(lisRHDato.getIdTipoUsuario()));
+                }
+            }
+        }
         return lisRHDatos;
     }
 
     public void guardar() {
         for (RecursoHumanoProyecto recursoHumanoProyecto1 : lisRHProyecto) {
-             recursoHumanoProyectoJpaController.create(recursoHumanoProyecto1);           
+            recursoHumanoProyectoJpaController.create(recursoHumanoProyecto1);
         }
         Proyecto proyecto = proyectoJpaController.findProyecto(idProyecto);
         proyecto.setIdEstatusProyecto(Cte.Estatus_Proyecto_Por_Aprobacion);

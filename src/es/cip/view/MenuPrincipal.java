@@ -325,7 +325,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
-            JFases = new JFases("",1);
+            JFases = new JFases("", 1);
             JFases.setVisible(true);         //  pestana(avancesProyecto, Cte.JFases);
             //this.pack();
 //            this.setExtendedState(MAXIMIZED_BOTH);
@@ -401,7 +401,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuRegUsuaActionPerformed
 
     private void jMenuAsociarTutorUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuAsociarTutorUserActionPerformed
-        asociacionUsuario = new JAsociaciònUsuario("",1);
+        asociacionUsuario = new JAsociaciònUsuario("", 1);
         asociacionUsuario.setVisible(true);        // TODO add your handling code here:
         jTabbedPane.removeAll();
     }//GEN-LAST:event_jMenuAsociarTutorUserActionPerformed
@@ -442,7 +442,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
-        asociacionUsuario = new JAsociaciònUsuario("",1);
+        asociacionUsuario = new JAsociaciònUsuario("", 1);
         asociacionUsuario.setVisible(true);
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem7ActionPerformed
