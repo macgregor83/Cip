@@ -21,8 +21,7 @@ public class JFConvocatoriasBL {
     private ConvocatoriaJpaController convocatoriaJpaController=new ConvocatoriaJpaController();
     private String urlArchivo;
     
-    public void guardar(){
-        
+    public void guardar(){        
         convocatoriaJpaController.create(convocatoria);
     }
 

@@ -15,7 +15,8 @@ public class Id {
 
     public static final String Id(Integer idUsuario) {
 
-        Date date = new Date();
+        Date date = Fecha.Date();
+        
         if (date == null) {
             date = new Date();
         }

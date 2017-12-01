@@ -130,7 +130,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jMenu6.setText("Iniciar Sesion");
+        jMenu6.setText("Cerrar Sesion");
         jMenuBar.add(jMenu6);
 
         jMenuArchivo.setText("Usuario");
@@ -236,6 +236,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenu1.add(jMenuItem3);
 
         jMenuItem1.setText("Consulta Convocatoria");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem1);
 
         jMenuBar.add(jMenu1);
@@ -306,7 +311,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
             registroProyecto = new JRegistroProyecto();
             registroProyecto.setVisible(true);
             //  pestana(registroProyecto, Cte.Registro_Proyecto);
-            this.pack();
+            //this.pack();
 //            this.setExtendedState(MAXIMIZED_BOTH);
             this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
         } catch (Exception ex) {
@@ -322,7 +327,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
             this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
             JFases = new JFases("",1);
             JFases.setVisible(true);         //  pestana(avancesProyecto, Cte.JFases);
-            this.pack();
+            //this.pack();
 //            this.setExtendedState(MAXIMIZED_BOTH);
             this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
         } catch (Exception ex) {
@@ -339,7 +344,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
             estadoProyecto = new JFEstadoProyecto(1);
             estadoProyecto.setVisible(true);
             // pestana(estadoProyecto, Cte.Estado_Proyecto);
-            this.pack();
+            //this.pack();
             this.setExtendedState(MAXIMIZED_BOTH);
             this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
         } catch (Exception ex) {
@@ -365,7 +370,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jTabbedPaneStateChanged
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-        actividades = new JFActividades();
+        actividades = new JFActividades(1);
         actividades.setVisible(true);        // TODO add your handling code here:
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem6ActionPerformed
@@ -441,6 +446,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
         asociacionUsuario.setVisible(true);
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
     public void pestana(JPanel pantalla, String title) {
 
         jTabbedPane.addTab(title, null, pantalla);

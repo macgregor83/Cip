@@ -5,7 +5,7 @@
  */
 package es.cip.bussines.bl;
 
-import com.sun.org.apache.bcel.internal.generic.AALOAD;
+//import com.sun.org.apache.bcel.internal.generic.AALOAD;
 import es.cip.bussines.dao.control.AreaColaboracionJpaController;
 import es.cip.bussines.dao.control.CriterioClasificacionJpaController;
 import es.cip.bussines.dao.control.ObjetivoEspecificoJpaController;
@@ -25,8 +25,10 @@ import es.cip.bussines.dao.model.RecursoHumanoProyecto;
 import es.cip.bussines.dao.model.RecursosMateriales;
 import es.cip.bussines.dao.model.TipoProyecto;
 import es.cip.util.Cte;
+import es.cip.util.Fecha;
 import es.cip.util.Id;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -138,6 +140,7 @@ public class JRegistroProyectoBL {
             proyecto.setIdTipoProyecto(lisTipoProyecto.get(jComboBoxTipoProyecto).getId());
             proyecto.setIdCriterioClasificacion(lisCriterioClasificacion.get(jComboBoxCriterioClasificacion).getId());
             proyecto.setIdProductoEsperado(lisProductoEsperado.get(jComboBoxPrototipo).getId());
+            proyecto.setFechaInicio(Fecha.Date());
             proyecto.setIdEstatusProyecto(Cte.Estatus_Registro_Proyecto_F1);
             proyectoJpaController.create(proyecto);
             for (ObjetivoEspecifico objetivoEspecifico : lisObjetivoEspecifico) {

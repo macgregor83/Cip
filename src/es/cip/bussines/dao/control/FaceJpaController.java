@@ -7,6 +7,10 @@ package es.cip.bussines.dao.control;
 
 import es.cip.bussines.dao.control.exceptions.NonexistentEntityException;
 import es.cip.bussines.dao.model.Face;
+import es.cip.bussines.dao.model.Metodologia;
+import es.cip.bussines.dao.model.Proyecto;
+import es.cip.bussines.dao.model.RecursoHumanoDatos;
+import es.cip.bussines.dao.model.RecursoHumanoProyecto;
 import es.cip.util.Cte;
 import java.io.Serializable;
 import java.util.List;
@@ -127,6 +131,40 @@ public class FaceJpaController implements Serializable {
         }
     }
 
+    public List<Face> findProyecto(String nombreProyecto, Integer idUsuario, Integer minima, Integer maxima) {
+        EntityManager em = getEntityManager();
+        try {
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery(Face.class);
+            Root<Face> f = cq.from(Face.class);
+            Root<Metodologia> m = cq.from(Metodologia.class);
+            Root<Proyecto> p = cq.from(Proyecto.class);
+            Root<RecursoHumanoProyecto> rhp = cq.from(RecursoHumanoProyecto.class);
+            Root<RecursoHumanoDatos> rhd = cq.from(RecursoHumanoDatos.class);
+            cq.select(f).distinct(true);
+            cq.where(
+                    em.getCriteriaBuilder().and(
+                            em.getCriteriaBuilder().or(
+                                    em.getCriteriaBuilder().like(p.get("id"), "%" + nombreProyecto.trim() + "%"),
+                                    em.getCriteriaBuilder().like(p.get("NombreProyecto"), "%" + nombreProyecto.trim() + "%")),
+                            em.getCriteriaBuilder().like(m.get("id"), f.get("idMetodologia")),
+                            em.getCriteriaBuilder().like(p.get("id"), m.get("idProyecto")),
+                            em.getCriteriaBuilder().like(p.get("id"), rhp.get("idProyecto")),
+                            em.getCriteriaBuilder().like(rhd.get("id"), rhp.get("idRecursoHumanoDatos")),
+                            em.getCriteriaBuilder().like(rhd.get("idUsuario"), idUsuario + ""),
+                            //                    em.getCriteriaBuilder().between((p.get("idEstatusProyecto")), minima, maxima),
+                            em.getCriteriaBuilder().or(
+                                    em.getCriteriaBuilder().like(p.get("idEstatusProyecto"), minima + ""),
+                                    em.getCriteriaBuilder().like(p.get("idEstatusProyecto"), maxima + "")
+                            )
+                    )
+            );
+            Query q = em.createQuery(cq);
+            return q.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
     public int getFaceCount() {
         EntityManager em = getEntityManager();
         try {
@@ -139,5 +177,5 @@ public class FaceJpaController implements Serializable {
             em.close();
         }
     }
-    
+
 }

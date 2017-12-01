@@ -6,12 +6,15 @@
 package es.cip.bussines.dao.model;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -32,6 +35,15 @@ public class Proyecto implements Serializable {
     private Integer idProductoEsperado;
     private String Resumen;
     private Integer idEstatusProyecto;
+    
+    @Temporal(TemporalType.DATE)
+    private Date FechaInicio;
+    
+    @Temporal(TemporalType.DATE)
+    private Date FechaAprobarcion;
+    
+    @Temporal(TemporalType.DATE)
+    private Date FechaTermino;
 
     @JoinColumn(name = "idTipoProyecto", referencedColumnName = "id", insertable = false, updatable = false)
     @ManyToOne(optional = false)
@@ -151,6 +163,30 @@ public class Proyecto implements Serializable {
 
     public void setEstatusProyecto(EstatusProyecto EstatusProyecto) {
         this.EstatusProyecto = EstatusProyecto;
+    }
+
+    public Date getFechaInicio() {
+        return FechaInicio;
+    }
+
+    public void setFechaInicio(Date FechaInicio) {
+        this.FechaInicio = FechaInicio;
+    }
+
+    public Date getFechaAprobarcion() {
+        return FechaAprobarcion;
+    }
+
+    public void setFechaAprobarcion(Date FechaAprobarcion) {
+        this.FechaAprobarcion = FechaAprobarcion;
+    }
+
+    public Date getFechaTermino() {
+        return FechaTermino;
+    }
+
+    public void setFechaTermino(Date FechaTermino) {
+        this.FechaTermino = FechaTermino;
     }
 
     @Override

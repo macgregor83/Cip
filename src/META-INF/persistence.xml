@@ -23,6 +23,8 @@
     <class>es.cip.bussines.dao.model.RecursoHumanoProyecto</class>
     <class>es.cip.bussines.dao.model.RecursosMateriales</class>
     <class>es.cip.bussines.dao.model.TipoProyecto</class>
+    <class>es.cip.bussines.dao.model.ArchivoFase</class>
+    <class>es.cip.bussines.dao.model.EstatusFase</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://LAPTOP-MJK7SBQ5\SQLEXPRESS:1433;databaseName=cipdesarrollo"/>
       <property name="javax.persistence.jdbc.user" value="ivan"/>

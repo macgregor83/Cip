@@ -31,7 +31,7 @@ public class Convertir {
         try {
             for (int readNum; (readNum = fis.read(buf)) != -1;) {
                 bos.write(buf, 0, readNum);
-             //   System.out.println("read " + readNum + " bytes,");
+                //   System.out.println("read " + readNum + " bytes,");
             }
         } catch (IOException ex) {
             Logger.getLogger(Convertir.class.getName()).log(Level.SEVERE, null, ex);
@@ -41,21 +41,36 @@ public class Convertir {
     }
 
     public static void convertByteArrayToDoc(byte[] bytes) throws IOException {
-       
-        
+
         File someFile = new File("java2.pdf");
         FileOutputStream fos = new FileOutputStream(someFile);
-       fos.write(bytes);
+        fos.write(bytes);
         fos.flush();
         fos.close();
 
     }
 
+    public static String nombreArchivo(String urlArchivo) {
+
+        char[] nombre = urlArchivo.toCharArray();
+        int index=0;
+        for (int i = 0; i < nombre.length; i++) {
+            char string = nombre[i];
+            if(string==92){
+                index=i;
+            }
+        }
+        return urlArchivo.substring(index+1);
+       
+    }
+
     public static void main(String[] args) {
         try {
-            byte[] by = Convertir.convertDocToByteArray("D:\\Users\\iMac\\Documents\\maestria\\1re cuatrimestre\\Nueva carpeta\\tarea\\IMGOD_Atc1_S2.pdf");
+            String urlArchivo = "D:\\Users\\iMac\\Documents\\maestria\\1re cuatrimestre\\Nueva carpeta\\tarea\\IMGOD_Atc1_S2.pdf";
+            byte[] by = Convertir.convertDocToByteArray(urlArchivo);
 
             Convertir.convertByteArrayToDoc(by);
+            Convertir.nombreArchivo(urlArchivo);
 
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Convertir.class.getName()).log(Level.SEVERE, null, ex);
@@ -63,4 +78,5 @@ public class Convertir {
             Logger.getLogger(Convertir.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
 }

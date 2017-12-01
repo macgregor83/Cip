@@ -16,13 +16,12 @@ import javax.persistence.Id;
  * @author iMac
  */
 @Entity
-public class CriterioClasificacion implements Serializable {
+public class EstatusFase implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    private String CriterioClasificacion;
 
     public Integer getId() {
         return id;
@@ -30,14 +29,6 @@ public class CriterioClasificacion implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getCriterioClasificacion() {
-        return CriterioClasificacion;
-    }
-
-    public void setCriterioClasificacion(String CriterioClasificacion) {
-        this.CriterioClasificacion = CriterioClasificacion;
     }
 
     @Override
@@ -50,10 +41,10 @@ public class CriterioClasificacion implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof CriterioClasificacion)) {
+        if (!(object instanceof EstatusFase)) {
             return false;
         }
-        CriterioClasificacion other = (CriterioClasificacion) object;
+        EstatusFase other = (EstatusFase) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -62,7 +53,7 @@ public class CriterioClasificacion implements Serializable {
 
     @Override
     public String toString() {
-        return "es.cip.bussines.dao.model.CriterioClasificacion[ id=" + id + " ]";
+        return "es.cip.bussines.dao.model.EstatusFase[ id=" + id + " ]";
     }
-
+    
 }

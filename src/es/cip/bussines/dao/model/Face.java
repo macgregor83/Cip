@@ -6,6 +6,7 @@
 package es.cip.bussines.dao.model;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,6 +15,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -32,16 +35,22 @@ public class Face implements Serializable {
     private String Objetivo;
     private String Actividad;
     private Integer idMetodologia;
-    @Lob
-//    @Column(name = "Entregable")
-    private byte[] Entregable;
+    private Integer idEstatusFase;
     
-    private String ExtEntregable; 
-    
+    @Temporal(TemporalType.DATE)
+    private Date FechaInicio;
+
+    @Temporal(TemporalType.DATE)
+    private Date FechaTermino;
+
     @JoinColumn(name = "idMetodologia", referencedColumnName = "id", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Metodologia metodologia;
     
+     @JoinColumn(name = "idEstatusFase", referencedColumnName = "id", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    private EstatusFase estatusFase;
+
     public Integer getId() {
         return id;
     }
@@ -98,14 +107,6 @@ public class Face implements Serializable {
         this.idMetodologia = idMetodologia;
     }
 
-    public byte[] getEntregable() {
-        return Entregable;
-    }
-
-    public void setEntregable(byte[] Entregable) {
-        this.Entregable = Entregable;
-    }
-
     public Metodologia getMetodologia() {
         return metodologia;
     }
@@ -114,12 +115,36 @@ public class Face implements Serializable {
         this.metodologia = metodologia;
     }
 
-    public String getExtEntregable() {
-        return ExtEntregable;
+    public Date getFechaInicio() {
+        return FechaInicio;
     }
 
-    public void setExtEntregable(String ExtEntregable) {
-        this.ExtEntregable = ExtEntregable;
+    public void setFechaInicio(Date FechaInicio) {
+        this.FechaInicio = FechaInicio;
+    }
+
+    public Date getFechaTermino() {
+        return FechaTermino;
+    }
+
+    public void setFechaTermino(Date FechaTermino) {
+        this.FechaTermino = FechaTermino;
+    }
+
+    public EstatusFase getEstatusFase() {
+        return estatusFase;
+    }
+
+    public void setEstatusFase(EstatusFase estatusFase) {
+        this.estatusFase = estatusFase;
+    }
+
+    public Integer getIdEstatusFase() {
+        return idEstatusFase;
+    }
+
+    public void setIdEstatusFase(Integer idEstatusFase) {
+        this.idEstatusFase = idEstatusFase;
     }
 
     @Override
@@ -146,5 +171,5 @@ public class Face implements Serializable {
     public String toString() {
         return "es.cip.bussines.dao.model.Face[ id=" + id + " ]";
     }
-    
+
 }
