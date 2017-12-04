@@ -424,15 +424,14 @@ public class JFases extends javax.swing.JFrame {
         if (jTable6.getSelectedRows().length == 0) {
             bL.getLisFace().remove(jTable6.getRowCount() - 1);
             modelFase.removeRow(jTable6.getRowCount() - 1);
-
         } else {
             for (int i = jTable6.getSelectedRows().length; 0 < i; i--) {
                 bL.getLisFace().remove(jTable6.getSelectedRows()[i - 1]);
                 modelFase.removeRow(jTable6.getSelectedRows()[i - 1]);
             }
         }
-        if(jTable6.getRowCount()==0){
-                        jComboBoxProyecto.setEnabled(true);
+        if (jTable6.getRowCount() == 0) {
+            jComboBoxProyecto.setEnabled(true);
             jTextFieldNombreMetod.setEnabled(true);
         }
     }//GEN-LAST:event_jButtonMenosActionPerformed

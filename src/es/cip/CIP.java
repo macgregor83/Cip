@@ -23,6 +23,7 @@ public class CIP {
         // TODO code application logic here
         MenuPrincipal p=new MenuPrincipal();
         p.setVisible(true);
+        p.loginVisible();
         p.isFocusableWindow();
     }
     

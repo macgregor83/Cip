@@ -131,7 +131,7 @@ public class FaceJpaController implements Serializable {
         }
     }
 
-    public List<Face> findProyecto(String nombreProyecto, Integer idUsuario, Integer minima, Integer maxima) {
+    public List<Face> findProyecto(String nombreProyecto, Integer idUsuario, Integer minima, Integer maxima, Integer idEstatusFase) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery(Face.class);
@@ -146,6 +146,7 @@ public class FaceJpaController implements Serializable {
                             em.getCriteriaBuilder().or(
                                     em.getCriteriaBuilder().like(p.get("id"), "%" + nombreProyecto.trim() + "%"),
                                     em.getCriteriaBuilder().like(p.get("NombreProyecto"), "%" + nombreProyecto.trim() + "%")),
+                            em.getCriteriaBuilder().like(f.get("idEstatusFase"), idEstatusFase + ""),
                             em.getCriteriaBuilder().like(m.get("id"), f.get("idMetodologia")),
                             em.getCriteriaBuilder().like(p.get("id"), m.get("idProyecto")),
                             em.getCriteriaBuilder().like(p.get("id"), rhp.get("idProyecto")),
@@ -156,6 +157,27 @@ public class FaceJpaController implements Serializable {
                                     em.getCriteriaBuilder().like(p.get("idEstatusProyecto"), minima + ""),
                                     em.getCriteriaBuilder().like(p.get("idEstatusProyecto"), maxima + "")
                             )
+                    )
+            );
+            Query q = em.createQuery(cq);
+            return q.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
+    public List<Face> findProyecto(String idProyecto) {
+        EntityManager em = getEntityManager();
+        try {
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery(Face.class);
+            Root<Face> f = cq.from(Face.class);
+            Root<Metodologia> m = cq.from(Metodologia.class);
+
+            cq.select(f).distinct(true);
+            cq.where(
+                    em.getCriteriaBuilder().and(
+                            em.getCriteriaBuilder().like(m.get("idProyecto"), "%" + idProyecto.trim() + "%"),
+                            em.getCriteriaBuilder().like(m.get("id"), f.get("idMetodologia"))
                     )
             );
             Query q = em.createQuery(cq);

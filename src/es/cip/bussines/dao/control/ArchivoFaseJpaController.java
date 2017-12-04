@@ -7,6 +7,11 @@ package es.cip.bussines.dao.control;
 
 import es.cip.bussines.dao.control.exceptions.NonexistentEntityException;
 import es.cip.bussines.dao.model.ArchivoFase;
+import es.cip.bussines.dao.model.Face;
+import es.cip.bussines.dao.model.Metodologia;
+import es.cip.bussines.dao.model.Proyecto;
+import es.cip.bussines.dao.model.RecursoHumanoDatos;
+import es.cip.bussines.dao.model.RecursoHumanoProyecto;
 import es.cip.util.Cte;
 import java.io.Serializable;
 import java.util.List;
@@ -127,6 +132,71 @@ public class ArchivoFaseJpaController implements Serializable {
         }
     }
 
+    public List<ArchivoFase> findProyecto(String idProyecto, Integer idUsuario) {
+        EntityManager em = getEntityManager();
+        try {
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery(ArchivoFase.class);
+            Root<ArchivoFase> af = cq.from(ArchivoFase.class);
+            Root<Face> f = cq.from(Face.class);
+            Root<Metodologia> m = cq.from(Metodologia.class);
+            Root<Proyecto> p = cq.from(Proyecto.class);
+            Root<RecursoHumanoProyecto> rhp = cq.from(RecursoHumanoProyecto.class);
+            Root<RecursoHumanoDatos> rhd = cq.from(RecursoHumanoDatos.class);
+            cq.select(af);
+            cq.where(
+                    em.getCriteriaBuilder().and(
+                            em.getCriteriaBuilder().like(p.get("id"), idProyecto),
+                            em.getCriteriaBuilder().like(m.get("id"), f.get("idMetodologia")),
+                            em.getCriteriaBuilder().like(f.get("id"), af.get("idFace")),
+                            em.getCriteriaBuilder().like(p.get("id"), m.get("idProyecto")),
+                            em.getCriteriaBuilder().like(p.get("id"), rhp.get("idProyecto")),
+                            em.getCriteriaBuilder().like(rhd.get("id"), rhp.get("idRecursoHumanoDatos")),
+                            em.getCriteriaBuilder().like(rhd.get("idUsuario"), idUsuario + "")
+                    )
+            );
+            Query q = em.createQuery(cq);
+            return q.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
+    public List<ArchivoFase> findFase(Integer idFace, Integer idEstatus) {
+        EntityManager em = getEntityManager();
+        try {
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery(ArchivoFase.class);
+            Root<ArchivoFase> af = cq.from(ArchivoFase.class);
+            //Root<Face> f = cq.from(Face.class);
+
+            cq.select(af);
+            cq.where(
+                    em.getCriteriaBuilder().and(
+                            em.getCriteriaBuilder().like(af.get("idFace"), idFace + "")//,
+                            //em.getCriteriaBuilder().like(f.get("idEstatusFase"), idEstatus + ""),
+                           // em.getCriteriaBuilder().like(f.get("id"), af.get("idFace"))
+                    )
+            );
+            Query q = em.createQuery(cq);
+            return q.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
+    public List<ArchivoFase> findFase(Integer idFace) {
+        EntityManager em = getEntityManager();
+        try {
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery(ArchivoFase.class);
+            Root<ArchivoFase> af = cq.from(ArchivoFase.class);
+            cq.select(af);
+            cq.where(em.getCriteriaBuilder().like(af.get("idFace"), idFace + ""));
+            Query q = em.createQuery(cq);
+            return q.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
     public int getArchivoFaseCount() {
         EntityManager em = getEntityManager();
         try {
@@ -139,5 +209,5 @@ public class ArchivoFaseJpaController implements Serializable {
             em.close();
         }
     }
-    
+
 }

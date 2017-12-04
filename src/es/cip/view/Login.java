@@ -5,6 +5,8 @@
  */
 package es.cip.view;
 
+import es.cip.bussines.bl.LoginBL;
+import es.cip.bussines.dao.model.Usuario;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Image;
@@ -22,18 +24,20 @@ import javax.swing.JOptionPane;
  */
 public class Login extends javax.swing.JFrame {
 
-    public String rpe;
-    public String contrasenia;
     String valorRPE;
- public RegistroPersona registro;
+    private LoginBL bL = new LoginBL();
+    public RegistroPersona registro;
+    private boolean val = false;
+    private JFRegistroPersona JFRegistroPersona;
+
     /**
      * Creates new form Inicio
      */
-    public Login() throws Exception {
+    public Login() {
 
         //
         initComponents();
-
+        JFRegistroPersona = new JFRegistroPersona();
     }
 
     /**
@@ -85,7 +89,7 @@ public class Login extends javax.swing.JFrame {
 
         jButtonCancelar.setBackground(new java.awt.Color(255, 255, 255));
         jButtonCancelar.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
-        jButtonCancelar.setText("Cancelar");
+        jButtonCancelar.setText("Cerrar");
         jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonCancelarActionPerformed(evt);
@@ -93,6 +97,11 @@ public class Login extends javax.swing.JFrame {
         });
 
         jTextFieldContrasenia.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
+        jTextFieldContrasenia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldContraseniaActionPerformed(evt);
+            }
+        });
         jTextFieldContrasenia.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTextFieldContraseniaKeyReleased(evt);
@@ -103,6 +112,17 @@ public class Login extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 3, 12)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 255));
         jLabel1.setText("*Crear nuevo usuario");
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel1MouseExited(evt);
+            }
+        });
         jLabel1.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 jLabel1ComponentShown(evt);
@@ -127,7 +147,7 @@ public class Login extends javax.swing.JFrame {
                             .addComponent(jTextFieldContrasenia)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jButtonAceptar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 124, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 140, Short.MAX_VALUE)
                         .addComponent(jButtonCancelar)))
                 .addGap(53, 53, 53))
         );
@@ -156,12 +176,15 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAceptarActionPerformed
-
+        this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
+        val = bL.validarUsuario(jTextFieldUsuario.getText(), jTextFieldContrasenia.getText());
+        this.setVisible(!val);
+        jTextFieldContrasenia.setText("");
     }//GEN-LAST:event_jButtonAceptarActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
         // TODO add your handling code here:
-
+        System.exit(0);
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     private void jTextFieldUsuarioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldUsuarioKeyReleased
@@ -175,15 +198,53 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldContraseniaKeyReleased
 
     private void jLabel1ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jLabel1ComponentShown
-       registro =new RegistroPersona();
-      registro.setVisible(true);
-       // TODO add your handling code here:
+        registro = new RegistroPersona();
+        registro.setVisible(true);
+        this.setVisible(false);
+        // TODO add your handling code here:
     }//GEN-LAST:event_jLabel1ComponentShown
+
+    private void jTextFieldContraseniaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldContraseniaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldContraseniaActionPerformed
+
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        // TODO add your handling code here:
+        this.toBack();
+        JFRegistroPersona.setVisible(true);
+        JFRegistroPersona.toFront();
+        this.setVisible(false);
+    }//GEN-LAST:event_jLabel1MouseClicked
+
+    private void jLabel1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseEntered
+        // TODO add your handling code here:
+        this.setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_jLabel1MouseEntered
+
+    private void jLabel1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseExited
+        // TODO add your handling code here:
+        this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+    }//GEN-LAST:event_jLabel1MouseExited
+    public Integer getIdUsuario() {
+        return this.bL.getIdUsuario();
+    }
+
+    public Integer getIdTipoUsuario() {
+        return this.bL.getIdTipoUsuario();
+    }
+
+    public boolean isVal() {
+        return val;
+    }
+
+    public Usuario getUsuario() {
+        return this.bL.getUsuario();
+    }
 
     /**
      * @param args the command line arguments
      */
-//    public static void main(String args[]) {
+    public static void main(String args[]) {
 //        /* Set the Nimbus look and feel */
 //        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
 //        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -209,17 +270,17 @@ public class Login extends javax.swing.JFrame {
 //        //</editor-fold>
 //
 //        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                try {
-//                    new Login().setVisible(true);
-//                } catch (Exception ex) {
-//                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-//                    JOptionPane.showMessageDialog(null, ex);
-//                }
-//            }
-//        });
-//    }
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    new Login().setVisible(true);
+                } catch (Exception ex) {
+                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                    JOptionPane.showMessageDialog(null, ex);
+                }
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel etContrasenia;

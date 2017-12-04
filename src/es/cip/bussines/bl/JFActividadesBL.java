@@ -30,33 +30,39 @@ public class JFActividadesBL {
     private final Integer idUsuario;
     private Integer idFase;
 
-    private ArchivoFase archivoFase =new ArchivoFase();
-    
+    private ArchivoFase archivoFase = new ArchivoFase();
+
     private FaceJpaController faceJpaController = new FaceJpaController();
     private ProyectoJpaController proyectoJpaController = new ProyectoJpaController();
-    private ArchivoFaseJpaController archivoFaseJpaController=new ArchivoFaseJpaController();
-    
+    private ArchivoFaseJpaController archivoFaseJpaController = new ArchivoFaseJpaController();
+
     private List<Face> listFase;
     private List<Proyecto> listProyecto;
-    private List<ArchivoFase> listArchivoFase=new ArrayList<>();
+    private List<ArchivoFase> listArchivoFase = new ArrayList<>();
     private Face fase;
-    
+    private String idProyecto;
+
     public JFActividadesBL(Integer idUsuario) {
         this.idUsuario = idUsuario;
     }
 
     public List<Face> setListFase(String nombreProyecto) {
-        listFase = faceJpaController.findProyecto(nombreProyecto, idUsuario, 4, 5);
+        listFase = faceJpaController.findProyecto(nombreProyecto, idUsuario, 4, 5, Cte.Estatus_Face_registro);
         return listFase;
     }
 
     public List<Face> getListFase() {
         return listFase;
     }
+
     public void setIdFase(Integer selectedIndex) {
-        this.idFase = listFase.get(selectedIndex).getId();
-        this.fase=listFase.get(selectedIndex);
+        if (listFase.size() > 0) {
+            this.idFase = listFase.get(selectedIndex).getId();
+            this.idProyecto = listFase.get(selectedIndex).getMetodologia().getIdProyecto();
+            this.fase = listFase.get(selectedIndex);
+        }
     }
+
     public void setListProyecto(String nombreProyecto) {
         listProyecto = proyectoJpaController.findProyecto(nombreProyecto, idUsuario, Cte.Estatus_Proyecto_Aprobado);
 
@@ -69,28 +75,43 @@ public class JFActividadesBL {
             this.archivoFase.setEntregable(Convertir.convertDocToByteArray(urlEntregable));
             this.archivoFase.setDescripcion(Descripcion);
             this.archivoFase.setFecha(Fecha.Date());
-            
             this.listArchivoFase.add(archivoFase);
+            archivoFase = new ArchivoFase();
         } catch (Exception ex) {
             Logger.getLogger(JFActividadesBL.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(null, ex);
         }
-       
+
+    }
+
+    public void setListArchivoFase() {
+        //listArchivoFase=archivoFaseJpaController.findProyecto(idProyecto, idUsuario);
+        listArchivoFase = archivoFaseJpaController.findFase(idFase);
     }
 
     public List<ArchivoFase> getListArchivoFase() {
+
         return listArchivoFase;
     }
 
     public List<Proyecto> getListProyecto() {
         return listProyecto;
     }
-    public void guardar(){
-        for (ArchivoFase archivoFase1 : listArchivoFase) {
-            archivoFaseJpaController.create(archivoFase);
+
+    public void guardar() {
+        try {
+            for (ArchivoFase archivoFase1 : listArchivoFase) {
+                System.out.println(archivoFaseJpaController.findArchivoFase(archivoFase1.getId()));
+                if (archivoFaseJpaController.findArchivoFase(archivoFase1.getId()) == null) {
+                    archivoFaseJpaController.create(archivoFase1);
+                }
+            }
+            fase.setIdEstatusFase(Cte.Estatus_Face_Termino);
+            faceJpaController.edit(fase);
+        } catch (Exception ex) {
+            Logger.getLogger(JFActividadesBL.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, ex);
         }
-        fase.setIdEstatusFase(Cte.Estatus_Face_Iniciada);
-        //faceJpaController
     }
-            
+
 }

@@ -39,14 +39,22 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private JFAprobarProyecto aprovarProyecto;
 
     private JFases JFases;
-    private Login login;
+    private Login login = new Login();
 
     /**
      * Creates new form JMenuPrincipal
      */
     public MenuPrincipal() {
         jTabbedPane = new JTabbedPane();
+
         initComponents();
+
+        jMenuUsuario.setVisible(false);
+        jMenuProyecto.setVisible(false);
+        jMenuAdmin.setVisible(false);
+        //jMenuConvocatoria.setVisible((login.getIdTipoUsuario()==Cte.Tipo_Alumno || login.getIdTipoUsuario()==Cte.Tipo_Asesor)?true:false);
+        jMenuPatente.setVisible(false);
+
         getContentPane().add(jTabbedPane, BorderLayout.CENTER);
         this.setLayout(new FlowLayout());
         this.setLocationRelativeTo(null);
@@ -62,16 +70,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
         //jButtonCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("../Imagenes/boton_cerrar.gif")));
 //        try {
 //            login = new Login();
-//            this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
-//            SeccionPublica = new SeccionPublica();
-//            pestana(SeccionPublica, Cte.Seccion_Publica);
-//            this.pack();
-//            this.setExtendedState(MAXIMIZED_BOTH);
-//            this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
+//            login.setVisible(true);
 //        } catch (Exception ex) {
 //            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-//        } finally {
-//            this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+//        }
+//        finally {
+    //    this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
+        login();
 //        }
     }
 
@@ -88,12 +93,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jTabbedPane = new javax.swing.JTabbedPane();
         jMenuBar = new javax.swing.JMenuBar();
         jMenu6 = new javax.swing.JMenu();
-        jMenuArchivo = new javax.swing.JMenu();
+        jMenuUsuario = new javax.swing.JMenu();
         jMenuRegUsua = new javax.swing.JMenuItem();
         jDatosAcademicos = new javax.swing.JMenuItem();
         jMenuAsociarTutorUser = new javax.swing.JMenuItem();
         jMenuInvitado = new javax.swing.JMenuItem();
         jMenuProyecto = new javax.swing.JMenu();
+        jMenu1 = new javax.swing.JMenu();
         jMenuItemCrearProy = new javax.swing.JMenuItem();
         jMenuItemModProy = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
@@ -101,10 +107,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuAdmin = new javax.swing.JMenu();
         jMenuItemEstados = new javax.swing.JMenuItem();
-        jMenu1 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuConvocatoria = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
+        jMenuPatente = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
@@ -122,6 +128,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         setTitle("Cip");
         setAutoRequestFocus(false);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                formMouseExited(evt);
+            }
+        });
 
         jTabbedPane.setToolTipText("");
         jTabbedPane.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -131,9 +142,19 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
 
         jMenu6.setText("Cerrar Sesion");
+        jMenu6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu6MouseClicked(evt);
+            }
+        });
+        jMenu6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu6ActionPerformed(evt);
+            }
+        });
         jMenuBar.add(jMenu6);
 
-        jMenuArchivo.setText("Usuario");
+        jMenuUsuario.setText("Usuario");
 
         jMenuRegUsua.setText("Registro de Usuario ");
         jMenuRegUsua.addActionListener(new java.awt.event.ActionListener() {
@@ -141,7 +162,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 jMenuRegUsuaActionPerformed(evt);
             }
         });
-        jMenuArchivo.add(jMenuRegUsua);
+        jMenuUsuario.add(jMenuRegUsua);
 
         jDatosAcademicos.setText("Datos Academicos");
         jDatosAcademicos.addActionListener(new java.awt.event.ActionListener() {
@@ -149,7 +170,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 jDatosAcademicosActionPerformed(evt);
             }
         });
-        jMenuArchivo.add(jDatosAcademicos);
+        jMenuUsuario.add(jDatosAcademicos);
 
         jMenuAsociarTutorUser.setText("Asociacion Tutor / Usuario");
         jMenuAsociarTutorUser.addActionListener(new java.awt.event.ActionListener() {
@@ -157,7 +178,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 jMenuAsociarTutorUserActionPerformed(evt);
             }
         });
-        jMenuArchivo.add(jMenuAsociarTutorUser);
+        jMenuUsuario.add(jMenuAsociarTutorUser);
 
         jMenuInvitado.setText("Invitado");
         jMenuInvitado.addActionListener(new java.awt.event.ActionListener() {
@@ -165,11 +186,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 jMenuInvitadoActionPerformed(evt);
             }
         });
-        jMenuArchivo.add(jMenuInvitado);
+        jMenuUsuario.add(jMenuInvitado);
 
-        jMenuBar.add(jMenuArchivo);
+        jMenuBar.add(jMenuUsuario);
 
         jMenuProyecto.setText("Proyecto ");
+
+        jMenu1.setText("Registrar");
 
         jMenuItemCrearProy.setText("Registrar Proyecto");
         jMenuItemCrearProy.addActionListener(new java.awt.event.ActionListener() {
@@ -177,7 +200,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 jMenuItemCrearProyActionPerformed(evt);
             }
         });
-        jMenuProyecto.add(jMenuItemCrearProy);
+        jMenu1.add(jMenuItemCrearProy);
 
         jMenuItemModProy.setText("Registrar Fases ");
         jMenuItemModProy.addActionListener(new java.awt.event.ActionListener() {
@@ -185,15 +208,17 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 jMenuItemModProyActionPerformed(evt);
             }
         });
-        jMenuProyecto.add(jMenuItemModProy);
+        jMenu1.add(jMenuItemModProy);
 
-        jMenuItem7.setText("Asociar ");
+        jMenuItem7.setText("Asociacion Tutor / Usuario ");
         jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem7ActionPerformed(evt);
             }
         });
-        jMenuProyecto.add(jMenuItem7);
+        jMenu1.add(jMenuItem7);
+
+        jMenuProyecto.add(jMenu1);
 
         jMenuItem6.setText("Actividades Proyecto");
         jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
@@ -223,17 +248,17 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         jMenuAdmin.add(jMenuItemEstados);
 
-        jMenuBar.add(jMenuAdmin);
-
-        jMenu1.setText("Convocatoria");
-
         jMenuItem3.setText("Registrar Convocatoria");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem3ActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem3);
+        jMenuAdmin.add(jMenuItem3);
+
+        jMenuBar.add(jMenuAdmin);
+
+        jMenuConvocatoria.setText("Convocatoria");
 
         jMenuItem1.setText("Consulta Convocatoria");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -241,11 +266,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 jMenuItem1ActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        jMenuConvocatoria.add(jMenuItem1);
 
-        jMenuBar.add(jMenu1);
+        jMenuBar.add(jMenuConvocatoria);
 
-        jMenu3.setText("Patente");
+        jMenuPatente.setText("Patente");
 
         jMenuItem4.setText("Registrar Pantente");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
@@ -253,9 +278,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 jMenuItem4ActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem4);
+        jMenuPatente.add(jMenuItem4);
 
-        jMenuBar.add(jMenu3);
+        jMenuBar.add(jMenuPatente);
 
         jMenu4.setText("Visitante");
 
@@ -308,7 +333,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
-            registroProyecto = new JRegistroProyecto();
+            registroProyecto = new JRegistroProyecto(login.getIdUsuario());
             registroProyecto.setVisible(true);
             //  pestana(registroProyecto, Cte.Registro_Proyecto);
             //this.pack();
@@ -325,7 +350,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
-            JFases = new JFases("", 1);
+            JFases = new JFases("", login.getIdUsuario());
             JFases.setVisible(true);         //  pestana(avancesProyecto, Cte.JFases);
             //this.pack();
 //            this.setExtendedState(MAXIMIZED_BOTH);
@@ -341,7 +366,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
-            estadoProyecto = new JFEstadoProyecto(1);
+            //estadoProyecto = new (1);
             estadoProyecto.setVisible(true);
             // pestana(estadoProyecto, Cte.Estado_Proyecto);
             //this.pack();
@@ -370,7 +395,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jTabbedPaneStateChanged
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-        actividades = new JFActividades(1);
+        actividades = new JFActividades(login.getIdUsuario());
         actividades.setVisible(true);        // TODO add your handling code here:
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem6ActionPerformed
@@ -436,13 +461,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        estadoProyecto = new JFEstadoProyecto(1);
+        estadoProyecto = new JFEstadoProyecto(login.getIdUsuario());
         estadoProyecto.setVisible(true);
 // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
-        asociacionUsuario = new JAsociaciònUsuario("", 1);
+        asociacionUsuario = new JAsociaciònUsuario("", login.getIdUsuario());
         asociacionUsuario.setVisible(true);
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem7ActionPerformed
@@ -450,6 +475,32 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenu6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu6ActionPerformed
+        // TODO add your handling code here:
+        this.login();
+    }//GEN-LAST:event_jMenu6ActionPerformed
+
+    private void jMenu6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu6MouseClicked
+        try {
+            // TODO add your handling code here:
+            this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
+
+            login = new Login();
+            login.setVisible(true);
+            login();
+        } catch (Exception ex) {
+            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jMenu6MouseClicked
+
+    private void formMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseExited
+        // TODO add your handling code here:
+        // this.login();
+        if (login.isVal()) {
+            this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+        }
+    }//GEN-LAST:event_formMouseExited
     public void pestana(JPanel pantalla, String title) {
 
         jTabbedPane.addTab(title, null, pantalla);
@@ -461,7 +512,57 @@ public class MenuPrincipal extends javax.swing.JFrame {
         pnl.add(jButtonCerrar);
         jTabbedPane.setTabComponentAt(jTabbedPane.getTabCount() - 1, pnl);
         jTabbedPane.setSelectedIndex(jTabbedPane.getTabCount() - 1);
+    }
 
+    private void login() {
+        final Thread t;
+        t = new Thread(new Runnable() {
+            //Implementamos el método run()
+            @Override
+            public void run() {
+                // setVisible(true);
+                //current.setStringPainted(true);
+                boolean van = true;
+                do {
+
+                    try {
+                        if (login.isVal()) {
+                            //System.out.println((login.getIdTipoUsuario() == Cte.Tipo_Alumno || login.getIdTipoUsuario() == Cte.Tipo_Asesor) ? true : false);
+                            jMenuUsuario.setVisible((login.getIdTipoUsuario() == Cte.Tipo_Alumno || login.getIdTipoUsuario() == Cte.Tipo_Asesor) ? true : false);
+                            jMenuProyecto.setVisible((login.getIdTipoUsuario() == Cte.Tipo_Alumno || login.getIdTipoUsuario() == Cte.Tipo_Asesor) ? true : false);
+                            jMenuAdmin.setVisible((login.getIdTipoUsuario() == Cte.Tipo_Admin) ? true : false);
+                            //jMenuConvocatoria.setVisible((login.getIdTipoUsuario()==Cte.Tipo_Alumno || login.getIdTipoUsuario()==Cte.Tipo_Asesor)?true:false);
+                            jMenuPatente.setVisible((login.getIdTipoUsuario() == Cte.Tipo_Alumno || login.getIdTipoUsuario() == Cte.Tipo_Asesor) ? true : false);
+                            setTitle("CIP- \t" + login.getUsuario().getNombre() + " " + login.getUsuario().getApellidoPaterno() + " " + login.getUsuario().getApellidoMaterno() + " ");
+                            login.setVisible(false);
+                            van = false;
+                        } else {
+                            login.toFront();
+                            jMenuUsuario.setVisible(false);
+                            jMenuProyecto.setVisible(false);
+                            jMenuAdmin.setVisible(false);
+                            jMenuPatente.setVisible(false);
+                            setTitle("CIP-");
+                            //login.setVisible(true);
+                        }
+                    } catch (Exception ex) {
+                        Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                } while (van);
+            }
+        });
+        //Se ejecuta el Thread
+        t.start();
+
+    }
+
+    public void loginVisible() {
+        try {
+            login = new Login();
+            login.setVisible(true);
+        } catch (Exception ex) {
+            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -515,14 +616,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jDatosAcademicos;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenuAdmin;
-    private javax.swing.JMenu jMenuArchivo;
     private javax.swing.JMenuItem jMenuAsociarTutorUser;
     private javax.swing.JMenuBar jMenuBar;
+    private javax.swing.JMenu jMenuConvocatoria;
     private javax.swing.JMenuItem jMenuInvitado;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
@@ -534,8 +634,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemCrearProy;
     private javax.swing.JMenuItem jMenuItemEstados;
     private javax.swing.JMenuItem jMenuItemModProy;
+    private javax.swing.JMenu jMenuPatente;
     private javax.swing.JMenu jMenuProyecto;
     private javax.swing.JMenuItem jMenuRegUsua;
+    private javax.swing.JMenu jMenuUsuario;
     private javax.swing.JTabbedPane jTabbedPane;
     // End of variables declaration//GEN-END:variables
 

@@ -5,19 +5,56 @@
  */
 package es.cip.view;
 
+//import es.cip.bussines.bl.JFRevicionProyectoBL;
+import es.cip.bussines.dao.model.Proyecto;
+import es.cip.bussines.dao.model.RecursoHumanoProyecto;
 import static java.awt.Frame.MAXIMIZED_BOTH;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.text.JTextComponent;
 
 /**
  *
  * @author iMac
  */
-public class EstadoProyecto extends javax.swing.JPanel {
+public class JFRevicionProyecto extends javax.swing.JPanel {
+
+   // private JFRevicionProyectoBL bL = new JFRevicionProyectoBL();
 
     /**
      * Creates new form AprobarProyecto
      */
-    public EstadoProyecto() {
+    public JFRevicionProyecto() {
         initComponents();
+        ///// jComboBoxNombre ////
+//        jComboBoxProyecto.getEditor().getEditorComponent().addKeyListener(new KeyAdapter() {
+//            public void keyReleased(KeyEvent evt) {
+//                String cadenaEscrita = jComboBoxProyecto.getEditor().getItem().toString().toUpperCase();
+//                DefaultComboBoxModel modelo = new DefaultComboBoxModel();
+//                modelo.addElement(cadenaEscrita);
+//                List<RecursoHumanoProyecto> list = bL.setNombreProyecto(cadenaEscrita,"");
+//                if (list.size() > 0) {
+//                    for (RecursoHumanoProyecto r : list) {
+//                        modelo.addElement(r.getProyecto().getNombreProyecto());
+//                    }
+//                    jComboBoxProyecto.setModel(modelo);
+//                    if (jComboBoxProyecto.getItemCount() > 0) {
+//                        jComboBoxProyecto.showPopup();
+//                        if (evt.getKeyCode() != 8) {
+//                            ((JTextComponent) jComboBoxProyecto.getEditor().getEditorComponent()).select(cadenaEscrita.length(), jComboBoxProyecto.getEditor().getItem().toString().length());
+//                        } else {
+//                            jComboBoxProyecto.getEditor().setItem(cadenaEscrita);
+//                        }
+//                    } else {
+//                        jComboBoxProyecto.addItem(cadenaEscrita);
+//                    }
+//                } else {
+//                    jComboBoxProyecto.setModel(modelo);
+//                }
+//            }
+//        });
     }
 
     /**
@@ -75,12 +112,20 @@ public class EstadoProyecto extends javax.swing.JPanel {
         jLabelObservaciones = new javax.swing.JLabel();
         jScrollPane10 = new javax.swing.JScrollPane();
         jTextAreaObservaciones = new javax.swing.JTextArea();
+        jScrollPane11 = new javax.swing.JScrollPane();
+        jTableConvocatoria = new javax.swing.JTable();
+        jComboBoxConvocatorias = new javax.swing.JComboBox<>();
+        jLabelConvocatoria = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jComboBoxEstado = new javax.swing.JComboBox<>();
         jLabelEstado = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
+        jLabelEstado1 = new javax.swing.JLabel();
+        jComboBoxAsesorAlumno = new javax.swing.JComboBox<>();
+        jLabelEstado2 = new javax.swing.JLabel();
+        jComboBoxProyecto = new javax.swing.JComboBox<>();
 
         jButtonActualizar.setText("Actualizar");
         jButtonActualizar.addActionListener(new java.awt.event.ActionListener() {
@@ -392,25 +437,49 @@ public class EstadoProyecto extends javax.swing.JPanel {
         jTextAreaObservaciones.setRows(5);
         jScrollPane10.setViewportView(jTextAreaObservaciones);
 
+        jTableConvocatoria.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Estado", "Fecha"
+            }
+        ));
+        jScrollPane11.setViewportView(jTableConvocatoria);
+
+        jLabelConvocatoria.setText("Convocatoria ");
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabelObservaciones)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane10))
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 464, Short.MAX_VALUE)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addComponent(jLabelEstados)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBoxEstados, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                                .addComponent(jLabelObservaciones)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane10))
+                            .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 464, Short.MAX_VALUE)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGap(35, 35, 35)
+                                .addComponent(jLabelEstados)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jComboBoxEstados, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jLabelConvocatoria)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jComboBoxConvocatorias, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 437, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -424,7 +493,13 @@ public class EstadoProyecto extends javax.swing.JPanel {
                     .addComponent(jComboBoxEstados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 183, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBoxConvocatorias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelConvocatoria))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelObservaciones)
                     .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -469,7 +544,6 @@ public class EstadoProyecto extends javax.swing.JPanel {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Proyectos");
 
-        jComboBoxEstado.setEditable(true);
         jComboBoxEstado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxEstadoActionPerformed(evt);
@@ -499,36 +573,67 @@ public class EstadoProyecto extends javax.swing.JPanel {
         jLabel3.setForeground(new java.awt.Color(255, 51, 0));
         jLabel3.setText("*Dar clic en el proyecto para ver mas a detalle  ");
 
+        jLabelEstado1.setText("Asesor /Alumno");
+
+        jComboBoxAsesorAlumno.setEditable(true);
+        jComboBoxAsesorAlumno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxAsesorAlumnoActionPerformed(evt);
+            }
+        });
+
+        jLabelEstado2.setText("Proyecto");
+
+        jComboBoxProyecto.setEditable(true);
+        jComboBoxProyecto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxProyectoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1596, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1704, Short.MAX_VALUE)
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabelEstado)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBoxEstado, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(12, 12, 12))
+                    .addComponent(jLabelEstado, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabelEstado1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabelEstado2, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jComboBoxEstado, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jComboBoxProyecto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jComboBoxAsesorAlumno, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addComponent(jLabel3)
+                .addContainerGap(1416, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBoxProyecto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelEstado2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBoxAsesorAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelEstado1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBoxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelEstado))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 166, Short.MAX_VALUE))
+                .addGap(12, 12, 12)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -554,14 +659,34 @@ public class EstadoProyecto extends javax.swing.JPanel {
         this.jFrame1.setExtendedState(MAXIMIZED_BOTH);
     }//GEN-LAST:event_jTable1MouseClicked
 
+    private void jComboBoxAsesorAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxAsesorAlumnoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxAsesorAlumnoActionPerformed
+
+    private void jComboBoxProyectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxProyectoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxProyectoActionPerformed
+
+    public static void main(String[] args) {
+        JFRevicionProyecto jfrp=new JFRevicionProyecto();
+        jfrp.setVisible(true);
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new JFRevicionProyecto().setVisible(true);
+//            }
+//        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonActualizar;
+    private javax.swing.JComboBox<String> jComboBoxAsesorAlumno;
+    private javax.swing.JComboBox<String> jComboBoxConvocatorias;
     private javax.swing.JComboBox<String> jComboBoxCriterio;
     private javax.swing.JComboBox<String> jComboBoxEstado;
     private javax.swing.JComboBox<String> jComboBoxEstados;
     private javax.swing.JComboBox<String> jComboBoxNombre;
     private javax.swing.JComboBox<String> jComboBoxProducto;
+    private javax.swing.JComboBox<String> jComboBoxProyecto;
     private javax.swing.JComboBox<String> jComboBoxTipo;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabeCriterio;
@@ -573,7 +698,10 @@ public class EstadoProyecto extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabelConvocatoria;
     private javax.swing.JLabel jLabelEstado;
+    private javax.swing.JLabel jLabelEstado1;
+    private javax.swing.JLabel jLabelEstado2;
     private javax.swing.JLabel jLabelEstados;
     private javax.swing.JLabel jLabelNombre;
     private javax.swing.JLabel jLabelObjetivoGeneral;
@@ -587,6 +715,7 @@ public class EstadoProyecto extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
+    private javax.swing.JScrollPane jScrollPane11;
     private javax.swing.JScrollPane jScrollPane12;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -600,6 +729,7 @@ public class EstadoProyecto extends javax.swing.JPanel {
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable4;
     private javax.swing.JTable jTableArea;
+    private javax.swing.JTable jTableConvocatoria;
     private javax.swing.JTable jTableEstados;
     private javax.swing.JTable jTableMetodologia;
     private javax.swing.JTable jTableObjetivoEspecificos;

@@ -127,6 +127,22 @@ public class AreaColaboracionJpaController implements Serializable {
         }
     }
 
+    public List<AreaColaboracion> findProyecto(String idProyecto) {
+        EntityManager em = getEntityManager();
+        try {
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery(AreaColaboracion.class);
+            Root<AreaColaboracion> obj = cq.from(AreaColaboracion.class);
+            cq.select(obj);
+            cq.where(
+                    em.getCriteriaBuilder().like(obj.get("idProyecto"), idProyecto)
+            );
+            Query q = em.createQuery(cq);
+            return q.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
     public int getAreaColaboracionCount() {
         EntityManager em = getEntityManager();
         try {
@@ -139,5 +155,5 @@ public class AreaColaboracionJpaController implements Serializable {
             em.close();
         }
     }
-    
+
 }

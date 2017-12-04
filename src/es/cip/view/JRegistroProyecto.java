@@ -30,9 +30,9 @@ public class JRegistroProyecto extends javax.swing.JFrame {
     /**
      * Creates new form JRegistroProyecto
      */
-    public JRegistroProyecto() {
+    public JRegistroProyecto(Integer idUsuario) {
         bl = new JRegistroProyectoBL();
-        bl.setIdUsuario(1);
+        bl.setIdUsuario(idUsuario);
 
         initComponents();
 
@@ -635,7 +635,7 @@ public class JRegistroProyecto extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JRegistroProyecto().setVisible(true);
+                new JRegistroProyecto(1).setVisible(true);
             }
         });
     }

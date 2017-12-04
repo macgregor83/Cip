@@ -126,7 +126,21 @@ public class RecursosMaterialesJpaController implements Serializable {
             em.close();
         }
     }
-
+    public List<RecursosMateriales> findProyecto(String idProyecto) {
+        EntityManager em = getEntityManager();
+        try {
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery(RecursosMateriales.class);
+            Root<RecursosMateriales> obj = cq.from(RecursosMateriales.class);
+            cq.select(obj);
+            cq.where(
+                    em.getCriteriaBuilder().like(obj.get("idProyecto"), idProyecto)
+            );
+            Query q = em.createQuery(cq);
+            return q.getResultList();
+        } finally {
+            em.close();
+        }
+    }
     public int getRecursosMaterialesCount() {
         EntityManager em = getEntityManager();
         try {

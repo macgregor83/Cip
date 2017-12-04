@@ -6,6 +6,7 @@
 package es.cip.view;
 
 import es.cip.bussines.bl.JFActividadesBL;
+import es.cip.bussines.dao.model.ArchivoFase;
 import es.cip.bussines.dao.model.Face;
 import es.cip.bussines.dao.model.Proyecto;
 import es.cip.util.Archivo;
@@ -53,34 +54,12 @@ public class JFActividades extends javax.swing.JFrame {
             }
             jTextFieldActividad.setText(bL.getListFase().get(0).getActividad());
         }
-//        jComboBoxProyecto.getEditor().getEditorComponent().addKeyListener(new KeyAdapter() {
-//            public void keyReleased(KeyEvent evt) {
-//                String cadenaEscrita = jComboBoxProyecto.getEditor().getItem().toString().toUpperCase();
-//                DefaultComboBoxModel modelo = new DefaultComboBoxModel();
-//                modelo.addElement(cadenaEscrita);
-//                bL.setListProyecto(cadenaEscrita);
-//                List<Proyecto> list = bL.getListProyecto();
-//                if (list.size() > 0) {
-//                    for (Proyecto proyecto : list) {
-//                        modelo.addElement(proyecto.getNombreProyecto());
-//                    }
-//                    jComboBoxProyecto.setModel(modelo);
-//                    if (jComboBoxProyecto.getItemCount() > 0) {
-//                        jComboBoxProyecto.showPopup();
-//                        if (evt.getKeyCode() != 8) {
-//                            ((JTextComponent) jComboBoxProyecto.getEditor().getEditorComponent()).select(cadenaEscrita.length(), jComboBoxProyecto.getEditor().getItem().toString().length());
-//                        } else {
-//                            jComboBoxProyecto.getEditor().setItem(cadenaEscrita);
-//                        }
-//                    } else {
-//                        jComboBoxProyecto.addItem(cadenaEscrita);
-//                    }
-//                } else {
-//                    jComboBoxProyecto.setModel(modelo);
-//                }
-//            }
-//        });
+        bL.setListArchivoFase();
+        modelActualizacion.setNumRows(0);
 
+        for (ArchivoFase object : bL.getListArchivoFase()) {
+            modelActualizacion.addRow(new Object[]{object.getExtEntregable(), object.getFecha()});
+        }
     }
 
     /**
@@ -307,8 +286,8 @@ public class JFActividades extends javax.swing.JFrame {
                         .addComponent(jButtonCargar1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButtonCargar2))
-                    .addComponent(jScrollPaneActualizaciones1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(51, 51, 51)
+                    .addComponent(jScrollPaneActualizaciones1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelObservaciones1)
                     .addComponent(jScrollPaneObservaciones1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -348,11 +327,18 @@ public class JFActividades extends javax.swing.JFrame {
 
     private void jButtonActualizar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualizar1ActionPerformed
         // TODO add your handling code here:
-        
+        if (jTableActualizaciones1.getRowCount() > 0) {
+            bL.guardar();
+
+        }
     }//GEN-LAST:event_jButtonActualizar1ActionPerformed
 
     private void jButtonConcluida1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConcluida1ActionPerformed
         // TODO add your handling code here:
+        if (jTableActualizaciones1.getRowCount() > 0) {
+            bL.guardar();
+
+        }
     }//GEN-LAST:event_jButtonConcluida1ActionPerformed
 
     private void jButtonActualizar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualizar2ActionPerformed
@@ -361,9 +347,11 @@ public class JFActividades extends javax.swing.JFrame {
 
     private void jButtonCargar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCargar1ActionPerformed
         // TODO add your handling code here:
+        jComboBoxProyecto.setEnabled(false);
+        jComboBoxEntregable.setEnabled(false);
         if (jTextFieldAgregarArchivos.getText() != "" && jTextAreaDescripcion1.getText() != "") {
             bL.setListArchivoFase(jTextFieldAgregarArchivos.getText(), jTextAreaDescripcion1.getText());
-            modelActualizacion.addRow(new Object[]{Convertir.nombreArchivo(jTextFieldAgregarArchivos.getText()), Fecha.Date()});  
+            modelActualizacion.addRow(new Object[]{Convertir.nombreArchivo(jTextFieldAgregarArchivos.getText()), Fecha.Date()});
             jTextFieldAgregarArchivos.setText("");
             jTextAreaDescripcion1.setText("");
         }
@@ -371,6 +359,7 @@ public class JFActividades extends javax.swing.JFrame {
 
     private void jButtonCargar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCargar2ActionPerformed
         // TODO add your handling code here:
+
         if (jTableActualizaciones1.getSelectedRows().length == 0) {
             bL.getListArchivoFase().remove(jTableActualizaciones1.getRowCount() - 1);
             modelActualizacion.removeRow(jTableActualizaciones1.getRowCount() - 1);
@@ -380,6 +369,10 @@ public class JFActividades extends javax.swing.JFrame {
                 bL.getListFase().remove(jTableActualizaciones1.getSelectedRows()[i - 1]);
                 modelActualizacion.removeRow(jTableActualizaciones1.getSelectedRows()[i - 1]);
             }
+        }
+        if (jTableActualizaciones1.getRowCount() == 0) {
+            jComboBoxProyecto.setEnabled(true);
+            jComboBoxEntregable.setEnabled(true);
         }
     }//GEN-LAST:event_jButtonCargar2ActionPerformed
 
@@ -395,8 +388,15 @@ public class JFActividades extends javax.swing.JFrame {
             for (Face object : bL.getListFase()) {
                 jComboBoxEntregable.addItem(object.getNombreFase());
             }
-            jTextFieldActividad.setText(bL.getListFase().get(0).getActividad());
+            if (bL.getListFase().size() > 0) {
+                jTextFieldActividad.setText(bL.getListFase().get(0).getActividad());
+            }
             bL.setIdFase(0);
+            bL.setListArchivoFase();
+            modelActualizacion.setNumRows(0);
+            for (ArchivoFase object : bL.getListArchivoFase()) {
+                modelActualizacion.addRow(new Object[]{object.getExtEntregable(), object.getFecha()});
+            }
         }
     }//GEN-LAST:event_jComboBoxProyectoActionPerformed
 
@@ -406,6 +406,11 @@ public class JFActividades extends javax.swing.JFrame {
             bL.setListFase(bL.getListProyecto().get(jComboBoxProyecto.getSelectedIndex()).getId());
             jTextFieldActividad.setText(bL.getListFase().get(jComboBoxEntregable.getSelectedIndex()).getActividad());
             bL.setIdFase(jComboBoxEntregable.getSelectedIndex());
+            bL.setListArchivoFase();
+            modelActualizacion.setNumRows(0);
+            for (ArchivoFase object : bL.getListArchivoFase()) {
+                modelActualizacion.addRow(new Object[]{object.getExtEntregable(), object.getFecha()});
+            }
         }
     }//GEN-LAST:event_jComboBoxEntregableActionPerformed
 

@@ -83,6 +83,7 @@ public class JFasesBL {
         this.face.setIniciaMes(iniciaMes);
         this.face.setObjetivo(objeto);
         this.face.setActividad(actividad);
+        this.face.setIdEstatusFase(Cte.Estatus_Face_registro);
         lisFace.add(face);
 
     }

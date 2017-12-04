@@ -5,8 +5,10 @@
  */
 package es.cip.bussines.bl;
 
+import es.cip.bussines.dao.control.LoginJpaController;
 import es.cip.bussines.dao.control.UsuarioJpaController;
 import es.cip.bussines.dao.model.Usuario;
+import es.cip.bussines.dao.model.Login;
 
 /**
  *
@@ -15,10 +17,15 @@ import es.cip.bussines.dao.model.Usuario;
 public class JFRegistroPersonaBL {
 
     private Usuario usuario = new Usuario();
+    private Login login=new Login();
+    
     private UsuarioJpaController usuarioJpaController = new UsuarioJpaController();
+    private LoginJpaController loginJpaController = new LoginJpaController();
 
     public boolean guardar() throws Exception  {
         usuarioJpaController.create(usuario);
+        login.setIdUsuario(usuario.getId());
+        loginJpaController.create(login);
         return false;
     }
 
@@ -33,6 +40,14 @@ public class JFRegistroPersonaBL {
 
     public Usuario getUsuario() {
         return usuario;
+    }
+
+    public Login getLogin() {
+        return login;
+    }
+
+    public void setLogin(Login login) {
+        this.login = login;
     }
 
 }

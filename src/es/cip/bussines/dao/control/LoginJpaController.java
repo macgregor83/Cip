@@ -7,6 +7,7 @@ package es.cip.bussines.dao.control;
 
 import es.cip.bussines.dao.control.exceptions.NonexistentEntityException;
 import es.cip.bussines.dao.model.Login;
+import es.cip.bussines.dao.model.Usuario;
 import es.cip.util.Cte;
 import java.io.Serializable;
 import java.util.List;
@@ -138,7 +139,24 @@ public class LoginJpaController implements Serializable {
             em.close();
         }
     }
-
+    public List<Login> findLogin(String nickname,String password) {
+        EntityManager em = getEntityManager();
+        try {
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery(Login.class);
+            Root<Login> c = cq.from(Login.class);
+            Root<Usuario> u = cq.from(Usuario.class);
+            cq.select(c);
+            cq.where(em.getCriteriaBuilder().and(
+                    em.getCriteriaBuilder().like(u.get("Nickname"), nickname.trim()),
+                    em.getCriteriaBuilder().like(c.get("Password"), password.trim()),
+                    em.getCriteriaBuilder().like(u.get("id"), c.get("idUsuario")))
+                    );
+            Query q = em.createQuery(cq);
+            return q.getResultList();
+        } finally {
+            em.close();
+        }
+    }
     public int getLoginCount() {
         EntityManager em = getEntityManager();
         try {

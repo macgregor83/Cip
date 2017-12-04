@@ -561,7 +561,9 @@ public class JFRegistroPersona extends javax.swing.JFrame {
                 bL.getUsuario().setNumInt(jTextFieldNumInt.getText().trim());
                 bL.getUsuario().setNumExt(jTextFieldNumExt.getText().trim());
                 bL.getUsuario().setNickname(jTextFieldUsuar.getText().trim());
+                bL.getLogin().setPassword(jTextFieldPass.getText());
                 bL.guardar();
+                
                 datosAcademicos = new JFDatosAcademicos();
                 datosAcademicos.setNickname(jTextFieldUsuar.getText().trim());
                 datosAcademicos.setVisible(true);

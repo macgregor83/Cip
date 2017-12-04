@@ -6,7 +6,10 @@
 package es.cip.bussines.dao.control;
 
 import es.cip.bussines.dao.control.exceptions.NonexistentEntityException;
+import es.cip.bussines.dao.model.Proyecto;
+import es.cip.bussines.dao.model.RecursoHumanoDatos;
 import es.cip.bussines.dao.model.RecursoHumanoProyecto;
+import es.cip.bussines.dao.model.Usuario;
 import es.cip.util.Cte;
 import java.io.Serializable;
 import java.util.List;
@@ -127,6 +130,54 @@ public class RecursoHumanoProyectoJpaController implements Serializable {
         }
     }
 
+    public List<RecursoHumanoProyecto> findProyecto(String nombreProyecto, String nombreUsuario, Integer idEstatusProyecto) {
+        EntityManager em = getEntityManager();
+        try {
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery(RecursoHumanoProyecto.class);
+            Root<Proyecto> p = cq.from(Proyecto.class);
+            Root<RecursoHumanoProyecto> rhp = cq.from(RecursoHumanoProyecto.class);
+            Root<RecursoHumanoDatos> rhd = cq.from(RecursoHumanoDatos.class);
+            Root<Usuario> u = cq.from(Usuario.class);
+
+            cq.select(rhp);
+//            cq.where(
+            // em.getCriteriaBuilder().and(
+//                            em.getCriteriaBuilder().or(
+//                                    em.getCriteriaBuilder().like(p.get("id"), "%" + nombreProyecto.trim() + "%"),
+            //em.getCriteriaBuilder().like(p.get("NombreProyecto"), "%" + nombreProyecto.trim() + "%")//,
+//                            em.getCriteriaBuilder().or(
+//                                    em.getCriteriaBuilder().like(u.get("Nombre"), "%" + nombreUsuario.trim() + "%"),
+//                                    em.getCriteriaBuilder().like(u.get("ApellidoPaterno"), "%" + nombreUsuario.trim() + "%"),
+//                                    em.getCriteriaBuilder().like(u.get("ApellidoMaterno"), "%" + nombreUsuario.trim() + "%")),
+            //em.getCriteriaBuilder().like(p.get("id"), rhp.get("idProyecto")),
+            // em.getCriteriaBuilder().like(rhd.get("id"), rhp.get("idRecursoHumanoDatos"))//,
+            //em.getCriteriaBuilder().like(rhd.get("idUsuario"), u.get("id"))//,
+//                            em.getCriteriaBuilder().like(p.get("idEstatusProyecto"), idEstatusProyecto + "")
+            //  )
+//            );
+            Query q = em.createQuery(cq);
+            return q.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
+    public List<RecursoHumanoProyecto> findProyecto(String idProyecto) {
+        EntityManager em = getEntityManager();
+        try {
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery(RecursoHumanoProyecto.class);
+            Root<RecursoHumanoProyecto> obj = cq.from(RecursoHumanoProyecto.class);
+            cq.select(obj);
+            cq.where(
+                    em.getCriteriaBuilder().like(obj.get("idProyecto"), idProyecto)
+            );
+            Query q = em.createQuery(cq);
+            return q.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
     public int getRecursoHumanoProyectoCount() {
         EntityManager em = getEntityManager();
         try {
@@ -139,5 +190,5 @@ public class RecursoHumanoProyectoJpaController implements Serializable {
             em.close();
         }
     }
-    
+
 }

@@ -6,7 +6,9 @@
 package es.cip.bussines.bl;
 
 import es.cip.bussines.dao.control.LoginJpaController;
+import es.cip.bussines.dao.control.RecursoHumanoDatosJpaController;
 import es.cip.bussines.dao.model.Login;
+import es.cip.bussines.dao.model.RecursoHumanoDatos;
 import es.cip.bussines.dao.model.Usuario;
 import java.util.List;
 
@@ -18,22 +20,38 @@ public class LoginBL {
 
     private Usuario usuario;
     private Login login;
+    private Integer idUsuario=0;
+    private List<RecursoHumanoDatos> rhd;
+    private Integer idTipoUsuario=0;
 
     public LoginBL() {
         usuario = new Usuario();
         login = new Login();
     }
-    public boolean validarUsuario(String nickname, String pass ){
-        
-//        LoginJpaController logjc = new LoginJpaController();
-//        List<Login> lis = logjc.findLoginEntities(nickname);
-//        if(lis.size()>0){
-//            if(lis.get(0).getPassword().equalsIgnoreCase(pass)){
-//              return true;  
-//            }
-//        }            
-        return false;        
+
+    public boolean validarUsuario(String nickname, String pass) {
+        LoginJpaController logjc = new LoginJpaController();
+        List<Login> lis = logjc.findLogin(nickname, pass);
+        if (lis.size() > 0) {
+            this.idUsuario = lis.get(0).getIdUsuario();
+            RecursoHumanoDatosJpaController rhdjc=new RecursoHumanoDatosJpaController();
+            List<RecursoHumanoDatos> list = rhdjc.findIdUsuario(idUsuario);
+            idTipoUsuario=list.get(0).getIdTipoUsuario();
+            usuario=list.get(0).getUsuario();
+            return true;
+        }
+        return false;
     }
-    
+
+    public Integer getIdUsuario() {
+        return idUsuario;
+    }
+
+    public Integer getIdTipoUsuario() {
+        return idTipoUsuario;
+    }
+        public Usuario getUsuario() {
+        return usuario;
+    }
     
 }

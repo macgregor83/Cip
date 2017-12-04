@@ -127,6 +127,23 @@ public class ObjetivoEspecificoJpaController implements Serializable {
         }
     }
 
+    public List<ObjetivoEspecifico> findProyecto(String idProyecto) {
+        EntityManager em = getEntityManager();
+        try {
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery(ObjetivoEspecifico.class);
+            Root<ObjetivoEspecifico> obj = cq.from(ObjetivoEspecifico.class);
+
+            cq.select(obj);
+            cq.where(
+                    em.getCriteriaBuilder().like(obj.get("idProyecto"), idProyecto)
+            );
+            Query q = em.createQuery(cq);
+            return q.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
     public int getObjetivoEspecificoCount() {
         EntityManager em = getEntityManager();
         try {
