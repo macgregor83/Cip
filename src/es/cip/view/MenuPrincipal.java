@@ -40,6 +40,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private JFases JFases;
     private Login login = new Login();
+    private JFEstadosProyectos jFEstadosProyectos;
 
     /**
      * Creates new form JMenuPrincipal
@@ -367,7 +368,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
         try {
             this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
             //estadoProyecto = new (1);
-            estadoProyecto.setVisible(true);
+            jFEstadosProyectos=new JFEstadosProyectos();
+            jFEstadosProyectos.setVisible(true);
             // pestana(estadoProyecto, Cte.Estado_Proyecto);
             //this.pack();
             this.setExtendedState(MAXIMIZED_BOTH);

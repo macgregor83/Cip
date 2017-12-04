@@ -70,32 +70,46 @@ public class JFEstadosProyectos extends javax.swing.JFrame {
         }
 
         ///// jComboBoxNombre ////
-//        jComboBoxProyecto.getEditor().getEditorComponent().addKeyListener(new KeyAdapter() {
-//            public void keyReleased(KeyEvent evt) {
-//                String cadenaEscrita = jComboBoxProyecto.getEditor().getItem().toString().toUpperCase();
-//                DefaultComboBoxModel modelo = new DefaultComboBoxModel();
-//                modelo.addElement(cadenaEscrita);
-//                List<RecursoHumanoProyecto> list = bL.setNombreProyecto(cadenaEscrita, "");
-//                if (list.size() > 0) {
-//                    for (RecursoHumanoProyecto r : list) {
-//                        modelo.addElement(r.getProyecto().getNombreProyecto());
-//                    }
-//                    jComboBoxProyecto.setModel(modelo);
-//                    if (jComboBoxProyecto.getItemCount() > 0) {
-//                        jComboBoxProyecto.showPopup();
-//                        if (evt.getKeyCode() != 8) {
-//                            ((JTextComponent) jComboBoxProyecto.getEditor().getEditorComponent()).select(cadenaEscrita.length(), jComboBoxProyecto.getEditor().getItem().toString().length());
-//                        } else {
-//                            jComboBoxProyecto.getEditor().setItem(cadenaEscrita);
-//                        }
-//                    } else {
-//                        jComboBoxProyecto.addItem(cadenaEscrita);
-//                    }
-//                } else {
-//                    jComboBoxProyecto.setModel(modelo);
-//                }
-//            }
-//        });
+        jComboBoxProyecto.getEditor().getEditorComponent().addKeyListener(new KeyAdapter() {
+            public void keyReleased(KeyEvent evt) {
+                String cadenaEscrita = jComboBoxProyecto.getEditor().getItem().toString().toUpperCase();
+                DefaultComboBoxModel modelo = new DefaultComboBoxModel();
+                modelo.addElement(cadenaEscrita);
+                List<RecursoHumanoProyecto> list = bL.setNombreProyecto(cadenaEscrita, "");
+                modelTabla.setNumRows(0);
+                if (list.size() > 0) {
+                    for (RecursoHumanoProyecto rhp : list) {
+                        modelo.addElement(rhp.getProyecto().getNombreProyecto());
+
+                        modelTabla.addRow(new Object[]{
+                            rhp.getProyecto().getNombreProyecto(),
+                            rhp.getRecursoHumanoDatos().getUsuario().getNombre() + " "
+                            + rhp.getRecursoHumanoDatos().getUsuario().getApellidoPaterno() + " "
+                            + rhp.getRecursoHumanoDatos().getUsuario().getApellidoMaterno() + " - "
+                            + rhp.getRecursoHumanoDatos().getUsuario().getCorreoElectronico(),
+                            rhp.getProyecto().getTipoProyecto().getTipo(),
+                            rhp.getProyecto().getCriterioClasificacion().getCriterioClasificacion(),
+                            "0",
+                            rhp.getProyecto().getEstatusProyecto().getDescripcion()
+                        });
+
+                    }
+                    jComboBoxProyecto.setModel(modelo);
+                    if (jComboBoxProyecto.getItemCount() > 0) {
+                        jComboBoxProyecto.showPopup();
+                        if (evt.getKeyCode() != 8) {
+                            ((JTextComponent) jComboBoxProyecto.getEditor().getEditorComponent()).select(cadenaEscrita.length(), jComboBoxProyecto.getEditor().getItem().toString().length());
+                        } else {
+                            jComboBoxProyecto.getEditor().setItem(cadenaEscrita);
+                        }
+                    } else {
+                        jComboBoxProyecto.addItem(cadenaEscrita);
+                    }
+                } else {
+                    jComboBoxProyecto.setModel(modelo);
+                }
+            }
+        });
     }
 
     /**
@@ -641,7 +655,7 @@ public class JFEstadosProyectos extends javax.swing.JFrame {
 
         for (AreaColaboracion obj : bL.getLisAreaCol(idProyecto)) {
             modelArea.addRow(new Object[]{obj.getAreaColaboracion()});
-        }        
+        }
         for (RecursosMateriales obj : bL.getLisRM(idProyecto)) {
             modelRM.addRow(new Object[]{obj.getRecursosMateriales()});
         }

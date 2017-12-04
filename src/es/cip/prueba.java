@@ -5,8 +5,10 @@
  */
 package es.cip;
 
+import es.cip.bussines.dao.control.RecursoHumanoProyectoJpaController;
 import es.cip.bussines.dao.control.RecursosMaterialesJpaController;
 import es.cip.bussines.dao.control.UsuarioJpaController;
+import es.cip.bussines.dao.model.RecursoHumanoProyecto;
 import es.cip.bussines.dao.model.RecursosMateriales;
 import es.cip.bussines.dao.model.Usuario;
 import es.cip.util.Convertir;
@@ -28,35 +30,11 @@ public class prueba {
     Usuario u = new Usuario();
 
     public static void main(String[] args) {
-
-//        try {
-            //        EntityManagerFactory emf = javax.persistence.Persistence.createEntityManagerFactory("CIPPU");
-//        UsuarioJpaController oControl = new UsuarioJpaController(emf);
-//        List<Usuario> lis = oControl.findUsuarioEntities();
-//        for (Usuario li : lis) {
-//            System.out.println("" + li.getNombre());
-//        }
-//        for (int i = 0; i < 10000; i++) {
-//            System.out.println(Id.Id());
-//        }
-//        String url = "D:\\Users\\iMac\\Documents\\maestria\\1re cuatrimestre\\Libros\\eBook\\Ingenier+¡a de Software\\Analisis y dise+¦o de Sistemas - Kendal 8ed.pdf";    
-//        String[] ext={".pdf","doc","docx"};
-//        System.out.println(ValidCampos.esTelefono("7712007695"));
-//
-//            byte[] by = Convertir.convertDocToByteArray("‪D:\\Users\\iMac\\Downloads\\ExpRegulares.pdf");
-//            Convertir.convertByteArrayToDoc(by);
-//        } catch (FileNotFoundException ex) {
-//            Logger.getLogger(prueba.class.getName()).log(Level.SEVERE, null, ex);
-//        } catch (IOException ex) {
-//            Logger.getLogger(prueba.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-        System.out.println(Id.Id(1).length());
-        Id.Id(1);
-        RecursosMateriales recursosMateriales=new RecursosMateriales();
-        RecursosMaterialesJpaController recursosMaterialesJpaController = new RecursosMaterialesJpaController();
-        //recursosMateriales.setId(2);
-        recursosMateriales.setIdProyecto("11710261838060000001");
-        recursosMateriales.setRecursosMateriales("hola");
-            recursosMaterialesJpaController.create(recursosMateriales);
+        RecursoHumanoProyectoJpaController rhpjc=new RecursoHumanoProyectoJpaController();
+        System.out.println(rhpjc.findProyecto("proyecto2", "", 1));
+        for (RecursoHumanoProyecto recursoHumanoProyecto : rhpjc.findProyecto("proyecto2", "", 1)) {
+            System.out.println(recursoHumanoProyecto.getProyecto().getNombreProyecto());
+            
+        }
     }
 }

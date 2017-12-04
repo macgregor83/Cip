@@ -140,21 +140,22 @@ public class RecursoHumanoProyectoJpaController implements Serializable {
             Root<Usuario> u = cq.from(Usuario.class);
 
             cq.select(rhp);
-//            cq.where(
-            // em.getCriteriaBuilder().and(
-//                            em.getCriteriaBuilder().or(
-//                                    em.getCriteriaBuilder().like(p.get("id"), "%" + nombreProyecto.trim() + "%"),
-            //em.getCriteriaBuilder().like(p.get("NombreProyecto"), "%" + nombreProyecto.trim() + "%")//,
-//                            em.getCriteriaBuilder().or(
-//                                    em.getCriteriaBuilder().like(u.get("Nombre"), "%" + nombreUsuario.trim() + "%"),
-//                                    em.getCriteriaBuilder().like(u.get("ApellidoPaterno"), "%" + nombreUsuario.trim() + "%"),
-//                                    em.getCriteriaBuilder().like(u.get("ApellidoMaterno"), "%" + nombreUsuario.trim() + "%")),
-            //em.getCriteriaBuilder().like(p.get("id"), rhp.get("idProyecto")),
-            // em.getCriteriaBuilder().like(rhd.get("id"), rhp.get("idRecursoHumanoDatos"))//,
-            //em.getCriteriaBuilder().like(rhd.get("idUsuario"), u.get("id"))//,
-//                            em.getCriteriaBuilder().like(p.get("idEstatusProyecto"), idEstatusProyecto + "")
+            cq.where(
+                    // em.getCriteriaBuilder().and(
+                    //                            em.getCriteriaBuilder().or(
+                    //                                   em.getCriteriaBuilder().like(p.get("id"), "%" + nombreProyecto.trim() + "%"),
+                    em.getCriteriaBuilder().like(p.get("NombreProyecto"), "%" + nombreProyecto.trim() + "%"),
+                    //                            em.getCriteriaBuilder().or(
+                    //                                    em.getCriteriaBuilder().like(u.get("Nombre"), "%" + nombreUsuario.trim() + "%"),
+                    //                                    em.getCriteriaBuilder().like(u.get("ApellidoPaterno"), "%" + nombreUsuario.trim() + "%"),
+                    //                                    em.getCriteriaBuilder().like(u.get("ApellidoMaterno"), "%" + nombreUsuario.trim() + "%")),
+                    em.getCriteriaBuilder().like(p.get("id"), rhp.get("idProyecto")),
+                         em.getCriteriaBuilder().like(rhd.get("id"), rhp.get("idRecursoHumanoDatos")),
+                        em.getCriteriaBuilder().like(rhd.get("idUsuario"), u.get("id"))//,
+            //                            em.getCriteriaBuilder().like(p.get("idEstatusProyecto"), idEstatusProyecto + "")
             //  )
-//            );
+            );
+
             Query q = em.createQuery(cq);
             return q.getResultList();
         } finally {
