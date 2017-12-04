@@ -31,10 +31,10 @@ public class prueba {
 
     public static void main(String[] args) {
         RecursoHumanoProyectoJpaController rhpjc=new RecursoHumanoProyectoJpaController();
-        System.out.println(rhpjc.findProyecto("proyecto2", "", 1));
-        for (RecursoHumanoProyecto recursoHumanoProyecto : rhpjc.findProyecto("proyecto2", "", 1)) {
+        System.out.println(rhpjc.findProyecto("", "ivan", 1));
+        for (RecursoHumanoProyecto recursoHumanoProyecto : rhpjc.findProyecto("", "ivan", 1)) {
             System.out.println(recursoHumanoProyecto.getProyecto().getNombreProyecto());
-            
+            System.out.println(recursoHumanoProyecto.getRecursoHumanoDatos().getUsuario().getNombre());
         }
     }
 }

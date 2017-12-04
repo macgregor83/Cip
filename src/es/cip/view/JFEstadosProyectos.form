@@ -683,9 +683,9 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jComboBoxEstado" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jComboBoxProyecto" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jComboBoxAsesorAlumno" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jComboBoxEstado" max="32767" attributes="0"/>
+                          <Component id="jTextFieldProyecto" max="32767" attributes="0"/>
+                          <Component id="jTextFieldUsuario" alignment="1" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -699,13 +699,13 @@
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jComboBoxProyecto" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabelEstado2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jTextFieldProyecto" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jComboBoxAsesorAlumno" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabelEstado1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jTextFieldUsuario" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -802,20 +802,6 @@
         <Property name="text" type="java.lang.String" value="*Dar clic en el proyecto para ver mas a detalle  "/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="jComboBoxProyecto">
-      <Properties>
-        <Property name="editable" type="boolean" value="true"/>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="0"/>
-        </Property>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBoxProyectoActionPerformed"/>
-      </Events>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-      </AuxValues>
-    </Component>
     <Component class="javax.swing.JLabel" name="jLabelEstado1">
       <Properties>
         <Property name="text" type="java.lang.String" value="Asesor /Alumno"/>
@@ -825,20 +811,6 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Proyecto"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JComboBox" name="jComboBoxAsesorAlumno">
-      <Properties>
-        <Property name="editable" type="boolean" value="true"/>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="0"/>
-        </Property>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBoxAsesorAlumnoActionPerformed"/>
-      </Events>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-      </AuxValues>
     </Component>
     <Component class="javax.swing.JComboBox" name="jComboBoxEstado">
       <Properties>
@@ -857,6 +829,17 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Estado"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="jTextFieldProyecto">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldProyectoActionPerformed"/>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextFieldProyectoKeyReleased"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="jTextFieldUsuario">
+      <Events>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextFieldUsuarioKeyReleased"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

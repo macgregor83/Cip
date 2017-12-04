@@ -55,6 +55,7 @@ public class JFEstadosProyectos extends javax.swing.JFrame {
         modelRH = (DefaultTableModel) jTableRH.getModel();
         modelRH.setNumRows(0);
 
+        modelTabla.setNumRows(0);
         for (RecursoHumanoProyecto rhp : bL.setNombreProyecto("", "")) {
             modelTabla.addRow(new Object[]{
                 rhp.getProyecto().getNombreProyecto(),
@@ -69,47 +70,6 @@ public class JFEstadosProyectos extends javax.swing.JFrame {
             });
         }
 
-        ///// jComboBoxNombre ////
-        jComboBoxProyecto.getEditor().getEditorComponent().addKeyListener(new KeyAdapter() {
-            public void keyReleased(KeyEvent evt) {
-                String cadenaEscrita = jComboBoxProyecto.getEditor().getItem().toString().toUpperCase();
-                DefaultComboBoxModel modelo = new DefaultComboBoxModel();
-                modelo.addElement(cadenaEscrita);
-                List<RecursoHumanoProyecto> list = bL.setNombreProyecto(cadenaEscrita, "");
-                modelTabla.setNumRows(0);
-                if (list.size() > 0) {
-                    for (RecursoHumanoProyecto rhp : list) {
-                        modelo.addElement(rhp.getProyecto().getNombreProyecto());
-
-                        modelTabla.addRow(new Object[]{
-                            rhp.getProyecto().getNombreProyecto(),
-                            rhp.getRecursoHumanoDatos().getUsuario().getNombre() + " "
-                            + rhp.getRecursoHumanoDatos().getUsuario().getApellidoPaterno() + " "
-                            + rhp.getRecursoHumanoDatos().getUsuario().getApellidoMaterno() + " - "
-                            + rhp.getRecursoHumanoDatos().getUsuario().getCorreoElectronico(),
-                            rhp.getProyecto().getTipoProyecto().getTipo(),
-                            rhp.getProyecto().getCriterioClasificacion().getCriterioClasificacion(),
-                            "0",
-                            rhp.getProyecto().getEstatusProyecto().getDescripcion()
-                        });
-
-                    }
-                    jComboBoxProyecto.setModel(modelo);
-                    if (jComboBoxProyecto.getItemCount() > 0) {
-                        jComboBoxProyecto.showPopup();
-                        if (evt.getKeyCode() != 8) {
-                            ((JTextComponent) jComboBoxProyecto.getEditor().getEditorComponent()).select(cadenaEscrita.length(), jComboBoxProyecto.getEditor().getItem().toString().length());
-                        } else {
-                            jComboBoxProyecto.getEditor().setItem(cadenaEscrita);
-                        }
-                    } else {
-                        jComboBoxProyecto.addItem(cadenaEscrita);
-                    }
-                } else {
-                    jComboBoxProyecto.setModel(modelo);
-                }
-            }
-        });
     }
 
     /**
@@ -167,12 +127,12 @@ public class JFEstadosProyectos extends javax.swing.JFrame {
         jTEstadoProyecto = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jComboBoxProyecto = new javax.swing.JComboBox<>();
         jLabelEstado1 = new javax.swing.JLabel();
         jLabelEstado2 = new javax.swing.JLabel();
-        jComboBoxAsesorAlumno = new javax.swing.JComboBox<>();
         jComboBoxEstado = new javax.swing.JComboBox<>();
         jLabelEstado = new javax.swing.JLabel();
+        jTextFieldProyecto = new javax.swing.JTextField();
+        jTextFieldUsuario = new javax.swing.JTextField();
 
         jButtonActualizar.setText("Actualizar");
         jButtonActualizar.addActionListener(new java.awt.event.ActionListener() {
@@ -558,23 +518,9 @@ public class JFEstadosProyectos extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(255, 51, 0));
         jLabel3.setText("*Dar clic en el proyecto para ver mas a detalle  ");
 
-        jComboBoxProyecto.setEditable(true);
-        jComboBoxProyecto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxProyectoActionPerformed(evt);
-            }
-        });
-
         jLabelEstado1.setText("Asesor /Alumno");
 
         jLabelEstado2.setText("Proyecto");
-
-        jComboBoxAsesorAlumno.setEditable(true);
-        jComboBoxAsesorAlumno.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxAsesorAlumnoActionPerformed(evt);
-            }
-        });
 
         jComboBoxEstado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -583,6 +529,23 @@ public class JFEstadosProyectos extends javax.swing.JFrame {
         });
 
         jLabelEstado.setText("Estado");
+
+        jTextFieldProyecto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldProyectoActionPerformed(evt);
+            }
+        });
+        jTextFieldProyecto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextFieldProyectoKeyReleased(evt);
+            }
+        });
+
+        jTextFieldUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextFieldUsuarioKeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -603,8 +566,8 @@ public class JFEstadosProyectos extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jComboBoxEstado, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jComboBoxProyecto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jComboBoxAsesorAlumno, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(jTextFieldProyecto)
+                            .addComponent(jTextFieldUsuario, javax.swing.GroupLayout.Alignment.TRAILING))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -613,12 +576,12 @@ public class JFEstadosProyectos extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBoxProyecto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelEstado2))
+                    .addComponent(jLabelEstado2)
+                    .addComponent(jTextFieldProyecto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBoxAsesorAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelEstado1))
+                    .addComponent(jLabelEstado1)
+                    .addComponent(jTextFieldUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBoxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -683,14 +646,6 @@ public class JFEstadosProyectos extends javax.swing.JFrame {
         //this.jTEstadoProyecto.setExtendedState(MAXIMIZED_BOTH);
     }//GEN-LAST:event_jTEstadoProyectoMouseClicked
 
-    private void jComboBoxProyectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxProyectoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxProyectoActionPerformed
-
-    private void jComboBoxAsesorAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxAsesorAlumnoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxAsesorAlumnoActionPerformed
-
     private void jComboBoxEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxEstadoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBoxEstadoActionPerformed
@@ -711,6 +666,46 @@ public class JFEstadosProyectos extends javax.swing.JFrame {
     private void jTextFieldTipoProyectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldTipoProyectoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldTipoProyectoActionPerformed
+
+    private void jTextFieldProyectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldProyectoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldProyectoActionPerformed
+
+    private void jTextFieldProyectoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldProyectoKeyReleased
+        // TODO add your handling code here:   
+        modelTabla.setNumRows(0);
+        for (RecursoHumanoProyecto rhp : bL.setNombreProyecto(jTextFieldProyecto.getText().trim(), jTextFieldUsuario.getText().trim())) {
+            modelTabla.addRow(new Object[]{
+                rhp.getProyecto().getNombreProyecto(),
+                rhp.getRecursoHumanoDatos().getUsuario().getNombre() + " "
+                + rhp.getRecursoHumanoDatos().getUsuario().getApellidoPaterno() + " "
+                + rhp.getRecursoHumanoDatos().getUsuario().getApellidoMaterno() + " - "
+                + rhp.getRecursoHumanoDatos().getUsuario().getCorreoElectronico(),
+                rhp.getProyecto().getTipoProyecto().getTipo(),
+                rhp.getProyecto().getCriterioClasificacion().getCriterioClasificacion(),
+                "0",
+                rhp.getProyecto().getEstatusProyecto().getDescripcion()
+            });
+        }
+    }//GEN-LAST:event_jTextFieldProyectoKeyReleased
+
+    private void jTextFieldUsuarioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldUsuarioKeyReleased
+        // TODO add your handling code here:
+        modelTabla.setNumRows(0);
+        for (RecursoHumanoProyecto rhp : bL.setNombreProyecto(jTextFieldProyecto.getText().trim(), jTextFieldUsuario.getText().trim())) {
+            modelTabla.addRow(new Object[]{
+                rhp.getProyecto().getNombreProyecto(),
+                rhp.getRecursoHumanoDatos().getUsuario().getNombre() + " "
+                + rhp.getRecursoHumanoDatos().getUsuario().getApellidoPaterno() + " "
+                + rhp.getRecursoHumanoDatos().getUsuario().getApellidoMaterno() + " - "
+                + rhp.getRecursoHumanoDatos().getUsuario().getCorreoElectronico(),
+                rhp.getProyecto().getTipoProyecto().getTipo(),
+                rhp.getProyecto().getCriterioClasificacion().getCriterioClasificacion(),
+                "0",
+                rhp.getProyecto().getEstatusProyecto().getDescripcion()
+            });
+        }
+    }//GEN-LAST:event_jTextFieldUsuarioKeyReleased
 
     /**
      * @param args the command line arguments
@@ -750,10 +745,8 @@ public class JFEstadosProyectos extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonActualizar;
-    private javax.swing.JComboBox<String> jComboBoxAsesorAlumno;
     private javax.swing.JComboBox<String> jComboBoxEstado;
     private javax.swing.JComboBox<String> jComboBoxEstados;
-    private javax.swing.JComboBox<String> jComboBoxProyecto;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabeCriterio;
     private javax.swing.JLabel jLabel1;
@@ -799,7 +792,9 @@ public class JFEstadosProyectos extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldCriterioClas;
     private javax.swing.JTextField jTextFieldNombreProyecto;
     private javax.swing.JTextField jTextFieldProductoEsperado;
+    private javax.swing.JTextField jTextFieldProyecto;
     private javax.swing.JTextField jTextFieldTiempo;
     private javax.swing.JTextField jTextFieldTipoProyecto;
+    private javax.swing.JTextField jTextFieldUsuario;
     // End of variables declaration//GEN-END:variables
 }
