@@ -141,9 +141,7 @@ public class RecursoHumanoProyectoJpaController implements Serializable {
 
             cq.select(rhp);
             cq.where(
-                    // em.getCriteriaBuilder().and(
-                    //                            em.getCriteriaBuilder().or(
-                    //                                   em.getCriteriaBuilder().like(p.get("id"), "%" + nombreProyecto.trim() + "%"),
+                    
                     em.getCriteriaBuilder().like(p.get("NombreProyecto"), "%" + nombreProyecto.trim() + "%"),
                                                em.getCriteriaBuilder().or(
                             em.getCriteriaBuilder().like(u.get("Nombre"), "%" + nombreUsuario.trim() + "%"),
@@ -156,6 +154,7 @@ public class RecursoHumanoProyectoJpaController implements Serializable {
             //  )
             );
 
+            cq.orderBy(em.getCriteriaBuilder().desc(rhp.get("id")));
             Query q = em.createQuery(cq);
             return q.getResultList();
         } finally {
