@@ -409,7 +409,10 @@ public class JFActividades extends javax.swing.JFrame {
 
     private void jButtonActualizar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualizar1ActionPerformed
         // TODO add your handling code here:
-        
+        if (jTableActualizaciones1.getRowCount() > 0) {
+            bL.guardar();
+
+        }
     }//GEN-LAST:event_jButtonActualizar1ActionPerformed
 
     private void jButtonConcluida1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConcluida1ActionPerformed
@@ -424,7 +427,7 @@ public class JFActividades extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (jTextFieldAgregarArchivos.getText() != "" && jTextAreaDescripcion1.getText() != "") {
             bL.setListArchivoFase(jTextFieldAgregarArchivos.getText(), jTextAreaDescripcion1.getText());
-            modelActualizacion.addRow(new Object[]{Convertir.nombreArchivo(jTextFieldAgregarArchivos.getText()), Fecha.Date()});  
+            modelActualizacion.addRow(new Object[]{Convertir.nombreArchivo(jTextFieldAgregarArchivos.getText()), Fecha.Date()});
             jTextFieldAgregarArchivos.setText("");
             jTextAreaDescripcion1.setText("");
         }
