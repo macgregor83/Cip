@@ -295,12 +295,10 @@ public class JAsociaciònUsuario extends javax.swing.JFrame {
 
     private void jComboBoxProyectoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jComboBoxProyectoKeyReleased
         // TODO add your handling code here:
-        System.out.println("hola");
     }//GEN-LAST:event_jComboBoxProyectoKeyReleased
 
     private void jComboBoxProyectoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jComboBoxProyectoFocusLost
         // TODO add your handling code here:
-        System.out.println("hola");
     }//GEN-LAST:event_jComboBoxProyectoFocusLost
 
     private void jComboBoxProyectoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxProyectoItemStateChanged
