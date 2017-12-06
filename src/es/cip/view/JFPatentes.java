@@ -53,7 +53,7 @@ public class JFPatentes extends javax.swing.JFrame {
 
         jLabel3.setText("Fecha de registro:");
 
-        jLabel4.setText("Porcentage");
+        jLabel4.setText("Porcentage:");
 
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -87,6 +87,8 @@ public class JFPatentes extends javax.swing.JFrame {
 
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/editar.png"))); // NOI18N
         jButton4.setText("Modificar");
+        jButton4.setMaximumSize(new java.awt.Dimension(119, 41));
+        jButton4.setMinimumSize(new java.awt.Dimension(119, 41));
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
