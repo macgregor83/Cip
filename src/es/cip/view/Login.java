@@ -24,7 +24,6 @@ import javax.swing.JOptionPane;
  */
 public class Login extends javax.swing.JFrame {
 
-    String valorRPE;
     private LoginBL bL = new LoginBL();
     public RegistroPersona registro;
     private boolean val = false;
