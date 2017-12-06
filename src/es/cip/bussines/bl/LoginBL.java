@@ -32,6 +32,7 @@ public class LoginBL {
     public boolean validarUsuario(String nickname, String pass) {
         LoginJpaController logjc = new LoginJpaController();
         List<Login> lis = logjc.findLogin(nickname, pass);
+        System.out.println(lis.size());
         if (lis.size() > 0) {
             this.idUsuario = lis.get(0).getIdUsuario();
             RecursoHumanoDatosJpaController rhdjc=new RecursoHumanoDatosJpaController();

@@ -5,17 +5,56 @@
  */
 package es.cip.view;
 
+import es.cip.bussines.bl.JFInvitadosBL;
+import es.cip.bussines.dao.model.Proyecto;
+import es.cip.bussines.dao.model.RecursoHumanoProyecto;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.text.JTextComponent;
+
 /**
  *
  * @author Vero
  */
 public class JFInvitados extends javax.swing.JFrame {
 
+    private final JFInvitadosBL bl;
+
     /**
      * Creates new form JFInvitados
      */
     public JFInvitados() {
+        bl = new JFInvitadosBL();
         initComponents();
+        jComboBoxNombreProyecto.getEditor().getEditorComponent().addKeyListener(new KeyAdapter() {
+            public void keyReleased(KeyEvent evt) {
+                String cadenaEscrita = jComboBoxNombreProyecto.getEditor().getItem().toString().toUpperCase();
+                DefaultComboBoxModel modelo = new DefaultComboBoxModel();
+                modelo.addElement(cadenaEscrita);
+                bl.setLisRHP(cadenaEscrita);
+                List<RecursoHumanoProyecto> list = bl.getLisRHP();
+                if (list.size() > 0) {
+                    for (RecursoHumanoProyecto proyecto : list) {
+                        modelo.addElement(proyecto.getProyecto().getNombreProyecto());
+                    }
+                    jComboBoxNombreProyecto.setModel(modelo);
+                    if (jComboBoxNombreProyecto.getItemCount() > 0) {
+                        jComboBoxNombreProyecto.showPopup();
+                        if (evt.getKeyCode() != 8) {
+                            ((JTextComponent) jComboBoxNombreProyecto.getEditor().getEditorComponent()).select(cadenaEscrita.length(), jComboBoxNombreProyecto.getEditor().getItem().toString().length());
+                        } else {
+                            jComboBoxNombreProyecto.getEditor().setItem(cadenaEscrita);
+                        }
+                    } else {
+                        jComboBoxNombreProyecto.addItem(cadenaEscrita);
+                    }
+                } else {
+                    jComboBoxNombreProyecto.setModel(modelo);
+                }
+            }
+        });
     }
 
     /**
@@ -35,9 +74,9 @@ public class JFInvitados extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
-        jComboBox10 = new javax.swing.JComboBox<>();
+        jComboBoxNombreProyecto = new javax.swing.JComboBox<>();
         jScrollPane9 = new javax.swing.JScrollPane();
-        jTextArea4 = new javax.swing.JTextArea();
+        jTextAreaObjGen = new javax.swing.JTextArea();
         jLabel15 = new javax.swing.JLabel();
         jScrollPane10 = new javax.swing.JScrollPane();
         jTextArea5 = new javax.swing.JTextArea();
@@ -100,23 +139,31 @@ public class JFInvitados extends javax.swing.JFrame {
 
         jLabel17.setText("Nombre del Proyecto");
 
-        jComboBox10.setEditable(true);
-        jComboBox10.setEnabled(false);
-        jComboBox10.addActionListener(new java.awt.event.ActionListener() {
+        jComboBoxNombreProyecto.setEditable(true);
+        jComboBoxNombreProyecto.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jComboBoxNombreProyectoFocusLost(evt);
+            }
+        });
+        jComboBoxNombreProyecto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox10ActionPerformed(evt);
+                jComboBoxNombreProyectoActionPerformed(evt);
             }
         });
 
-        jTextArea4.setColumns(20);
-        jTextArea4.setRows(5);
-        jTextArea4.setEnabled(false);
-        jScrollPane9.setViewportView(jTextArea4);
+        jTextAreaObjGen.setColumns(20);
+        jTextAreaObjGen.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
+        jTextAreaObjGen.setRows(5);
+        jTextAreaObjGen.setDisabledTextColor(new java.awt.Color(255, 255, 255));
+        jTextAreaObjGen.setEnabled(false);
+        jScrollPane9.setViewportView(jTextAreaObjGen);
 
         jLabel15.setText("Resumen/Abstract");
 
         jTextArea5.setColumns(20);
+        jTextArea5.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
         jTextArea5.setRows(5);
+        jTextArea5.setDisabledTextColor(new java.awt.Color(255, 255, 255));
         jTextArea5.setEnabled(false);
         jScrollPane10.setViewportView(jTextArea5);
 
@@ -152,7 +199,7 @@ public class JFInvitados extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 1311, Short.MAX_VALUE)
-                    .addComponent(jComboBox10, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jComboBoxNombreProyecto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane10, javax.swing.GroupLayout.Alignment.LEADING))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel3Layout.createSequentialGroup()
@@ -169,7 +216,7 @@ public class JFInvitados extends javax.swing.JFrame {
                 .addComponent(jLabel18)
                 .addGap(13, 13, 13)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxNombreProyecto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel17))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -213,9 +260,20 @@ public class JFInvitados extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton6ActionPerformed
 
-    private void jComboBox10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox10ActionPerformed
+    private void jComboBoxNombreProyectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxNombreProyectoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox10ActionPerformed
+        int row = jComboBoxNombreProyecto.getSelectedIndex() - 1;
+        System.out.println(row);
+        if (row > 0) {
+            jTextAreaObjGen.setText(bl.getLisRHP().get(row).getProyecto().getObjGeneral());
+
+        }
+    }//GEN-LAST:event_jComboBoxNombreProyectoActionPerformed
+
+    private void jComboBoxNombreProyectoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jComboBoxNombreProyectoFocusLost
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_jComboBoxNombreProyectoFocusLost
 
     /**
      * @param args the command line arguments
@@ -254,7 +312,7 @@ public class JFInvitados extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton6;
-    private javax.swing.JComboBox<String> jComboBox10;
+    private javax.swing.JComboBox<String> jComboBoxNombreProyecto;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel17;
@@ -267,8 +325,8 @@ public class JFInvitados extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane16;
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTable jTable10;
-    private javax.swing.JTextArea jTextArea4;
     private javax.swing.JTextArea jTextArea5;
     private javax.swing.JTextArea jTextArea6;
+    private javax.swing.JTextArea jTextAreaObjGen;
     // End of variables declaration//GEN-END:variables
 }

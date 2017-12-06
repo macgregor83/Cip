@@ -41,6 +41,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private JFases JFases;
     private Login login = new Login();
     private JFEstadosProyectos jFEstadosProyectos;
+    private JFInvitados invitados;
 
     /**
      * Creates new form JMenuPrincipal
@@ -97,7 +98,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenuUsuario = new javax.swing.JMenu();
         jMenuRegUsua = new javax.swing.JMenuItem();
         jDatosAcademicos = new javax.swing.JMenuItem();
-        jMenuAsociarTutorUser = new javax.swing.JMenuItem();
         jMenuInvitado = new javax.swing.JMenuItem();
         jMenuProyecto = new javax.swing.JMenu();
         jMenu1 = new javax.swing.JMenu();
@@ -172,14 +172,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
         jMenuUsuario.add(jDatosAcademicos);
-
-        jMenuAsociarTutorUser.setText("Asociacion Tutor / Usuario");
-        jMenuAsociarTutorUser.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuAsociarTutorUserActionPerformed(evt);
-            }
-        });
-        jMenuUsuario.add(jMenuAsociarTutorUser);
 
         jMenuInvitado.setText("Invitado");
         jMenuInvitado.addActionListener(new java.awt.event.ActionListener() {
@@ -427,12 +419,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuRegUsuaActionPerformed
 
-    private void jMenuAsociarTutorUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuAsociarTutorUserActionPerformed
-        asociacionUsuario = new JAsociaciònUsuario("", 1);
-        asociacionUsuario.setVisible(true);        // TODO add your handling code here:
-        jTabbedPane.removeAll();
-    }//GEN-LAST:event_jMenuAsociarTutorUserActionPerformed
-
     private void jDatosAcademicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDatosAcademicosActionPerformed
         try {
             // TODO add your handling code here:
@@ -458,8 +444,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        SeccionPublica = new SeccionPublica();
-        SeccionPublica.setVisible(true);   // TODO add your handling code here:
+        invitados = new JFInvitados();
+        invitados.setVisible(true);   // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
@@ -526,8 +512,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 //current.setStringPainted(true);
                 boolean van = true;
                 do {
-
+                   
                     try {
+                        Thread.sleep(1000);
                         if (login.isVal()) {
                             //System.out.println((login.getIdTipoUsuario() == Cte.Tipo_Alumno || login.getIdTipoUsuario() == Cte.Tipo_Asesor) ? true : false);
                             jMenuUsuario.setVisible((login.getIdTipoUsuario() == Cte.Tipo_Alumno || login.getIdTipoUsuario() == Cte.Tipo_Asesor) ? true : false);
@@ -622,7 +609,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenuAdmin;
-    private javax.swing.JMenuItem jMenuAsociarTutorUser;
     private javax.swing.JMenuBar jMenuBar;
     private javax.swing.JMenu jMenuConvocatoria;
     private javax.swing.JMenuItem jMenuInvitado;

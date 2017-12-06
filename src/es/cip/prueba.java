@@ -35,7 +35,7 @@ public class prueba {
         for (RecursoHumanoProyecto recursoHumanoProyecto : rhpjc.findProyecto("", "ivan", 1)) {
             System.out.println(recursoHumanoProyecto.getProyecto().getNombreProyecto());
             System.out.println(recursoHumanoProyecto.getRecursoHumanoDatos().getUsuario().getNombre());
-            System.out.println(recursoHumanoProyecto.getId());
+            //System.out.println(recursoHumanoProyecto.getProyectoId());
         }
     }
 }

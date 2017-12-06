@@ -46,14 +46,15 @@ public class Cte {
     public static final String No_Existe_Usuario = "Selecciona una persona";
 
     public static final String Error_BD = "Error en conexión a base de datos";
+    public static final String Guardo_Correcto="Se guardó correctamente.";
     ///** Estatus Del Proyecto**///
     //public static final Integer Estatus_Proyecto = 1;
-       
+
     public static final String Proyecto_No_existe = "Este Proyecto no existe";
     public static final String Selecciona_Campos = "Selecciona algun Campo";
-    public static final String No_aprueba="Aun no se puede aprobar o ya esta aprobado";
-    
-      public static Integer Estatus_Registro_Proyecto_F1 = 1;
+    public static final String No_aprueba = "Aun no se puede aprobar o ya esta aprobado";
+
+    public static Integer Estatus_Registro_Proyecto_F1 = 1;
     public static Integer Estatus_Registro_Proyecto_F2 = 2;
     public static final Integer Estatus_Proyecto_Por_Aprobacion = 3;
     public static Integer Estatus_Proyecto_Aprobado = 4;
@@ -61,13 +62,11 @@ public class Cte {
     public static final Integer Estatus_Face_registro = 1;
     public static final Integer Estatus_Face_Desarrollo = 2;
     public static final Integer Estatus_Face_Termino = 3;
+
+    public static final Integer Tipo_Alumno = 1;
+    public static final Integer Tipo_Asesor = 2;
+    public static final Integer Tipo_Admin = 3;
     
-     public static final Integer Tipo_Alumno=1;      
-     public static final Integer Tipo_Asesor=2;      
-     public static final Integer Tipo_Admin=3;  
+
     
-     
-
-
-
 }

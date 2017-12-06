@@ -42,14 +42,6 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jDatosAcademicosActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuAsociarTutorUser">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Asociacion Tutor / Usuario"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuAsociarTutorUserActionPerformed"/>
-              </Events>
-            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuInvitado">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Invitado"/>

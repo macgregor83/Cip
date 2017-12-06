@@ -544,8 +544,8 @@ public class JFRegistroPersona extends javax.swing.JFrame {
         valCampos = jTextFieldDireccion.getText().trim() == "" ? false : valCampos;
         valCampos = jTextFieldColonia.getText().trim() == "" ? false : valCampos;
         valCampos = jTextFieldMunicipio.getText().trim() == "" ? false : valCampos;
-        valCampos = !ValidCampos.esEntero(jTextFieldNumInt.getText().trim()) ? false : valCampos;
-        valCampos = !ValidCampos.esEntero(jTextFieldNumExt.getText().trim()) ? false : valCampos;
+        valCampos = !ValidCampos.esNumeroCasa(jTextFieldNumInt.getText().trim()) ? false : valCampos;
+        valCampos = !ValidCampos.esNumeroCasa(jTextFieldNumExt.getText().trim()) ? false : valCampos;
 
         if (valCampos || CampNull()) {
 
@@ -632,12 +632,12 @@ public class JFRegistroPersona extends javax.swing.JFrame {
 
     private void jTextFieldNumIntFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldNumIntFocusLost
         // TODO add your handling code here:
-        jLabelNumInt.setVisible(!ValidCampos.esEntero(jTextFieldNumInt.getText().trim()));
+        jLabelNumInt.setVisible(!ValidCampos.esNumeroCasa(jTextFieldNumInt.getText().trim().toUpperCase()));
     }//GEN-LAST:event_jTextFieldNumIntFocusLost
 
     private void jTextFieldNumExtFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldNumExtFocusLost
         // TODO add your handling code here:
-        jLabelNumExt.setVisible(!ValidCampos.esEntero(jTextFieldNumExt.getText().trim()));
+        jLabelNumExt.setVisible(!ValidCampos.esNumeroCasa(jTextFieldNumExt.getText().trim().toUpperCase()));
     }//GEN-LAST:event_jTextFieldNumExtFocusLost
 
     private void jTextFieldPassFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldPassFocusLost
@@ -652,17 +652,17 @@ public class JFRegistroPersona extends javax.swing.JFrame {
 
     private void jTextFieldNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldNombreKeyReleased
         // TODO add your handling code here:
-        jTextFieldNombre.setText(jTextFieldNombre.getText().trim().toUpperCase());
+        jTextFieldNombre.setText(jTextFieldNombre.getText().toUpperCase());
     }//GEN-LAST:event_jTextFieldNombreKeyReleased
 
     private void jTextFieldApePaternoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldApePaternoKeyReleased
         // TODO add your handling code here:
-        jTextFieldApePaterno.setText(jTextFieldApePaterno.getText().trim().toUpperCase());
+        jTextFieldApePaterno.setText(jTextFieldApePaterno.getText().toUpperCase());
     }//GEN-LAST:event_jTextFieldApePaternoKeyReleased
 
     private void jTextFieldApeMaternoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldApeMaternoKeyReleased
         // TODO add your handling code here:        
-        jTextFieldApeMaterno.setText(jTextFieldApeMaterno.getText().trim().toUpperCase());
+        jTextFieldApeMaterno.setText(jTextFieldApeMaterno.getText().toUpperCase());
     }//GEN-LAST:event_jTextFieldApeMaternoKeyReleased
     private boolean CampNull() {
         if (jTextFieldNombre.getText() == ""

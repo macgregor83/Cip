@@ -8,6 +8,7 @@ package es.cip.view;
 import es.cip.bussines.bl.JFActividadesBL;
 import es.cip.bussines.dao.model.ArchivoFase;
 import es.cip.bussines.dao.model.Face;
+import es.cip.bussines.dao.model.ObservacionesProyecto;
 import es.cip.bussines.dao.model.Proyecto;
 import es.cip.util.Archivo;
 import es.cip.util.Convertir;
@@ -48,11 +49,13 @@ public class JFActividades extends javax.swing.JFrame {
             jComboBoxProyecto.addItem(object.getNombreProyecto());
         }
         if (bL.getListProyecto().size() > 0) {
-            bL.setListFase(bL.getListProyecto().get(0).getId());
+            bL.setListFase(bL.getListProyecto().get(0).getId());            
+            jComboBoxEntregable.removeAllItems();
             for (Face object : bL.getListFase()) {
                 jComboBoxEntregable.addItem(object.getNombreFase());
+                jTextFieldActividad.setText(bL.getListFase().get(0).getActividad());
             }
-            jTextFieldActividad.setText(bL.getListFase().get(0).getActividad());
+            
         }
         bL.setListArchivoFase();
         modelActualizacion.setNumRows(0);
@@ -95,6 +98,12 @@ public class JFActividades extends javax.swing.JFrame {
         jButtonCargar2 = new javax.swing.JButton();
         jTextFieldActividad = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jProgressBarPorcentaje1 = new javax.swing.JProgressBar();
+        jLabelPorcentaje1 = new javax.swing.JLabel();
+        jLabelObservaciones = new javax.swing.JLabel();
+        jScrollPane10 = new javax.swing.JScrollPane();
+        jTextAreaObservaciones = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -210,49 +219,51 @@ public class JFActividades extends javax.swing.JFrame {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabelActividad1)
-                    .addComponent(jLabelDescripcion1)
-                    .addComponent(jLabelAgregarArchivos)
-                    .addComponent(jLabelEntregable1)
-                    .addComponent(jLabelActividad2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBoxEntregable, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextFieldActividad)
-                    .addComponent(jComboBoxProyecto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPaneDescripcion1)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jTextFieldAgregarArchivos, javax.swing.GroupLayout.PREFERRED_SIZE, 536, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2)))
-                .addContainerGap())
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(jLabelObservaciones1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPaneObservaciones1)
-                .addGap(12, 12, 12))
             .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addComponent(jScrollPaneActualizaciones1, javax.swing.GroupLayout.PREFERRED_SIZE, 633, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButtonCargar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButtonCargar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(12, 12, 12))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                         .addComponent(jButtonActualizar1)
                         .addGap(41, 41, 41)
                         .addComponent(jButtonActualizar2)
                         .addGap(46, 46, 46)
                         .addComponent(jButtonConcluida1)
-                        .addGap(121, 121, 121))))
+                        .addGap(121, 121, 121))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPaneObservaciones1)
+                            .addComponent(jScrollPaneActualizaciones1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButtonCargar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonCargar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(12, 12, 12))))
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabelActividad1)
+                            .addComponent(jLabelDescripcion1)
+                            .addComponent(jLabelAgregarArchivos)
+                            .addComponent(jLabelEntregable1)
+                            .addComponent(jLabelActividad2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jComboBoxEntregable, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jTextFieldActividad)
+                            .addComponent(jComboBoxProyecto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jScrollPaneDescripcion1)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jTextFieldAgregarArchivos, javax.swing.GroupLayout.PREFERRED_SIZE, 536, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton2))))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addComponent(jLabelObservaciones1)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -288,16 +299,64 @@ public class JFActividades extends javax.swing.JFrame {
                         .addComponent(jButtonCargar2))
                     .addComponent(jScrollPaneActualizaciones1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelObservaciones1)
-                    .addComponent(jScrollPaneObservaciones1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addComponent(jLabelObservaciones1)
+                .addGap(5, 5, 5)
+                .addComponent(jScrollPaneObservaciones1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButtonActualizar1)
                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jButtonActualizar2)
                         .addComponent(jButtonConcluida1)))
                 .addContainerGap())
+        );
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        jProgressBarPorcentaje1.setForeground(new java.awt.Color(0, 255, 0));
+        jProgressBarPorcentaje1.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
+        jProgressBarPorcentaje1.setString("50%");
+        jProgressBarPorcentaje1.setStringPainted(true);
+
+        jLabelPorcentaje1.setText("Porcentaje Total");
+
+        jLabelObservaciones.setText("Observaciones ");
+
+        jTextAreaObservaciones.setEditable(false);
+        jTextAreaObservaciones.setColumns(20);
+        jTextAreaObservaciones.setRows(5);
+        jScrollPane10.setViewportView(jTextAreaObservaciones);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(jLabelPorcentaje1)
+                            .addComponent(jProgressBarPorcentaje1, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabelObservaciones)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane10))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabelPorcentaje1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jProgressBarPorcentaje1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabelObservaciones)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 409, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -307,13 +366,17 @@ public class JFActividades extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -337,7 +400,7 @@ public class JFActividades extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (jTableActualizaciones1.getRowCount() > 0) {
             bL.guardar();
-
+            this.setVisible(false);
         }
     }//GEN-LAST:event_jButtonConcluida1ActionPerformed
 
@@ -397,6 +460,12 @@ public class JFActividades extends javax.swing.JFrame {
             for (ArchivoFase object : bL.getListArchivoFase()) {
                 modelActualizacion.addRow(new Object[]{object.getExtEntregable(), object.getFecha()});
             }
+            String obs="";
+            for (ObservacionesProyecto observacionesProyecto : bL.setListObsProy()) {                
+                obs+=observacionesProyecto.getObservaciones();
+                obs+="\n\n";
+            }
+            jTextAreaObservaciones.setText(obs);
         }
     }//GEN-LAST:event_jComboBoxProyectoActionPerformed
 
@@ -469,13 +538,19 @@ public class JFActividades extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelAgregarArchivos;
     private javax.swing.JLabel jLabelDescripcion1;
     private javax.swing.JLabel jLabelEntregable1;
+    private javax.swing.JLabel jLabelObservaciones;
     private javax.swing.JLabel jLabelObservaciones1;
+    private javax.swing.JLabel jLabelPorcentaje1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JProgressBar jProgressBarPorcentaje1;
+    private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPaneActualizaciones1;
     private javax.swing.JScrollPane jScrollPaneDescripcion1;
     private javax.swing.JScrollPane jScrollPaneObservaciones1;
     private javax.swing.JTable jTableActualizaciones1;
     private javax.swing.JTextArea jTextAreaDescripcion1;
+    private javax.swing.JTextArea jTextAreaObservaciones;
     private javax.swing.JTextArea jTextAreaObservaciones1;
     private javax.swing.JTextField jTextFieldActividad;
     private javax.swing.JTextField jTextFieldAgregarArchivos;

@@ -382,11 +382,15 @@ public class JFases extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -449,7 +453,7 @@ public class JFases extends javax.swing.JFrame {
                 && jComboBoxProyecto.getItemCount() == 1
                 && jTable6.getRowCount() > 0) {
             bL.guardar(jTextFieldNombreMetod.getText().trim());
-            JAsociaciònUsuario asociacionUsuario = new JAsociaciònUsuario("", 1);
+            JAsociaciònUsuario asociacionUsuario = new JAsociaciònUsuario("", bL.getIdUsuario());
             asociacionUsuario.setVisible(true);
             this.setVisible(false);
         } else {
@@ -534,7 +538,7 @@ public class JFases extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                JFases f = new JFases("11710262216430000001", 1);
+                JFases f = new JFases("11711031227240000001", 2);
 //                f.setIdProyecto("11710262216430000001");
                 f.setVisible(true);
             }

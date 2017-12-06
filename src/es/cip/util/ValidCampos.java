@@ -34,6 +34,12 @@ public class ValidCampos {
         return encaja.matches();
 
     }
+        public static final boolean esNumeroCasa(String cadena) {
+        Pattern patron = Pattern.compile("[0-9]*|[S/N]*");
+        Matcher encaja = patron.matcher(cadena);
+        return encaja.matches();
+
+    }
 
     public static final boolean esURL(String cadena) {
         Pattern patron = Pattern.compile("^(http|https|ftp)\\:\\/\\/[a-z0-9\\.-]+\\.(([a-z]{2,4})+)$");
@@ -84,7 +90,7 @@ public class ValidCampos {
 
     public static final boolean esSoloLetras(String entrada) {
         //String entrada = " No para mi?? que triste :( por que??"; ^[a-zA-Z]+(\\s*[a-zA-Z]*)*[a-zA-Z]+$
-        Pattern patron = Pattern.compile("[^A-Za-zñáéíóúüÜÑÁÉÍÓÚ]");
+        Pattern patron = Pattern.compile("[^A-Za-zñáéíóúüÜÑÁÉÍÓÚ\\s]");
         //Pattern patron = Pattern.compile("^[a-zA-Z0-9ñáéíóúüÜÑÁÉÍÓÚ]+( [a-zA-Z0-9ñáéíóúüÜÑÁÉÍÓÚ]+)*$");
         Matcher encaja = patron.matcher(entrada);
 
@@ -99,7 +105,7 @@ public class ValidCampos {
     }
 
     public static final boolean sonLetrasNumero(String cadena) {
-        Pattern patron = Pattern.compile("[^A-Za-zñáéíóúüÜÑÁÉÍÓÚ0-9]");
+        Pattern patron = Pattern.compile("[^A-Za-zñáéíóúüÜÑÁÉÍÓÚ0-9\\s]");
         Matcher encaja = patron.matcher(cadena);
         if (!encaja.find()) //System.out.println("solo tiene letras y espacio!");
         {

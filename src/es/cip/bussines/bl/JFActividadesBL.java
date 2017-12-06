@@ -7,9 +7,11 @@ package es.cip.bussines.bl;
 
 import es.cip.bussines.dao.control.ArchivoFaseJpaController;
 import es.cip.bussines.dao.control.FaceJpaController;
+import es.cip.bussines.dao.control.ObservacionesProyectoJpaController;
 import es.cip.bussines.dao.control.ProyectoJpaController;
 import es.cip.bussines.dao.model.ArchivoFase;
 import es.cip.bussines.dao.model.Face;
+import es.cip.bussines.dao.model.ObservacionesProyecto;
 import es.cip.bussines.dao.model.Proyecto;
 import es.cip.util.Convertir;
 import es.cip.util.Cte;
@@ -35,15 +37,22 @@ public class JFActividadesBL {
     private FaceJpaController faceJpaController = new FaceJpaController();
     private ProyectoJpaController proyectoJpaController = new ProyectoJpaController();
     private ArchivoFaseJpaController archivoFaseJpaController = new ArchivoFaseJpaController();
+    private ObservacionesProyectoJpaController observacionesProyectoJpaController = new ObservacionesProyectoJpaController();
 
     private List<Face> listFase;
     private List<Proyecto> listProyecto;
     private List<ArchivoFase> listArchivoFase = new ArrayList<>();
     private Face fase;
     private String idProyecto;
+    private List<ObservacionesProyecto> listObsProy;
 
     public JFActividadesBL(Integer idUsuario) {
         this.idUsuario = idUsuario;
+    }
+
+    public List<ObservacionesProyecto> setListObsProy() {
+        listObsProy = observacionesProyectoJpaController.findProyecto(idProyecto);
+        return listObsProy;
     }
 
     public List<Face> setListFase(String nombreProyecto) {

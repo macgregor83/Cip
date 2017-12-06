@@ -8,15 +8,18 @@ package es.cip.bussines.bl;
 import es.cip.bussines.dao.control.AreaColaboracionJpaController;
 import es.cip.bussines.dao.control.FaceJpaController;
 import es.cip.bussines.dao.control.ObjetivoEspecificoJpaController;
+import es.cip.bussines.dao.control.ObservacionesProyectoJpaController;
 import es.cip.bussines.dao.control.ProyectoJpaController;
 import es.cip.bussines.dao.control.RecursoHumanoProyectoJpaController;
 import es.cip.bussines.dao.control.RecursosMaterialesJpaController;
 import es.cip.bussines.dao.model.AreaColaboracion;
 import es.cip.bussines.dao.model.Face;
 import es.cip.bussines.dao.model.ObjetivoEspecifico;
+import es.cip.bussines.dao.model.ObservacionesProyecto;
 import es.cip.bussines.dao.model.Proyecto;
 import es.cip.bussines.dao.model.RecursoHumanoProyecto;
 import es.cip.bussines.dao.model.RecursosMateriales;
+import es.cip.prueba;
 import es.cip.util.Cte;
 import java.util.List;
 import java.util.logging.Level;
@@ -36,6 +39,7 @@ public class JFEstadosProyectosBL {
     private RecursoHumanoProyectoJpaController recursosHumanoProyectoJpaController = new RecursoHumanoProyectoJpaController();
     private FaceJpaController faceJpaController = new FaceJpaController();
     private ProyectoJpaController proyectoJpaController = new ProyectoJpaController();
+    private ObservacionesProyectoJpaController observacionesProyectoJpaController = new ObservacionesProyectoJpaController();
 
     private List<RecursoHumanoProyecto> lisRHP;
     private List<ObjetivoEspecifico> lisObjEsp;
@@ -43,6 +47,7 @@ public class JFEstadosProyectosBL {
     private List<RecursosMateriales> lisRH;
     private List<Face> lisFace;
     private Proyecto proyecto;
+    private ObservacionesProyecto observacionesProyecto = new ObservacionesProyecto();
 
     public void getProyectos() {
         recursoHumanoProyectoJpaController.findRecursoHumanoProyecto(1);
@@ -79,16 +84,43 @@ public class JFEstadosProyectosBL {
         return lisFace = faceJpaController.findProyecto(idProyecto);
     }
 
+    public ObservacionesProyecto getObservacionesProyecto() {
+        return observacionesProyecto;
+    }
+
     public boolean guardar() {
         try {
             if (proyecto.getIdEstatusProyecto() == Cte.Estatus_Proyecto_Por_Aprobacion) {
                 proyecto.setIdEstatusProyecto(Cte.Estatus_Proyecto_Aprobado);
                 proyectoJpaController.edit(proyecto);
+                if (observacionesProyecto.getObservaciones() != "") {
+                    observacionesProyecto.setIdProyecto(proyecto.getId());
+                    observacionesProyectoJpaController.create(observacionesProyecto);
+                }
                 return true;
             } else {
                 JOptionPane.showMessageDialog(null, Cte.No_aprueba);
                 return false;
             }
+        } catch (Exception ex) {
+            Logger.getLogger(JFEstadosProyectosBL.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, ex);
+        }
+        return false;
+    }
+
+    public boolean guardar(String observaciones) {
+        try {
+
+            if (observaciones != "") {
+                observacionesProyecto.setObservaciones(observaciones);
+                observacionesProyecto.setIdProyecto(proyecto.getId());
+                observacionesProyectoJpaController.create(observacionesProyecto);
+                JOptionPane.showMessageDialog(null, Cte.Guardo_Correcto);
+                return true;
+            }
+            return false;
+
         } catch (Exception ex) {
             Logger.getLogger(JFEstadosProyectosBL.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(null, ex);

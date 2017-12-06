@@ -42,7 +42,7 @@ public class JFDatosAcademicos extends javax.swing.JFrame {
         jLabelAlertaNombre.setToolTipText(Cte.No_Existe_Usuario);
 
         for (TipoUsuario li : bL.getListTipoUsuario("")) {
-            if (li.getId() < 10) {
+            if (li.getId() < Cte.Tipo_Admin) {
                 jComboBoxTipoDA.addItem(li.getTipo());
             }
         }
