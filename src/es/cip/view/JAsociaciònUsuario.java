@@ -116,8 +116,8 @@ public class JAsociaciònUsuario extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jComboBoxProyecto = new javax.swing.JComboBox<>();
         txtTutor = new javax.swing.JLabel();
-        jButtonMas = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jbMayor = new javax.swing.JButton();
+        jbtMenos = new javax.swing.JButton();
         jLabelAlertNomPro = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTableAsesor = new javax.swing.JTable();
@@ -135,6 +135,7 @@ public class JAsociaciònUsuario extends javax.swing.JFrame {
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel12.setText("Recursos Humanos");
 
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/enviar.png"))); // NOI18N
         jButton2.setText("Enviar a Aprobación");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -161,17 +162,17 @@ public class JAsociaciònUsuario extends javax.swing.JFrame {
 
         txtTutor.setText("Tutor");
 
-        jButtonMas.setText("+");
-        jButtonMas.addActionListener(new java.awt.event.ActionListener() {
+        jbMayor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/mas.png"))); // NOI18N
+        jbMayor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonMasActionPerformed(evt);
+                jbMayorActionPerformed(evt);
             }
         });
 
-        jButton3.setText("-");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jbtMenos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/menos.png"))); // NOI18N
+        jbtMenos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jbtMenosActionPerformed(evt);
             }
         });
 
@@ -221,9 +222,9 @@ public class JAsociaciònUsuario extends javax.swing.JFrame {
                             .addComponent(jLabelAlertNomPro1))
                         .addGap(5, 5, 5)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButtonMas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(35, 35, 35))
+                            .addComponent(jbtMenos, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jbMayor, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))
+                        .addGap(67, 67, 67))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jButton2)
@@ -239,19 +240,19 @@ public class JAsociaciònUsuario extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBoxProyecto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9)
-                    .addComponent(jButtonMas)
+                    .addComponent(jbMayor)
                     .addComponent(jLabelAlertNomPro, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBoxNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtTutor)
-                    .addComponent(jButton3)
+                    .addComponent(jbtMenos)
                     .addComponent(jLabelAlertNomPro1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2)
-                .addGap(18, 18, 18))
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -275,7 +276,7 @@ public class JAsociaciònUsuario extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void jbtMenosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtMenosActionPerformed
         // TODO add your handling code here:
         if (jTableAsesor.getSelectedRows().length == 0) {
             bL.getLisRHProyecto().remove(jTableAsesor.getRowCount() - 1);
@@ -290,7 +291,7 @@ public class JAsociaciònUsuario extends javax.swing.JFrame {
         if (jTableAsesor.getRowCount()==0) {
             jComboBoxProyecto.setEnabled(true);
         }
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_jbtMenosActionPerformed
 
     private void jComboBoxProyectoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jComboBoxProyectoKeyReleased
         // TODO add your handling code here:
@@ -318,7 +319,7 @@ public class JAsociaciònUsuario extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jComboBoxProyectoItemStateChanged
 
-    private void jButtonMasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMasActionPerformed
+    private void jbMayorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbMayorActionPerformed
         // TODO add your handling code here:
 //        System.out.println((jComboBoxProyecto.getItemCount() > 0) +"-"+ (jComboBoxNombre.getItemCount() > 0) +"-"+
 //                (jComboBoxProyecto.getSelectedIndex()> 0) +"-"+ (jComboBoxNombre.getSelectedIndex() > 0));
@@ -338,7 +339,7 @@ public class JAsociaciònUsuario extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(rootPane, Cte.Selecciona_Campos);
         }
-    }//GEN-LAST:event_jButtonMasActionPerformed
+    }//GEN-LAST:event_jbMayorActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
@@ -390,8 +391,6 @@ public class JAsociaciònUsuario extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButtonMas;
     private javax.swing.JComboBox<String> jComboBoxNombre;
     private javax.swing.JComboBox<String> jComboBoxProyecto;
     private javax.swing.JLabel jLabel12;
@@ -401,6 +400,8 @@ public class JAsociaciònUsuario extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable jTableAsesor;
+    private javax.swing.JButton jbMayor;
+    private javax.swing.JButton jbtMenos;
     private javax.swing.JLabel txtTutor;
     // End of variables declaration//GEN-END:variables
 }
