@@ -6,9 +6,7 @@
 package es.cip.view;
 
 import es.cip.bussines.bl.JFActividadesBL;
-import es.cip.bussines.dao.model.ArchivoFase;
 import es.cip.bussines.dao.model.Face;
-import es.cip.bussines.dao.model.ObservacionesProyecto;
 import es.cip.bussines.dao.model.Proyecto;
 import es.cip.util.Archivo;
 import es.cip.util.Convertir;
@@ -49,20 +47,40 @@ public class JFActividades extends javax.swing.JFrame {
             jComboBoxProyecto.addItem(object.getNombreProyecto());
         }
         if (bL.getListProyecto().size() > 0) {
-            bL.setListFase(bL.getListProyecto().get(0).getId());            
-            jComboBoxEntregable.removeAllItems();
+            bL.setListFase(bL.getListProyecto().get(0).getId());
             for (Face object : bL.getListFase()) {
                 jComboBoxEntregable.addItem(object.getNombreFase());
-                jTextFieldActividad.setText(bL.getListFase().get(0).getActividad());
             }
-            
+            jTextFieldActividad.setText(bL.getListFase().get(0).getActividad());
         }
-        bL.setListArchivoFase();
-        modelActualizacion.setNumRows(0);
+//        jComboBoxProyecto.getEditor().getEditorComponent().addKeyListener(new KeyAdapter() {
+//            public void keyReleased(KeyEvent evt) {
+//                String cadenaEscrita = jComboBoxProyecto.getEditor().getItem().toString().toUpperCase();
+//                DefaultComboBoxModel modelo = new DefaultComboBoxModel();
+//                modelo.addElement(cadenaEscrita);
+//                bL.setListProyecto(cadenaEscrita);
+//                List<Proyecto> list = bL.getListProyecto();
+//                if (list.size() > 0) {
+//                    for (Proyecto proyecto : list) {
+//                        modelo.addElement(proyecto.getNombreProyecto());
+//                    }
+//                    jComboBoxProyecto.setModel(modelo);
+//                    if (jComboBoxProyecto.getItemCount() > 0) {
+//                        jComboBoxProyecto.showPopup();
+//                        if (evt.getKeyCode() != 8) {
+//                            ((JTextComponent) jComboBoxProyecto.getEditor().getEditorComponent()).select(cadenaEscrita.length(), jComboBoxProyecto.getEditor().getItem().toString().length());
+//                        } else {
+//                            jComboBoxProyecto.getEditor().setItem(cadenaEscrita);
+//                        }
+//                    } else {
+//                        jComboBoxProyecto.addItem(cadenaEscrita);
+//                    }
+//                } else {
+//                    jComboBoxProyecto.setModel(modelo);
+//                }
+//            }
+//        });
 
-        for (ArchivoFase object : bL.getListArchivoFase()) {
-            modelActualizacion.addRow(new Object[]{object.getExtEntregable(), object.getFecha()});
-        }
     }
 
     /**
@@ -119,7 +137,7 @@ public class JFActividades extends javax.swing.JFrame {
 
         jLabelAgregarArchivos.setText("Agregar archivos ");
 
-        jButtonCargar1.setText("+");
+        jButtonCargar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/mas.png"))); // NOI18N
         jButtonCargar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonCargar1ActionPerformed(evt);
@@ -163,6 +181,7 @@ public class JFActividades extends javax.swing.JFrame {
         jTextAreaObservaciones1.setRows(5);
         jScrollPaneObservaciones1.setViewportView(jTextAreaObservaciones1);
 
+        jButtonActualizar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/editar.png"))); // NOI18N
         jButtonActualizar1.setText("Actualizar Actividad");
         jButtonActualizar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -170,6 +189,7 @@ public class JFActividades extends javax.swing.JFrame {
             }
         });
 
+        jButtonConcluida1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/terminado.png"))); // NOI18N
         jButtonConcluida1.setText("Actividad Concluida");
         jButtonConcluida1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -177,6 +197,7 @@ public class JFActividades extends javax.swing.JFrame {
             }
         });
 
+        jButtonActualizar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cerrar.png"))); // NOI18N
         jButtonActualizar2.setText("Eliminar Actividad");
         jButtonActualizar2.setEnabled(false);
         jButtonActualizar2.addActionListener(new java.awt.event.ActionListener() {
@@ -193,7 +214,7 @@ public class JFActividades extends javax.swing.JFrame {
             }
         });
 
-        jButtonCargar2.setText("-");
+        jButtonCargar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/menos.png"))); // NOI18N
         jButtonCargar2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonCargar2ActionPerformed(evt);
@@ -208,6 +229,7 @@ public class JFActividades extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/subir_archivo.png"))); // NOI18N
         jButton2.setText("Subir Archivo");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -219,58 +241,56 @@ public class JFActividades extends javax.swing.JFrame {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabelActividad1)
+                    .addComponent(jLabelDescripcion1)
+                    .addComponent(jLabelAgregarArchivos)
+                    .addComponent(jLabelEntregable1)
+                    .addComponent(jLabelActividad2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jComboBoxEntregable, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jTextFieldActividad)
+                    .addComponent(jComboBoxProyecto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPaneDescripcion1)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jTextFieldAgregarArchivos, javax.swing.GroupLayout.PREFERRED_SIZE, 536, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton2)))
+                .addContainerGap())
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(jLabelObservaciones1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPaneObservaciones1)
+                .addGap(12, 12, 12))
             .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addComponent(jScrollPaneActualizaciones1, javax.swing.GroupLayout.PREFERRED_SIZE, 633, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButtonCargar1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonCargar2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addGap(43, 43, 43))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                         .addComponent(jButtonActualizar1)
                         .addGap(41, 41, 41)
                         .addComponent(jButtonActualizar2)
                         .addGap(46, 46, 46)
                         .addComponent(jButtonConcluida1)
-                        .addGap(121, 121, 121))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPaneObservaciones1)
-                            .addComponent(jScrollPaneActualizaciones1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButtonCargar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButtonCargar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(12, 12, 12))))
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabelActividad1)
-                            .addComponent(jLabelDescripcion1)
-                            .addComponent(jLabelAgregarArchivos)
-                            .addComponent(jLabelEntregable1)
-                            .addComponent(jLabelActividad2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBoxEntregable, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextFieldActividad)
-                            .addComponent(jComboBoxProyecto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPaneDescripcion1)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(jTextFieldAgregarArchivos, javax.swing.GroupLayout.PREFERRED_SIZE, 536, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton2))))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addComponent(jLabelObservaciones1)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addGap(121, 121, 121))))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel10)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addGap(17, 17, 17)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelActividad2)
                     .addComponent(jComboBoxProyecto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -286,29 +306,28 @@ public class JFActividades extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelAgregarArchivos)
                     .addComponent(jTextFieldAgregarArchivos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelDescripcion1)
                     .addComponent(jScrollPaneDescripcion1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jButtonCargar1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButtonCargar2))
-                    .addComponent(jScrollPaneActualizaciones1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabelObservaciones1)
-                .addGap(5, 5, 5)
-                .addComponent(jScrollPaneObservaciones1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jScrollPaneActualizaciones1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(51, 51, 51)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonActualizar1)
-                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButtonActualizar2)
-                        .addComponent(jButtonConcluida1)))
-                .addContainerGap())
+                    .addComponent(jLabelObservaciones1)
+                    .addComponent(jScrollPaneObservaciones1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButtonActualizar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonActualizar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonConcluida1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(29, 29, 29))
         );
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -366,8 +385,8 @@ public class JFActividades extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -390,18 +409,11 @@ public class JFActividades extends javax.swing.JFrame {
 
     private void jButtonActualizar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualizar1ActionPerformed
         // TODO add your handling code here:
-        if (jTableActualizaciones1.getRowCount() > 0) {
-            bL.guardar();
-
-        }
+        
     }//GEN-LAST:event_jButtonActualizar1ActionPerformed
 
     private void jButtonConcluida1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConcluida1ActionPerformed
         // TODO add your handling code here:
-        if (jTableActualizaciones1.getRowCount() > 0) {
-            bL.guardar();
-            this.setVisible(false);
-        }
     }//GEN-LAST:event_jButtonConcluida1ActionPerformed
 
     private void jButtonActualizar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualizar2ActionPerformed
@@ -410,11 +422,9 @@ public class JFActividades extends javax.swing.JFrame {
 
     private void jButtonCargar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCargar1ActionPerformed
         // TODO add your handling code here:
-        jComboBoxProyecto.setEnabled(false);
-        jComboBoxEntregable.setEnabled(false);
         if (jTextFieldAgregarArchivos.getText() != "" && jTextAreaDescripcion1.getText() != "") {
             bL.setListArchivoFase(jTextFieldAgregarArchivos.getText(), jTextAreaDescripcion1.getText());
-            modelActualizacion.addRow(new Object[]{Convertir.nombreArchivo(jTextFieldAgregarArchivos.getText()), Fecha.Date()});
+            modelActualizacion.addRow(new Object[]{Convertir.nombreArchivo(jTextFieldAgregarArchivos.getText()), Fecha.Date()});  
             jTextFieldAgregarArchivos.setText("");
             jTextAreaDescripcion1.setText("");
         }
@@ -422,7 +432,6 @@ public class JFActividades extends javax.swing.JFrame {
 
     private void jButtonCargar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCargar2ActionPerformed
         // TODO add your handling code here:
-
         if (jTableActualizaciones1.getSelectedRows().length == 0) {
             bL.getListArchivoFase().remove(jTableActualizaciones1.getRowCount() - 1);
             modelActualizacion.removeRow(jTableActualizaciones1.getRowCount() - 1);
@@ -432,10 +441,6 @@ public class JFActividades extends javax.swing.JFrame {
                 bL.getListFase().remove(jTableActualizaciones1.getSelectedRows()[i - 1]);
                 modelActualizacion.removeRow(jTableActualizaciones1.getSelectedRows()[i - 1]);
             }
-        }
-        if (jTableActualizaciones1.getRowCount() == 0) {
-            jComboBoxProyecto.setEnabled(true);
-            jComboBoxEntregable.setEnabled(true);
         }
     }//GEN-LAST:event_jButtonCargar2ActionPerformed
 
@@ -451,21 +456,8 @@ public class JFActividades extends javax.swing.JFrame {
             for (Face object : bL.getListFase()) {
                 jComboBoxEntregable.addItem(object.getNombreFase());
             }
-            if (bL.getListFase().size() > 0) {
-                jTextFieldActividad.setText(bL.getListFase().get(0).getActividad());
-            }
+            jTextFieldActividad.setText(bL.getListFase().get(0).getActividad());
             bL.setIdFase(0);
-            bL.setListArchivoFase();
-            modelActualizacion.setNumRows(0);
-            for (ArchivoFase object : bL.getListArchivoFase()) {
-                modelActualizacion.addRow(new Object[]{object.getExtEntregable(), object.getFecha()});
-            }
-            String obs="";
-            for (ObservacionesProyecto observacionesProyecto : bL.setListObsProy()) {                
-                obs+=observacionesProyecto.getObservaciones();
-                obs+="\n\n";
-            }
-            jTextAreaObservaciones.setText(obs);
         }
     }//GEN-LAST:event_jComboBoxProyectoActionPerformed
 
@@ -475,11 +467,6 @@ public class JFActividades extends javax.swing.JFrame {
             bL.setListFase(bL.getListProyecto().get(jComboBoxProyecto.getSelectedIndex()).getId());
             jTextFieldActividad.setText(bL.getListFase().get(jComboBoxEntregable.getSelectedIndex()).getActividad());
             bL.setIdFase(jComboBoxEntregable.getSelectedIndex());
-            bL.setListArchivoFase();
-            modelActualizacion.setNumRows(0);
-            for (ArchivoFase object : bL.getListArchivoFase()) {
-                modelActualizacion.addRow(new Object[]{object.getExtEntregable(), object.getFecha()});
-            }
         }
     }//GEN-LAST:event_jComboBoxEntregableActionPerformed
 

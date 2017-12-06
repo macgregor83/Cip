@@ -64,7 +64,7 @@ public class PantallaInicio extends javax.swing.JFrame {
         jLabelImagTorre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelImagTorre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/upt.png"))); // NOI18N
         getContentPane().add(jLabelImagTorre);
-        jLabelImagTorre.setBounds(0, 90, 1320, 660);
+        jLabelImagTorre.setBounds(440, 250, 150, 190);
 
         jMenu1.setText("Menú");
 

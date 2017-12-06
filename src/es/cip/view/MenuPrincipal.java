@@ -37,9 +37,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private SeccionPublica SeccionPublica;
     private JFConvocatorias convocatoria;
     private JFAprobarProyecto aprovarProyecto;
-
+    private JConsultaConvocatoria consultaConvocatoria;
     private JFases JFases;
-    private Login login = new Login();
+    private Login login;
     private JFEstadosProyectos jFEstadosProyectos;
     private JFInvitados invitados;
     private JFConvocatorias jFConvocatorias;
@@ -49,6 +49,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
      */
     public MenuPrincipal() {
         jTabbedPane = new JTabbedPane();
+        try {
+            login = new Login();
+        } catch (Exception ex) {
+            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         initComponents();
 
@@ -94,6 +99,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jButtonCerrar = new javax.swing.JButton();
         jTabbedPane = new javax.swing.JTabbedPane();
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar = new javax.swing.JMenuBar();
         jMenu6 = new javax.swing.JMenu();
         jMenuUsuario = new javax.swing.JMenu();
@@ -126,6 +132,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
+        jTabbedPane.setToolTipText("");
+        jTabbedPane.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jTabbedPaneStateChanged(evt);
+            }
+        });
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cip");
         setAutoRequestFocus(false);
@@ -136,12 +149,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jTabbedPane.setToolTipText("");
-        jTabbedPane.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                jTabbedPaneStateChanged(evt);
-            }
-        });
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cip.jpeg"))); // NOI18N
 
         jMenu6.setText("Cerrar Sesion");
         jMenu6.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -301,13 +310,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 1061, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1061, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 584, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 584, Short.MAX_VALUE)
         );
 
         pack();
@@ -373,21 +380,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
             this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
         }
     }//GEN-LAST:event_jMenuItemEstadosActionPerformed
-
-    private void jTabbedPaneStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPaneStateChanged
-        // TODO add your handling code here:
-        System.out.println(jTabbedPane.getSelectedIndex());
-        if (jTabbedPane.getSelectedIndex() > -1) {
-            JPanel pnl = new JPanel();
-            pnl.setOpaque(false);
-            JLabel label = new JLabel(jTabbedPane.getTitleAt(jTabbedPane.getSelectedIndex()));
-            pnl.add(label);
-            pnl.add(jButtonCerrar);
-            if (jTabbedPane.getSelectedIndex() >= 0) {
-                jTabbedPane.setTabComponentAt(jTabbedPane.getSelectedIndex(), pnl);
-            }
-        }
-    }//GEN-LAST:event_jTabbedPaneStateChanged
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
         actividades = new JFActividades(login.getIdUsuario());
@@ -492,6 +484,21 @@ public class MenuPrincipal extends javax.swing.JFrame {
             this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
         }
     }//GEN-LAST:event_formMouseExited
+
+    private void jTabbedPaneStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPaneStateChanged
+        // TODO add your handling code here:
+        System.out.println(jTabbedPane.getSelectedIndex());
+        if (jTabbedPane.getSelectedIndex() > -1) {
+            JPanel pnl = new JPanel();
+            pnl.setOpaque(false);
+            JLabel label = new JLabel(jTabbedPane.getTitleAt(jTabbedPane.getSelectedIndex()));
+            pnl.add(label);
+            pnl.add(jButtonCerrar);
+            if (jTabbedPane.getSelectedIndex() >= 0) {
+                jTabbedPane.setTabComponentAt(jTabbedPane.getSelectedIndex(), pnl);
+            }
+        }
+    }//GEN-LAST:event_jTabbedPaneStateChanged
     public void pestana(JPanel pantalla, String title) {
 
         jTabbedPane.addTab(title, null, pantalla);
@@ -606,6 +613,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCerrar;
     private javax.swing.JMenuItem jDatosAcademicos;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu4;
@@ -632,19 +640,19 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane;
     // End of variables declaration//GEN-END:variables
 
-    private void cerrar() {
-
-        Object[] opciones = {"Aceptar", "Cancelar"};
-        int eleccion = JOptionPane.showOptionDialog(rootPane, "En realidad desea realizar cerrar la aplicacion", "Mensaje de Confirmacion",
-                JOptionPane.YES_NO_OPTION,
-                JOptionPane.QUESTION_MESSAGE, null, opciones, "Aceptar");
-        if (eleccion == JOptionPane.YES_OPTION) {
-            System.exit(0);
-        } else {
-        }
-    }
-
-    private void formWindowClosing(java.awt.event.WindowEvent evt) {
-        cerrar();
-    }
+//    private void cerrar() {
+//
+//        Object[] opciones = {"Aceptar", "Cancelar"};
+//        int eleccion = JOptionPane.showOptionDialog(rootPane, "En realidad desea realizar cerrar la aplicacion", "Mensaje de Confirmacion",
+//                JOptionPane.YES_NO_OPTION,
+//                JOptionPane.QUESTION_MESSAGE, null, opciones, "Aceptar");
+//        if (eleccion == JOptionPane.YES_OPTION) {
+//            System.exit(0);
+//        } else {
+//        }
+//    }
+//
+//    private void formWindowClosing(java.awt.event.WindowEvent evt) {
+//        cerrar();
+//    }
 }

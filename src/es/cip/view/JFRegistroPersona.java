@@ -268,6 +268,7 @@ public class JFRegistroPersona extends javax.swing.JFrame {
             }
         });
 
+        jButtonAgregar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/agregar.png"))); // NOI18N
         jButtonAgregar1.setText("Agregar");
         jButtonAgregar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -480,8 +481,8 @@ public class JFRegistroPersona extends javax.swing.JFrame {
                     .addComponent(jTextFieldNumExt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelNumExt))
                 .addGap(22, 22, 22)
-                .addComponent(jButtonAgregar1)
-                .addContainerGap())
+                .addComponent(jButtonAgregar1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
