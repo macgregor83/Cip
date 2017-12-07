@@ -30,10 +30,11 @@ public class JFDatosAcademicos extends javax.swing.JFrame {
 
     private JFDatosAcademicosBL bL = new JFDatosAcademicosBL();
 
-    /**
+    /** Datos Academicos
      * Creates new form JFDatosAcademicos
      */
     public JFDatosAcademicos() {
+        this.setTitle(Cte.Titulo_JFDatosAcademicos);
         initComponents();
         jLabelAlertaNoControl.setVisible(false);
         jLabelAlertaNombre.setVisible(false);
@@ -215,6 +216,7 @@ public class JFDatosAcademicos extends javax.swing.JFrame {
         jPanel2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("Datos Academicos");
 
         jLabel13.setText("Univercidad");
@@ -336,10 +338,6 @@ public class JFDatosAcademicos extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(0, 175, Short.MAX_VALUE)
-                .addComponent(jLabel7)
-                .addGap(73, 73, 73))
-            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -359,7 +357,7 @@ public class JFDatosAcademicos extends javax.swing.JFrame {
                     .addComponent(jTextFieldDireccionDA)
                     .addComponent(jTextFieldLocalidadDA)
                     .addComponent(jComboBoxTipoDA, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jComboBoxUniversidad, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jComboBoxUniversidad, 0, 319, Short.MAX_VALUE)
                     .addComponent(jComboBoxCampus, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jComboBoxCarrera, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jComboBoxNombre, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -371,6 +369,7 @@ public class JFDatosAcademicos extends javax.swing.JFrame {
                     .addComponent(jLabelAlertaNoControl)
                     .addComponent(jLabelAlertaNombre))
                 .addContainerGap())
+            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

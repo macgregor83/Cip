@@ -7,6 +7,7 @@ package es.cip.view;
 
 import es.cip.bussines.bl.JFEstadoProyectoBL;
 import es.cip.bussines.dao.model.Proyecto;
+import es.cip.util.Cte;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -17,10 +18,11 @@ public class JFEstadoProyecto extends javax.swing.JFrame {
 
     private final JFEstadoProyectoBL bl;
     private DefaultTableModel modelEstadoProyecto;
-    /**
+    /** Proyectos Proyectos
      * Creates new form JFEstadoProyecto
      */
     public JFEstadoProyecto(Integer idUsuario) {
+        this.setTitle(Cte.Titulo_JFEstadoProyecto);
         bl=new JFEstadoProyectoBL(idUsuario);
         initComponents();
         modelEstadoProyecto = (DefaultTableModel) jTEstadoProyecto.getModel();

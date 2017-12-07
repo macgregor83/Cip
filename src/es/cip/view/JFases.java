@@ -28,11 +28,13 @@ public class JFases extends javax.swing.JFrame {
     private JFasesBL bL = new JFasesBL();
     private final DefaultTableModel modelFase;
 
-    /**
+    /** 
      * Creates new form JFases
      */
     public JFases(String idProyecto, Integer idUsuario) {
+        
         initComponents();
+        this.setTitle(Cte.Titulo_JFases);
         bL.setIdProyecto(idProyecto);
         bL.setIdUsuario(idUsuario);
 
@@ -416,7 +418,6 @@ public class JFases extends javax.swing.JFrame {
                 jComboBoxIniciaMes.getSelectedIndex(),
                 jTextAreaObjetivo.getText(),
                 jTextFieldActividad.getText());
-
         jTextFieldNombreFase.setText("");
         jComboBoxDuracion.setSelectedIndex(0);
         jComboBoxIniciaMes.setSelectedIndex(0);

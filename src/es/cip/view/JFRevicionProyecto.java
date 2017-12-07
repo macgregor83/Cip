@@ -27,7 +27,9 @@ public class JFRevicionProyecto extends javax.swing.JPanel {
      * Creates new form AprobarProyecto
      */
     public JFRevicionProyecto() {
+        
         initComponents();
+        
         ///// jComboBoxNombre ////
 //        jComboBoxProyecto.getEditor().getEditorComponent().addKeyListener(new KeyAdapter() {
 //            public void keyReleased(KeyEvent evt) {

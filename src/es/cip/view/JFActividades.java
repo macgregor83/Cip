@@ -10,6 +10,7 @@ import es.cip.bussines.dao.model.Face;
 import es.cip.bussines.dao.model.Proyecto;
 import es.cip.util.Archivo;
 import es.cip.util.Convertir;
+import es.cip.util.Cte;
 import es.cip.util.Fecha;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -32,12 +33,13 @@ public class JFActividades extends javax.swing.JFrame {
     private JFActividadesBL bL;
     private final DefaultTableModel modelActualizacion;
 
-    /**
+    /** Actualizaciones de la Actividad
      * Creates new form JFActividades
      */
     public JFActividades(Integer idUsuario) {
         bL = new JFActividadesBL(idUsuario);
         initComponents();
+        this.setTitle(Cte.Titulo_JFActividades);
         bL.setListProyecto("");
 
         modelActualizacion = (DefaultTableModel) jTableActualizaciones1.getModel();
@@ -411,12 +413,13 @@ public class JFActividades extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (jTableActualizaciones1.getRowCount() > 0) {
             bL.guardar();
-
+            this.setVisible(true);
         }
     }//GEN-LAST:event_jButtonActualizar1ActionPerformed
 
     private void jButtonConcluida1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConcluida1ActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_jButtonConcluida1ActionPerformed
 
     private void jButtonActualizar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualizar2ActionPerformed

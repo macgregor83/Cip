@@ -31,10 +31,11 @@ public class JFConvocatorias extends javax.swing.JFrame {
     private JFConvocatoriasBL jfConvocatoriasBL;
     boolean ValCampos = true;
 
-    /**
+    /** CONVOCATORIAS
      * Creates new form JFConvocatorias
      */
     public JFConvocatorias() {
+        this.setTitle(Cte.Titulo_JFConvocatorias);
         jfConvocatoriasBL = new JFConvocatoriasBL();
         initComponents();
         jLabelAstArchivo.setVisible(false);

@@ -23,10 +23,11 @@ public class JFRegistroPersona extends javax.swing.JFrame {
     private boolean valCampos = true;
     private JFRegistroPersonaBL bL = new JFRegistroPersonaBL();
 
-    /**
+    /**  Datos Personales
      * Creates new form JFRegistroPersona
      */
     public JFRegistroPersona() {
+        this.setTitle(Cte.Titulo_JFRegistroPersona);
         initComponents();
 
         jLabelNombre.setVisible(false);
@@ -139,6 +140,7 @@ public class JFRegistroPersona extends javax.swing.JFrame {
         jLabel5.setText("Correo Electronico ");
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("Datos Personales");
 
         jTextFieldNombre.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -343,45 +345,39 @@ public class JFRegistroPersona extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(17, 17, 17))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel12)
-                            .addComponent(jLabel11)
-                            .addComponent(jLabel10)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel13)
-                            .addComponent(jLabel14))
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextFieldNumInt, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE)
-                            .addComponent(jTextFieldMunicipio, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextFieldColonia, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextFieldDireccion, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextFieldCorreo, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextFieldTelefono, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextFieldNombre, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextFieldNumExt)
-                            .addComponent(jTextFieldApePaterno)
-                            .addComponent(jTextFieldUsuar)
-                            .addComponent(jTextFieldApeMaterno)
-                            .addComponent(jButtonAgregar1, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextFieldPass)
-                            .addComponent(jTextFieldPass1))))
+                .addGap(41, 41, 41)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel12)
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel13)
+                    .addComponent(jLabel14))
+                .addGap(0, 29, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jTextFieldNumInt, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE)
+                    .addComponent(jTextFieldMunicipio, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jTextFieldColonia, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jTextFieldDireccion, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jTextFieldCorreo, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jTextFieldTelefono, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jTextFieldNombre, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jTextFieldNumExt)
+                    .addComponent(jTextFieldApePaterno)
+                    .addComponent(jTextFieldUsuar)
+                    .addComponent(jTextFieldApeMaterno)
+                    .addComponent(jButtonAgregar1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jTextFieldPass)
+                    .addComponent(jTextFieldPass1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -406,12 +402,14 @@ public class JFRegistroPersona extends javax.swing.JFrame {
                         .addComponent(jLabelNumInt, javax.swing.GroupLayout.Alignment.TRAILING))
                     .addComponent(jLabelNumExt))
                 .addContainerGap())
+            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel6)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)

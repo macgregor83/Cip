@@ -8,6 +8,7 @@ package es.cip.view;
 import es.cip.bussines.bl.JFInvitadosBL;
 import es.cip.bussines.dao.model.Proyecto;
 import es.cip.bussines.dao.model.RecursoHumanoProyecto;
+import es.cip.util.Cte;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.List;
@@ -22,10 +23,11 @@ public class JFInvitados extends javax.swing.JFrame {
 
     private final JFInvitadosBL bl;
 
-    /**
+    /** Registro Proyectos
      * Creates new form JFInvitados
      */
     public JFInvitados() {
+        this.setTitle(Cte.Titulo_JFInvitados);
         bl = new JFInvitadosBL();
         initComponents();
         jComboBoxNombreProyecto.getEditor().getEditorComponent().addKeyListener(new KeyAdapter() {
@@ -170,7 +172,7 @@ public class JFInvitados extends javax.swing.JFrame {
 
         jLabel18.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel18.setText("Proyectos");
+        jLabel18.setText("Registro Proyectos");
 
         jTable10.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

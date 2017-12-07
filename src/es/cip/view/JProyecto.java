@@ -6,14 +6,17 @@
 
 package es.cip.view;
 
+import es.cip.util.Cte;
+
 /**
  *
  * @author Vero
  */
 public class JProyecto extends javax.swing.JFrame {
 
-    /** Creates new form JProyecto */
+    /** Creates new form JProyecto  Datos Proyecto */
     public JProyecto() {
+        this.setTitle(Cte.Titulo_JProyecto);
         initComponents();
     }
 

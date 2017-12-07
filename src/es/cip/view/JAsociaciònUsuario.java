@@ -27,11 +27,14 @@ public class JAsociaciònUsuario extends javax.swing.JFrame {
     public JAsociaciònUsuarioBL bL = new JAsociaciònUsuarioBL();
     private final DefaultTableModel modelTabla;
 
-    /**
+    /** Recursos Humanos
      * Creates new form JAsociaciònUsuario
      */
     public JAsociaciònUsuario(String idProyecto, Integer idUsuario) {
+        this.setTitle(Cte.Titulo_JAsociaciònUsuario);
+        
         initComponents();
+        
         bL.setIdProyecto(idProyecto);
         bL.setIdUsuario(idUsuario);
         jLabelAlertNomPro.setVisible(false);

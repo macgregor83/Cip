@@ -73,7 +73,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         int size = 20;
         jButtonCerrar.setPreferredSize(new Dimension(size, size));
         jButtonCerrar.setToolTipText("Cerrar Pestaña");
-
         //tabButton.setText("...");
         //jButtonCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("../Imagenes/boton_cerrar.gif")));
 //        try {

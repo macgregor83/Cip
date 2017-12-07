@@ -7,6 +7,7 @@ package es.cip.view;
 
 import es.cip.bussines.bl.LoginBL;
 import es.cip.bussines.dao.model.Usuario;
+import es.cip.util.Cte;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Image;
@@ -36,7 +37,7 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() throws Exception {
 
-        //
+        this.setTitle(Cte.Titulo_Login);
         initComponents();
         JFRegistroPersona = new JFRegistroPersona();
 
@@ -140,7 +141,7 @@ public class Login extends javax.swing.JFrame {
         });
 
         jLabel1.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 1, 18)); // NOI18N
-        jLabel1.setText("CONTROL INTEGRAL DE PROYECTOS");
+        jLabel1.setText("CONTROL INTEGRADOR DE PROYECTOS");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel2.setText("UNIVERSIDAD POLITECNICA DE TULANCINGO");
@@ -224,7 +225,7 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonAceptarActionPerformed
 
     private void btnCrearUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearUsuarioActionPerformed
-        formWindowClosing();
+        //formWindowClosing();
 
         // TODO add your handling code here:
 
@@ -242,14 +243,14 @@ public class Login extends javax.swing.JFrame {
 
     private void jButtonCancelar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelar1ActionPerformed
 //      Login lo;
-        try {
-//            lo = new  Login();
-//             lo.disable();
-
-        } catch (Exception ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
+//        try {
+////            lo = new  Login();
+////             lo.disable();
+//
+//        } catch (Exception ex) {
+//            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+    formWindowClosing();
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonCancelar1ActionPerformed
 
@@ -262,7 +263,6 @@ public class Login extends javax.swing.JFrame {
 
     private void btnCrearUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCrearUsuarioMouseClicked
         // TODO add your handling code here:
-        // TODO add your handling code here:
         this.toBack();
         JFRegistroPersona.setVisible(true);
         JFRegistroPersona.toFront();
@@ -271,7 +271,6 @@ public class Login extends javax.swing.JFrame {
 
     private void btnCrearUsuarioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCrearUsuarioMouseEntered
         // TODO add your handling code here:
-        
         this.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }//GEN-LAST:event_btnCrearUsuarioMouseEntered
 

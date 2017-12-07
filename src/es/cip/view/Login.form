@@ -216,7 +216,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Bitstream Vera Sans Mono" size="18" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="CONTROL INTEGRAL DE PROYECTOS"/>
+        <Property name="text" type="java.lang.String" value="CONTROL INTEGRADOR DE PROYECTOS"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">

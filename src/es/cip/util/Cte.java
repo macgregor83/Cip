@@ -7,6 +7,7 @@ package es.cip.util;
 
 import es.cip.bussines.dao.model.EstatusProyecto;
 import es.cip.view.Login;
+import java.awt.Window;
 
 /**
  *
@@ -46,7 +47,7 @@ public class Cte {
     public static final String No_Existe_Usuario = "Selecciona una persona";
 
     public static final String Error_BD = "Error en conexión a base de datos";
-    public static final String Guardo_Correcto="Se guardó correctamente.";
+    public static final String Guardo_Correcto = "Se guardó correctamente.";
     ///** Estatus Del Proyecto**///
     //public static final Integer Estatus_Proyecto = 1;
 
@@ -54,19 +55,34 @@ public class Cte {
     public static final String Selecciona_Campos = "Selecciona algun Campo";
     public static final String No_aprueba = "Aun no se puede aprobar o ya esta aprobado";
 
+    // id de tabla estatus registro
     public static Integer Estatus_Registro_Proyecto_F1 = 1;
     public static Integer Estatus_Registro_Proyecto_F2 = 2;
     public static final Integer Estatus_Proyecto_Por_Aprobacion = 3;
     public static Integer Estatus_Proyecto_Aprobado = 4;
 
+    // id de tabla estatus fase
     public static final Integer Estatus_Face_registro = 1;
     public static final Integer Estatus_Face_Desarrollo = 2;
     public static final Integer Estatus_Face_Termino = 3;
-
+    //id de tabla estatus tipo de usuario
     public static final Integer Tipo_Alumno = 1;
     public static final Integer Tipo_Asesor = 2;
     public static final Integer Tipo_Admin = 3;
-    
 
-    
+    //TITULOS DE PANTALLAS
+    public static final String Titulo_JAsociaciònUsuario = "Recursos Humanos";
+    public static final String Titulo_JFActividades = "Actualizaciones de la Actividad";
+    public static final String Titulo_JFConvocatorias = "Convocatorias";
+    public static final String Titulo_JFDatosAcademicos = "Datos Academicos";
+    public static final String Titulo_JFEstadoProyecto = "Proyectos";
+    public static final String Titulo_JFEstadosProyectos = "Proyectos";
+    public static final String Titulo_JFInvitados = "Registro Proyectos";
+    public static final String Titulo_JFPatentes = "Patente";
+    public static final String Titulo_JFRegistroPersona = "Datos Personales";
+    public static final String Titulo_JFases = "Metodologia/Cronograma";
+    public static final String Titulo_JProyecto = "Datos Proyecto";
+    public static final String Titulo_JRegistroProyecto = "Proyecto Datos Proyecto";
+    public static final String Titulo_Login="Login";
+
 }
