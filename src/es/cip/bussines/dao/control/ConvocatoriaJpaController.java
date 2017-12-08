@@ -127,7 +127,22 @@ public class ConvocatoriaJpaController implements Serializable {
             em.close();
         }
     }
-
+    public List<Convocatoria> findConvocatoria(String nombreProyecto) {
+        EntityManager em = getEntityManager();
+        try {
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery(Convocatoria.class);
+            Root<Convocatoria> c = cq.from(Convocatoria.class);
+            cq.select(c);
+            cq.where(em.getCriteriaBuilder().or(
+                            em.getCriteriaBuilder().like(c.get("id"), "%" + nombreProyecto.trim() + "%"),
+                            em.getCriteriaBuilder().like(c.get("Convocatoria"), "%" + nombreProyecto.trim() + "%"))
+                    );
+            Query q = em.createQuery(cq);
+            return q.getResultList();
+        } finally {
+            em.close();
+        }
+    }
     public int getConvocatoriaCount() {
         EntityManager em = getEntityManager();
         try {

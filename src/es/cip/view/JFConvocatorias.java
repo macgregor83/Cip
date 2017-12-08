@@ -27,12 +27,12 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  * @author Vero
  */
 public class JFConvocatorias extends javax.swing.JFrame {
-
+    
     private JFConvocatoriasBL jfConvocatoriasBL;
     boolean ValCampos = true;
 
-    /** CONVOCATORIAS
-     * Creates new form JFConvocatorias
+    /**
+     * CONVOCATORIAS Creates new form JFConvocatorias
      */
     public JFConvocatorias() {
         this.setTitle(Cte.Titulo_JFConvocatorias);
@@ -76,6 +76,7 @@ public class JFConvocatorias extends javax.swing.JFrame {
         jLabel41.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel41.setText("CONVOCATORIAS");
 
+        txtArchivo.setEditable(false);
         txtArchivo.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtArchivoFocusLost(evt);
@@ -217,23 +218,22 @@ public class JFConvocatorias extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtArchivoActionPerformed
-  String nombre="";
-  JFileChooser file=new JFileChooser();
-  file.showSaveDialog(this);
-  File guarda =file.getSelectedFile();
- 
-  if(guarda !=null)
-  {
-    txtArchivo.setText(guarda.getPath());
-  JOptionPane.showMessageDialog(null,
-         "El archivo se a guardado Exitosamente",
-             "Información",JOptionPane.INFORMATION_MESSAGE);
-  }else{
-     JOptionPane.showMessageDialog(null,
-        "Su archivo no se ha guardado",
-           "Advertencia",JOptionPane.WARNING_MESSAGE);
-  
-  }        // TODO add your handling code here:
+        String nombre = "";
+        JFileChooser file = new JFileChooser();
+        file.showSaveDialog(this);
+        File guarda = file.getSelectedFile();
+        
+        if (guarda != null) {
+            txtArchivo.setText(guarda.getPath());
+            JOptionPane.showMessageDialog(null,
+                    "El archivo se a guardado Exitosamente",
+                    "Información", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null,
+                    "Su archivo no se ha guardado",
+                    "Advertencia", JOptionPane.WARNING_MESSAGE);
+            
+        }        // TODO add your handling code here:
     }//GEN-LAST:event_txtArchivoActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
@@ -242,21 +242,23 @@ public class JFConvocatorias extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        if (ValCampos) {
-            
-            jfConvocatoriasBL.getConvocatoria().setConvocatoria(jTextField5.getText());
-            jfConvocatoriasBL.getConvocatoria().setFechaAperura(jDateChooser1.getDate());
-            jfConvocatoriasBL.getConvocatoria().setFechaCierre(jDateChooser2.getDate());
-            jfConvocatoriasBL.getConvocatoria().setUrl(jTextField2.getText());
-            try {
-                jfConvocatoriasBL.getConvocatoria().setAchivoPDF(Convertir.convertDocToByteArray(txtArchivo.getText()));
-            } catch (FileNotFoundException ex) {
-                Logger.getLogger(JFConvocatorias.class.getName()).log(Level.SEVERE, null, ex);
+        try {
+            if (ValCampos) {
+                
+                jfConvocatoriasBL.getConvocatoria().setConvocatoria(jTextField5.getText());
+                jfConvocatoriasBL.getConvocatoria().setFechaAperura(jDateChooser1.getDate());
+                jfConvocatoriasBL.getConvocatoria().setFechaCierre(jDateChooser2.getDate());                
+                jfConvocatoriasBL.getConvocatoria().setUrl(jTextField2.getText());
+                jfConvocatoriasBL.setUrlArchivo(txtArchivo.getText());
+                jfConvocatoriasBL.guardar();
+                JOptionPane.showMessageDialog(rootPane, Cte.Guardo_Correcto);
+                this.setVisible(false);
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Falta llenar campos");
             }
-            
-            jfConvocatoriasBL.guardar();
-        }else {
-            JOptionPane.showMessageDialog(rootPane, "Falta llenar campos");
+        } catch (Exception ex) {
+            Logger.getLogger(JFConvocatorias.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, Cte.Error_BD + "\n" + ex);
         }
 
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -282,8 +284,8 @@ public class JFConvocatorias extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField2FocusLost
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-     archivo(); 
- 
+        archivo();
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
@@ -339,42 +341,39 @@ public class JFConvocatorias extends javax.swing.JFrame {
     private javax.swing.JTextField txtArchivo;
     // End of variables declaration//GEN-END:variables
 
-public String archivo(){
-    
-    String aux="";   
-  String texto="";
-  try
-  {
-   /**llamamos el metodo que permite cargar la ventana*/
-   JFileChooser file=new JFileChooser();
-   FileNameExtensionFilter filter = new FileNameExtensionFilter(".pdf","pdf");
-   file.setFileFilter(filter);
-   file.showOpenDialog(this);
-   /**abrimos el archivo seleccionado*/
-   File abre=file.getSelectedFile();
-   
- String ruta = abre.getPath();
-   txtArchivo.setText(ruta);
-     byte[] by = Convertir.convertDocToByteArray(ruta);
-
-     Convertir.convertByteArrayToDoc(by);
-   /**recorremos el archivo, lo leemos para plasmarlo
-   *en el area de texto*/
-   
-     
-   }
-   catch(IOException ex)
-   {
-     JOptionPane.showMessageDialog(null,ex+"" +
-           "\nNo se ha encontrado el archivo",
-                 "ADVERTENCIA!!!",JOptionPane.WARNING_MESSAGE);
-    }
-  return texto;//
+    public String archivo() {
         
+        String aux = "";
+        String texto = "";
+        try {
+            /**
+             * llamamos el metodo que permite cargar la ventana
+             */
+            JFileChooser file = new JFileChooser();
+            FileNameExtensionFilter filter = new FileNameExtensionFilter(".pdf", "pdf");
+            file.setFileFilter(filter);
+            file.showOpenDialog(this);
+            /**
+             * abrimos el archivo seleccionado
+             */
+            File abre = file.getSelectedFile();
+            
+            String ruta = abre.getPath();
+            txtArchivo.setText(ruta);
+            byte[] by = Convertir.convertDocToByteArray(ruta);
 
-}
+            //Convertir.convertByteArrayToDoc(by);
+            /**
+             * recorremos el archivo, lo leemos para plasmarlo en el area de
+             * texto
+             */
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, ex + ""
+                    + "\nNo se ha encontrado el archivo",
+                    "ADVERTENCIA!!!", JOptionPane.WARNING_MESSAGE);
+        }
+        return texto;//
+
+    }
     
-    
 }
-
-

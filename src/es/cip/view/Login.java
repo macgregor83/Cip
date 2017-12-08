@@ -220,8 +220,13 @@ public class Login extends javax.swing.JFrame {
     private void jButtonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAceptarActionPerformed
         this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
         val = bL.validarUsuario(jTextFieldUsuario.getText(), jTextFieldContrasenia.getText());
-        this.setVisible(!val);
+        if(!val){
+            JOptionPane.showMessageDialog(null, Cte.Usuario_Pass_Erroneas);
+        }
+        this.setVisible(!val);        
         jTextFieldContrasenia.setText("");
+        //jTextFieldUsuario.setText("");
+        this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
     }//GEN-LAST:event_jButtonAceptarActionPerformed
 
     private void btnCrearUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearUsuarioActionPerformed

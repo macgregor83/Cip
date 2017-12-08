@@ -28,6 +28,7 @@ public class Convocatoria implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    
     private String Convocatoria;
     
     @Lob
@@ -66,9 +67,7 @@ public class Convocatoria implements Serializable {
 
     public void setAchivoPDF(byte[] AchivoPDF) {
         this.AchivoPDF = AchivoPDF;
-    }
-
- 
+    } 
 
     public String getUrl() {
         return url;

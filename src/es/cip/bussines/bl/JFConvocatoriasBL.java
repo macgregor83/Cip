@@ -6,22 +6,29 @@
 package es.cip.bussines.bl;
 
 //import es.cip.bussines.dao.control.ConvocatoriaJpaController;
-
 import es.cip.bussines.dao.control.ConvocatoriaJpaController;
 import es.cip.bussines.dao.model.Convocatoria;
+import es.cip.util.Convertir;
+import es.cip.view.JFConvocatorias;
+import java.io.FileNotFoundException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 //import es.cip.bussines.dao.model.Convocatoria;
-
 /**
  *
  * @author iMac
  */
 public class JFConvocatoriasBL {
-    private Convocatoria convocatoria =new Convocatoria();
-    private ConvocatoriaJpaController convocatoriaJpaController=new ConvocatoriaJpaController();
+
+    private Convocatoria convocatoria = new Convocatoria();
+    private ConvocatoriaJpaController convocatoriaJpaController = new ConvocatoriaJpaController();
     private String urlArchivo;
-    
-    public void guardar(){        
+
+    public void guardar() throws Exception {
+       
+        convocatoria.setAchivoPDF(Convertir.convertDocToByteArray(urlArchivo));
+        convocatoria.setExtAchivoPDF(Convertir.nombreArchivo(urlArchivo));
         convocatoriaJpaController.create(convocatoria);
     }
 
@@ -33,7 +40,6 @@ public class JFConvocatoriasBL {
         this.convocatoria = convocatoria;
     }
 
-    
     public String getUrlArchivo() {
         return urlArchivo;
     }
@@ -42,6 +48,4 @@ public class JFConvocatoriasBL {
         this.urlArchivo = urlArchivo;
     }
 
-
-    
 }

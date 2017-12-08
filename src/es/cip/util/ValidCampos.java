@@ -42,7 +42,7 @@ public class ValidCampos {
     }
 
     public static final boolean esURL(String cadena) {
-        Pattern patron = Pattern.compile("^(http|https|ftp)\\:\\/\\/[a-z0-9\\.-]+\\.(([a-z]{2,4})+)$");
+        Pattern patron = Pattern.compile("^(http|https|ftp)\\:\\/\\/[a-zA-Z0-9\\.-]+\\.(([a-z]{2,4})+)$");
         Matcher encaja = patron.matcher(cadena);
         return encaja.matches();
 

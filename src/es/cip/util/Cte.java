@@ -46,7 +46,11 @@ public class Cte {
     public static final String No_Control_Rep = "Este Numero de control ya existe";
     public static final String No_Existe_Usuario = "Selecciona una persona";
 
+    //Errores
     public static final String Error_BD = "Error en conexión a base de datos";
+    public static final String Error_Abrir_PDF = "Error al abrir pdf";
+    public static final String Error_Abrir_Pagina = "Error al abrir Pagina Web";
+
     public static final String Guardo_Correcto = "Se guardó correctamente.";
     ///** Estatus Del Proyecto**///
     //public static final Integer Estatus_Proyecto = 1;
@@ -83,6 +87,12 @@ public class Cte {
     public static final String Titulo_JFases = "Metodologia/Cronograma";
     public static final String Titulo_JProyecto = "Datos Proyecto";
     public static final String Titulo_JRegistroProyecto = "Proyecto Datos Proyecto";
-    public static final String Titulo_Login="Login";
+    public static final String Titulo_Login = "Login";
+
+    //JFProyectoConvocatoria
+    public static final String Selecciona_Solo_Uno = "Selecciona solo un registro de cada tabla.";
+    
+    //login
+    public static final String Usuario_Pass_Erroneas="Usuaro o Contraseña Erronea";
 
 }

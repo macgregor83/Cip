@@ -38,7 +38,7 @@ public class Archivo {
 
             byte[] by = Convertir.convertDocToByteArray(ruta);
 
-            Convertir.convertByteArrayToDoc(by);
+            //Convertir.convertByteArrayToDoc(by);
             /**
              * recorremos el archivo, lo leemos para plasmarlo en el area de
              * texto

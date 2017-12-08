@@ -5,6 +5,7 @@
  */
 package es.cip.util;
 
+import java.awt.Desktop;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -40,14 +41,14 @@ public class Convertir {
 
     }
 
-    public static void convertByteArrayToDoc(byte[] bytes) throws IOException {
+    public static void convertByteArrayToDoc(byte[] bytes, String nombreArchivo) throws IOException {
 
-        File someFile = new File("java2.pdf");
+        File someFile = new File(nombreArchivo);
         FileOutputStream fos = new FileOutputStream(someFile);
-        fos.write(bytes);
+        fos.write(bytes);        
         fos.flush();
         fos.close();
-
+        Desktop.getDesktop().open(someFile);
     }
 
     public static String nombreArchivo(String urlArchivo) {
@@ -69,7 +70,7 @@ public class Convertir {
             String urlArchivo = "D:\\Users\\iMac\\Documents\\maestria\\1re cuatrimestre\\Nueva carpeta\\tarea\\IMGOD_Atc1_S2.pdf";
             byte[] by = Convertir.convertDocToByteArray(urlArchivo);
 
-            Convertir.convertByteArrayToDoc(by);
+            Convertir.convertByteArrayToDoc(by,"a.pdf");
             Convertir.nombreArchivo(urlArchivo);
 
         } catch (FileNotFoundException ex) {

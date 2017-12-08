@@ -43,6 +43,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private JFEstadosProyectos jFEstadosProyectos;
     private JFInvitados invitados;
     private JFConvocatorias jfConvocatorias;
+    private JFProyectoConvocatoria jfProyectoConvocatoria;
 
     /**
      * Creates new form JMenuPrincipal
@@ -454,8 +455,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
-        jfConvocatorias=new JFConvocatorias();
-        jfConvocatorias.setVisible(true);
+        jfProyectoConvocatoria=new JFProyectoConvocatoria(login.getIdUsuario());
+        jfProyectoConvocatoria.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenu6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu6ActionPerformed

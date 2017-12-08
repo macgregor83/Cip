@@ -26,14 +26,12 @@ public class ConvocaProyec implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     private String idProyecto;
     private Integer idConvocatoria;
     @Temporal(TemporalType.DATE)
     private Date Fecha;
-
-    private String ExtAchivoPDF;
 
     @JoinColumn(name = "idProyecto", referencedColumnName = "id", insertable = false, updatable = false)
     @ManyToOne(optional = false)
@@ -43,11 +41,11 @@ public class ConvocaProyec implements Serializable {
     @ManyToOne(optional = false)
     private Convocatoria convocatoria;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -75,14 +73,6 @@ public class ConvocaProyec implements Serializable {
         this.Fecha = Fecha;
     }
 
-    public String getExtAchivoPDF() {
-        return ExtAchivoPDF;
-    }
-
-    public void setExtAchivoPDF(String ExtAchivoPDF) {
-        this.ExtAchivoPDF = ExtAchivoPDF;
-    }
-
     public Proyecto getProyecto() {
         return proyecto;
     }
@@ -102,7 +92,7 @@ public class ConvocaProyec implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (int) id;
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
