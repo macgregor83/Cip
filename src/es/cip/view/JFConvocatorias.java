@@ -18,6 +18,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -27,7 +28,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  * @author Vero
  */
 public class JFConvocatorias extends javax.swing.JFrame {
-    
+
     private JFConvocatoriasBL jfConvocatoriasBL;
     boolean ValCampos = true;
 
@@ -55,20 +56,21 @@ public class JFConvocatorias extends javax.swing.JFrame {
         jPanel9 = new javax.swing.JPanel();
         jLabel41 = new javax.swing.JLabel();
         txtArchivo = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        jTextFieldLink = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        jTextFieldConvocatoria = new javax.swing.JTextField();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jDateChooser2 = new com.toedter.calendar.JDateChooser();
         jLabelAstArchivo = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setIconImage((new ImageIcon(this.getClass().getResource("/Imagenes/cip.png"))).getImage());
 
         jPanel9.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -88,14 +90,14 @@ public class JFConvocatorias extends javax.swing.JFrame {
             }
         });
 
-        jTextField2.addFocusListener(new java.awt.event.FocusAdapter() {
+        jTextFieldLink.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
-                jTextField2FocusLost(evt);
+                jTextFieldLinkFocusLost(evt);
             }
         });
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldLink.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                jTextFieldLinkActionPerformed(evt);
             }
         });
 
@@ -117,9 +119,9 @@ public class JFConvocatorias extends javax.swing.JFrame {
 
         jLabel5.setText("Fecha Cierre");
 
-        jTextField5.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldConvocatoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField5ActionPerformed(evt);
+                jTextFieldConvocatoriaActionPerformed(evt);
             }
         });
 
@@ -156,12 +158,12 @@ public class JFConvocatorias extends javax.swing.JFrame {
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jDateChooser1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 621, Short.MAX_VALUE)
                             .addComponent(jDateChooser2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jTextFieldLink, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
                                 .addComponent(txtArchivo)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton2))
-                            .addComponent(jTextField5, javax.swing.GroupLayout.Alignment.TRAILING))))
+                            .addComponent(jTextFieldConvocatoria, javax.swing.GroupLayout.Alignment.TRAILING))))
                 .addGap(18, 18, 18)
                 .addComponent(jLabelAstArchivo))
         );
@@ -172,7 +174,7 @@ public class JFConvocatorias extends javax.swing.JFrame {
                 .addGap(55, 55, 55)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldConvocatoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -181,7 +183,7 @@ public class JFConvocatorias extends javax.swing.JFrame {
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldLink, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -222,7 +224,7 @@ public class JFConvocatorias extends javax.swing.JFrame {
         JFileChooser file = new JFileChooser();
         file.showSaveDialog(this);
         File guarda = file.getSelectedFile();
-        
+
         if (guarda != null) {
             txtArchivo.setText(guarda.getPath());
             JOptionPane.showMessageDialog(null,
@@ -232,29 +234,32 @@ public class JFConvocatorias extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,
                     "Su archivo no se ha guardado",
                     "Advertencia", JOptionPane.WARNING_MESSAGE);
-            
+
         }        // TODO add your handling code here:
     }//GEN-LAST:event_txtArchivoActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void jTextFieldLinkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldLinkActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_jTextFieldLinkActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         try {
-            if (ValCampos) {
-                
-                jfConvocatoriasBL.getConvocatoria().setConvocatoria(jTextField5.getText());
+            if (ValidCampos.sonLetrasNumero(jTextFieldConvocatoria.getText()) && jTextFieldConvocatoria.getText() != ""
+                    && ValidCampos.validarArchivo(txtArchivo.getText()) && txtArchivo.getText() != ""
+                    && ValidCampos.esURL(jTextFieldLink.getText()) && jTextFieldLink.getText() != ""
+                    && ValidCampos.mayorIgualFechas(jDateChooser1.getDate(), jDateChooser2.getDate())) {
+
+                jfConvocatoriasBL.getConvocatoria().setConvocatoria(jTextFieldConvocatoria.getText());
                 jfConvocatoriasBL.getConvocatoria().setFechaAperura(jDateChooser1.getDate());
-                jfConvocatoriasBL.getConvocatoria().setFechaCierre(jDateChooser2.getDate());                
-                jfConvocatoriasBL.getConvocatoria().setUrl(jTextField2.getText());
+                jfConvocatoriasBL.getConvocatoria().setFechaCierre(jDateChooser2.getDate());
+                jfConvocatoriasBL.getConvocatoria().setUrl(jTextFieldLink.getText());
                 jfConvocatoriasBL.setUrlArchivo(txtArchivo.getText());
                 jfConvocatoriasBL.guardar();
                 JOptionPane.showMessageDialog(rootPane, Cte.Guardo_Correcto);
                 this.setVisible(false);
             } else {
-                JOptionPane.showMessageDialog(rootPane, "Falta llenar campos");
+                JOptionPane.showMessageDialog(null, Cte.Falta_llenar_Campos);
             }
         } catch (Exception ex) {
             Logger.getLogger(JFConvocatorias.class.getName()).log(Level.SEVERE, null, ex);
@@ -263,9 +268,9 @@ public class JFConvocatorias extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
+    private void jTextFieldConvocatoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldConvocatoriaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField5ActionPerformed
+    }//GEN-LAST:event_jTextFieldConvocatoriaActionPerformed
 
     private void txtArchivoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtArchivoFocusLost
         // TODO add your handling code here:
@@ -276,14 +281,15 @@ public class JFConvocatorias extends javax.swing.JFrame {
         jLabelAstArchivo.setVisible(!ValidCampos.validarArchivo(txtArchivo.getText()));
     }//GEN-LAST:event_txtArchivoFocusLost
 
-    private void jTextField2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField2FocusLost
+    private void jTextFieldLinkFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldLinkFocusLost
         // TODO add your handling code here:
-        if (!ValidCampos.esURL(jTextField2.getText())) {
+        if (!ValidCampos.esURL(jTextFieldLink.getText())) {
             JOptionPane.showMessageDialog(rootPane, Cte.Archivo_Erroneo);
         }
-    }//GEN-LAST:event_jTextField2FocusLost
+    }//GEN-LAST:event_jTextFieldLinkFocusLost
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
         archivo();
 
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -336,13 +342,13 @@ public class JFConvocatorias extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabelAstArchivo;
     private javax.swing.JPanel jPanel9;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField jTextFieldConvocatoria;
+    private javax.swing.JTextField jTextFieldLink;
     private javax.swing.JTextField txtArchivo;
     // End of variables declaration//GEN-END:variables
 
     public String archivo() {
-        
+
         String aux = "";
         String texto = "";
         try {
@@ -357,7 +363,7 @@ public class JFConvocatorias extends javax.swing.JFrame {
              * abrimos el archivo seleccionado
              */
             File abre = file.getSelectedFile();
-            
+
             String ruta = abre.getPath();
             txtArchivo.setText(ruta);
             byte[] by = Convertir.convertDocToByteArray(ruta);
@@ -367,13 +373,14 @@ public class JFConvocatorias extends javax.swing.JFrame {
              * recorremos el archivo, lo leemos para plasmarlo en el area de
              * texto
              */
-        } catch (IOException ex) {
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex + ""
                     + "\nNo se ha encontrado el archivo",
                     "ADVERTENCIA!!!", JOptionPane.WARNING_MESSAGE);
+            txtArchivo.setText("");
         }
         return texto;//
 
     }
-    
+
 }

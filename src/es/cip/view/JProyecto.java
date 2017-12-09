@@ -7,6 +7,7 @@
 package es.cip.view;
 
 import es.cip.util.Cte;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -68,6 +69,7 @@ public class JProyecto extends javax.swing.JFrame {
         jLabelPorcentaje1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setIconImage((new ImageIcon(this.getClass().getResource("/Imagenes/cip.png"))).getImage());
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.setMaximumSize(new java.awt.Dimension(1059, 356));

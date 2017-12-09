@@ -5,6 +5,8 @@
  */
 package es.cip.view;
 
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author Vero
@@ -44,6 +46,7 @@ public class JConsultaConvocatoria extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setIconImage((new ImageIcon(this.getClass().getResource("/Imagenes/cip.png"))).getImage());
 
         jTable10.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

@@ -8,6 +8,7 @@ package es.cip.view;
 import es.cip.bussines.bl.JFEstadoProyectoBL;
 import es.cip.bussines.dao.model.Proyecto;
 import es.cip.util.Cte;
+import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -51,6 +52,7 @@ public class JFEstadoProyecto extends javax.swing.JFrame {
         btnConsultar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setIconImage((new ImageIcon(this.getClass().getResource("/Imagenes/cip.png"))).getImage());
 
         jTEstadoProyecto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

@@ -6,6 +6,7 @@
 package es.cip.view;
 
 import es.cip.util.Cte;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -45,6 +46,7 @@ public class JFPatentes extends javax.swing.JFrame {
         jComboBox1 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setIconImage((new ImageIcon(this.getClass().getResource("/Imagenes/cip.png"))).getImage());
 
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 

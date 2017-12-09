@@ -13,6 +13,8 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.text.JTextComponent;
 
 /**
@@ -22,14 +24,18 @@ import javax.swing.text.JTextComponent;
 public class JFInvitados extends javax.swing.JFrame {
 
     private final JFInvitadosBL bl;
+    private final DefaultTableModel modelUsuario;
 
-    /** Registro Proyectos
-     * Creates new form JFInvitados
+    /**
+     * Registro Proyectos Creates new form JFInvitados
      */
     public JFInvitados() {
         this.setTitle(Cte.Titulo_JFInvitados);
         bl = new JFInvitadosBL();
+        
         initComponents();
+        modelUsuario = (DefaultTableModel) jTable10.getModel();
+        modelUsuario.setNumRows(0);
         jComboBoxNombreProyecto.getEditor().getEditorComponent().addKeyListener(new KeyAdapter() {
             public void keyReleased(KeyEvent evt) {
                 String cadenaEscrita = jComboBoxNombreProyecto.getEditor().getItem().toString().toUpperCase();
@@ -57,6 +63,12 @@ public class JFInvitados extends javax.swing.JFrame {
                 }
             }
         });
+        bl.setLisRHP("");
+        DefaultComboBoxModel modelo = new DefaultComboBoxModel();
+        for (RecursoHumanoProyecto proyecto : bl.getLisRHP()) {
+            modelo.addElement(proyecto.getProyecto().getNombreProyecto());
+        }
+        jComboBoxNombreProyecto.setModel(modelo);
     }
 
     /**
@@ -81,12 +93,13 @@ public class JFInvitados extends javax.swing.JFrame {
         jTextAreaObjGen = new javax.swing.JTextArea();
         jLabel15 = new javax.swing.JLabel();
         jScrollPane10 = new javax.swing.JScrollPane();
-        jTextArea5 = new javax.swing.JTextArea();
+        jTextAreaResumen = new javax.swing.JTextArea();
         jLabel18 = new javax.swing.JLabel();
         jScrollPane16 = new javax.swing.JScrollPane();
         jTable10 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setIconImage((new ImageIcon(this.getClass().getResource("/Imagenes/cip.png"))).getImage());
 
         jPanel4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel4.setMaximumSize(new java.awt.Dimension(1059, 356));
@@ -143,34 +156,32 @@ public class JFInvitados extends javax.swing.JFrame {
         jLabel17.setText("Nombre del Proyecto");
 
         jComboBoxNombreProyecto.setEditable(true);
-        jComboBoxNombreProyecto.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                jComboBoxNombreProyectoFocusLost(evt);
-            }
-        });
-        jComboBoxNombreProyecto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxNombreProyectoActionPerformed(evt);
+        jComboBoxNombreProyecto.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBoxNombreProyectoItemStateChanged(evt);
             }
         });
 
         jTextAreaObjGen.setColumns(20);
-        jTextAreaObjGen.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
+        jTextAreaObjGen.setLineWrap(true);
         jTextAreaObjGen.setRows(5);
-        jTextAreaObjGen.setDisabledTextColor(new java.awt.Color(255, 255, 255));
+        jTextAreaObjGen.setWrapStyleWord(true);
+        jTextAreaObjGen.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         jTextAreaObjGen.setEnabled(false);
         jScrollPane9.setViewportView(jTextAreaObjGen);
 
         jLabel15.setText("Resumen/Abstract");
 
-        jTextArea5.setColumns(20);
-        jTextArea5.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
-        jTextArea5.setRows(5);
-        jTextArea5.setDisabledTextColor(new java.awt.Color(255, 255, 255));
-        jTextArea5.setEnabled(false);
-        jScrollPane10.setViewportView(jTextArea5);
+        jTextAreaResumen.setColumns(20);
+        jTextAreaResumen.setLineWrap(true);
+        jTextAreaResumen.setRows(5);
+        jTextAreaResumen.setWrapStyleWord(true);
+        jTextAreaResumen.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        jTextAreaResumen.setEnabled(false);
+        jScrollPane10.setViewportView(jTextAreaResumen);
 
-        jLabel18.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel18.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel18.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel18.setText("Registro Proyectos");
 
@@ -194,11 +205,12 @@ public class JFInvitados extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel17, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel15)
-                        .addComponent(jLabel10)))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel17)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel10)
+                        .addGap(6, 6, 6))
+                    .addComponent(jLabel15))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 1311, Short.MAX_VALUE)
@@ -207,31 +219,36 @@ public class JFInvitados extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                    .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(26, 26, 26)
-                        .addComponent(jScrollPane16)))
+                        .addComponent(jScrollPane16, javax.swing.GroupLayout.DEFAULT_SIZE, 1421, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(58, 58, 58)
+                        .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jLabel18)
-                .addGap(13, 13, 13)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBoxNombreProyecto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel17))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel10)
-                    .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel10)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel15))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel15)
+                    .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane16, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(69, 69, 69))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -263,20 +280,26 @@ public class JFInvitados extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton6ActionPerformed
 
-    private void jComboBoxNombreProyectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxNombreProyectoActionPerformed
-        // TODO add your handling code here:
+    private void jComboBoxNombreProyectoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxNombreProyectoItemStateChanged
+        // TODO add your handling code here: 
         int row = jComboBoxNombreProyecto.getSelectedIndex() - 1;
         System.out.println(row);
         if (row > 0) {
             jTextAreaObjGen.setText(bl.getLisRHP().get(row).getProyecto().getObjGeneral());
-
+            jTextAreaResumen.setText(bl.getLisRHP().get(row).getProyecto().getResumen());
+            modelUsuario.setNumRows(0);
+            for (RecursoHumanoProyecto rhp : bl.getLisRHP()) {
+                if (bl.getLisRHP().get(row).getProyecto().getId().equalsIgnoreCase(rhp.getIdProyecto())) {
+                    modelUsuario.addRow(new Object[]{rhp.getRecursoHumanoDatos().getUsuario().getNombre() + " " + rhp.getRecursoHumanoDatos().getUsuario().getApellidoPaterno() + " " + rhp.getRecursoHumanoDatos().getUsuario().getApellidoMaterno(),
+                        rhp.getRecursoHumanoDatos().getUniversidad().getNombre(),
+                        rhp.getRecursoHumanoDatos().getCampus().getNombre(),
+                        rhp.getRecursoHumanoDatos().getCarrera().getNombreCarrera(),
+                        rhp.getRecursoHumanoDatos().getUsuario().getCorreoElectronico()
+                    });
+                }
+            }
         }
-    }//GEN-LAST:event_jComboBoxNombreProyectoActionPerformed
-
-    private void jComboBoxNombreProyectoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jComboBoxNombreProyectoFocusLost
-        // TODO add your handling code here:
-
-    }//GEN-LAST:event_jComboBoxNombreProyectoFocusLost
+    }//GEN-LAST:event_jComboBoxNombreProyectoItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -328,8 +351,8 @@ public class JFInvitados extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane16;
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTable jTable10;
-    private javax.swing.JTextArea jTextArea5;
     private javax.swing.JTextArea jTextArea6;
     private javax.swing.JTextArea jTextAreaObjGen;
+    private javax.swing.JTextArea jTextAreaResumen;
     // End of variables declaration//GEN-END:variables
 }

@@ -42,7 +42,8 @@ public class ValidCampos {
     }
 
     public static final boolean esURL(String cadena) {
-        Pattern patron = Pattern.compile("^(http|https|ftp)\\:\\/\\/[a-zA-Z0-9\\.-]+\\.(([a-z]{2,4})+)$");
+        //"^(http|https|ftp)\\:\\/\\/[a-zA-Z0-9\\.-]+\\.(([a-z]{2,4})+)$"
+        Pattern patron = Pattern.compile("^(https?://)?(([\\w!~*'().&=+$%-]+: )?[\\w!~*'().&=+$%-]+@)?(([0-9]{1,3}\\.){3}[0-9]{1,3}|([\\w!~*'()-]+\\.)*([\\w^-][\\w-]{0,61})?[\\w]\\.[a-z]{2,6})(:[0-9]{1,4})?((/*)|(/+[\\w!~*'().;?:@&=+$,%#-]+)+/*)$");
         Matcher encaja = patron.matcher(cadena);
         return encaja.matches();
 
@@ -115,6 +116,17 @@ public class ValidCampos {
             return false;
         }
     }
+     public static final boolean sonLetrasNumeroSinEspacios(String cadena) {
+        Pattern patron = Pattern.compile("[^A-Za-zñáéíóúüÜÑÁÉÍÓÚ0-9]");
+        Matcher encaja = patron.matcher(cadena);
+        if (!encaja.find()) //System.out.println("solo tiene letras y espacio!");
+        {
+            return true;
+        } else //System.out.println("tiene otra cosa");
+        {
+            return false;
+        }
+    }
 
     public static final boolean esMoneda(String entrada) {
         //String entrada = " No para mi?? que triste :( por que??";
@@ -158,6 +170,7 @@ public class ValidCampos {
     }
 
     public static final boolean mayorIgualFechas(Date fechaDate1, Date fechaDate2) {
+        try{
         System.out.println("Parametro Date Fecha 1 = " + fechaDate1 + "\n"
                 + "Parametro Date fechaActual = " + fechaDate2 + "\n");
 
@@ -175,6 +188,9 @@ public class ValidCampos {
             return true;
         }
         return false;
+        }catch (Exception e) {
+            return false;
+        }
     }
 
 

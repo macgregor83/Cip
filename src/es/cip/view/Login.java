@@ -12,6 +12,7 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -66,7 +67,7 @@ public class Login extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
-        setIconImage(getIconImage());
+        setIconImage((new ImageIcon(this.getClass().getResource("/Imagenes/cip.png"))).getImage());
         setMinimumSize(new java.awt.Dimension(391, 332));
         setName("Control Cursos Capacitación"); // NOI18N
         setResizable(false);
@@ -125,6 +126,9 @@ public class Login extends javax.swing.JFrame {
 
         jTextFieldContrasenia.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
         jTextFieldContrasenia.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextFieldContraseniaKeyPressed(evt);
+            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTextFieldContraseniaKeyReleased(evt);
             }
@@ -283,6 +287,13 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
     }//GEN-LAST:event_btnCrearUsuarioMouseExited
+
+    private void jTextFieldContraseniaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldContraseniaKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
+                jButtonAceptar.doClick();
+            }
+    }//GEN-LAST:event_jTextFieldContraseniaKeyPressed
     public Integer getIdUsuario() {
         return this.bL.getIdUsuario();
     }

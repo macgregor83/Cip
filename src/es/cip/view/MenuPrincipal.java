@@ -13,6 +13,7 @@ import java.awt.FlowLayout;
 import static java.awt.Frame.MAXIMIZED_BOTH;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -61,7 +62,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenuUsuario.setVisible(false);
         jMenuProyecto.setVisible(false);
         jMenuAdmin.setVisible(false);
-        //jMenuConvocatoria.setVisible((login.getIdTipoUsuario()==Cte.Tipo_Alumno || login.getIdTipoUsuario()==Cte.Tipo_Asesor)?true:false);
+        jMenuConvocatoria.setVisible(false);
         jMenuPatente.setVisible(false);
 
         getContentPane().add(jTabbedPane, BorderLayout.CENTER);
@@ -143,6 +144,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         setTitle("Cip");
         setAutoRequestFocus(false);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setIconImage((new ImageIcon(this.getClass().getResource("/Imagenes/cip.png"))).getImage());
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 formMouseExited(evt);
@@ -530,8 +532,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
                             jMenuUsuario.setVisible((login.getIdTipoUsuario() == Cte.Tipo_Alumno || login.getIdTipoUsuario() == Cte.Tipo_Asesor) ? true : false);
                             jMenuProyecto.setVisible((login.getIdTipoUsuario() == Cte.Tipo_Alumno || login.getIdTipoUsuario() == Cte.Tipo_Asesor) ? true : false);
                             jMenuAdmin.setVisible((login.getIdTipoUsuario() == Cte.Tipo_Admin) ? true : false);
-                            //jMenuConvocatoria.setVisible((login.getIdTipoUsuario()==Cte.Tipo_Alumno || login.getIdTipoUsuario()==Cte.Tipo_Asesor)?true:false);
+                            jMenuConvocatoria.setVisible((login.getIdTipoUsuario()==Cte.Tipo_Alumno || login.getIdTipoUsuario()==Cte.Tipo_Asesor)?true:false);
                             jMenuPatente.setVisible((login.getIdTipoUsuario() == Cte.Tipo_Alumno || login.getIdTipoUsuario() == Cte.Tipo_Asesor) ? true : false);
+                            System.out.println("CIP- \t" + login.getUsuario().getNombre() + " " + login.getUsuario().getApellidoPaterno() + " " + login.getUsuario().getApellidoMaterno() + " ");
                             setTitle("CIP- \t" + login.getUsuario().getNombre() + " " + login.getUsuario().getApellidoPaterno() + " " + login.getUsuario().getApellidoMaterno() + " ");
                             login.setVisible(false);
                             van = false;

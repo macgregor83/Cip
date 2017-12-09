@@ -20,9 +20,9 @@ public class LoginBL {
 
     private Usuario usuario;
     private Login login;
-    private Integer idUsuario=0;
+    private Integer idUsuario = 0;
     private List<RecursoHumanoDatos> rhd;
-    private Integer idTipoUsuario=0;
+    private Integer idTipoUsuario = 0;
 
     public LoginBL() {
         usuario = new Usuario();
@@ -32,13 +32,12 @@ public class LoginBL {
     public boolean validarUsuario(String nickname, String pass) {
         LoginJpaController logjc = new LoginJpaController();
         List<Login> lis = logjc.findLogin(nickname, pass);
-        System.out.println(lis.size());
-        if (lis.size() > 0) {
+        if (lis.size() == 1) {
             this.idUsuario = lis.get(0).getIdUsuario();
-            RecursoHumanoDatosJpaController rhdjc=new RecursoHumanoDatosJpaController();
+            RecursoHumanoDatosJpaController rhdjc = new RecursoHumanoDatosJpaController();
             List<RecursoHumanoDatos> list = rhdjc.findIdUsuario(idUsuario);
-            idTipoUsuario=list.get(0).getIdTipoUsuario();
-            usuario=list.get(0).getUsuario();
+            idTipoUsuario = list.get(0).getIdTipoUsuario();
+            usuario = list.get(0).getUsuario();
             return true;
         }
         return false;
@@ -51,8 +50,9 @@ public class LoginBL {
     public Integer getIdTipoUsuario() {
         return idTipoUsuario;
     }
-        public Usuario getUsuario() {
+
+    public Usuario getUsuario() {
         return usuario;
     }
-    
+
 }

@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.JTextComponent;
@@ -104,6 +105,16 @@ public class JFProyectoConvocatoria extends javax.swing.JFrame {
                 }
             }
         });
+        modelProyecto.setNumRows(0);
+        for (Proyecto proyecto : bl.getListProyecto("")) {
+            modelProyecto.addRow(new Object[]{proyecto.getNombreProyecto(), 0, proyecto.getEstatusProyecto().getDescripcion()});
+        }
+
+        modelConvocatoria.setNumRows(0);
+        for (Convocatoria convocatoria : bl.getListConvocatoria("")) {
+            modelConvocatoria.addRow(new Object[]{convocatoria.getConvocatoria(), convocatoria.getFechaAperura(), convocatoria.getFechaCierre()});
+        }
+
     }
 
     /**
@@ -130,6 +141,7 @@ public class JFProyectoConvocatoria extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setIconImage((new ImageIcon(this.getClass().getResource("/Imagenes/cip.png"))).getImage());
 
         jTableProyecto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -173,6 +185,7 @@ public class JFProyectoConvocatoria extends javax.swing.JFrame {
 
         jComboBoxProyecto.setEditable(true);
 
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/descargar.png"))); // NOI18N
         jButton1.setText("Descargar convocatoria");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -180,6 +193,7 @@ public class JFProyectoConvocatoria extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/WWW-Icon.png"))); // NOI18N
         jButton2.setText("Abrir Pagina");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -239,15 +253,15 @@ public class JFProyectoConvocatoria extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonCargar1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonCargar1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton1))
+                .addContainerGap())
         );
 
         pack();
@@ -271,7 +285,7 @@ public class JFProyectoConvocatoria extends javax.swing.JFrame {
             }
         } catch (Exception ex) {
             Logger.getLogger(JFProyectoConvocatoria.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(null,Cte.Error_Abrir_Pagina+"\n"+ ex);
+            JOptionPane.showMessageDialog(null, Cte.Error_Abrir_Pagina + "\n" + ex);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -279,13 +293,13 @@ public class JFProyectoConvocatoria extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             if (jTable2.getSelectedRows().length == 1) {
-                Convertir.convertByteArrayToDoc(bl.getListConvocatoria().get(jTable2.getSelectedRow()).getAchivoPDF(),bl.getListConvocatoria().get(jTable2.getSelectedRow()).getExtAchivoPDF());
+                Convertir.convertByteArrayToDoc(bl.getListConvocatoria().get(jTable2.getSelectedRow()).getAchivoPDF(), bl.getListConvocatoria().get(jTable2.getSelectedRow()).getExtAchivoPDF());
             } else {
                 JOptionPane.showMessageDialog(null, Cte.Selecciona_Solo_Uno);
             }
         } catch (IOException ex) {
             Logger.getLogger(JFProyectoConvocatoria.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(null,Cte.Error_Abrir_PDF+"\n"+ ex);
+            JOptionPane.showMessageDialog(null, Cte.Error_Abrir_PDF + "\n" + ex);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

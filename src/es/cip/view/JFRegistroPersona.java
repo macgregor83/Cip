@@ -11,6 +11,7 @@ import es.cip.util.ValidCampos;
 import java.awt.Cursor;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -126,6 +127,7 @@ public class JFRegistroPersona extends javax.swing.JFrame {
         jTextFieldPass1 = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setIconImage((new ImageIcon(this.getClass().getResource("/Imagenes/cip.png"))).getImage());
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -347,7 +349,7 @@ public class JFRegistroPersona extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(41, 41, 41)
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel12)
                     .addComponent(jLabel11)
@@ -362,7 +364,7 @@ public class JFRegistroPersona extends javax.swing.JFrame {
                     .addComponent(jLabel7)
                     .addComponent(jLabel13)
                     .addComponent(jLabel14))
-                .addGap(0, 29, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jTextFieldNumInt, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE)
                     .addComponent(jTextFieldMunicipio, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -378,7 +380,7 @@ public class JFRegistroPersona extends javax.swing.JFrame {
                     .addComponent(jButtonAgregar1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jTextFieldPass)
                     .addComponent(jTextFieldPass1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -409,7 +411,6 @@ public class JFRegistroPersona extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel6)
-                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -595,7 +596,7 @@ public class JFRegistroPersona extends javax.swing.JFrame {
 
     private void jTextFieldUsuarFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldUsuarFocusLost
         // TODO add your handling code here:
-//        jLabelUsuar.setVisible(!ValidCampos.esSoloLetras(jTextFieldUsuar.getText().trim()));
+        //jLabelUsuar.setVisible(!ValidCampos.sonLetrasNumeroSinEspacios(jTextFieldUsuar.getText().trim()));
         jLabelUsuar.setVisible(!bL.extNickname(jTextFieldUsuar.getText().trim()));
 //        if (!ValidCampos.esSoloLetras(jTextFieldUsuar.getText().trim()) || !bL.extNickname(jTextFieldUsuar.getText().trim())) {
 //            jLabelUsuar.setVisible(true);

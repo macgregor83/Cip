@@ -9,6 +9,7 @@ import es.cip.bussines.dao.control.LoginJpaController;
 import es.cip.bussines.dao.control.UsuarioJpaController;
 import es.cip.bussines.dao.model.Usuario;
 import es.cip.bussines.dao.model.Login;
+import es.cip.util.ValidCampos;
 
 /**
  *
@@ -31,7 +32,7 @@ public class JFRegistroPersonaBL {
 
     public boolean extNickname(String nickname) {
         
-        if (usuarioJpaController.findNickname(nickname).size() == 0) {
+        if (usuarioJpaController.findNickname(nickname).size() == 0 && ValidCampos.sonLetrasNumeroSinEspacios(nickname)) {
             return true;
         } else {
             return false;

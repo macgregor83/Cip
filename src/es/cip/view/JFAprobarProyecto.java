@@ -5,6 +5,8 @@
  */
 package es.cip.view;
 
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author Vero
@@ -45,6 +47,7 @@ public class JFAprobarProyecto extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setIconImage((new ImageIcon(this.getClass().getResource("/Imagenes/cip.png"))).getImage());
 
         jComboBoxEstados.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Aprobar" }));
 
