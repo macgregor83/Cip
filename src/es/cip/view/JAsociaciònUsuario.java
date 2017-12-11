@@ -165,7 +165,7 @@ public class JAsociaciònUsuario extends javax.swing.JFrame {
             }
         });
 
-        txtTutor.setText("Tutor");
+        txtTutor.setText("Tutor/Alumno");
 
         jbMayor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/mas.png"))); // NOI18N
         jbMayor.addActionListener(new java.awt.event.ActionListener() {
@@ -193,7 +193,7 @@ public class JAsociaciònUsuario extends javax.swing.JFrame {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "Nombre", "Universidad", "Campus", "Carrera", "Correo", "Tipo Persona"
+                "Nombre", "Universidad", "Campus", "Carrera", "Correo", "Tipo Usuario"
             }
         ));
         jScrollPane4.setViewportView(jTableAsesor);
@@ -215,8 +215,8 @@ public class JAsociaciònUsuario extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9)
-                            .addComponent(txtTutor))
+                            .addComponent(txtTutor, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jComboBoxProyecto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)

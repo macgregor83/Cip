@@ -35,7 +35,7 @@ public class ValidCampos {
 
     }
         public static final boolean esNumeroCasa(String cadena) {
-        Pattern patron = Pattern.compile("[0-9]*|[S/N]*");
+        Pattern patron = Pattern.compile("[0-9]*|[S/N]*|[S/n]*|[s/n]*");
         Matcher encaja = patron.matcher(cadena);
         return encaja.matches();
 

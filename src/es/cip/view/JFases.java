@@ -29,11 +29,11 @@ public class JFases extends javax.swing.JFrame {
     private JFasesBL bL = new JFasesBL();
     private final DefaultTableModel modelFase;
 
-    /** 
+    /**
      * Creates new form JFases
      */
     public JFases(String idProyecto, Integer idUsuario) {
-        
+
         initComponents();
         this.setTitle(Cte.Titulo_JFases);
         bL.setIdProyecto(idProyecto);
@@ -414,17 +414,28 @@ public class JFases extends javax.swing.JFrame {
         // TODO add your handling code here:
         jComboBoxProyecto.setEnabled(false);
         jTextFieldNombreMetod.setEnabled(false);
-        modelFase.addRow(new Object[]{jTextFieldNombreFase.getText(), jTextFieldActividad.getText(), jTextAreaObjetivo.getText()});
-        bL.getFase(jTextFieldNombreFase.getText().trim(),
-                jComboBoxDuracion.getSelectedIndex(),
-                jComboBoxIniciaMes.getSelectedIndex(),
-                jTextAreaObjetivo.getText(),
-                jTextFieldActividad.getText());
-        jTextFieldNombreFase.setText("");
-        jComboBoxDuracion.setSelectedIndex(0);
-        jComboBoxIniciaMes.setSelectedIndex(0);
-        jTextAreaObjetivo.setText("");
-        jTextFieldActividad.setText("");
+        if (jTextFieldNombreMetod.getText().trim() != ""
+                && ValidCampos.sonLetrasNumero(jTextFieldNombreMetod.getText())
+                && jTextFieldNombreFase.getText().trim() != ""
+                && ValidCampos.sonLetrasNumero(jTextFieldNombreFase.getText())
+                && jTextFieldActividad.getText().trim() != ""
+                && jTextAreaObjetivo.getText().trim() != ""
+                && jComboBoxProyecto.getItemCount() == 1
+                && jTable6.getRowCount() > 0) {
+            modelFase.addRow(new Object[]{jTextFieldNombreFase.getText(), jTextFieldActividad.getText(), jTextAreaObjetivo.getText()});
+            bL.getFase(jTextFieldNombreFase.getText().trim(),
+                    jComboBoxDuracion.getSelectedIndex(),
+                    jComboBoxIniciaMes.getSelectedIndex(),
+                    jTextAreaObjetivo.getText(),
+                    jTextFieldActividad.getText());
+            jTextFieldNombreFase.setText("");
+            jComboBoxDuracion.setSelectedIndex(0);
+            jComboBoxIniciaMes.setSelectedIndex(0);
+            jTextAreaObjetivo.setText("");
+            jTextFieldActividad.setText("");
+        }else{
+            JOptionPane.showMessageDialog(null, Cte.Falta_llenar_Campos);
+        }
     }//GEN-LAST:event_jButtonMasActionPerformed
 
     private void jButtonMenosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMenosActionPerformed
@@ -472,8 +483,8 @@ public class JFases extends javax.swing.JFrame {
     private void jComboBoxIniciaMesItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxIniciaMesItemStateChanged
         // TODO add your handling code here:
         jComboBoxDuracion.removeAllItems();
-        for (int i = 0; i < jComboBoxIniciaMes.getItemCount() - jComboBoxIniciaMes.getSelectedIndex(); i++) {
-            jComboBoxDuracion.addItem((i + 1) + "");
+        for (int i = 1; i < jComboBoxIniciaMes.getItemCount() - jComboBoxIniciaMes.getSelectedIndex(); i++) {
+            jComboBoxDuracion.addItem((i) + "");
         }
     }//GEN-LAST:event_jComboBoxIniciaMesItemStateChanged
 

@@ -24,7 +24,7 @@ import javax.swing.JTabbedPane;
  * @author Vero
  */
 public class MenuPrincipal extends javax.swing.JFrame {
-
+    
     private RegistroPersona registroPersona;
     private JFInvitados invitado;
     private JFRegistroPersona JFRegistroPersona;
@@ -45,6 +45,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private JFInvitados invitados;
     private JFConvocatorias jfConvocatorias;
     private JFProyectoConvocatoria jfProyectoConvocatoria;
+    private JFCambioTipoUsuario jfCambioTipoUsuario;
 
     /**
      * Creates new form JMenuPrincipal
@@ -56,15 +57,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
         } catch (Exception ex) {
             Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
         initComponents();
-
+        
         jMenuUsuario.setVisible(false);
         jMenuProyecto.setVisible(false);
         jMenuAdmin.setVisible(false);
         jMenuConvocatoria.setVisible(false);
         jMenuPatente.setVisible(false);
-
+        
         getContentPane().add(jTabbedPane, BorderLayout.CENTER);
         this.setLayout(new FlowLayout());
         this.setLocationRelativeTo(null);
@@ -84,7 +85,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 //            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
 //        }
 //        finally {
-    //    this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
+        //    this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
         login();
 //        }
     }
@@ -117,6 +118,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenuAdmin = new javax.swing.JMenu();
         jMenuItemEstados = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem8 = new javax.swing.JMenuItem();
         jMenuConvocatoria = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuPatente = new javax.swing.JMenu();
@@ -154,7 +156,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cip.jpeg"))); // NOI18N
 
-        jMenu6.setText("Cerrar Sesion");
+        jMenu6.setText("Cerrar Sesión");
         jMenu6.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jMenu6MouseClicked(evt);
@@ -177,7 +179,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         jMenuUsuario.add(jMenuRegUsua);
 
-        jDatosAcademicos.setText("Datos Academicos");
+        jDatosAcademicos.setText("Datos Académicos");
         jDatosAcademicos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jDatosAcademicosActionPerformed(evt);
@@ -199,7 +201,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jMenu1.setText("Registrar");
 
-        jMenuItemCrearProy.setText("Registrar Proyecto");
+        jMenuItemCrearProy.setText("Registrar");
         jMenuItemCrearProy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemCrearProyActionPerformed(evt);
@@ -215,7 +217,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItemModProy);
 
-        jMenuItem7.setText("Asociacion Tutor / Usuario ");
+        jMenuItem7.setText("Asociación Tutor / Usuario");
         jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem7ActionPerformed(evt);
@@ -261,6 +263,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         jMenuAdmin.add(jMenuItem3);
 
+        jMenuItem8.setText("Cambiar Tipo de Usuario ");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
+        jMenuAdmin.add(jMenuItem8);
+
         jMenuBar.add(jMenuAdmin);
 
         jMenuConvocatoria.setText("Convocatoria");
@@ -277,7 +287,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jMenuPatente.setText("Patente");
 
-        jMenuItem4.setText("Registrar Pantente");
+        jMenuItem4.setText("Registrar Patente");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem4ActionPerformed(evt);
@@ -289,7 +299,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jMenu4.setText("Visitante");
 
-        jMenuItem5.setText("Registrar Vistante");
+        jMenuItem5.setText("Registrar Visitante");
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem5ActionPerformed(evt);
@@ -327,7 +337,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (jTabbedPane.getSelectedIndex() >= 0) {
             String temp = jTabbedPane.getTitleAt(jTabbedPane.getSelectedIndex());
-
+            
             jTabbedPane.removeTabAt(jTabbedPane.getSelectedIndex());
         }
     }//GEN-LAST:event_jButtonCerrarActionPerformed
@@ -370,7 +380,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         try {
             this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
             //estadoProyecto = new (1);
-            jFEstadosProyectos=new JFEstadosProyectos();
+            jFEstadosProyectos = new JFEstadosProyectos();
             jFEstadosProyectos.setVisible(true);
             // pestana(estadoProyecto, Cte.Estado_Proyecto);
             //this.pack();
@@ -457,7 +467,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
-        jfProyectoConvocatoria=new JFProyectoConvocatoria(login.getIdUsuario());
+        jfProyectoConvocatoria = new JFProyectoConvocatoria(login.getIdUsuario());
         jfProyectoConvocatoria.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
@@ -470,7 +480,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         try {
             // TODO add your handling code here:
             this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
-
+            
             login = new Login();
             login.setVisible(true);
             login();
@@ -501,8 +511,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jTabbedPaneStateChanged
-    public void pestana(JPanel pantalla, String title) {
 
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        // TODO add your handling code here:
+        jfCambioTipoUsuario = new JFCambioTipoUsuario();
+        jfCambioTipoUsuario.setVisible(true);
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
+    public void pestana(JPanel pantalla, String title) {
+        
         jTabbedPane.addTab(title, null, pantalla);
 //jTabbedPane1.;
         JPanel pnl = new JPanel();
@@ -513,7 +529,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jTabbedPane.setTabComponentAt(jTabbedPane.getTabCount() - 1, pnl);
         jTabbedPane.setSelectedIndex(jTabbedPane.getTabCount() - 1);
     }
-
+    
     private void login() {
         final Thread t;
         t = new Thread(new Runnable() {
@@ -524,7 +540,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 //current.setStringPainted(true);
                 boolean van = true;
                 do {
-                   
+                    
                     try {
                         Thread.sleep(1000);
                         if (login.isVal()) {
@@ -532,7 +548,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                             jMenuUsuario.setVisible((login.getIdTipoUsuario() == Cte.Tipo_Alumno || login.getIdTipoUsuario() == Cte.Tipo_Asesor) ? true : false);
                             jMenuProyecto.setVisible((login.getIdTipoUsuario() == Cte.Tipo_Alumno || login.getIdTipoUsuario() == Cte.Tipo_Asesor) ? true : false);
                             jMenuAdmin.setVisible((login.getIdTipoUsuario() == Cte.Tipo_Admin) ? true : false);
-                            jMenuConvocatoria.setVisible((login.getIdTipoUsuario()==Cte.Tipo_Alumno || login.getIdTipoUsuario()==Cte.Tipo_Asesor)?true:false);
+                            jMenuConvocatoria.setVisible((login.getIdTipoUsuario() == Cte.Tipo_Alumno || login.getIdTipoUsuario() == Cte.Tipo_Asesor) ? true : false);
                             jMenuPatente.setVisible((login.getIdTipoUsuario() == Cte.Tipo_Alumno || login.getIdTipoUsuario() == Cte.Tipo_Asesor) ? true : false);
                             System.out.println("CIP- \t" + login.getUsuario().getNombre() + " " + login.getUsuario().getApellidoPaterno() + " " + login.getUsuario().getApellidoMaterno() + " ");
                             setTitle("CIP- \t" + login.getUsuario().getNombre() + " " + login.getUsuario().getApellidoPaterno() + " " + login.getUsuario().getApellidoMaterno() + " ");
@@ -555,9 +571,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         //Se ejecuta el Thread
         t.start();
-
+        
     }
-
+    
     public void loginVisible() {
         try {
             login = new Login();
@@ -598,16 +614,16 @@ public class MenuPrincipal extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-
+                
                 new MenuPrincipal().setVisible(true);
-                Login lo;
-                try {
-                    lo = new Login();
-                    lo.setVisible(true);
-                    lo.show();
-                } catch (Exception ex) {
-                    Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-                }
+//                Login lo;
+//                try {
+//                    lo = new Login();
+//                    lo.setVisible(true);
+//                    lo.show();
+//                } catch (Exception ex) {
+//                    Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+//                }
 
             }
         });
@@ -633,6 +649,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItemCrearProy;
     private javax.swing.JMenuItem jMenuItemEstados;
     private javax.swing.JMenuItem jMenuItemModProy;

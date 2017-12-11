@@ -69,8 +69,8 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtTutor" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtTutor" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel9" alignment="1" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -182,7 +182,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="txtTutor">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Tutor"/>
+            <Property name="text" type="java.lang.String" value="Tutor/Alumno"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="jbMayor">
@@ -232,7 +232,7 @@
                     <Column editable="true" title="Campus" type="java.lang.Object"/>
                     <Column editable="true" title="Carrera" type="java.lang.Object"/>
                     <Column editable="true" title="Correo" type="java.lang.Object"/>
-                    <Column editable="true" title="Tipo Persona" type="java.lang.Object"/>
+                    <Column editable="true" title="Tipo Usuario" type="java.lang.Object"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">

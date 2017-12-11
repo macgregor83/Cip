@@ -166,7 +166,8 @@ public class RecursoHumanoDatosJpaController implements Serializable {
                     em.getCriteriaBuilder().and(
                     em.getCriteriaBuilder().or(
                             em.getCriteriaBuilder().like(u.get("Nombre"), "%" + usuario.trim() + "%"),
-                            em.getCriteriaBuilder().like(u.get("ApellidoPaterno"), "%" + usuario.trim() + "%")),
+                            em.getCriteriaBuilder().like(u.get("ApellidoPaterno"), "%" + usuario.trim() + "%"),
+                            em.getCriteriaBuilder().like(u.get("ApellidoMaterno"), "%" + usuario.trim() + "%")),
                     em.getCriteriaBuilder().like(u.get("id"), c.get("idUsuario"))
                     )
                     );
