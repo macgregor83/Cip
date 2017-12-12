@@ -54,8 +54,11 @@ public class JFases extends javax.swing.JFrame {
         }
 
         for (int i = 0; i < bL.getLisProyecto().get(0).getTiempoEstimado(); i++) {
-            jComboBoxIniciaMes.addItem((i) + "");
-            jComboBoxDuracion.addItem((i + 1) + "");
+            jComboBoxIniciaMes.addItem(i + "");
+            if (i == 0) {
+                jComboBoxDuracion.removeAllItems();
+            }
+            jComboBoxDuracion.addItem(i + 1 + "");
         }
 
         modelFase = (DefaultTableModel) jTable6.getModel();
@@ -502,7 +505,7 @@ public class JFases extends javax.swing.JFrame {
                 this.setVisible(false);
             } else {
                 jButtonDiagrama.doClick();
-                JOptionPane.showMessageDialog(null, Cte.Fase_Incompleta);       
+                JOptionPane.showMessageDialog(null, Cte.Fase_Incompleta);
             }
         } else {
             JOptionPane.showMessageDialog(rootPane, Cte.Falta_llenar_Campos);
@@ -517,7 +520,7 @@ public class JFases extends javax.swing.JFrame {
         // TODO add your handling code here:
         jComboBoxDuracion.removeAllItems();
         for (int i = 0; i < jComboBoxIniciaMes.getItemCount() - jComboBoxIniciaMes.getSelectedIndex(); i++) {
-            jComboBoxDuracion.addItem((i+1) + "");
+            jComboBoxDuracion.addItem(i + 1 + "");
         }
     }//GEN-LAST:event_jComboBoxIniciaMesItemStateChanged
 
@@ -561,7 +564,6 @@ public class JFases extends javax.swing.JFrame {
         bL.diagramaGantt();
     }//GEN-LAST:event_jButtonDiagramaActionPerformed
 
-
     /**
      * @param args the command line arguments
      */
@@ -592,7 +594,7 @@ public class JFases extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                JFases f = new JFases("11711102200270000002", 2);
+                JFases f = new JFases("", 2);
 //                f.setIdProyecto("11710262216430000001");
                 f.setVisible(true);
             }

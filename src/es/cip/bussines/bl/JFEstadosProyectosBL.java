@@ -88,6 +88,26 @@ public class JFEstadosProyectosBL {
         return observacionesProyecto;
     }
 
+    public int porsentaje(String idProyecto) {
+        
+        int cont = 0;
+        int cont1 = 0;
+        lisFace = faceJpaController.findProyecto(idProyecto);
+//        if (listProyecto.size() > 0) {
+            for (Face face1 : lisFace) {
+                if (face1.getEstatusFase().getId() == Cte.Estatus_Face_Termino) {
+                    cont += face1.getDuracion();
+                }
+                cont1 += face1.getDuracion();
+            }
+//        }
+        if (cont1 > 0) {
+            System.out.println(cont * 100 / cont1);
+            return cont * 100 / cont1;
+        }
+        return 0;
+    }
+
     public boolean guardar() {
         try {
             if (proyecto.getIdEstatusProyecto() == Cte.Estatus_Proyecto_Por_Aprobacion) {

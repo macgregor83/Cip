@@ -43,7 +43,7 @@ public class JFActividades extends javax.swing.JFrame {
         this.setTitle(Cte.Titulo_JFActividades);
         bL.setListProyecto("");
         
-        jProgressBarPorcentaje.setValue(10);
+        
         modelActualizacion = (DefaultTableModel) jTableActualizaciones1.getModel();
         modelActualizacion.setNumRows(0);
         
@@ -52,11 +52,13 @@ public class JFActividades extends javax.swing.JFrame {
         }
         if (bL.getListProyecto().size() > 0) {
             bL.setListFase(bL.getListProyecto().get(0).getId());
+            jComboBoxEntregable.removeAllItems();
             for (Face object : bL.getListFase()) {
                 jComboBoxEntregable.addItem(object.getNombreFase());
             }
             jTextFieldActividad.setText(bL.getListFase().get(0).getActividad());
         }
+        jProgressBarPorcentaje.setValue(bL.porsentaje());
 //        jComboBoxProyecto.getEditor().getEditorComponent().addKeyListener(new KeyAdapter() {
 //            public void keyReleased(KeyEvent evt) {
 //                String cadenaEscrita = jComboBoxProyecto.getEditor().getItem().toString().toUpperCase();
@@ -84,7 +86,7 @@ public class JFActividades extends javax.swing.JFrame {
 //                }
 //            }
 //        });
-
+    
     }
 
     /**
@@ -96,6 +98,7 @@ public class JFActividades extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButtonDiagrama = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabelActividad1 = new javax.swing.JLabel();
         jTextFieldAgregarArchivos = new javax.swing.JTextField();
@@ -118,14 +121,23 @@ public class JFActividades extends javax.swing.JFrame {
         jLabelActividad2 = new javax.swing.JLabel();
         jComboBoxProyecto = new javax.swing.JComboBox<>();
         jButtonCargar2 = new javax.swing.JButton();
-        jTextFieldActividad = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextFieldActividad = new javax.swing.JTextArea();
+        jButtonDiagrama1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jProgressBarPorcentaje = new javax.swing.JProgressBar();
         jLabelPorcentaje1 = new javax.swing.JLabel();
         jLabelObservaciones = new javax.swing.JLabel();
         jScrollPane10 = new javax.swing.JScrollPane();
         jTextAreaObservaciones = new javax.swing.JTextArea();
+
+        jButtonDiagrama.setText("Diagrama de Gantt ");
+        jButtonDiagrama.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDiagramaActionPerformed(evt);
+            }
+        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setIconImage((new ImageIcon(this.getClass().getResource("/Imagenes/cip.png"))).getImage());
@@ -162,8 +174,9 @@ public class JFActividades extends javax.swing.JFrame {
         ));
         jScrollPaneActualizaciones1.setViewportView(jTableActualizaciones1);
 
-        jLabelEntregable1.setText("Entregable");
+        jLabelEntregable1.setText("Fase");
 
+        jComboBoxEntregable.setMaximumSize(new java.awt.Dimension(31, 22));
         jComboBoxEntregable.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxEntregableActionPerformed(evt);
@@ -188,6 +201,7 @@ public class JFActividades extends javax.swing.JFrame {
 
         jButtonActualizar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/editar.png"))); // NOI18N
         jButtonActualizar1.setText("Actualizar Actividad");
+        jButtonActualizar1.setEnabled(false);
         jButtonActualizar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonActualizar1ActionPerformed(evt);
@@ -226,19 +240,23 @@ public class JFActividades extends javax.swing.JFrame {
             }
         });
 
-        jTextFieldActividad.setEditable(false);
-        jTextFieldActividad.setEnabled(false);
-        jTextFieldActividad.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldActividadActionPerformed(evt);
-            }
-        });
-
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/subir_archivo.png"))); // NOI18N
         jButton2.setText("Subir Archivo");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
+            }
+        });
+
+        jTextFieldActividad.setColumns(20);
+        jTextFieldActividad.setRows(5);
+        jTextFieldActividad.setEnabled(false);
+        jScrollPane1.setViewportView(jTextFieldActividad);
+
+        jButtonDiagrama1.setText("Diagrama de Gantt ");
+        jButtonDiagrama1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDiagrama1ActionPerformed(evt);
             }
         });
 
@@ -257,13 +275,13 @@ public class JFActividades extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jComboBoxEntregable, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextFieldActividad)
                     .addComponent(jComboBoxProyecto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPaneDescripcion1)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jTextFieldAgregarArchivos, javax.swing.GroupLayout.PREFERRED_SIZE, 536, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2)))
+                        .addComponent(jButton2))
+                    .addComponent(jScrollPane1))
                 .addContainerGap())
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
@@ -273,22 +291,23 @@ public class JFActividades extends javax.swing.JFrame {
                 .addGap(12, 12, 12))
             .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addComponent(jScrollPaneActualizaciones1, javax.swing.GroupLayout.PREFERRED_SIZE, 633, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButtonCargar1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButtonCargar2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                        .addGap(43, 43, 43))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addComponent(jButtonActualizar1)
-                        .addGap(41, 41, 41)
-                        .addComponent(jButtonActualizar2)
-                        .addGap(46, 46, 46)
-                        .addComponent(jButtonConcluida1)
-                        .addGap(121, 121, 121))))
+                .addGap(83, 83, 83)
+                .addComponent(jScrollPaneActualizaciones1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButtonCargar1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonCargar2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButtonDiagrama1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButtonActualizar1)
+                .addGap(41, 41, 41)
+                .addComponent(jButtonActualizar2)
+                .addGap(46, 46, 46)
+                .addComponent(jButtonConcluida1)
+                .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -304,10 +323,10 @@ public class JFActividades extends javax.swing.JFrame {
                     .addComponent(jLabelEntregable1)
                     .addComponent(jComboBoxEntregable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelActividad1)
-                    .addComponent(jTextFieldActividad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(15, 15, 15)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelAgregarArchivos)
                     .addComponent(jTextFieldAgregarArchivos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -331,7 +350,8 @@ public class JFActividades extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButtonActualizar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButtonActualizar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonConcluida1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButtonConcluida1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonDiagrama1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(29, 29, 29))
         );
 
@@ -373,15 +393,15 @@ public class JFActividades extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabelPorcentaje1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jProgressBarPorcentaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jLabelObservaciones)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 409, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -415,15 +435,21 @@ public class JFActividades extends javax.swing.JFrame {
 
     private void jButtonActualizar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualizar1ActionPerformed
         // TODO add your handling code here:
-        if (jTableActualizaciones1.getRowCount() > 0) {
-            bL.guardar();
-            this.setVisible(true);
-        }
+//        if (jTableActualizaciones1.getRowCount() > 0) {
+//            bL.guardar();
+//            this.setVisible(true);
+//        }
+        
+        jProgressBarPorcentaje.setValue(bL.porsentaje());
     }//GEN-LAST:event_jButtonActualizar1ActionPerformed
 
     private void jButtonConcluida1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConcluida1ActionPerformed
-        // TODO add your handling code here:
-        
+        // TODO add your handling code here:   
+                if (jTableActualizaciones1.getRowCount() > 0) {
+            bL.guardar();
+            this.setVisible(true);
+        }
+        jProgressBarPorcentaje.setValue(bL.porsentaje());
     }//GEN-LAST:event_jButtonConcluida1ActionPerformed
 
     private void jButtonActualizar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualizar2ActionPerformed
@@ -454,10 +480,6 @@ public class JFActividades extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonCargar2ActionPerformed
 
-    private void jTextFieldActividadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldActividadActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldActividadActionPerformed
-
     private void jComboBoxProyectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxProyectoActionPerformed
         // TODO add your handling code here:
         if (bL.getListProyecto().size() > 0) {
@@ -484,6 +506,16 @@ public class JFActividades extends javax.swing.JFrame {
         jTextFieldAgregarArchivos.setText(Archivo.urlArchivo());
 
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButtonDiagramaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDiagramaActionPerformed
+        // TODO add your handling code here:
+        bL.diagramaGantt();
+    }//GEN-LAST:event_jButtonDiagramaActionPerformed
+
+    private void jButtonDiagrama1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDiagrama1ActionPerformed
+        // TODO add your handling code here:
+        bL.diagramaGantt();
+    }//GEN-LAST:event_jButtonDiagrama1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -515,7 +547,7 @@ public class JFActividades extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JFActividades(1).setVisible(true);
+                new JFActividades(2).setVisible(true);
             }
         });
     }
@@ -527,6 +559,8 @@ public class JFActividades extends javax.swing.JFrame {
     private javax.swing.JButton jButtonCargar1;
     private javax.swing.JButton jButtonCargar2;
     private javax.swing.JButton jButtonConcluida1;
+    private javax.swing.JButton jButtonDiagrama;
+    private javax.swing.JButton jButtonDiagrama1;
     private javax.swing.JComboBox<String> jComboBoxEntregable;
     private javax.swing.JComboBox<String> jComboBoxProyecto;
     private javax.swing.JLabel jLabel10;
@@ -541,6 +575,7 @@ public class JFActividades extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JProgressBar jProgressBarPorcentaje;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPaneActualizaciones1;
     private javax.swing.JScrollPane jScrollPaneDescripcion1;
@@ -549,7 +584,7 @@ public class JFActividades extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextAreaDescripcion1;
     private javax.swing.JTextArea jTextAreaObservaciones;
     private javax.swing.JTextArea jTextAreaObservaciones1;
-    private javax.swing.JTextField jTextFieldActividad;
+    private javax.swing.JTextArea jTextFieldActividad;
     private javax.swing.JTextField jTextFieldAgregarArchivos;
     // End of variables declaration//GEN-END:variables
 }

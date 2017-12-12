@@ -75,7 +75,7 @@ public class JFEstadosProyectos extends javax.swing.JFrame {
                 + rhp.getRecursoHumanoDatos().getUsuario().getCorreoElectronico(),
                 rhp.getProyecto().getTipoProyecto().getTipo(),
                 rhp.getProyecto().getCriterioClasificacion().getCriterioClasificacion(),
-                "0",
+                bL.porsentaje(rhp.getIdProyecto()+"%"),
                 rhp.getProyecto().getEstatusProyecto().getDescripcion()
             });
         }

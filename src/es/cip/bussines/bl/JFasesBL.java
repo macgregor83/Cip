@@ -52,8 +52,9 @@ public class JFasesBL {
     public void setIdUsuario(Integer idUsuario) {
         this.idUsuario = idUsuario;
         lisProyecto = proyectoJpaController.findProyecto(idProyecto, idUsuario, Cte.Estatus_Registro_Proyecto_F1);
-        if (lisProyecto.size() > 0) {
+        if (lisProyecto.size() > 0 && idProyecto=="") {
             idProyecto = lisProyecto.get(0).getId();
+            proyecto = lisProyecto.get(0);
         }
     }
 
@@ -85,13 +86,13 @@ public class JFasesBL {
     }
 
     public void getFase(String nombreFase, Integer duracion, Integer iniciaMes, String objeto, String actividad) {
-        face = new Face();
-        this.face.setNombreFase(nombreFase);
-        this.face.setDuracion(duracion + 1);
-        this.face.setIniciaMes(iniciaMes);
-        this.face.setObjetivo(objeto);
-        this.face.setActividad(actividad);
-        this.face.setIdEstatusFase(Cte.Estatus_Face_registro);
+        Face face = new Face();
+        face.setNombreFase(nombreFase);
+        face.setDuracion(duracion + 1);
+        face.setIniciaMes(iniciaMes);
+        face.setObjetivo(objeto);
+        face.setActividad(actividad);
+        face.setIdEstatusFase(Cte.Estatus_Face_registro);
         lisFace.add(face);
 
     }
@@ -124,7 +125,7 @@ public class JFasesBL {
 
             for (Face face1 : lisFace) {
                 face1.setIdMetodologia(metodologia.getId());
-                faceJpaController.create(face);
+                faceJpaController.create(face1);
             }
             Proyecto proyecto = proyectoJpaController.findProyecto(idProyecto);
             proyecto.setIdEstatusProyecto(Cte.Estatus_Registro_Proyecto_F2);

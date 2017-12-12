@@ -165,7 +165,34 @@ public class FaceJpaController implements Serializable {
             em.close();
         }
     }
-
+public List<Face> findProyecto(String nombreProyecto, Integer idUsuario) {
+        EntityManager em = getEntityManager();
+        try {
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery(Face.class);
+            Root<Face> f = cq.from(Face.class);
+            Root<Metodologia> m = cq.from(Metodologia.class);
+            Root<Proyecto> p = cq.from(Proyecto.class);
+            Root<RecursoHumanoProyecto> rhp = cq.from(RecursoHumanoProyecto.class);
+            Root<RecursoHumanoDatos> rhd = cq.from(RecursoHumanoDatos.class);
+            cq.select(f).distinct(true);
+            cq.where(
+                    em.getCriteriaBuilder().and(
+                            em.getCriteriaBuilder().or(
+                                    em.getCriteriaBuilder().like(p.get("id"), "%" + nombreProyecto.trim() + "%"),
+                                    em.getCriteriaBuilder().like(p.get("NombreProyecto"), "%" + nombreProyecto.trim() + "%")),
+                            em.getCriteriaBuilder().like(m.get("id"), f.get("idMetodologia")),
+                            em.getCriteriaBuilder().like(p.get("id"), m.get("idProyecto")),
+                            em.getCriteriaBuilder().like(p.get("id"), rhp.get("idProyecto")),
+                            em.getCriteriaBuilder().like(rhd.get("id"), rhp.get("idRecursoHumanoDatos")),
+                            em.getCriteriaBuilder().like(rhd.get("idUsuario"), idUsuario + "")
+                    )
+            );
+            Query q = em.createQuery(cq);
+            return q.getResultList();
+        } finally {
+            em.close();
+        }
+    }
     public List<Face> findProyecto(String idProyecto) {
         EntityManager em = getEntityManager();
         try {
