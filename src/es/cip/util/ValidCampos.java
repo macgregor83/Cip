@@ -29,6 +29,7 @@ public class ValidCampos {
     }
 
     public static final boolean esEntero(String cadena) {
+        
         Pattern patron = Pattern.compile("[0-9]*");
         Matcher encaja = patron.matcher(cadena);
         return encaja.matches();

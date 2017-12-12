@@ -17,6 +17,7 @@ import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.JTextComponent;
 
@@ -34,10 +35,11 @@ public class JFases extends javax.swing.JFrame {
      */
     public JFases(String idProyecto, Integer idUsuario) {
 
-        initComponents();
         this.setTitle(Cte.Titulo_JFases);
         bL.setIdProyecto(idProyecto);
         bL.setIdUsuario(idUsuario);
+
+        initComponents();
 
         jLabelAlertNomPro.setVisible(false);
         jLabelAlertNomMeto.setVisible(false);
@@ -49,11 +51,13 @@ public class JFases extends javax.swing.JFrame {
 
         for (Proyecto object : bL.getLisProyecto()) {
             jComboBoxProyecto.addItem(object.getNombreProyecto());
+        }
 
-        }
         for (int i = 0; i < bL.getLisProyecto().get(0).getTiempoEstimado(); i++) {
-            jComboBoxIniciaMes.addItem((i + 1) + "");
+            jComboBoxIniciaMes.addItem((i) + "");
+            jComboBoxDuracion.addItem((i + 1) + "");
         }
+
         modelFase = (DefaultTableModel) jTable6.getModel();
         modelFase.setNumRows(0);
         ///// jComboBoxNombre ////
@@ -83,6 +87,7 @@ public class JFases extends javax.swing.JFrame {
                 }
             }
         });
+
     }
 
     /**
@@ -94,6 +99,8 @@ public class JFases extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         jPanel9 = new javax.swing.JPanel();
         jLabel41 = new javax.swing.JLabel();
         jPanel10 = new javax.swing.JPanel();
@@ -122,6 +129,20 @@ public class JFases extends javax.swing.JFrame {
         jComboBoxProyecto = new javax.swing.JComboBox<>();
         jLabelAlertNomPro = new javax.swing.JLabel();
         jLabelAlertNomMeto = new javax.swing.JLabel();
+        jButtonDiagrama = new javax.swing.JButton();
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setIconImage((new ImageIcon(this.getClass().getResource("/Imagenes/cip.png"))).getImage());
@@ -202,14 +223,14 @@ public class JFases extends javax.swing.JFrame {
                         .addComponent(jLabel43)
                         .addGap(18, 18, 18)
                         .addComponent(jComboBoxIniciaMes, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 405, Short.MAX_VALUE)
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jComboBoxDuracion, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel46))
                     .addComponent(jTextFieldNombreFase, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane13, javax.swing.GroupLayout.DEFAULT_SIZE, 382, Short.MAX_VALUE)
+                    .addComponent(jScrollPane13)
                     .addComponent(jScrollPane1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabelAlertNomFace)
@@ -316,42 +337,50 @@ public class JFases extends javax.swing.JFrame {
         jLabelAlertNomMeto.setForeground(new java.awt.Color(255, 0, 0));
         jLabelAlertNomMeto.setText("*");
 
+        jButtonDiagrama.setText("Diagrama de Gantt ");
+        jButtonDiagrama.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDiagramaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
+                .addComponent(jLabel41, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(20, 20, 20)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelAlertNomPro)
+                    .addComponent(jLabelAlertNomMeto))
+                .addContainerGap())
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel9Layout.createSequentialGroup()
-                        .addComponent(jLabel41, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(15, 15, 15))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
-                        .addContainerGap()
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel9Layout.createSequentialGroup()
-                                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel49, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel47, javax.swing.GroupLayout.Alignment.TRAILING))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextFieldNombreMetod)
-                                    .addComponent(jComboBoxProyecto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(jLabel49, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel47, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextFieldNombreMetod)
+                            .addComponent(jComboBoxProyecto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jScrollPane9, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel9Layout.createSequentialGroup()
                                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jButtonMas, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jButtonMenos, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                                .addGap(0, 35, Short.MAX_VALUE))
-                            .addComponent(jScrollPane9, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelAlertNomPro)
-                    .addComponent(jLabelAlertNomMeto))
-                .addContainerGap())
+                                .addGap(0, 19, Short.MAX_VALUE))
+                            .addGroup(jPanel9Layout.createSequentialGroup()
+                                .addComponent(jButtonDiagrama, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap())))
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -378,24 +407,24 @@ public class JFases extends javax.swing.JFrame {
                         .addComponent(jButtonMenos)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonDiagrama))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 13, Short.MAX_VALUE))
         );
 
         pack();
@@ -421,7 +450,7 @@ public class JFases extends javax.swing.JFrame {
                 && jTextFieldActividad.getText().trim() != ""
                 && jTextAreaObjetivo.getText().trim() != ""
                 && jComboBoxProyecto.getItemCount() == 1
-                && jTable6.getRowCount() > 0) {
+                && jTable6.getRowCount() >= 0) {
             modelFase.addRow(new Object[]{jTextFieldNombreFase.getText(), jTextFieldActividad.getText(), jTextAreaObjetivo.getText()});
             bL.getFase(jTextFieldNombreFase.getText().trim(),
                     jComboBoxDuracion.getSelectedIndex(),
@@ -433,7 +462,7 @@ public class JFases extends javax.swing.JFrame {
             jComboBoxIniciaMes.setSelectedIndex(0);
             jTextAreaObjetivo.setText("");
             jTextFieldActividad.setText("");
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, Cte.Falta_llenar_Campos);
         }
     }//GEN-LAST:event_jButtonMasActionPerformed
@@ -467,10 +496,14 @@ public class JFases extends javax.swing.JFrame {
                 && jTextAreaObjetivo.getText().trim() != ""
                 && jComboBoxProyecto.getItemCount() == 1
                 && jTable6.getRowCount() > 0) {
-            bL.guardar(jTextFieldNombreMetod.getText().trim());
-            JAsociaciònUsuario asociacionUsuario = new JAsociaciònUsuario("", bL.getIdUsuario());
-            asociacionUsuario.setVisible(true);
-            this.setVisible(false);
+            if (bL.guardar(jTextFieldNombreMetod.getText().trim())) {
+                JAsociaciònUsuario asociacionUsuario = new JAsociaciònUsuario("", bL.getIdUsuario());
+                asociacionUsuario.setVisible(true);
+                this.setVisible(false);
+            } else {
+                jButtonDiagrama.doClick();
+                JOptionPane.showMessageDialog(null, Cte.Fase_Incompleta);       
+            }
         } else {
             JOptionPane.showMessageDialog(rootPane, Cte.Falta_llenar_Campos);
         }
@@ -483,8 +516,8 @@ public class JFases extends javax.swing.JFrame {
     private void jComboBoxIniciaMesItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxIniciaMesItemStateChanged
         // TODO add your handling code here:
         jComboBoxDuracion.removeAllItems();
-        for (int i = 1; i < jComboBoxIniciaMes.getItemCount() - jComboBoxIniciaMes.getSelectedIndex(); i++) {
-            jComboBoxDuracion.addItem((i) + "");
+        for (int i = 0; i < jComboBoxIniciaMes.getItemCount() - jComboBoxIniciaMes.getSelectedIndex(); i++) {
+            jComboBoxDuracion.addItem((i+1) + "");
         }
     }//GEN-LAST:event_jComboBoxIniciaMesItemStateChanged
 
@@ -523,6 +556,12 @@ public class JFases extends javax.swing.JFrame {
         jLabelAlertNomFace.setVisible(!ValidCampos.sonLetrasNumero(jTextFieldNombreFase.getText()));
     }//GEN-LAST:event_jTextFieldNombreFaseFocusLost
 
+    private void jButtonDiagramaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDiagramaActionPerformed
+        // TODO add your handling code here:
+        bL.diagramaGantt();
+    }//GEN-LAST:event_jButtonDiagramaActionPerformed
+
+
     /**
      * @param args the command line arguments
      */
@@ -553,7 +592,7 @@ public class JFases extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                JFases f = new JFases("11711031227240000001", 2);
+                JFases f = new JFases("11711102200270000002", 2);
 //                f.setIdProyecto("11710262216430000001");
                 f.setVisible(true);
             }
@@ -562,6 +601,7 @@ public class JFases extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButtonDiagrama;
     private javax.swing.JButton jButtonMas;
     private javax.swing.JButton jButtonMenos;
     private javax.swing.JComboBox<String> jComboBoxDuracion;
@@ -583,7 +623,9 @@ public class JFases extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane13;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane9;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable6;
     private javax.swing.JTextArea jTextAreaObjetivo;
     private javax.swing.JTextArea jTextFieldActividad;

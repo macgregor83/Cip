@@ -69,6 +69,7 @@ public class Cte {
     public static final Integer Estatus_Face_registro = 1;
     public static final Integer Estatus_Face_Desarrollo = 2;
     public static final Integer Estatus_Face_Termino = 3;
+        public static final String Fase_Incompleta="No se han a completado las fases ";
     //id de tabla estatus tipo de usuario
     public static final Integer Tipo_Alumno = 1;
     public static final Integer Tipo_Asesor = 2;
@@ -94,5 +95,6 @@ public class Cte {
     
     //login
     public static final String Usuario_Pass_Erroneas="Usuaro o Contraseña Erronea";
+
 
 }

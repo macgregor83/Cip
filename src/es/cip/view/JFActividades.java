@@ -30,22 +30,23 @@ import javax.swing.text.JTextComponent;
  * @author Vero
  */
 public class JFActividades extends javax.swing.JFrame {
-
+    
     private JFActividadesBL bL;
     private final DefaultTableModel modelActualizacion;
 
-    /** Actualizaciones de la Actividad
-     * Creates new form JFActividades
+    /**
+     * Actualizaciones de la Actividad Creates new form JFActividades
      */
     public JFActividades(Integer idUsuario) {
         bL = new JFActividadesBL(idUsuario);
         initComponents();
         this.setTitle(Cte.Titulo_JFActividades);
         bL.setListProyecto("");
-
+        
+        jProgressBarPorcentaje.setValue(10);
         modelActualizacion = (DefaultTableModel) jTableActualizaciones1.getModel();
         modelActualizacion.setNumRows(0);
-
+        
         for (Proyecto object : bL.getListProyecto()) {
             jComboBoxProyecto.addItem(object.getNombreProyecto());
         }
@@ -120,7 +121,7 @@ public class JFActividades extends javax.swing.JFrame {
         jTextFieldActividad = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        jProgressBarPorcentaje1 = new javax.swing.JProgressBar();
+        jProgressBarPorcentaje = new javax.swing.JProgressBar();
         jLabelPorcentaje1 = new javax.swing.JLabel();
         jLabelObservaciones = new javax.swing.JLabel();
         jScrollPane10 = new javax.swing.JScrollPane();
@@ -336,10 +337,11 @@ public class JFActividades extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jProgressBarPorcentaje1.setForeground(new java.awt.Color(0, 255, 0));
-        jProgressBarPorcentaje1.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
-        jProgressBarPorcentaje1.setString("50%");
-        jProgressBarPorcentaje1.setStringPainted(true);
+        jProgressBarPorcentaje.setBackground(new java.awt.Color(51, 255, 255));
+        jProgressBarPorcentaje.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jProgressBarPorcentaje.setForeground(new java.awt.Color(153, 153, 153));
+        jProgressBarPorcentaje.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
+        jProgressBarPorcentaje.setStringPainted(true);
 
         jLabelPorcentaje1.setText("Porcentaje Total");
 
@@ -361,7 +363,7 @@ public class JFActividades extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                             .addComponent(jLabelPorcentaje1)
-                            .addComponent(jProgressBarPorcentaje1, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jProgressBarPorcentaje, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabelObservaciones)
                         .addGap(0, 0, Short.MAX_VALUE))
@@ -374,7 +376,7 @@ public class JFActividades extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabelPorcentaje1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jProgressBarPorcentaje1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jProgressBarPorcentaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabelObservaciones)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -443,7 +445,7 @@ public class JFActividades extends javax.swing.JFrame {
         if (jTableActualizaciones1.getSelectedRows().length == 0) {
             bL.getListArchivoFase().remove(jTableActualizaciones1.getRowCount() - 1);
             modelActualizacion.removeRow(jTableActualizaciones1.getRowCount() - 1);
-
+            
         } else {
             for (int i = jTableActualizaciones1.getSelectedRows().length; 0 < i; i--) {
                 bL.getListFase().remove(jTableActualizaciones1.getSelectedRows()[i - 1]);
@@ -538,7 +540,7 @@ public class JFActividades extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelPorcentaje1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JProgressBar jProgressBarPorcentaje1;
+    private javax.swing.JProgressBar jProgressBarPorcentaje;
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPaneActualizaciones1;
     private javax.swing.JScrollPane jScrollPaneDescripcion1;
