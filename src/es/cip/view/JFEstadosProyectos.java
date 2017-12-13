@@ -34,19 +34,19 @@ public class JFEstadosProyectos extends javax.swing.JFrame {
     private final DefaultTableModel modelMetodo;
     private final DefaultTableModel modelRH;
 
-    /**  Proyectos
-     * Creates new form JFEstadoProyecto
+    /**
+     * Proyectos Creates new form JFEstadoProyecto
      */
     public JFEstadosProyectos() {
-        
+
         initComponents();
-        
+
         this.setTitle(Cte.Titulo_JFEstadosProyectos);
         this.jFrame1.setTitle(Cte.Titulo_JFEstadosProyectos);
-        
+
         jLabelEstado.setVisible(false);
         jComboBoxEstado.setVisible(false);
-        
+
         modelTabla = (DefaultTableModel) jTEstadoProyecto.getModel();
         modelTabla.setNumRows(0);
 
@@ -75,7 +75,7 @@ public class JFEstadosProyectos extends javax.swing.JFrame {
                 + rhp.getRecursoHumanoDatos().getUsuario().getCorreoElectronico(),
                 rhp.getProyecto().getTipoProyecto().getTipo(),
                 rhp.getProyecto().getCriterioClasificacion().getCriterioClasificacion(),
-                bL.porsentaje(rhp.getIdProyecto()+"%"),
+                bL.porsentaje(rhp.getIdProyecto() + "%"),
                 rhp.getProyecto().getEstatusProyecto().getDescripcion()
             });
         }
@@ -97,6 +97,7 @@ public class JFEstadosProyectos extends javax.swing.JFrame {
         jLabel18 = new javax.swing.JLabel();
         jScrollPane9 = new javax.swing.JScrollPane();
         jTableMetodologia = new javax.swing.JTable();
+        jButtonDiagrama = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTableRH = new javax.swing.JTable();
@@ -164,16 +165,23 @@ public class JFEstadosProyectos extends javax.swing.JFrame {
 
         jTableMetodologia.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Actividad ", "Duracion", "Objetivo"
+                "Fase", "Actividad ", "Duracion", "Objetivo"
             }
         ));
         jScrollPane9.setViewportView(jTableMetodologia);
+
+        jButtonDiagrama.setText("Diagrama de Gantt ");
+        jButtonDiagrama.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDiagramaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -182,7 +190,11 @@ public class JFEstadosProyectos extends javax.swing.JFrame {
             .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 465, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 498, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButtonDiagrama, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -191,7 +203,9 @@ public class JFEstadosProyectos extends javax.swing.JFrame {
                 .addComponent(jLabel18)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButtonDiagrama)
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -442,7 +456,7 @@ public class JFEstadosProyectos extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane10)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 465, Short.MAX_VALUE)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 498, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabelObservaciones)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -456,7 +470,7 @@ public class JFEstadosProyectos extends javax.swing.JFrame {
                 .addGap(24, 24, 24)
                 .addComponent(jLabelObservaciones)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 368, Short.MAX_VALUE)
+                .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 322, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -662,6 +676,7 @@ public class JFEstadosProyectos extends javax.swing.JFrame {
         }
         for (Face obj : bL.getLisFase(idProyecto)) {
             modelMetodo.addRow(new Object[]{
+                obj.getNombreFase(),
                 obj.getActividad(),
                 obj.getDuracion(),
                 obj.getObjetivo()
@@ -746,6 +761,11 @@ public class JFEstadosProyectos extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBoxEstadoActionPerformed
 
+    private void jButtonDiagramaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDiagramaActionPerformed
+        // TODO add your handling code here:
+        bL.diagramaGantt();
+    }//GEN-LAST:event_jButtonDiagramaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -786,6 +806,7 @@ public class JFEstadosProyectos extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButtonActualizar;
+    private javax.swing.JButton jButtonDiagrama;
     private javax.swing.JComboBox<String> jComboBoxEstado;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabeCriterio;

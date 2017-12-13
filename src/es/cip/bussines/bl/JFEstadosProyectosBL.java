@@ -21,6 +21,9 @@ import es.cip.bussines.dao.model.RecursoHumanoProyecto;
 import es.cip.bussines.dao.model.RecursosMateriales;
 import es.cip.prueba;
 import es.cip.util.Cte;
+import es.cip.util.DiagramaGantt;
+import es.cip.util.Fecha;
+import es.cip.util.FormatoFechas;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -48,6 +51,7 @@ public class JFEstadosProyectosBL {
     private List<Face> lisFace;
     private Proyecto proyecto;
     private ObservacionesProyecto observacionesProyecto = new ObservacionesProyecto();
+    private DiagramaGantt diagrama;
 
     public void getProyectos() {
         recursoHumanoProyectoJpaController.findRecursoHumanoProyecto(1);
@@ -89,23 +93,35 @@ public class JFEstadosProyectosBL {
     }
 
     public int porsentaje(String idProyecto) {
-        
+
         int cont = 0;
         int cont1 = 0;
         lisFace = faceJpaController.findProyecto(idProyecto);
 //        if (listProyecto.size() > 0) {
-            for (Face face1 : lisFace) {
-                if (face1.getEstatusFase().getId() == Cte.Estatus_Face_Termino) {
-                    cont += face1.getDuracion();
-                }
-                cont1 += face1.getDuracion();
+        for (Face face1 : lisFace) {
+            if (face1.getEstatusFase().getId() == Cte.Estatus_Face_Termino) {
+                cont += face1.getDuracion();
             }
+            cont1 += face1.getDuracion();
+        }
 //        }
         if (cont1 > 0) {
             System.out.println(cont * 100 / cont1);
             return cont * 100 / cont1;
         }
         return 0;
+    }
+
+    public void diagramaGantt() {
+        diagrama = new DiagramaGantt(proyecto.getNombreProyecto());
+        diagrama.setS1("Tiemplo Total", Fecha.Date(), FormatoFechas.sumarFechasMes(Fecha.Date(), (proyecto.getTiempoEstimado())));
+        for (Face face1 : lisFace) {
+            diagrama.setS1("Ideal"+face1.getNombreFase(), FormatoFechas.sumarFechasMes(Fecha.Date(), face1.getIniciaMes()), FormatoFechas.sumarFechasMes(Fecha.Date(), (face1.getIniciaMes() + face1.getDuracion())));
+            if (face1.getIdEstatusFase() == Cte.Estatus_Face_Termino) {
+                diagrama.setS2(face1.getNombreFase(), FormatoFechas.sumarFechasMes(Fecha.Date(), face1.getIniciaMes()), FormatoFechas.sumarFechasMes(Fecha.Date(), (face1.getIniciaMes() + face1.getDuracion())));
+            }
+        }
+        diagrama.ejecutar();
     }
 
     public boolean guardar() {

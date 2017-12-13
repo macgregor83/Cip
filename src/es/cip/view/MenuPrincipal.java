@@ -247,7 +247,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jMenuAdmin.setText("Administrador ");
 
-        jMenuItemEstados.setText("Aprobar Proyectos");
+        jMenuItemEstados.setText("Estado de Proyectos");
         jMenuItemEstados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemEstadosActionPerformed(evt);

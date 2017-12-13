@@ -103,7 +103,6 @@ public class JFasesBL {
         for (Face face1 : lisFace) {
             diagrama.setS2(face1.getNombreFase(), FormatoFechas.sumarFechasMes(Fecha.Date(), face1.getIniciaMes()), FormatoFechas.sumarFechasMes(Fecha.Date(), (face1.getIniciaMes() + face1.getDuracion())));
         }
-
         diagrama.ejecutar();
     }
 

@@ -70,12 +70,21 @@ public class JFActividadesBL {
         return listFase;
     }
     public void diagramaGantt() {
+//        diagrama = new DiagramaGantt(proyecto.getNombreProyecto());
+//        diagrama.setS1("Tiemplo Total", Fecha.Date(), FormatoFechas.sumarFechasMes(Fecha.Date(), (proyecto.getTiempoEstimado())));
+//        for (Face face1 : listFase1) {
+//            diagrama.setS2(face1.getNombreFase(), FormatoFechas.sumarFechasMes(Fecha.Date(), face1.getIniciaMes()), FormatoFechas.sumarFechasMes(Fecha.Date(), (face1.getIniciaMes() + face1.getDuracion())));
+//        }
+//
+//        diagrama.ejecutar();
         diagrama = new DiagramaGantt(proyecto.getNombreProyecto());
         diagrama.setS1("Tiemplo Total", Fecha.Date(), FormatoFechas.sumarFechasMes(Fecha.Date(), (proyecto.getTiempoEstimado())));
         for (Face face1 : listFase1) {
-            diagrama.setS2(face1.getNombreFase(), FormatoFechas.sumarFechasMes(Fecha.Date(), face1.getIniciaMes()), FormatoFechas.sumarFechasMes(Fecha.Date(), (face1.getIniciaMes() + face1.getDuracion())));
+            diagrama.setS1("Ideal"+face1.getNombreFase(), FormatoFechas.sumarFechasMes(Fecha.Date(), face1.getIniciaMes()), FormatoFechas.sumarFechasMes(Fecha.Date(), (face1.getIniciaMes() + face1.getDuracion())));
+            if (face1.getIdEstatusFase() == Cte.Estatus_Face_Termino) {
+                diagrama.setS2(face1.getNombreFase(), FormatoFechas.sumarFechasMes(Fecha.Date(), face1.getIniciaMes()), FormatoFechas.sumarFechasMes(Fecha.Date(), (face1.getIniciaMes() + face1.getDuracion())));
+            }
         }
-
         diagrama.ejecutar();
     }
 
