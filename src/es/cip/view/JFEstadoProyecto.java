@@ -30,7 +30,7 @@ public class JFEstadoProyecto extends javax.swing.JFrame {
         modelEstadoProyecto.setNumRows(0);
         for (Proyecto object : bl.getListProyecto("")) {
             //jComboBoxEstado.addItem(object.getNombreProyecto());
-             modelEstadoProyecto.addRow(new Object[]{object.getNombreProyecto(),0,object.getEstatusProyecto().getDescripcion()});
+             modelEstadoProyecto.addRow(new Object[]{object.getNombreProyecto(),bl.porsentaje(object.getId())+"%",object.getEstatusProyecto().getDescripcion()});
         }
     }
 

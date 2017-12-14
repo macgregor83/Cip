@@ -56,7 +56,7 @@ public class FormatoFechas {
     //@param fechaInicial La fecha de inicio
     //@param fechaFinal  La fecha de fin
     //@return Retorna el numero de dias entre dos fechas
-    public static synchronized int diferenciasDeFechas(Date fechaInicial, Date fechaFinal) {
+    public static synchronized int diferenciasDeFechasDias(Date fechaInicial, Date fechaFinal) {
 
         DateFormat df = DateFormat.getDateInstance(DateFormat.MEDIUM);
         String fechaInicioString = df.format(fechaInicial);
@@ -77,6 +77,7 @@ public class FormatoFechas {
         double dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
         return ((int) dias) + 1;
     }
+
     //Sumarle mes a una fecha determinada
     //@param fch La fecha para sumarle los dias
     //@param dias Numero de dias a agregar
@@ -93,7 +94,7 @@ public class FormatoFechas {
     //@return Retorna el numero de dias entre dos fechas
 
     public static synchronized int diferenciasDeFechasMin(Date fechaInicial, Date fechaFinal) {
-/*
+        /*
         DateFormat df = DateFormat.getDateInstance(DateFormat.MEDIUM);
         String fechaInicioString = df.format(fechaInicial);
         try {
@@ -106,19 +107,18 @@ public class FormatoFechas {
             fechaFinal = df.parse(fechaFinalString);
         } catch (ParseException ex) {
         }
-*/
+         */
         long fechaInicialMs = fechaInicial.getTime();
         long fechaFinalMs = fechaFinal.getTime();
         long diferencia = fechaFinalMs - fechaInicialMs;
-        double dias = Math.floor(diferencia / (1000 * 60 ));
+        double dias = Math.floor(diferencia / (1000 * 60));
         //System.out.println(""+((int) dias));
-        return ((int) dias) ;
+        return ((int) dias);
     }
 
     //Devuele un java.util.Date desde un String en formato dd-MM-yyyy
     //@param La fecha a convertir a formato date
     //@return Retorna la fecha en formato Date
-
     public static synchronized java.util.Date deStringToDate(String fecha) {
         SimpleDateFormat formatoDelTexto = new SimpleDateFormat("dd-MM-yyyy");
         Date fechaEnviar = null;
@@ -129,5 +129,21 @@ public class FormatoFechas {
             ex.printStackTrace();
             return null;
         }
+    }
+
+    public static String deDateToString(Date ahora) {
+        SimpleDateFormat formateador = new SimpleDateFormat("dd-MM-yyyy");
+        return formateador.format(ahora);
+    }
+
+    public static synchronized int diferenciasDeFechasMes(Date fechaInicial, Date fechaFinal) {
+        Calendar inicio = new GregorianCalendar();
+        Calendar fin = new GregorianCalendar();
+        inicio.setTime(fechaInicial);
+        fin.setTime(fechaFinal);
+        int difA = fin.get(Calendar.YEAR) - inicio.get(Calendar.YEAR);
+        int difM = difA * 12 + fin.get(Calendar.MONTH) - inicio.get(Calendar.MONTH);
+        System.out.println(difM);
+        return difM;
     }
 }

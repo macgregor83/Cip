@@ -338,7 +338,7 @@ public class JAsociaciònUsuario extends javax.swing.JFrame {
                 bL.getLisRHDatos().get(jComboBoxNombre.getSelectedIndex() - 1).getTipoUsuario().getTipo()});
             bL.setlisRHProyecto(bL.getLisProyecto().get(jComboBoxProyecto.getSelectedIndex()).getId(), bL.getLisRHDatos().get(jComboBoxNombre.getSelectedIndex() - 1).getId());
             jComboBoxNombre.removeAllItems();
-
+            JOptionPane.showMessageDialog(null, Cte.Mensaje_Espera_Apobar);
         } else {
             JOptionPane.showMessageDialog(rootPane, Cte.Selecciona_Campos);
         }

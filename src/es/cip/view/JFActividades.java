@@ -13,6 +13,7 @@ import es.cip.util.Archivo;
 import es.cip.util.Convertir;
 import es.cip.util.Cte;
 import es.cip.util.Fecha;
+import es.cip.util.FormatoFechas;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.File;
@@ -31,7 +32,7 @@ import javax.swing.text.JTextComponent;
  * @author Vero
  */
 public class JFActividades extends javax.swing.JFrame {
-    
+
     private JFActividadesBL bL;
     private final DefaultTableModel modelActualizacion;
 
@@ -43,11 +44,10 @@ public class JFActividades extends javax.swing.JFrame {
         initComponents();
         this.setTitle(Cte.Titulo_JFActividades);
         bL.setListProyecto("");
-        
-        
+
         modelActualizacion = (DefaultTableModel) jTableActualizaciones1.getModel();
         modelActualizacion.setNumRows(0);
-        
+
         for (Proyecto object : bL.getListProyecto()) {
             jComboBoxProyecto.addItem(object.getNombreProyecto());
         }
@@ -87,7 +87,7 @@ public class JFActividades extends javax.swing.JFrame {
 //                }
 //            }
 //        });
-    
+
     }
 
     /**
@@ -132,6 +132,14 @@ public class JFActividades extends javax.swing.JFrame {
         jLabelObservaciones = new javax.swing.JLabel();
         jScrollPane10 = new javax.swing.JScrollPane();
         jTextAreaObservaciones = new javax.swing.JTextArea();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabelFecha = new javax.swing.JLabel();
+        jLabelLleva = new javax.swing.JLabel();
+        jLabelFalta = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
         jButtonDiagrama.setText("Diagrama de Gantt ");
         jButtonDiagrama.addActionListener(new java.awt.event.ActionListener() {
@@ -378,28 +386,80 @@ public class JFActividades extends javax.swing.JFrame {
         jTextAreaObservaciones.setRows(5);
         jScrollPane10.setViewportView(jTextAreaObservaciones);
 
+        jLabel1.setText("Fecha de Inicio:");
+
+        jLabel2.setText("Lleva ");
+
+        jLabel3.setText("Faltan ");
+
+        jLabelFecha.setText("jLabel4");
+
+        jLabelLleva.setText("jLabel4");
+
+        jLabelFalta.setText("jLabel4");
+
+        jLabel4.setText("Meses.");
+
+        jLabel5.setText("Meses.");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(12, 12, 12)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(jLabelPorcentaje1)
-                            .addComponent(jProgressBarPorcentaje, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabelFecha)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabelObservaciones)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane10))
+                        .addComponent(jLabelLleva)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel4))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabelFalta)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel5)))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jProgressBarPorcentaje, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 304, Short.MAX_VALUE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.CENTER, jPanel1Layout.createSequentialGroup()
+                                .addGap(116, 116, 116)
+                                .addComponent(jLabelPorcentaje1))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(12, 12, 12)
+                                .addComponent(jLabelObservaciones)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabelFecha))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabelLleva)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabelFalta)
+                    .addComponent(jLabel5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabelPorcentaje1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jProgressBarPorcentaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -445,13 +505,13 @@ public class JFActividades extends javax.swing.JFrame {
 //            bL.guardar();
 //            this.setVisible(true);
 //        }
-        
+
         jProgressBarPorcentaje.setValue(bL.porsentaje());
     }//GEN-LAST:event_jButtonActualizar1ActionPerformed
 
     private void jButtonConcluida1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConcluida1ActionPerformed
         // TODO add your handling code here:   
-                if (jTableActualizaciones1.getRowCount() > 0) {
+        if (jTableActualizaciones1.getRowCount() > 0) {
             bL.guardar();
             this.setVisible(false);
         }
@@ -477,7 +537,7 @@ public class JFActividades extends javax.swing.JFrame {
         if (jTableActualizaciones1.getSelectedRows().length == 0) {
             bL.getListArchivoFase().remove(jTableActualizaciones1.getRowCount() - 1);
             modelActualizacion.removeRow(jTableActualizaciones1.getRowCount() - 1);
-            
+
         } else {
             for (int i = jTableActualizaciones1.getSelectedRows().length; 0 < i; i--) {
                 bL.getListFase().remove(jTableActualizaciones1.getSelectedRows()[i - 1]);
@@ -489,6 +549,10 @@ public class JFActividades extends javax.swing.JFrame {
     private void jComboBoxProyectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxProyectoActionPerformed
         // TODO add your handling code here:
         if (bL.getListProyecto().size() > 0) {
+            jLabelFecha.setText(FormatoFechas.deDateToString(bL.getListProyecto().get(jComboBoxProyecto.getSelectedIndex()).getFechaAprobarcion()));
+            jLabelLleva.setText(FormatoFechas.diferenciasDeFechasMes(bL.getListProyecto().get(jComboBoxProyecto.getSelectedIndex()).getFechaAprobarcion(), Fecha.Date()) + "");
+            jLabelFalta.setText((bL.getListProyecto().get(jComboBoxProyecto.getSelectedIndex()).getTiempoEstimado() - Integer.parseInt(jLabelLleva.getText())) + "");
+
             jComboBoxEntregable.removeAllItems();
             bL.setListFase(bL.getListProyecto().get(jComboBoxProyecto.getSelectedIndex()).getId());
             for (Face object : bL.getListFase()) {
@@ -496,14 +560,15 @@ public class JFActividades extends javax.swing.JFrame {
             }
             jTextFieldActividad.setText(bL.getListFase().get(0).getActividad());
             bL.setIdFase(0);
-            
-            if(bL.setListObsProy().size()>0){
-                 String cadena="";
+
+            if (bL.setListObsProy().size() > 0) {
+                String cadena = "";
                 for (ObservacionesProyecto observacionesProyecto : bL.getListObsProy()) {
-                    cadena = observacionesProyecto.getObservaciones()+"\n\n *-*-*-*-*-*-*-*- \n\n"+cadena;
+                    cadena = observacionesProyecto.getObservaciones() + "\n\n *-*-*-*-*-*-*-*- \n\n" + cadena;
                 }
                 jTextAreaObservaciones.setText(cadena);
             }
+            jProgressBarPorcentaje.setValue(bL.porsentaje());
         }
     }//GEN-LAST:event_jComboBoxProyectoActionPerformed
 
@@ -577,12 +642,20 @@ public class JFActividades extends javax.swing.JFrame {
     private javax.swing.JButton jButtonDiagrama1;
     private javax.swing.JComboBox<String> jComboBoxEntregable;
     private javax.swing.JComboBox<String> jComboBoxProyecto;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabelActividad1;
     private javax.swing.JLabel jLabelActividad2;
     private javax.swing.JLabel jLabelAgregarArchivos;
     private javax.swing.JLabel jLabelDescripcion1;
     private javax.swing.JLabel jLabelEntregable1;
+    private javax.swing.JLabel jLabelFalta;
+    private javax.swing.JLabel jLabelFecha;
+    private javax.swing.JLabel jLabelLleva;
     private javax.swing.JLabel jLabelObservaciones;
     private javax.swing.JLabel jLabelObservaciones1;
     private javax.swing.JLabel jLabelPorcentaje1;

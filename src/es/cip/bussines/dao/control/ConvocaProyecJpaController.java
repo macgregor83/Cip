@@ -127,6 +127,22 @@ public class ConvocaProyecJpaController implements Serializable {
         }
     }
 
+    public List<ConvocaProyec> findProyecto(String idProyecto) {
+        EntityManager em = getEntityManager();
+        try {
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery(ConvocaProyec.class);
+            Root<ConvocaProyec> f = cq.from(ConvocaProyec.class);
+            cq.select(f).distinct(true);
+            cq.where(
+                    em.getCriteriaBuilder().like(f.get("idProyecto"), idProyecto)
+            );
+            cq.orderBy(em.getCriteriaBuilder().desc(f.get("idProyecto")));
+            Query q = em.createQuery(cq);
+            return q.getResultList();
+        } finally {
+            em.close();
+        }
+    }
     public int getConvocaProyecCount() {
         EntityManager em = getEntityManager();
         try {

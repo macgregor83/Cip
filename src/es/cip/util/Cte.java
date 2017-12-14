@@ -95,6 +95,9 @@ public class Cte {
     
     //login
     public static final String Usuario_Pass_Erroneas="Usuaro o Contraseña Erronea";
+    
+    
+    public static final String Mensaje_Espera_Apobar="Se realizó tu registro del proyecto, en espera de revisión y aprobación.";
 
 
 }

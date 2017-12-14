@@ -6,6 +6,7 @@
 package es.cip.bussines.bl;
 
 import es.cip.bussines.dao.control.AreaColaboracionJpaController;
+import es.cip.bussines.dao.control.ConvocaProyecJpaController;
 import es.cip.bussines.dao.control.FaceJpaController;
 import es.cip.bussines.dao.control.ObjetivoEspecificoJpaController;
 import es.cip.bussines.dao.control.ObservacionesProyectoJpaController;
@@ -13,6 +14,7 @@ import es.cip.bussines.dao.control.ProyectoJpaController;
 import es.cip.bussines.dao.control.RecursoHumanoProyectoJpaController;
 import es.cip.bussines.dao.control.RecursosMaterialesJpaController;
 import es.cip.bussines.dao.model.AreaColaboracion;
+import es.cip.bussines.dao.model.ConvocaProyec;
 import es.cip.bussines.dao.model.Face;
 import es.cip.bussines.dao.model.ObjetivoEspecifico;
 import es.cip.bussines.dao.model.ObservacionesProyecto;
@@ -43,18 +45,29 @@ public class JFEstadosProyectosBL {
     private FaceJpaController faceJpaController = new FaceJpaController();
     private ProyectoJpaController proyectoJpaController = new ProyectoJpaController();
     private ObservacionesProyectoJpaController observacionesProyectoJpaController = new ObservacionesProyectoJpaController();
+    private ConvocaProyecJpaController convocaProyecJpaController = new ConvocaProyecJpaController();
 
     private List<RecursoHumanoProyecto> lisRHP;
     private List<ObjetivoEspecifico> lisObjEsp;
     private List<AreaColaboracion> lisAreaCol;
     private List<RecursosMateriales> lisRH;
     private List<Face> lisFace;
+    private List<ConvocaProyec> listConvocaProyec;
+    
     private Proyecto proyecto;
     private ObservacionesProyecto observacionesProyecto = new ObservacionesProyecto();
     private DiagramaGantt diagrama;
 
     public void getProyectos() {
         recursoHumanoProyectoJpaController.findRecursoHumanoProyecto(1);
+    }
+
+    public List<ConvocaProyec> getListConvocaProyec() {
+        return listConvocaProyec;
+    }
+
+    public List<ConvocaProyec> setListConvocaProyec(String idProyecto) {
+       return this.listConvocaProyec = convocaProyecJpaController.findProyecto(idProyecto);
     }
 
     public List<RecursoHumanoProyecto> setNombreProyecto(String nombreProyecto, String nombreUsuario) {
@@ -67,6 +80,7 @@ public class JFEstadosProyectosBL {
     }
 
     public List<ObjetivoEspecifico> getLisObjEsp(String idProyecto) {
+        
         lisObjEsp = objetivoEspecificoJpaController.findProyecto(idProyecto);
         proyecto = lisObjEsp.get(0).getProyecto();
         return lisObjEsp;
