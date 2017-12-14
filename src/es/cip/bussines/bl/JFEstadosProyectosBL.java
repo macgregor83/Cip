@@ -128,6 +128,7 @@ public class JFEstadosProyectosBL {
         try {
             if (proyecto.getIdEstatusProyecto() == Cte.Estatus_Proyecto_Por_Aprobacion) {
                 proyecto.setIdEstatusProyecto(Cte.Estatus_Proyecto_Aprobado);
+                proyecto.setFechaAprobarcion(Fecha.Date());
                 proyectoJpaController.edit(proyecto);
                 if (observacionesProyecto.getObservaciones() != "") {
                     observacionesProyecto.setIdProyecto(proyecto.getId());

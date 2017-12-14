@@ -60,6 +60,10 @@ public class JFActividadesBL {
         return listObsProy;
     }
 
+    public List<ObservacionesProyecto> getListObsProy() {
+        return listObsProy;
+    }
+
     public List<Face> setListFase(String nombreProyecto) {
         listFase = faceJpaController.findProyecto(nombreProyecto, idUsuario, 4, 5, Cte.Estatus_Face_registro);
         listFase1 = faceJpaController.findProyecto(nombreProyecto, idUsuario);

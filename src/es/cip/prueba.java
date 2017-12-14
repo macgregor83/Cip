@@ -30,6 +30,8 @@ import javax.persistence.EntityManagerFactory;
  */
 public class prueba {
 
+    
+
     Usuario u = new Usuario();
 
     public static void main(String[] args) {
@@ -41,10 +43,14 @@ public class prueba {
 //            //System.out.println(recursoHumanoProyecto.getProyectoId());
 //        }
 
-        java.util.Date ahora = new java.util.Date();
-        java.util.Date d;
-        d =  FormatoFechas.sumarFechasDias( ahora, 7*10);
-        System.out.println(d);
-
+//        java.util.Date ahora = new java.util.Date();
+//        java.util.Date d;
+//        d =  FormatoFechas.sumarFechasDias( ahora, 7*10);
+//        System.out.println(d);
+ String cadena="";
+        for (int i = 0; i < 10; i++) {
+            cadena=i+"\n\n *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*- \n\n"+cadena;
+        }
+        System.out.println(cadena);
     }
 }

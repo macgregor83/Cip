@@ -105,6 +105,7 @@ public class JProyecto extends javax.swing.JFrame {
         jLabel5.setText("Tiempo Estimado");
 
         jTextObjetivoGeneral.setColumns(20);
+        jTextObjetivoGeneral.setLineWrap(true);
         jTextObjetivoGeneral.setRows(5);
         jScrollPane2.setViewportView(jTextObjetivoGeneral);
 
@@ -123,6 +124,7 @@ public class JProyecto extends javax.swing.JFrame {
         jLabel8.setText("Resumen/Abstract");
 
         jTextResumAbstracto.setColumns(20);
+        jTextResumAbstracto.setLineWrap(true);
         jTextResumAbstracto.setRows(5);
         jScrollPane3.setViewportView(jTextResumAbstracto);
 
@@ -131,6 +133,7 @@ public class JProyecto extends javax.swing.JFrame {
         jLabel11.setText("Datos Proyecto");
 
         jTextObjetivoEsoecificos.setColumns(20);
+        jTextObjetivoEsoecificos.setLineWrap(true);
         jTextObjetivoEsoecificos.setRows(5);
         jScrollPane5.setViewportView(jTextObjetivoEsoecificos);
 

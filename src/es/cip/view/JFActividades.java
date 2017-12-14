@@ -7,6 +7,7 @@ package es.cip.view;
 
 import es.cip.bussines.bl.JFActividadesBL;
 import es.cip.bussines.dao.model.Face;
+import es.cip.bussines.dao.model.ObservacionesProyecto;
 import es.cip.bussines.dao.model.Proyecto;
 import es.cip.util.Archivo;
 import es.cip.util.Convertir;
@@ -186,6 +187,7 @@ public class JFActividades extends javax.swing.JFrame {
         jLabelDescripcion1.setText("Descripcion");
 
         jTextAreaDescripcion1.setColumns(20);
+        jTextAreaDescripcion1.setLineWrap(true);
         jTextAreaDescripcion1.setRows(5);
         jScrollPaneDescripcion1.setViewportView(jTextAreaDescripcion1);
 
@@ -196,6 +198,7 @@ public class JFActividades extends javax.swing.JFrame {
         jLabelObservaciones1.setText("Observaciones ");
 
         jTextAreaObservaciones1.setColumns(20);
+        jTextAreaObservaciones1.setLineWrap(true);
         jTextAreaObservaciones1.setRows(5);
         jScrollPaneObservaciones1.setViewportView(jTextAreaObservaciones1);
 
@@ -249,10 +252,12 @@ public class JFActividades extends javax.swing.JFrame {
         });
 
         jTextFieldActividad.setColumns(20);
+        jTextFieldActividad.setLineWrap(true);
         jTextFieldActividad.setRows(5);
         jTextFieldActividad.setEnabled(false);
         jScrollPane1.setViewportView(jTextFieldActividad);
 
+        jButtonDiagrama1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/grafica.png"))); // NOI18N
         jButtonDiagrama1.setText("Diagrama de Gantt ");
         jButtonDiagrama1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -369,6 +374,7 @@ public class JFActividades extends javax.swing.JFrame {
 
         jTextAreaObservaciones.setEditable(false);
         jTextAreaObservaciones.setColumns(20);
+        jTextAreaObservaciones.setLineWrap(true);
         jTextAreaObservaciones.setRows(5);
         jScrollPane10.setViewportView(jTextAreaObservaciones);
 
@@ -447,7 +453,7 @@ public class JFActividades extends javax.swing.JFrame {
         // TODO add your handling code here:   
                 if (jTableActualizaciones1.getRowCount() > 0) {
             bL.guardar();
-            this.setVisible(true);
+            this.setVisible(false);
         }
         jProgressBarPorcentaje.setValue(bL.porsentaje());
     }//GEN-LAST:event_jButtonConcluida1ActionPerformed
@@ -490,6 +496,14 @@ public class JFActividades extends javax.swing.JFrame {
             }
             jTextFieldActividad.setText(bL.getListFase().get(0).getActividad());
             bL.setIdFase(0);
+            
+            if(bL.setListObsProy().size()>0){
+                 String cadena="";
+                for (ObservacionesProyecto observacionesProyecto : bL.getListObsProy()) {
+                    cadena = observacionesProyecto.getObservaciones()+"\n\n *-*-*-*-*-*-*-*- \n\n"+cadena;
+                }
+                jTextAreaObservaciones.setText(cadena);
+            }
         }
     }//GEN-LAST:event_jComboBoxProyectoActionPerformed
 
