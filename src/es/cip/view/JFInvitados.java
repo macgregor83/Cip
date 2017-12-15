@@ -32,7 +32,7 @@ public class JFInvitados extends javax.swing.JFrame {
     public JFInvitados() {
         this.setTitle(Cte.Titulo_JFInvitados);
         bl = new JFInvitadosBL();
-        
+
         initComponents();
         modelUsuario = (DefaultTableModel) jTable10.getModel();
         modelUsuario.setNumRows(0);
@@ -105,8 +105,8 @@ public class JFInvitados extends javax.swing.JFrame {
         jPanel4.setMaximumSize(new java.awt.Dimension(1059, 356));
 
         jTextArea6.setColumns(20);
+        jTextArea6.setLineWrap(true);
         jTextArea6.setRows(5);
-        jTextArea6.setEnabled(false);
         jScrollPane15.setViewportView(jTextArea6);
 
         jLabel21.setText("Observaciones");
@@ -124,27 +124,28 @@ public class JFInvitados extends javax.swing.JFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(39, 39, 39)
                         .addComponent(jLabel21)
-                        .addGap(14, 14, 14)
-                        .addComponent(jScrollPane15, javax.swing.GroupLayout.DEFAULT_SIZE, 1304, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane15, javax.swing.GroupLayout.DEFAULT_SIZE, 1304, Short.MAX_VALUE)
+                        .addGap(9, 9, 9))
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(0, 1249, Short.MAX_VALUE)
                         .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(46, 46, 46))
+                .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(34, 34, 34)
+                .addGap(21, 21, 21)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane15, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane15, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel21))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(175, 175, 175))
+                .addGap(139, 139, 139))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -159,6 +160,11 @@ public class JFInvitados extends javax.swing.JFrame {
         jComboBoxNombreProyecto.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jComboBoxNombreProyectoItemStateChanged(evt);
+            }
+        });
+        jComboBoxNombreProyecto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxNombreProyectoActionPerformed(evt);
             }
         });
 
@@ -257,18 +263,20 @@ public class JFInvitados extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -278,13 +286,47 @@ public class JFInvitados extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
+        int row = jComboBoxNombreProyecto.getSelectedIndex();
+        System.out.println(row);
+        jTextAreaObjGen.setText("");
+        jTextAreaResumen.setText("");
+        modelUsuario.setNumRows(0);
+        if (row >= 0) {
+            if (bl.guardar(jTextArea6.getText(), bl.getLisRHP().get(row).getProyecto().getId())) {
+            jTextArea6.setText("");
+        }
+        }
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jComboBoxNombreProyectoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxNombreProyectoItemStateChanged
         // TODO add your handling code here: 
-        int row = jComboBoxNombreProyecto.getSelectedIndex() - 1;
+//        int row = jComboBoxNombreProyecto.getSelectedIndex() - 1;
+//        System.out.println(row);
+//        if (row > -1) {
+//            jTextAreaObjGen.setText(bl.getLisRHP().get(row).getProyecto().getObjGeneral());
+//            jTextAreaResumen.setText(bl.getLisRHP().get(row).getProyecto().getResumen());
+//            modelUsuario.setNumRows(0);
+//            for (RecursoHumanoProyecto rhp : bl.getLisRHP()) {
+//                if (bl.getLisRHP().get(row).getProyecto().getId().equalsIgnoreCase(rhp.getIdProyecto())) {
+//                    modelUsuario.addRow(new Object[]{rhp.getRecursoHumanoDatos().getUsuario().getNombre() + " " + rhp.getRecursoHumanoDatos().getUsuario().getApellidoPaterno() + " " + rhp.getRecursoHumanoDatos().getUsuario().getApellidoMaterno(),
+//                        rhp.getRecursoHumanoDatos().getUniversidad().getNombre(),
+//                        rhp.getRecursoHumanoDatos().getCampus().getNombre(),
+//                        rhp.getRecursoHumanoDatos().getCarrera().getNombreCarrera(),
+//                        rhp.getRecursoHumanoDatos().getUsuario().getCorreoElectronico()
+//                    });
+//                }
+//            }
+//        }
+    }//GEN-LAST:event_jComboBoxNombreProyectoItemStateChanged
+
+    private void jComboBoxNombreProyectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxNombreProyectoActionPerformed
+        // TODO add your handling code here:
+        int row = jComboBoxNombreProyecto.getSelectedIndex();
         System.out.println(row);
-        if (row > 0) {
+        jTextAreaObjGen.setText("");
+        jTextAreaResumen.setText("");
+        modelUsuario.setNumRows(0);
+        if (row >= 0) {
             jTextAreaObjGen.setText(bl.getLisRHP().get(row).getProyecto().getObjGeneral());
             jTextAreaResumen.setText(bl.getLisRHP().get(row).getProyecto().getResumen());
             modelUsuario.setNumRows(0);
@@ -299,7 +341,7 @@ public class JFInvitados extends javax.swing.JFrame {
                 }
             }
         }
-    }//GEN-LAST:event_jComboBoxNombreProyectoItemStateChanged
+    }//GEN-LAST:event_jComboBoxNombreProyectoActionPerformed
 
     /**
      * @param args the command line arguments

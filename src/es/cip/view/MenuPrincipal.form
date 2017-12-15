@@ -69,12 +69,12 @@
           <SubComponents>
             <Menu class="javax.swing.JMenu" name="jMenu1">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Registrar"/>
+                <Property name="text" type="java.lang.String" value="NuevoProyecto "/>
               </Properties>
               <SubComponents>
                 <MenuItem class="javax.swing.JMenuItem" name="jMenuItemCrearProy">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Registrar"/>
+                    <Property name="text" type="java.lang.String" value="Registrar Proyecto "/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemCrearProyActionPerformed"/>
@@ -225,6 +225,8 @@
   </SyntheticProperties>
   <Events>
     <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="formMouseExited"/>
+    <EventHandler event="windowClosed" listener="java.awt.event.WindowListener" parameters="java.awt.event.WindowEvent" handler="formWindowClosed"/>
+    <EventHandler event="windowClosing" listener="java.awt.event.WindowListener" parameters="java.awt.event.WindowEvent" handler="formWindowClosing"/>
   </Events>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>

@@ -13,6 +13,7 @@ import es.cip.util.Cte;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.List;
+import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -28,26 +29,34 @@ public class JAsociaciònUsuario extends javax.swing.JFrame {
     public JAsociaciònUsuarioBL bL = new JAsociaciònUsuarioBL();
     private final DefaultTableModel modelTabla;
 
-    /** Recursos Humanos
-     * Creates new form JAsociaciònUsuario
+    /**
+     * Recursos Humanos Creates new form JAsociaciònUsuario
      */
     public JAsociaciònUsuario(String idProyecto, Integer idUsuario) {
         this.setTitle(Cte.Titulo_JAsociaciònUsuario);
-        
+
         initComponents();
-        
+
         bL.setIdProyecto(idProyecto);
         bL.setIdUsuario(idUsuario);
         jLabelAlertNomPro.setVisible(false);
         jLabelAlertNomPro.setToolTipText(Cte.Proyecto_No_existe);
-
+        jComboBoxProyecto.setToolTipText(Cte.ToolTip_Escribe_Nombre_Proyecto);
+        jComboBoxNombre.setToolTipText(Cte.ToolTip_Escribe_Nombre_Usuario);
         modelTabla = (DefaultTableModel) jTableAsesor.getModel();
         modelTabla.setNumRows(0);
         for (Proyecto object : bL.getLisProyecto()) {
             jComboBoxProyecto.addItem(object.getNombreProyecto());
             jComboBoxProyecto.addItem(object.getNombreProyecto());
         }
-
+        List<RecursoHumanoDatos> list = bL.findNombreCompleto("");
+        if (list.size() > 0) {
+            DefaultComboBoxModel modelo=new DefaultComboBoxModel();
+            for (RecursoHumanoDatos rh : list) {
+                modelo.addElement(rh.getUsuario().getNombre() + " " + rh.getUsuario().getApellidoPaterno() + " " + rh.getUsuario().getApellidoMaterno() + "-" + rh.getUsuario().getCorreoElectronico() + "-" + rh.getTipoUsuario().getTipo());
+            }
+            jComboBoxNombre.setModel(modelo);
+        }
         jComboBoxProyecto.getEditor().getEditorComponent().addKeyListener(new KeyAdapter() {
             public void keyReleased(KeyEvent evt) {
                 String cadenaEscrita = jComboBoxProyecto.getEditor().getItem().toString().toUpperCase();
@@ -286,14 +295,14 @@ public class JAsociaciònUsuario extends javax.swing.JFrame {
         if (jTableAsesor.getSelectedRows().length == 0) {
             bL.getLisRHProyecto().remove(jTableAsesor.getRowCount() - 1);
             modelTabla.removeRow(jTableAsesor.getRowCount() - 1);
-            
+
         } else {
             for (int i = jTableAsesor.getSelectedRows().length; 0 < i; i--) {
                 bL.getLisRHProyecto().remove(jTableAsesor.getSelectedRows()[i - 1]);
                 modelTabla.removeRow(jTableAsesor.getSelectedRows()[i - 1]);
             }
         }
-        if (jTableAsesor.getRowCount()==0) {
+        if (jTableAsesor.getRowCount() == 0) {
             jComboBoxProyecto.setEnabled(true);
         }
     }//GEN-LAST:event_jbtMenosActionPerformed
@@ -350,8 +359,8 @@ public class JAsociaciònUsuario extends javax.swing.JFrame {
         if (jTableAsesor.getRowCount() > 0) {
             bL.guardar();
             this.setVisible(false);
-            
-        }else{
+
+        } else {
             JOptionPane.showMessageDialog(rootPane, Cte.Falta_llenar_Campos);
         }
         System.out.println("hola");

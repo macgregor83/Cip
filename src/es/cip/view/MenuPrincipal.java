@@ -152,6 +152,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 formMouseExited(evt);
             }
         });
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cip.jpeg"))); // NOI18N
@@ -199,9 +207,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jMenuProyecto.setText("Proyecto ");
 
-        jMenu1.setText("Registrar");
+        jMenu1.setText("NuevoProyecto ");
 
-        jMenuItemCrearProy.setText("Registrar");
+        jMenuItemCrearProy.setText("Registrar Proyecto ");
         jMenuItemCrearProy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemCrearProyActionPerformed(evt);
@@ -517,6 +525,16 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jfCambioTipoUsuario = new JFCambioTipoUsuario();
         jfCambioTipoUsuario.setVisible(true);
     }//GEN-LAST:event_jMenuItem8ActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowClosed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+        System.out.println("Salio"+login.getIdUsuario());
+        
+    }//GEN-LAST:event_formWindowClosing
     public void pestana(JPanel pantalla, String title) {
         
         jTabbedPane.addTab(title, null, pantalla);

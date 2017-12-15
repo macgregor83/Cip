@@ -221,7 +221,7 @@ public class JFDatosAcademicos extends javax.swing.JFrame {
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("Datos Academicos");
 
-        jLabel13.setText("Univercidad");
+        jLabel13.setText("Universidad");
 
         jLabel14.setText("Campus");
 
@@ -493,7 +493,7 @@ public class JFDatosAcademicos extends javax.swing.JFrame {
 
     private void jTextFieldDireccionDAKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldDireccionDAKeyReleased
         // TODO add your handling code here:
-        jTextFieldDireccionDA.setText(jTextFieldDireccionDA.getText().trim());
+        jTextFieldDireccionDA.setText(jTextFieldDireccionDA.getText().toUpperCase());
     }//GEN-LAST:event_jTextFieldDireccionDAKeyReleased
 
     private void jComboBoxNombreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBoxNombreMouseClicked
@@ -512,7 +512,7 @@ public class JFDatosAcademicos extends javax.swing.JFrame {
 
     private void jTextFieldLocalidadDAKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldLocalidadDAKeyReleased
         // TODO add your handling code here:
-        jTextFieldLocalidadDA.setText(jTextFieldLocalidadDA.getText().trim());
+        jTextFieldLocalidadDA.setText(jTextFieldLocalidadDA.getText().toUpperCase());
     }//GEN-LAST:event_jTextFieldLocalidadDAKeyReleased
 
     private void jComboBoxCampusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxCampusActionPerformed

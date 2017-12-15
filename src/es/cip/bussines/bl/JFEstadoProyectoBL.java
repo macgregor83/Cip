@@ -45,7 +45,7 @@ public class JFEstadoProyectoBL {
         int cont1 = 0;
         lisFace = faceJpaController.findProyecto(idProyecto);
         for (Face face1 : lisFace) {
-            if (face1.getEstatusFase().getId() == Cte.Estatus_Face_Termino) {
+            if (face1.getIdEstatusFase() == Cte.Estatus_Face_Termino) {
                 cont += face1.getDuracion();
             }
             cont1 += face1.getDuracion();

@@ -19,18 +19,24 @@ public class JFEstadoProyecto extends javax.swing.JFrame {
 
     private final JFEstadoProyectoBL bl;
     private DefaultTableModel modelEstadoProyecto;
-    /** Proyectos Proyectos
-     * Creates new form JFEstadoProyecto
+
+    /**
+     * Proyectos Proyectos Creates new form JFEstadoProyecto
      */
     public JFEstadoProyecto(Integer idUsuario) {
         this.setTitle(Cte.Titulo_JFEstadoProyecto);
-        bl=new JFEstadoProyectoBL(idUsuario);
+        bl = new JFEstadoProyectoBL(idUsuario);
         initComponents();
+
+        jComboBoxEstado.setVisible(false);
+        jLabelEstado.setVisible(false);
+        btnConsultar.setVisible(false);
+
         modelEstadoProyecto = (DefaultTableModel) jTEstadoProyecto.getModel();
         modelEstadoProyecto.setNumRows(0);
         for (Proyecto object : bl.getListProyecto("")) {
             //jComboBoxEstado.addItem(object.getNombreProyecto());
-             modelEstadoProyecto.addRow(new Object[]{object.getNombreProyecto(),bl.porsentaje(object.getId())+"%",object.getEstatusProyecto().getDescripcion()});
+            modelEstadoProyecto.addRow(new Object[]{object.getNombreProyecto(), bl.porsentaje(object.getId()) + "%", object.getEstatusProyecto().getDescripcion()});
         }
     }
 
@@ -154,7 +160,7 @@ public class JFEstadoProyecto extends javax.swing.JFrame {
         modelEstadoProyecto.setNumRows(0);
         for (Proyecto object : bl.getListProyecto("")) {
             //jComboBoxEstado.addItem(object.getNombreProyecto());
-             modelEstadoProyecto.addRow(new Object[]{object.getNombreProyecto(),0,object.getEstatusProyecto().getDescripcion()});
+            modelEstadoProyecto.addRow(new Object[]{object.getNombreProyecto(), 0, object.getEstatusProyecto().getDescripcion()});
         }
     }//GEN-LAST:event_btnConsultarActionPerformed
 

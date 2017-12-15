@@ -56,8 +56,8 @@ public class JFRegistroPersona extends javax.swing.JFrame {
         jLabelDirec.setToolTipText(Cte.Campo_Vacio);
         jLabelColonia.setToolTipText(Cte.Campo_Vacio);
         jLabelMunicipio.setToolTipText(Cte.Campo_Vacio);
-        jLabelNumInt.setToolTipText(Cte.Solo_Numero);
-        jLabelNumExt.setToolTipText(Cte.Solo_Numero);
+        jLabelNumInt.setToolTipText(Cte.Solo_Numero_Direccion);
+        jLabelNumExt.setToolTipText(Cte.Solo_Numero_Direccion);
 
         jTextFieldNombre.setToolTipText(Cte.Solo_Letras);
         jTextFieldApePaterno.setToolTipText(Cte.Solo_Letras);

@@ -65,7 +65,6 @@ public class Login extends javax.swing.JFrame {
         canvas1 = new java.awt.Canvas();
         jLabelImagTorre = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
         setIconImage((new ImageIcon(this.getClass().getResource("/Imagenes/cip.png"))).getImage());
         setMinimumSize(new java.awt.Dimension(391, 332));

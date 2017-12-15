@@ -28,36 +28,36 @@ public class Cte {
     public static final String Archivo_Erroneo = "Archivo Invalido";
 
     /*  */
-    public static final String Solo_Letras = "Este campo solo admite Letras";
-    public static final String Pass = "Minimo 8 caracteres\n"
-            + " Maximo 15\n"
-            + " Al menos una letra mayúscula\n"
-            + " Al menos una letra minucula\n"
-            + " Al menos un dígito\n"
-            + " No espacios en blanco\n"
-            + " Al menos 1 caracter especial";
+    public static final String Solo_Letras = "Este campo solo admite Letras.";
+    public static final String Pass = "De 8 a 15 caracteres,"
+            + " Al menos una letra mayúscula,"
+            + " una letra minúscula, "
+            + " un dígito"
+            + " y un caracter especial."
+            + " No espacios en blanco.";
     public static final String Pass_Diferente = "Las Contraseñas son diferentes.";
-    public static final String Tel_Erroneo = "El telefono el incorrecto";
-    public static final String Correo_Erroneo = "Correo Erroneo";
-    public static final String Campo_Vacio = "No se admite vacio";
-    public static final String Solo_Numero = "Este campo solo admite Numeros";
-    public static final String Falta_llenar_Campos = "Falta llenar campos";
-    public static final String Usua_Rep = "Este usuario ya existe";
-    public static final String No_Control_Rep = "Este Numero de control ya existe";
-    public static final String No_Existe_Usuario = "Selecciona una persona";
+    public static final String Tel_Erroneo = "El telefono es incorrecto.";
+    public static final String Correo_Erroneo = "Correo erróneo.";
+    public static final String Campo_Vacio = "No se admite vacio.";
+    public static final String Solo_Numero = "Este campo solo admite Numeros.";
+    public static final String Solo_Numero_Direccion="Este campo admite Numeros y S/N.";
+    public static final String Falta_llenar_Campos = "Falta llenar campos.";
+    public static final String Usua_Rep = "Este usuario ya existe.";
+    public static final String No_Control_Rep = "Este Número de control ya existe.";
+    public static final String No_Existe_Usuario = "Selecciona una persona.";
 
     //Errores
-    public static final String Error_BD = "Error en conexión a base de datos";
-    public static final String Error_Abrir_PDF = "Error al abrir pdf";
-    public static final String Error_Abrir_Pagina = "Error al abrir Pagina Web";
+    public static final String Error_BD = "Error en conexión a base de datos.";
+    public static final String Error_Abrir_PDF = "Error al abrir pdf.";
+    public static final String Error_Abrir_Pagina = "Error al abrir Pagina Web.";
 
     public static final String Guardo_Correcto = "Se guardó correctamente.";
     ///** Estatus Del Proyecto**///
     //public static final Integer Estatus_Proyecto = 1;
 
-    public static final String Proyecto_No_existe = "Este Proyecto no existe";
-    public static final String Selecciona_Campos = "Selecciona algun Campo";
-    public static final String No_aprueba = "Aun no se puede aprobar o ya esta aprobado";
+    public static final String Proyecto_No_existe = "Este Proyecto no existe.";
+    public static final String Selecciona_Campos = "Selecciona algun Campo.";
+    public static final String No_aprueba = "Aun no se puede aprobar o ya esta aprobado.";
 
     // id de tabla estatus registro
     public static Integer Estatus_Registro_Proyecto_F1 = 1;
@@ -69,7 +69,7 @@ public class Cte {
     public static final Integer Estatus_Face_registro = 1;
     public static final Integer Estatus_Face_Desarrollo = 2;
     public static final Integer Estatus_Face_Termino = 3;
-        public static final String Fase_Incompleta="No se han a completado las fases ";
+        public static final String Fase_Incompleta="No se han a completado las fases.";
     //id de tabla estatus tipo de usuario
     public static final Integer Tipo_Alumno = 1;
     public static final Integer Tipo_Asesor = 2;
@@ -94,10 +94,14 @@ public class Cte {
     public static final String Selecciona_Solo_Uno = "Selecciona solo un registro de cada tabla.";
     
     //login
-    public static final String Usuario_Pass_Erroneas="Usuaro o Contraseña Erronea";
+    public static final String Usuario_Pass_Erroneas="Usuaro o Contraseña Erronea.";
     
     
     public static final String Mensaje_Espera_Apobar="Se realizó tu registro del proyecto, en espera de revisión y aprobación.";
+    
+    //Asosiar alumnos
+    public static final String ToolTip_Escribe_Nombre_Proyecto ="Escribe el nombre del Proyecto.";
+    public static final String ToolTip_Escribe_Nombre_Usuario="Escribe el nombre del tutor o alumno .";
 
 
 }

@@ -460,7 +460,7 @@ public class JRegistroProyecto extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(btnMenos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(19, 19, 19)))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -502,9 +502,9 @@ public class JRegistroProyecto extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(528, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
+                .addContainerGap(519, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
@@ -601,11 +601,11 @@ public class JRegistroProyecto extends javax.swing.JFrame {
         System.out.println(jTextFieldNombProyecto.getText().trim());
         if (jTextFieldNombProyecto.getText().trim() != ""
                 && ValidCampos.sonLetrasNumero(jTextFieldNombProyecto.getText().trim()) 
-                && jTextFieldTiempoEstimado.getText().trim() !=""
+                && !jTextFieldTiempoEstimado.getText().trim().equals("") 
                 && ValidCampos.esEntero(jTextFieldTiempoEstimado.getText().trim())
-                && jTextObjetivoGeneral.getText()!=""
+                && !jTextObjetivoGeneral.getText().equals("") 
                 && jTableObjEspecifico.getColumnCount()>0
-                && jTextResumAbstracto.getText()!=""
+                && !jTextResumAbstracto.getText().equals("") 
                 && jTableAreaColaboracion.getColumnCount()>0
                 && jTableRecursosMateriales.getColumnCount()>0
                 ) {
